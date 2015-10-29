@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		396042EDA83F5B82B996F9A8 /* libPods-DealSentryUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F634D649E282908A28612F3 /* libPods-DealSentryUITests.a */; };
+		B03FE69F8AE97BE3818E09FF /* libPods-DealSentry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0645F8F9414DC2E2EF98F2E1 /* libPods-DealSentry.a */; };
 		CA4078FA1BE2C9F900EEB6BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4078F91BE2C9F900EEB6BA /* main.m */; };
 		CA4078FD1BE2C9F900EEB6BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4078FC1BE2C9F900EEB6BA /* AppDelegate.m */; };
 		CA4079001BE2C9F900EEB6BA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4078FF1BE2C9F900EEB6BA /* ViewController.m */; };
@@ -16,6 +18,7 @@
 		CA40790B1BE2C9FA00EEB6BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA4079091BE2C9FA00EEB6BA /* LaunchScreen.storyboard */; };
 		CA4079161BE2C9FA00EEB6BA /* DealSentryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4079151BE2C9FA00EEB6BA /* DealSentryTests.m */; };
 		CA4079211BE2C9FA00EEB6BA /* DealSentryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4079201BE2C9FA00EEB6BA /* DealSentryUITests.m */; };
+		FA70BBF6A6C190B0317943A3 /* libPods-DealSentryTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9B85A16604738A691E1D4E /* libPods-DealSentryTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		010B4A2BA9B5FD2B26E41758 /* Pods-DealSentryUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentryUITests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentryUITests/Pods-DealSentryUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		0645F8F9414DC2E2EF98F2E1 /* libPods-DealSentry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DealSentry.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F9B85A16604738A691E1D4E /* libPods-DealSentryTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DealSentryTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F634D649E282908A28612F3 /* libPods-DealSentryUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DealSentryUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		73B5B4EA37748CAE817B68D7 /* Pods-DealSentry.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentry.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentry/Pods-DealSentry.debug.xcconfig"; sourceTree = "<group>"; };
+		7C24EA9BBF15A2725F314594 /* Pods-DealSentry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentry.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentry/Pods-DealSentry.release.xcconfig"; sourceTree = "<group>"; };
+		910B2F064EB105739BC63970 /* Pods-DealSentryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentryTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentryTests/Pods-DealSentryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CA4078F51BE2C9F900EEB6BA /* DealSentry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DealSentry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA4078F91BE2C9F900EEB6BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CA4078FB1BE2C9F900EEB6BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -53,6 +63,8 @@
 		CA40791C1BE2C9FA00EEB6BA /* DealSentryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DealSentryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA4079201BE2C9FA00EEB6BA /* DealSentryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DealSentryUITests.m; sourceTree = "<group>"; };
 		CA4079221BE2C9FA00EEB6BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8EEDE9AAD9CB3293267C52F /* Pods-DealSentryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentryTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentryTests/Pods-DealSentryTests.release.xcconfig"; sourceTree = "<group>"; };
+		E9035901FB124984189BC2F2 /* Pods-DealSentryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentryUITests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentryUITests/Pods-DealSentryUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B03FE69F8AE97BE3818E09FF /* libPods-DealSentry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA70BBF6A6C190B0317943A3 /* libPods-DealSentryTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,12 +88,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				396042EDA83F5B82B996F9A8 /* libPods-DealSentryUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA51B428B433CF8EDC35C4D9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				73B5B4EA37748CAE817B68D7 /* Pods-DealSentry.debug.xcconfig */,
+				7C24EA9BBF15A2725F314594 /* Pods-DealSentry.release.xcconfig */,
+				910B2F064EB105739BC63970 /* Pods-DealSentryTests.debug.xcconfig */,
+				D8EEDE9AAD9CB3293267C52F /* Pods-DealSentryTests.release.xcconfig */,
+				010B4A2BA9B5FD2B26E41758 /* Pods-DealSentryUITests.debug.xcconfig */,
+				E9035901FB124984189BC2F2 /* Pods-DealSentryUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CA4078EC1BE2C9F900EEB6BA = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +115,8 @@
 				CA4079141BE2C9FA00EEB6BA /* DealSentryTests */,
 				CA40791F1BE2C9FA00EEB6BA /* DealSentryUITests */,
 				CA4078F61BE2C9F900EEB6BA /* Products */,
+				AA51B428B433CF8EDC35C4D9 /* Pods */,
+				F83833E4F36F678AEDD26222 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -143,6 +173,16 @@
 			path = DealSentryUITests;
 			sourceTree = "<group>";
 		};
+		F83833E4F36F678AEDD26222 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0645F8F9414DC2E2EF98F2E1 /* libPods-DealSentry.a */,
+				0F9B85A16604738A691E1D4E /* libPods-DealSentryTests.a */,
+				5F634D649E282908A28612F3 /* libPods-DealSentryUITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -150,9 +190,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CA4079251BE2C9FA00EEB6BA /* Build configuration list for PBXNativeTarget "DealSentry" */;
 			buildPhases = (
+				3673FA1E0C463E378CA24334 /* Check Pods Manifest.lock */,
 				CA4078F11BE2C9F900EEB6BA /* Sources */,
 				CA4078F21BE2C9F900EEB6BA /* Frameworks */,
 				CA4078F31BE2C9F900EEB6BA /* Resources */,
+				4ADBADBE92A1CFEAF1718138 /* Embed Pods Frameworks */,
+				52E6D33F01C7406287540A11 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -167,9 +210,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CA4079281BE2C9FA00EEB6BA /* Build configuration list for PBXNativeTarget "DealSentryTests" */;
 			buildPhases = (
+				A88160929A722B9FFCABA170 /* Check Pods Manifest.lock */,
 				CA40790D1BE2C9FA00EEB6BA /* Sources */,
 				CA40790E1BE2C9FA00EEB6BA /* Frameworks */,
 				CA40790F1BE2C9FA00EEB6BA /* Resources */,
+				41F850976CAFFD9C292E1690 /* Embed Pods Frameworks */,
+				52D94FBE00B7E30F0C007A58 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -185,9 +231,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CA40792B1BE2C9FA00EEB6BA /* Build configuration list for PBXNativeTarget "DealSentryUITests" */;
 			buildPhases = (
+				D49F074F9C40AE60C4ABF796 /* Check Pods Manifest.lock */,
 				CA4079181BE2C9FA00EEB6BA /* Sources */,
 				CA4079191BE2C9FA00EEB6BA /* Frameworks */,
 				CA40791A1BE2C9FA00EEB6BA /* Resources */,
+				4F65403907E693F5AC2A02A9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -267,6 +315,129 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3673FA1E0C463E378CA24334 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		41F850976CAFFD9C292E1690 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-DealSentryTests/Pods-DealSentryTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4ADBADBE92A1CFEAF1718138 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-DealSentry/Pods-DealSentry-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4F65403907E693F5AC2A02A9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-DealSentryUITests/Pods-DealSentryUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		52D94FBE00B7E30F0C007A58 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-DealSentryTests/Pods-DealSentryTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		52E6D33F01C7406287540A11 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-DealSentry/Pods-DealSentry-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A88160929A722B9FFCABA170 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D49F074F9C40AE60C4ABF796 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CA4078F11BE2C9F900EEB6BA /* Sources */ = {
@@ -415,6 +586,7 @@
 		};
 		CA4079261BE2C9FA00EEB6BA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73B5B4EA37748CAE817B68D7 /* Pods-DealSentry.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DealSentry/Info.plist;
@@ -426,6 +598,7 @@
 		};
 		CA4079271BE2C9FA00EEB6BA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C24EA9BBF15A2725F314594 /* Pods-DealSentry.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = DealSentry/Info.plist;
@@ -437,6 +610,7 @@
 		};
 		CA4079291BE2C9FA00EEB6BA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 910B2F064EB105739BC63970 /* Pods-DealSentryTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = DealSentryTests/Info.plist;
@@ -449,6 +623,7 @@
 		};
 		CA40792A1BE2C9FA00EEB6BA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D8EEDE9AAD9CB3293267C52F /* Pods-DealSentryTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = DealSentryTests/Info.plist;
@@ -461,6 +636,7 @@
 		};
 		CA40792C1BE2C9FA00EEB6BA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 010B4A2BA9B5FD2B26E41758 /* Pods-DealSentryUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = DealSentryUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -473,6 +649,7 @@
 		};
 		CA40792D1BE2C9FA00EEB6BA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9035901FB124984189BC2F2 /* Pods-DealSentryUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = DealSentryUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -502,6 +679,7 @@
 				CA4079271BE2C9FA00EEB6BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CA4079281BE2C9FA00EEB6BA /* Build configuration list for PBXNativeTarget "DealSentryTests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +688,7 @@
 				CA40792A1BE2C9FA00EEB6BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CA40792B1BE2C9FA00EEB6BA /* Build configuration list for PBXNativeTarget "DealSentryUITests" */ = {
 			isa = XCConfigurationList;
@@ -518,6 +697,7 @@
 				CA40792D1BE2C9FA00EEB6BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
