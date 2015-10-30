@@ -28,7 +28,7 @@
 #import "DealSentry-Swift.h"
 
 @implementation DataManager
-@synthesize arrayForCR,sharedDelegate,arrayForContact,arrayForContactRoles;
+@synthesize arrayForCompanyRoles,sharedDelegate,arrayForContact,arrayForContactRoles;
 @synthesize arrayForAgreementTypes,arrayForDealStatuses,arrayForIndustries;
 @synthesize arrayForLoanTypes,arrayForOfferingFormat,arrayForSegments;
 @synthesize arrayForTransactionStatuses,arrayForUseOfProceeds,arrayForCompanies;
@@ -112,7 +112,7 @@ static DataManager *singletonInstance;
 /// fetching independent entities from database in an array to pass it on to the view controllers via sharedDataModel
 -(void)fetchIndependentEntities
 {
-    arrayForCR = [NSArray arrayWithArray:[self fetchCompanyRoleData]];
+    arrayForCompanyRoles = [NSArray arrayWithArray:[self fetchCompanyRoleData]];
     arrayForContact = [NSMutableArray arrayWithArray:[self fetchContactData]];
     arrayForContactRoles = [NSArray arrayWithArray:[self fetchContactRoleData]];
     arrayForAgreementTypes = [NSArray arrayWithArray:[self fetchAgreementTypesData]];
@@ -461,11 +461,11 @@ static DataManager *singletonInstance;
     for(TransactionCompanyData *transactionCompanyData in tcData)
     {
         TransactionCompany *newTransactionCompany = [NSEntityDescription insertNewObjectForEntityForName:@"TransactionCompanyEntity" inManagedObjectContext:context];
-        for(CompanyRoleData *CRData in arrayForCR)
+        for(CompanyRoleData *CompanyRoleData in arrayForCompanyRoles)
         {
-            if([transactionCompanyData.role isEqualToString:CRData.roleDescription])
+            if([transactionCompanyData.role isEqualToString:CompanyRoleData.roleDescription])
             {
-                newTransactionCompany.roleId = CRData.roleId;
+                newTransactionCompany.roleId = CompanyRoleData.roleId;
                 break;
             }
         }
@@ -723,13 +723,13 @@ static DataManager *singletonInstance;
             }
              CompanyData *companyData  = [[CompanyData alloc]initWithCompanyId:companyId companyName: companyName ticker:ticker country:countryCode gfcid:gfcid level:companyLevel exchange:exchange marketSegment:segmentId franchiseIndustry:industryId parentCompany:parentCompany countryFlag:countryCode];
             
-            arrayForCR = [NSArray arrayWithArray:[self fetchCompanyRoleData]];
+            arrayForCompanyRoles = [NSArray arrayWithArray:[self fetchCompanyRoleData]];
             
-            for(CompanyRoleData *CRData in arrayForCR)
+            for(CompanyRoleData *CompanyRoleData in arrayForCompanyRoles)
             {
-                if([tcCompany.roleId isEqualToString:CRData.roleId])
+                if([tcCompany.roleId isEqualToString:CompanyRoleData.roleId])
                 {
-                    role = CRData.roleDescription;
+                    role = CompanyRoleData.roleDescription;
                     break;
                 }
             }

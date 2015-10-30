@@ -42,8 +42,8 @@ import Foundation
         let appDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
         
     
-        let arrayForCR = self.coreDataManager.arrayForCR as NSArray as! [CompanyRoleData]
-        sharedDataModel.companyRolesArray = arrayForCR
+        let arrayForCompanyRoles = self.coreDataManager.arrayForCompanyRoles as NSArray as! [CompanyRoleData]
+        sharedDataModel.companyRolesArray = arrayForCompanyRoles
     
         let arrayForContactRoles = self.coreDataManager.arrayForContactRoles as NSArray as! [ContactRoleData]
         sharedDataModel.contactRolesArray = arrayForContactRoles

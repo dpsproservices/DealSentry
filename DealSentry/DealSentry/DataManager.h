@@ -15,7 +15,7 @@
 }
 @property(weak,nonatomic) AppDelegate *sharedDelegate;
 
-@property(nonatomic,strong) NSArray *arrayForCR;
+@property(nonatomic,strong) NSArray *arrayForCompanyRoles;
 
 @property(nonatomic,strong) NSMutableArray *arrayForContact;
 @property(nonatomic,strong) NSArray *arrayForContactRoles;
