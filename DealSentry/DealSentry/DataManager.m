@@ -255,11 +255,11 @@ static DataManager *singletonInstance;
 /// this method parses the true status csv and save it in transactionStatuses entity as attributes which in turn present in coredata datamodel
 -(void)savetransactionStatusesData
 {
-    for(NSMutableDictionary *transactionStatusDictionary in [self parseCSVData:@"true_status"])
+    for(NSMutableDictionary *transactionStatusDictionary in [self parseCSVData:@"transaction_status"])
     {
         TransactionStatus *newTransactionStatus = [NSEntityDescription insertNewObjectForEntityForName:@"TransactionStatusEntity" inManagedObjectContext:context];
-        newTransactionStatus.transactionStatusId = [transactionStatusDictionary objectForKey:@"transactionStatus_ID"];
-        newTransactionStatus.transactionStatusDescription = [transactionStatusDictionary objectForKey:@"TRUE_STATUS_DESCRIPTION"];
+        newTransactionStatus.transactionStatusId = [transactionStatusDictionary objectForKey:@"TRANSACTION_STATUS_ID"];
+        newTransactionStatus.transactionStatusDescription = [transactionStatusDictionary objectForKey:@"TRANSACTION_STATUS_DESCRIPTION"];
     }
 }
 
