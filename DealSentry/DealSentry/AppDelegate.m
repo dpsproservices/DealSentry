@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "DealSentry-Swift.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +15,9 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self performInitialization];
     return YES;
 }
 
@@ -122,6 +123,57 @@
             abort();
         }
     }
+}
+
+#pragma mark - application specifics
+
+@synthesize userId,currentOrientation;
+
+// checks the current device orientation and sets the global property for use in UI layout logic
+-(void)checkLaunchOrientation {
+    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
+    if (UIInterfaceOrientationIsPortrait(orientation))
+    {
+        currentOrientation = @"portrait";
+    }
+    else
+    {
+        currentOrientation = @"landscape";
+    }
+}
+
+-(void) performInitialization {
+
+    [self initializeModels];
+    
+    [self initializeViewControllers];
+}
+
+-(void) initializeModels {
+    
+    // defaults, globals and singletons
+    userId = @"ew57483";
+
+}
+
+-(void) initializeViewControllers {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [self checkLaunchOrientation];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
+    
+    self.splitViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainStoryboard"];
+
+    VCConnection *vcConnection = [VCConnection sharedInstance];
+    vcConnection.window = self.window;
+    vcConnection.splitViewController = self.splitViewController;
+    [vcConnection forViewController];
+
+    self.splitViewController.presentsWithGesture = NO;
+    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    
+    [self.window makeKeyAndVisible];
 }
 
 @end

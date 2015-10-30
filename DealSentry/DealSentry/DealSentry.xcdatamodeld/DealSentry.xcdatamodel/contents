@@ -1,4 +1,232 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Automatic">
+    <entity name="AgreementEntity" representedClassName="Agreement" syncable="YES">
+        <attribute name="agreementId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="agreementTerms" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="agreementTypeId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="effectiveDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="exclusivityApprovedBy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="expirationDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="legalReviewBy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transactionId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="transactionCompany" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransactionCompanyEntity" inverseName="agreement" inverseEntity="TransactionCompanyEntity" syncable="YES"/>
+    </entity>
+    <entity name="AgreementTypeEntity" representedClassName="AgreementType" syncable="YES">
+        <attribute name="agreementDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="agreementTypeId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="BusinessSelectionEntity" representedClassName="BusinessSelection" syncable="YES">
+        <attribute name="businessSelectionType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="consolidatedBankingOpportunityDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasCommoditiesExposure" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasDerivativesExposure" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasWealthManagementOpportunity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="investmentOpportunityDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isConsolidatedBankingOpportunity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isDifferentCurencies" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isDownwardRatingsLikely" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isFriendlyOrHostile" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isGovernmentAgency" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isInvestmentOpportunity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isServicesOpportunity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isUKCompanyInvolved" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pleaseExplain" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="servicesOpportunityDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toIncludeCash" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toIncludeOther" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="toIncludeStock" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transactionId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wealthManagementOpportunity" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransactionEntity" inverseName="businessSelection" inverseEntity="TransactionEntity" syncable="YES"/>
+    </entity>
+    <entity name="CompanyEntity" representedClassName="Company" syncable="YES">
+        <attribute name="companyId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyLevel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="companyName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="exchange" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gfcid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="industryId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isManuallyDefinedByUser" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentCompany" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="segmentId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ticker" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="transactionCompany" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransactionCompanyEntity" inverseName="company" inverseEntity="TransactionCompanyEntity" syncable="YES"/>
+    </entity>
+    <entity name="CompanyRoleEntity" representedClassName="CompanyRole" syncable="YES">
+        <attribute name="roleDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="roleId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ContactEntity" representedClassName="Contact" syncable="YES">
+        <attribute name="contactId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gocDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="soeId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ContactRoleEntity" representedClassName="ContactRole" syncable="YES">
+        <attribute name="roleDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="roleId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="CountryEntity" representedClassName="Country" syncable="YES">
+        <attribute name="countryCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="countryName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DealStatusEntity" representedClassName="DealStatus" syncable="YES">
+        <attribute name="dealStatusDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dealStatusId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="IndustryEntity" representedClassName="Industry" syncable="YES">
+        <attribute name="franchiseIndustry" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="industryDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="industryId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="LoanTypeEntity" representedClassName="LoanType" syncable="YES">
+        <attribute name="loanTypeDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="loanTypeId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="MaterialityEntity" representedClassName="Materiality" syncable="YES">
+        <attribute name="companyId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasFinancialSponsor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasNonProfitOrganization" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasPRC" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasPubliclyTradedSecurities" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasStandardAgreements" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasUSGovtAffiliatedMunicipality" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isGovtOwned" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isMaterial" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isMaterialDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="percentOwned" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="specialCircumstances" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transactionId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="transactionCompany" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransactionCompanyEntity" inverseName="materiality" inverseEntity="TransactionCompanyEntity" syncable="YES"/>
+    </entity>
+    <entity name="OfferingFormatEntity" representedClassName="OfferingFormat" syncable="YES">
+        <attribute name="offeringFormatDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="offeringFormatId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ProductEntity" representedClassName="Product" syncable="YES">
+        <attribute name="productDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ProductMapEntity" representedClassName="ProductMap" syncable="YES">
+        <attribute name="productDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productSubDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subProductId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SegmentEntity" representedClassName="Segment" syncable="YES">
+        <attribute name="marketSegment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="segmentDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="segmentId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SubProductEntity" representedClassName="SubProduct" syncable="YES">
+        <attribute name="subProductDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subProductId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="TransactionCompanyEntity" representedClassName="TransactionCompany" syncable="YES">
+        <attribute name="companyId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="roleId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transactionId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="agreement" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AgreementEntity" inverseName="transactionCompany" inverseEntity="AgreementEntity" syncable="YES"/>
+        <relationship name="company" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CompanyEntity" inverseName="transactionCompany" inverseEntity="CompanyEntity" syncable="YES"/>
+        <relationship name="materiality" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MaterialityEntity" inverseName="transactionCompany" inverseEntity="MaterialityEntity" syncable="YES"/>
+        <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransactionEntity" inverseName="transactionCompany" inverseEntity="TransactionEntity" syncable="YES"/>
+    </entity>
+    <entity name="TransactionContactEntity" representedClassName="TransactionContact" syncable="YES">
+        <attribute name="contactId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="crossSellDesignee" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="roleId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transactionId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransactionEntity" inverseName="transactionContact" inverseEntity="TransactionEntity" syncable="YES"/>
+    </entity>
+    <entity name="TransactionDetailEntity" representedClassName="TransactionDetail" syncable="YES">
+        <attribute name="backwardsDealStatusExplanation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bankRole" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dealDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dealSize" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dealStatusId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="estimatedPitchDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="expectedAnnouncementDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="expectedClosingDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isConfidential" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isSubjectToTakeOver" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="likelyToTakePlace" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="loanTypeId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="offeringFormatComments" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="offeringFormatId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productSubId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="projectName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="terminatedExplanation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transactionId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uncollectedFees" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="useOfProceedsComments" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="useOfProceedsId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransactionEntity" inverseName="transactionDetail" inverseEntity="TransactionEntity" syncable="YES"/>
+    </entity>
+    <entity name="TransactionEntity" representedClassName="Transaction" syncable="YES">
+        <attribute name="dbDraftId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbTransactionId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clearanceApprovedDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="counterparty" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ddtRestriction" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dealStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dealStatusChangedBackwards" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="draftId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fulfillmentCondition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isQueued" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="primaryClient" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="product" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productSub" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="queueEvent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="requestorContactId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="savedOnDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="sponsoringMDContactId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="submittedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="transactionId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transactionStatusId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedDate" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="businessSelection" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="BusinessSelectionEntity" inverseName="transaction" inverseEntity="BusinessSelectionEntity" syncable="YES"/>
+        <relationship name="transactionCompany" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TransactionCompanyEntity" inverseName="transaction" inverseEntity="TransactionCompanyEntity" syncable="YES"/>
+        <relationship name="transactionContact" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="TransactionContactEntity" inverseName="transaction" inverseEntity="TransactionContactEntity" syncable="YES"/>
+        <relationship name="transactionDetail" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TransactionDetailEntity" inverseName="transaction" inverseEntity="TransactionDetailEntity" syncable="YES"/>
+    </entity>
+    <entity name="TransactionStatusEntity" representedClassName="TransactionStatus" syncable="YES">
+        <attribute name="transactionStatusDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transactionStatusId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="UseOfProceedsEntity" representedClassName="UseOfProceeds" syncable="YES">
+        <attribute name="useOfProceedsDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="useOfProceedsId" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="AgreementEntity" positionX="-155" positionY="291" width="128" height="195"/>
+        <element name="AgreementTypeEntity" positionX="16" positionY="288" width="128" height="75"/>
+        <element name="BusinessSelectionEntity" positionX="-810" positionY="408" width="243" height="375"/>
+        <element name="CompanyEntity" positionX="-153" positionY="549" width="162" height="225"/>
+        <element name="CompanyRoleEntity" positionX="-155" positionY="792" width="128" height="75"/>
+        <element name="ContactEntity" positionX="-603" positionY="855" width="128" height="150"/>
+        <element name="ContactRoleEntity" positionX="-603" positionY="1023" width="128" height="75"/>
+        <element name="CountryEntity" positionX="70" positionY="774" width="128" height="90"/>
+        <element name="DealStatusEntity" positionX="-578" positionY="1176" width="128" height="75"/>
+        <element name="IndustryEntity" positionX="61" positionY="540" width="128" height="90"/>
+        <element name="LoanTypeEntity" positionX="-576" positionY="1536" width="128" height="75"/>
+        <element name="MaterialityEntity" positionX="-153" positionY="909" width="180" height="255"/>
+        <element name="OfferingFormatEntity" positionX="-576" positionY="1635" width="144" height="75"/>
+        <element name="ProductEntity" positionX="-576" positionY="1266" width="128" height="75"/>
+        <element name="ProductMapEntity" positionX="-389" positionY="1296" width="128" height="105"/>
+        <element name="SegmentEntity" positionX="63" positionY="666" width="128" height="90"/>
+        <element name="SubProductEntity" positionX="-578" positionY="1356" width="128" height="75"/>
+        <element name="TransactionCompanyEntity" positionX="-432" positionY="666" width="171" height="150"/>
+        <element name="TransactionContactEntity" positionX="-819" positionY="855" width="173" height="120"/>
+        <element name="TransactionDetailEntity" positionX="-873" positionY="1224" width="207" height="390"/>
+        <element name="TransactionEntity" positionX="-1206" positionY="441" width="171" height="420"/>
+        <element name="TransactionStatusEntity" positionX="-1010" positionY="441" width="128" height="75"/>
+        <element name="UseOfProceedsEntity" positionX="-576" positionY="1446" width="153" height="75"/>
+    </elements>
 </model>

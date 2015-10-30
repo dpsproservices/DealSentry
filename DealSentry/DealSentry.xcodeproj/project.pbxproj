@@ -11,13 +11,149 @@
 		B03FE69F8AE97BE3818E09FF /* libPods-DealSentry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0645F8F9414DC2E2EF98F2E1 /* libPods-DealSentry.a */; };
 		CA4078FA1BE2C9F900EEB6BA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4078F91BE2C9F900EEB6BA /* main.m */; };
 		CA4078FD1BE2C9F900EEB6BA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4078FC1BE2C9F900EEB6BA /* AppDelegate.m */; };
-		CA4079001BE2C9F900EEB6BA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4078FF1BE2C9F900EEB6BA /* ViewController.m */; };
-		CA4079031BE2C9F900EEB6BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA4079011BE2C9F900EEB6BA /* Main.storyboard */; };
-		CA4079061BE2C9F900EEB6BA /* DealSentry.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA4079041BE2C9F900EEB6BA /* DealSentry.xcdatamodeld */; };
 		CA4079081BE2C9FA00EEB6BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA4079071BE2C9FA00EEB6BA /* Assets.xcassets */; };
-		CA40790B1BE2C9FA00EEB6BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA4079091BE2C9FA00EEB6BA /* LaunchScreen.storyboard */; };
 		CA4079161BE2C9FA00EEB6BA /* DealSentryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4079151BE2C9FA00EEB6BA /* DealSentryTests.m */; };
 		CA4079211BE2C9FA00EEB6BA /* DealSentryUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4079201BE2C9FA00EEB6BA /* DealSentryUITests.m */; };
+		CA726D461BE3193A0026612F /* VCConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726D431BE3193A0026612F /* VCConnection.swift */; };
+		CA726D471BE3193A0026612F /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D451BE3193A0026612F /* DataManager.m */; };
+		CA726D491BE3194F0026612F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA726D481BE3194F0026612F /* Main.storyboard */; };
+		CA726D4F1BE319710026612F /* AppAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726D4B1BE319710026612F /* AppAttributes.swift */; };
+		CA726D501BE319710026612F /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726D4C1BE319710026612F /* DateUtils.swift */; };
+		CA726D511BE319710026612F /* DebugUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726D4D1BE319710026612F /* DebugUtility.swift */; };
+		CA726D541BE319F30026612F /* DealSentry.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CA726D521BE319F30026612F /* DealSentry.xcdatamodeld */; };
+		CA726D871BE31AD80026612F /* Agreement.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D5A1BE31AD80026612F /* Agreement.m */; };
+		CA726D881BE31AD80026612F /* AgreementType.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D5C1BE31AD80026612F /* AgreementType.m */; };
+		CA726D891BE31AD80026612F /* BusinessSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D5E1BE31AD80026612F /* BusinessSelection.m */; };
+		CA726D8A1BE31AD80026612F /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D601BE31AD80026612F /* Company.m */; };
+		CA726D8B1BE31AD80026612F /* CompanyRole.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D621BE31AD80026612F /* CompanyRole.m */; };
+		CA726D8C1BE31AD80026612F /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D641BE31AD80026612F /* Contact.m */; };
+		CA726D8D1BE31AD80026612F /* ContactRole.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D661BE31AD80026612F /* ContactRole.m */; };
+		CA726D8E1BE31AD80026612F /* Country.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D681BE31AD80026612F /* Country.m */; };
+		CA726D8F1BE31AD80026612F /* DealStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D6A1BE31AD80026612F /* DealStatus.m */; };
+		CA726D901BE31AD80026612F /* Industry.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D6C1BE31AD80026612F /* Industry.m */; };
+		CA726D911BE31AD80026612F /* LoanType.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D6E1BE31AD80026612F /* LoanType.m */; };
+		CA726D921BE31AD80026612F /* Materiality.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D701BE31AD80026612F /* Materiality.m */; };
+		CA726D931BE31AD80026612F /* OfferingFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D721BE31AD80026612F /* OfferingFormat.m */; };
+		CA726D941BE31AD80026612F /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D741BE31AD80026612F /* Product.m */; };
+		CA726D951BE31AD80026612F /* ProductMap.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D761BE31AD80026612F /* ProductMap.m */; };
+		CA726D961BE31AD80026612F /* Segment.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D781BE31AD80026612F /* Segment.m */; };
+		CA726D971BE31AD80026612F /* SubProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D7A1BE31AD80026612F /* SubProduct.m */; };
+		CA726D981BE31AD80026612F /* Transaction.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D7C1BE31AD80026612F /* Transaction.m */; };
+		CA726D991BE31AD80026612F /* TransactionCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D7E1BE31AD80026612F /* TransactionCompany.m */; };
+		CA726D9A1BE31AD80026612F /* TransactionContact.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D801BE31AD80026612F /* TransactionContact.m */; };
+		CA726D9B1BE31AD80026612F /* TransactionDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D821BE31AD80026612F /* TransactionDetail.m */; };
+		CA726D9C1BE31AD80026612F /* TransactionStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D841BE31AD80026612F /* TransactionStatus.m */; };
+		CA726D9D1BE31AD80026612F /* UseOfProceeds.m in Sources */ = {isa = PBXBuildFile; fileRef = CA726D861BE31AD80026612F /* UseOfProceeds.m */; };
+		CA726E021BE31AEA0026612F /* AddCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DA01BE31AEA0026612F /* AddCompaniesViewController.swift */; };
+		CA726E031BE31AEA0026612F /* AgreementsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DA21BE31AEA0026612F /* AgreementsTableViewCell.swift */; };
+		CA726E041BE31AEA0026612F /* AgreementsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DA31BE31AEA0026612F /* AgreementsTableViewController.swift */; };
+		CA726E051BE31AEA0026612F /* EnterAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DA41BE31AEA0026612F /* EnterAgreementViewController.swift */; };
+		CA726E061BE31AEA0026612F /* NoAgreementsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DA51BE31AEA0026612F /* NoAgreementsTableViewCell.swift */; };
+		CA726E071BE31AEA0026612F /* CompaniesQuestionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DA61BE31AEA0026612F /* CompaniesQuestionsTableViewCell.swift */; };
+		CA726E081BE31AEA0026612F /* CompaniesQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DA71BE31AEA0026612F /* CompaniesQuestionsViewController.swift */; };
+		CA726E091BE31AEA0026612F /* CompaniesSearchHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DA81BE31AEA0026612F /* CompaniesSearchHeaderTableViewCell.swift */; };
+		CA726E0A1BE31AEA0026612F /* CompaniesSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DA91BE31AEA0026612F /* CompaniesSearchTableViewCell.swift */; };
+		CA726E0B1BE31AEA0026612F /* DefineCompanyPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DAA1BE31AEA0026612F /* DefineCompanyPopupViewController.swift */; };
+		CA726E0C1BE31AEA0026612F /* DefineCompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DAB1BE31AEA0026612F /* DefineCompanyViewController.swift */; };
+		CA726E0D1BE31AEA0026612F /* MaterialityPage0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DAD1BE31AEA0026612F /* MaterialityPage0ViewController.swift */; };
+		CA726E0E1BE31AEA0026612F /* MaterialityPage1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DAE1BE31AEA0026612F /* MaterialityPage1ViewController.swift */; };
+		CA726E0F1BE31AEA0026612F /* MaterialityPage2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DAF1BE31AEA0026612F /* MaterialityPage2ViewController.swift */; };
+		CA726E101BE31AEA0026612F /* MaterialityPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DB01BE31AEA0026612F /* MaterialityPageViewController.swift */; };
+		CA726E111BE31AEA0026612F /* MaterialityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DB11BE31AEA0026612F /* MaterialityViewController.swift */; };
+		CA726E121BE31AEA0026612F /* NoCompaniesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DB21BE31AEA0026612F /* NoCompaniesTableViewCell.swift */; };
+		CA726E131BE31AEA0026612F /* SearchCompaniesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DB31BE31AEA0026612F /* SearchCompaniesViewController.swift */; };
+		CA726E141BE31AEA0026612F /* ContactsQuestionsCollectionsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DB51BE31AEA0026612F /* ContactsQuestionsCollectionsViewCell.swift */; };
+		CA726E151BE31AEA0026612F /* ContactsQuestionsCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DB61BE31AEA0026612F /* ContactsQuestionsCollectionsViewController.swift */; };
+		CA726E161BE31AEA0026612F /* ContactsSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DB71BE31AEA0026612F /* ContactsSearchTableViewCell.swift */; };
+		CA726E171BE31AEA0026612F /* ContactsSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DB81BE31AEA0026612F /* ContactsSearchTableViewController.swift */; };
+		CA726E181BE31AEA0026612F /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DB91BE31AEA0026612F /* ContactsTableViewCell.swift */; };
+		CA726E191BE31AEA0026612F /* ContactsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DBA1BE31AEA0026612F /* ContactsTableViewController.swift */; };
+		CA726E1A1BE31AEA0026612F /* NoContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DBB1BE31AEA0026612F /* NoContactsTableViewCell.swift */; };
+		CA726E1B1BE31AEA0026612F /* SortFilterTxnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DBD1BE31AEA0026612F /* SortFilterTxnTableViewCell.swift */; };
+		CA726E1C1BE31AEA0026612F /* TransactionFilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DBE1BE31AEA0026612F /* TransactionFilterTableViewCell.swift */; };
+		CA726E1D1BE31AEA0026612F /* TransactionFilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DBF1BE31AEA0026612F /* TransactionFilterTableViewController.swift */; };
+		CA726E1E1BE31AEA0026612F /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DC01BE31AEA0026612F /* TransactionTableViewCell.swift */; };
+		CA726E1F1BE31AEA0026612F /* TransactionDetailPage1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DC21BE31AEA0026612F /* TransactionDetailPage1ViewController.swift */; };
+		CA726E201BE31AEA0026612F /* TransactionDetailPage2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DC31BE31AEA0026612F /* TransactionDetailPage2ViewController.swift */; };
+		CA726E211BE31AEA0026612F /* TransactionDetailPage3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DC41BE31AEA0026612F /* TransactionDetailPage3ViewController.swift */; };
+		CA726E221BE31AEA0026612F /* TransactionDetailPage4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DC51BE31AEA0026612F /* TransactionDetailPage4ViewController.swift */; };
+		CA726E231BE31AEA0026612F /* TransactionDetailPage5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DC61BE31AEA0026612F /* TransactionDetailPage5ViewController.swift */; };
+		CA726E241BE31AEA0026612F /* TransactionDetailPage6ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DC71BE31AEA0026612F /* TransactionDetailPage6ViewController.swift */; };
+		CA726E251BE31AEA0026612F /* TransactionDetailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DC81BE31AEA0026612F /* TransactionDetailPageViewController.swift */; };
+		CA726E261BE31AEA0026612F /* TransactionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DC91BE31AEA0026612F /* TransactionDetailViewController.swift */; };
+		CA726E271BE31AEA0026612F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DCA1BE31AEA0026612F /* DetailViewController.swift */; };
+		CA726E281BE31AEA0026612F /* DismissModalSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DCB1BE31AEA0026612F /* DismissModalSegue.swift */; };
+		CA726E291BE31AEA0026612F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DCC1BE31AEA0026612F /* MasterViewController.swift */; };
+		CA726E2A1BE31AEA0026612F /* BusinessSelectionPage1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DCE1BE31AEA0026612F /* BusinessSelectionPage1ViewController.swift */; };
+		CA726E2B1BE31AEA0026612F /* BusinessSelectionPage2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DCF1BE31AEA0026612F /* BusinessSelectionPage2ViewController.swift */; };
+		CA726E2C1BE31AEA0026612F /* BusinessSelectionPage3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD01BE31AEA0026612F /* BusinessSelectionPage3ViewController.swift */; };
+		CA726E2D1BE31AEA0026612F /* BusinessSelectionPage4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD11BE31AEA0026612F /* BusinessSelectionPage4ViewController.swift */; };
+		CA726E2E1BE31AEA0026612F /* BusinessSelectionPage5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD21BE31AEA0026612F /* BusinessSelectionPage5ViewController.swift */; };
+		CA726E2F1BE31AEA0026612F /* BusinessSelectionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD31BE31AEA0026612F /* BusinessSelectionPageViewController.swift */; };
+		CA726E301BE31AEA0026612F /* BusinessSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD41BE31AEA0026612F /* BusinessSelectionViewController.swift */; };
+		CA726E311BE31AEA0026612F /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD51BE31AEA0026612F /* NewViewController.swift */; };
+		CA726E321BE31AEA0026612F /* CompanyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD71BE31AEA0026612F /* CompanyMap.swift */; };
+		CA726E331BE31AEA0026612F /* DateCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD81BE31AEA0026612F /* DateCalendar.swift */; };
+		CA726E341BE31AEA0026612F /* DealSizeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD91BE31AEA0026612F /* DealSizeWidget.swift */; };
+		CA726E351BE31AEA0026612F /* dial.html in Resources */ = {isa = PBXBuildFile; fileRef = CA726DDB1BE31AEA0026612F /* dial.html */; };
+		CA726E361BE31AEA0026612F /* ui-bg_diagonals-thick_18_b81900_40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DDD1BE31AEA0026612F /* ui-bg_diagonals-thick_18_b81900_40x40.png */; };
+		CA726E371BE31AEA0026612F /* ui-bg_diagonals-thick_20_666666_40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DDE1BE31AEA0026612F /* ui-bg_diagonals-thick_20_666666_40x40.png */; };
+		CA726E381BE31AEA0026612F /* ui-bg_flat_10_000000_40x100.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DDF1BE31AEA0026612F /* ui-bg_flat_10_000000_40x100.png */; };
+		CA726E391BE31AEA0026612F /* ui-bg_flat_75_ffffff_40x100.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DE01BE31AEA0026612F /* ui-bg_flat_75_ffffff_40x100.png */; };
+		CA726E3A1BE31AEA0026612F /* ui-bg_glass_100_f6f6f6_1x400.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DE11BE31AEA0026612F /* ui-bg_glass_100_f6f6f6_1x400.png */; };
+		CA726E3B1BE31AEA0026612F /* ui-bg_glass_100_fdf5ce_1x400.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DE21BE31AEA0026612F /* ui-bg_glass_100_fdf5ce_1x400.png */; };
+		CA726E3C1BE31AEA0026612F /* ui-bg_glass_55_fbf9ee_1x400.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DE31BE31AEA0026612F /* ui-bg_glass_55_fbf9ee_1x400.png */; };
+		CA726E3D1BE31AEA0026612F /* ui-bg_glass_65_ffffff_1x400.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DE41BE31AEA0026612F /* ui-bg_glass_65_ffffff_1x400.png */; };
+		CA726E3E1BE31AEA0026612F /* ui-bg_glass_75_dadada_1x400.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DE51BE31AEA0026612F /* ui-bg_glass_75_dadada_1x400.png */; };
+		CA726E3F1BE31AEA0026612F /* ui-bg_glass_75_e6e6e6_1x400.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DE61BE31AEA0026612F /* ui-bg_glass_75_e6e6e6_1x400.png */; };
+		CA726E401BE31AEA0026612F /* ui-bg_gloss-wave_35_f6a828_500x100.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DE71BE31AEA0026612F /* ui-bg_gloss-wave_35_f6a828_500x100.png */; };
+		CA726E411BE31AEA0026612F /* ui-bg_highlight-soft_100_eeeeee_1x100.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DE81BE31AEA0026612F /* ui-bg_highlight-soft_100_eeeeee_1x100.png */; };
+		CA726E421BE31AEA0026612F /* ui-bg_highlight-soft_75_cccccc_1x100.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DE91BE31AEA0026612F /* ui-bg_highlight-soft_75_cccccc_1x100.png */; };
+		CA726E431BE31AEA0026612F /* ui-bg_highlight-soft_75_ffe45c_1x100.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DEA1BE31AEA0026612F /* ui-bg_highlight-soft_75_ffe45c_1x100.png */; };
+		CA726E441BE31AEA0026612F /* ui-icons_222222_256x240.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DEB1BE31AEA0026612F /* ui-icons_222222_256x240.png */; };
+		CA726E451BE31AEA0026612F /* ui-icons_228ef1_256x240.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DEC1BE31AEA0026612F /* ui-icons_228ef1_256x240.png */; };
+		CA726E461BE31AEA0026612F /* ui-icons_454545_256x240.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DED1BE31AEA0026612F /* ui-icons_454545_256x240.png */; };
+		CA726E471BE31AEA0026612F /* ui-icons_ef8c08_256x240.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DEE1BE31AEA0026612F /* ui-icons_ef8c08_256x240.png */; };
+		CA726E481BE31AEA0026612F /* ui-icons_ffd27a_256x240.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DEF1BE31AEA0026612F /* ui-icons_ffd27a_256x240.png */; };
+		CA726E491BE31AEA0026612F /* ui-icons_ffffff_256x240.png in Resources */ = {isa = PBXBuildFile; fileRef = CA726DF01BE31AEA0026612F /* ui-icons_ffffff_256x240.png */; };
+		CA726E4A1BE31AEA0026612F /* calendar.html in Resources */ = {isa = PBXBuildFile; fileRef = CA726DF11BE31AEA0026612F /* calendar.html */; };
+		CA726E4B1BE31AEA0026612F /* map.html in Resources */ = {isa = PBXBuildFile; fileRef = CA726DF21BE31AEA0026612F /* map.html */; };
+		CA726E4C1BE31AEA0026612F /* PickerSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DF31BE31AEA0026612F /* PickerSelection.swift */; };
+		CA726E4D1BE31AEA0026612F /* PopDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DF41BE31AEA0026612F /* PopDatePicker.swift */; };
+		CA726E4E1BE31AEA0026612F /* PopDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DF51BE31AEA0026612F /* PopDateViewController.swift */; };
+		CA726E4F1BE31AEA0026612F /* PopDateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA726DF61BE31AEA0026612F /* PopDateViewController.xib */; };
+		CA726E501BE31AEA0026612F /* PopTextPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DF71BE31AEA0026612F /* PopTextPicker.swift */; };
+		CA726E511BE31AEA0026612F /* PopTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DF81BE31AEA0026612F /* PopTextViewController.swift */; };
+		CA726E521BE31AEA0026612F /* PopTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA726DF91BE31AEA0026612F /* PopTextViewController.xib */; };
+		CA726E531BE31AEA0026612F /* SliderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DFA1BE31AEA0026612F /* SliderController.swift */; };
+		CA726E561BE31AEA0026612F /* TransactionSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DFE1BE31AEA0026612F /* TransactionSummary.swift */; };
+		CA726E571BE31AEA0026612F /* TransactionSummaryCompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DFF1BE31AEA0026612F /* TransactionSummaryCompanyCell.swift */; };
+		CA726E581BE31AEA0026612F /* TransactionSummaryCompanyErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E001BE31AEA0026612F /* TransactionSummaryCompanyErrorCell.swift */; };
+		CA726E591BE31AEA0026612F /* TransactionSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E011BE31AEA0026612F /* TransactionSummaryViewController.swift */; };
+		CA726E731BE31AF40026612F /* AgreementData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E5B1BE31AF40026612F /* AgreementData.swift */; };
+		CA726E741BE31AF40026612F /* AgreementTypeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E5C1BE31AF40026612F /* AgreementTypeData.swift */; };
+		CA726E751BE31AF40026612F /* BusinessSelectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E5D1BE31AF40026612F /* BusinessSelectionData.swift */; };
+		CA726E761BE31AF40026612F /* CompanyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E5E1BE31AF40026612F /* CompanyData.swift */; };
+		CA726E771BE31AF40026612F /* CompanyRoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E5F1BE31AF40026612F /* CompanyRoleData.swift */; };
+		CA726E781BE31AF40026612F /* ContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E601BE31AF40026612F /* ContactData.swift */; };
+		CA726E791BE31AF40026612F /* ContactRoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E611BE31AF40026612F /* ContactRoleData.swift */; };
+		CA726E7A1BE31AF40026612F /* CountryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E621BE31AF40026612F /* CountryData.swift */; };
+		CA726E7B1BE31AF40026612F /* DealStatusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E631BE31AF40026612F /* DealStatusData.swift */; };
+		CA726E7C1BE31AF40026612F /* IndustryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E641BE31AF40026612F /* IndustryData.swift */; };
+		CA726E7D1BE31AF40026612F /* LoanTypeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E651BE31AF40026612F /* LoanTypeData.swift */; };
+		CA726E7E1BE31AF40026612F /* MaterialityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E661BE31AF40026612F /* MaterialityData.swift */; };
+		CA726E7F1BE31AF40026612F /* OfferingFormatData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E671BE31AF40026612F /* OfferingFormatData.swift */; };
+		CA726E801BE31AF40026612F /* ProductData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E681BE31AF40026612F /* ProductData.swift */; };
+		CA726E811BE31AF40026612F /* ProductMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E691BE31AF40026612F /* ProductMapData.swift */; };
+		CA726E821BE31AF40026612F /* ProductSubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6A1BE31AF40026612F /* ProductSubData.swift */; };
+		CA726E831BE31AF40026612F /* SegmentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6B1BE31AF40026612F /* SegmentsData.swift */; };
+		CA726E841BE31AF40026612F /* SharedDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6C1BE31AF40026612F /* SharedDataModel.swift */; };
+		CA726E851BE31AF40026612F /* TransactionCompanyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6D1BE31AF40026612F /* TransactionCompanyData.swift */; };
+		CA726E861BE31AF40026612F /* TransactionContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6E1BE31AF40026612F /* TransactionContactData.swift */; };
+		CA726E871BE31AF40026612F /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6F1BE31AF40026612F /* TransactionData.swift */; };
+		CA726E881BE31AF40026612F /* TransactionDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E701BE31AF40026612F /* TransactionDetailData.swift */; };
+		CA726E891BE31AF40026612F /* TransactionStatusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E711BE31AF40026612F /* TransactionStatusData.swift */; };
+		CA726E8A1BE31AF40026612F /* UseOfProceedsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E721BE31AF40026612F /* UseOfProceedsData.swift */; };
 		FA70BBF6A6C190B0317943A3 /* libPods-DealSentryTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9B85A16604738A691E1D4E /* libPods-DealSentryTests.a */; };
 /* End PBXBuildFile section */
 
@@ -50,12 +186,7 @@
 		CA4078F91BE2C9F900EEB6BA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CA4078FB1BE2C9F900EEB6BA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CA4078FC1BE2C9F900EEB6BA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CA4078FE1BE2C9F900EEB6BA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CA4078FF1BE2C9F900EEB6BA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		CA4079021BE2C9F900EEB6BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		CA4079051BE2C9F900EEB6BA /* DealSentry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DealSentry.xcdatamodel; sourceTree = "<group>"; };
 		CA4079071BE2C9FA00EEB6BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CA40790A1BE2C9FA00EEB6BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CA40790C1BE2C9FA00EEB6BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA4079111BE2C9FA00EEB6BA /* DealSentryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DealSentryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA4079151BE2C9FA00EEB6BA /* DealSentryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DealSentryTests.m; sourceTree = "<group>"; };
@@ -63,6 +194,171 @@
 		CA40791C1BE2C9FA00EEB6BA /* DealSentryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DealSentryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA4079201BE2C9FA00EEB6BA /* DealSentryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DealSentryUITests.m; sourceTree = "<group>"; };
 		CA4079221BE2C9FA00EEB6BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA726D421BE319390026612F /* DealSentry-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DealSentry-Bridging-Header.h"; sourceTree = "<group>"; };
+		CA726D431BE3193A0026612F /* VCConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCConnection.swift; sourceTree = "<group>"; };
+		CA726D441BE3193A0026612F /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
+		CA726D451BE3193A0026612F /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		CA726D481BE3194F0026612F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CA726D4B1BE319710026612F /* AppAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAttributes.swift; sourceTree = "<group>"; };
+		CA726D4C1BE319710026612F /* DateUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		CA726D4D1BE319710026612F /* DebugUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugUtility.swift; sourceTree = "<group>"; };
+		CA726D531BE319F30026612F /* DealSentry.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DealSentry.xcdatamodel; sourceTree = "<group>"; };
+		CA726D591BE31AD80026612F /* Agreement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Agreement.h; sourceTree = "<group>"; };
+		CA726D5A1BE31AD80026612F /* Agreement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Agreement.m; sourceTree = "<group>"; };
+		CA726D5B1BE31AD80026612F /* AgreementType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AgreementType.h; sourceTree = "<group>"; };
+		CA726D5C1BE31AD80026612F /* AgreementType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AgreementType.m; sourceTree = "<group>"; };
+		CA726D5D1BE31AD80026612F /* BusinessSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BusinessSelection.h; sourceTree = "<group>"; };
+		CA726D5E1BE31AD80026612F /* BusinessSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BusinessSelection.m; sourceTree = "<group>"; };
+		CA726D5F1BE31AD80026612F /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
+		CA726D601BE31AD80026612F /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
+		CA726D611BE31AD80026612F /* CompanyRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyRole.h; sourceTree = "<group>"; };
+		CA726D621BE31AD80026612F /* CompanyRole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyRole.m; sourceTree = "<group>"; };
+		CA726D631BE31AD80026612F /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		CA726D641BE31AD80026612F /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		CA726D651BE31AD80026612F /* ContactRole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactRole.h; sourceTree = "<group>"; };
+		CA726D661BE31AD80026612F /* ContactRole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactRole.m; sourceTree = "<group>"; };
+		CA726D671BE31AD80026612F /* Country.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Country.h; sourceTree = "<group>"; };
+		CA726D681BE31AD80026612F /* Country.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Country.m; sourceTree = "<group>"; };
+		CA726D691BE31AD80026612F /* DealStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DealStatus.h; sourceTree = "<group>"; };
+		CA726D6A1BE31AD80026612F /* DealStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DealStatus.m; sourceTree = "<group>"; };
+		CA726D6B1BE31AD80026612F /* Industry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Industry.h; sourceTree = "<group>"; };
+		CA726D6C1BE31AD80026612F /* Industry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Industry.m; sourceTree = "<group>"; };
+		CA726D6D1BE31AD80026612F /* LoanType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoanType.h; sourceTree = "<group>"; };
+		CA726D6E1BE31AD80026612F /* LoanType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoanType.m; sourceTree = "<group>"; };
+		CA726D6F1BE31AD80026612F /* Materiality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Materiality.h; sourceTree = "<group>"; };
+		CA726D701BE31AD80026612F /* Materiality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Materiality.m; sourceTree = "<group>"; };
+		CA726D711BE31AD80026612F /* OfferingFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OfferingFormat.h; sourceTree = "<group>"; };
+		CA726D721BE31AD80026612F /* OfferingFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfferingFormat.m; sourceTree = "<group>"; };
+		CA726D731BE31AD80026612F /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		CA726D741BE31AD80026612F /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
+		CA726D751BE31AD80026612F /* ProductMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductMap.h; sourceTree = "<group>"; };
+		CA726D761BE31AD80026612F /* ProductMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductMap.m; sourceTree = "<group>"; };
+		CA726D771BE31AD80026612F /* Segment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Segment.h; sourceTree = "<group>"; };
+		CA726D781BE31AD80026612F /* Segment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Segment.m; sourceTree = "<group>"; };
+		CA726D791BE31AD80026612F /* SubProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubProduct.h; sourceTree = "<group>"; };
+		CA726D7A1BE31AD80026612F /* SubProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubProduct.m; sourceTree = "<group>"; };
+		CA726D7B1BE31AD80026612F /* Transaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transaction.h; sourceTree = "<group>"; };
+		CA726D7C1BE31AD80026612F /* Transaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transaction.m; sourceTree = "<group>"; };
+		CA726D7D1BE31AD80026612F /* TransactionCompany.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionCompany.h; sourceTree = "<group>"; };
+		CA726D7E1BE31AD80026612F /* TransactionCompany.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionCompany.m; sourceTree = "<group>"; };
+		CA726D7F1BE31AD80026612F /* TransactionContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionContact.h; sourceTree = "<group>"; };
+		CA726D801BE31AD80026612F /* TransactionContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionContact.m; sourceTree = "<group>"; };
+		CA726D811BE31AD80026612F /* TransactionDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionDetail.h; sourceTree = "<group>"; };
+		CA726D821BE31AD80026612F /* TransactionDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionDetail.m; sourceTree = "<group>"; };
+		CA726D831BE31AD80026612F /* TransactionStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionStatus.h; sourceTree = "<group>"; };
+		CA726D841BE31AD80026612F /* TransactionStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionStatus.m; sourceTree = "<group>"; };
+		CA726D851BE31AD80026612F /* UseOfProceeds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UseOfProceeds.h; sourceTree = "<group>"; };
+		CA726D861BE31AD80026612F /* UseOfProceeds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UseOfProceeds.m; sourceTree = "<group>"; };
+		CA726DA01BE31AEA0026612F /* AddCompaniesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCompaniesViewController.swift; sourceTree = "<group>"; };
+		CA726DA21BE31AEA0026612F /* AgreementsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgreementsTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DA31BE31AEA0026612F /* AgreementsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgreementsTableViewController.swift; sourceTree = "<group>"; };
+		CA726DA41BE31AEA0026612F /* EnterAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterAgreementViewController.swift; sourceTree = "<group>"; };
+		CA726DA51BE31AEA0026612F /* NoAgreementsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoAgreementsTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DA61BE31AEA0026612F /* CompaniesQuestionsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesQuestionsTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DA71BE31AEA0026612F /* CompaniesQuestionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesQuestionsViewController.swift; sourceTree = "<group>"; };
+		CA726DA81BE31AEA0026612F /* CompaniesSearchHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesSearchHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DA91BE31AEA0026612F /* CompaniesSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompaniesSearchTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DAA1BE31AEA0026612F /* DefineCompanyPopupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefineCompanyPopupViewController.swift; sourceTree = "<group>"; };
+		CA726DAB1BE31AEA0026612F /* DefineCompanyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefineCompanyViewController.swift; sourceTree = "<group>"; };
+		CA726DAD1BE31AEA0026612F /* MaterialityPage0ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialityPage0ViewController.swift; sourceTree = "<group>"; };
+		CA726DAE1BE31AEA0026612F /* MaterialityPage1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialityPage1ViewController.swift; sourceTree = "<group>"; };
+		CA726DAF1BE31AEA0026612F /* MaterialityPage2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialityPage2ViewController.swift; sourceTree = "<group>"; };
+		CA726DB01BE31AEA0026612F /* MaterialityPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialityPageViewController.swift; sourceTree = "<group>"; };
+		CA726DB11BE31AEA0026612F /* MaterialityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialityViewController.swift; sourceTree = "<group>"; };
+		CA726DB21BE31AEA0026612F /* NoCompaniesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoCompaniesTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DB31BE31AEA0026612F /* SearchCompaniesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCompaniesViewController.swift; sourceTree = "<group>"; };
+		CA726DB51BE31AEA0026612F /* ContactsQuestionsCollectionsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsQuestionsCollectionsViewCell.swift; sourceTree = "<group>"; };
+		CA726DB61BE31AEA0026612F /* ContactsQuestionsCollectionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsQuestionsCollectionsViewController.swift; sourceTree = "<group>"; };
+		CA726DB71BE31AEA0026612F /* ContactsSearchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsSearchTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DB81BE31AEA0026612F /* ContactsSearchTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsSearchTableViewController.swift; sourceTree = "<group>"; };
+		CA726DB91BE31AEA0026612F /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DBA1BE31AEA0026612F /* ContactsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsTableViewController.swift; sourceTree = "<group>"; };
+		CA726DBB1BE31AEA0026612F /* NoContactsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoContactsTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DBD1BE31AEA0026612F /* SortFilterTxnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortFilterTxnTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DBE1BE31AEA0026612F /* TransactionFilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionFilterTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DBF1BE31AEA0026612F /* TransactionFilterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionFilterTableViewController.swift; sourceTree = "<group>"; };
+		CA726DC01BE31AEA0026612F /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		CA726DC21BE31AEA0026612F /* TransactionDetailPage1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailPage1ViewController.swift; sourceTree = "<group>"; };
+		CA726DC31BE31AEA0026612F /* TransactionDetailPage2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailPage2ViewController.swift; sourceTree = "<group>"; };
+		CA726DC41BE31AEA0026612F /* TransactionDetailPage3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailPage3ViewController.swift; sourceTree = "<group>"; };
+		CA726DC51BE31AEA0026612F /* TransactionDetailPage4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailPage4ViewController.swift; sourceTree = "<group>"; };
+		CA726DC61BE31AEA0026612F /* TransactionDetailPage5ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailPage5ViewController.swift; sourceTree = "<group>"; };
+		CA726DC71BE31AEA0026612F /* TransactionDetailPage6ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailPage6ViewController.swift; sourceTree = "<group>"; };
+		CA726DC81BE31AEA0026612F /* TransactionDetailPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailPageViewController.swift; sourceTree = "<group>"; };
+		CA726DC91BE31AEA0026612F /* TransactionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailViewController.swift; sourceTree = "<group>"; };
+		CA726DCA1BE31AEA0026612F /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		CA726DCB1BE31AEA0026612F /* DismissModalSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissModalSegue.swift; sourceTree = "<group>"; };
+		CA726DCC1BE31AEA0026612F /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		CA726DCE1BE31AEA0026612F /* BusinessSelectionPage1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessSelectionPage1ViewController.swift; sourceTree = "<group>"; };
+		CA726DCF1BE31AEA0026612F /* BusinessSelectionPage2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessSelectionPage2ViewController.swift; sourceTree = "<group>"; };
+		CA726DD01BE31AEA0026612F /* BusinessSelectionPage3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessSelectionPage3ViewController.swift; sourceTree = "<group>"; };
+		CA726DD11BE31AEA0026612F /* BusinessSelectionPage4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessSelectionPage4ViewController.swift; sourceTree = "<group>"; };
+		CA726DD21BE31AEA0026612F /* BusinessSelectionPage5ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessSelectionPage5ViewController.swift; sourceTree = "<group>"; };
+		CA726DD31BE31AEA0026612F /* BusinessSelectionPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessSelectionPageViewController.swift; sourceTree = "<group>"; };
+		CA726DD41BE31AEA0026612F /* BusinessSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessSelectionViewController.swift; sourceTree = "<group>"; };
+		CA726DD51BE31AEA0026612F /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
+		CA726DD71BE31AEA0026612F /* CompanyMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyMap.swift; sourceTree = "<group>"; };
+		CA726DD81BE31AEA0026612F /* DateCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCalendar.swift; sourceTree = "<group>"; };
+		CA726DD91BE31AEA0026612F /* DealSizeWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealSizeWidget.swift; sourceTree = "<group>"; };
+		CA726DDB1BE31AEA0026612F /* dial.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = dial.html; sourceTree = "<group>"; };
+		CA726DDD1BE31AEA0026612F /* ui-bg_diagonals-thick_18_b81900_40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_diagonals-thick_18_b81900_40x40.png"; sourceTree = "<group>"; };
+		CA726DDE1BE31AEA0026612F /* ui-bg_diagonals-thick_20_666666_40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_diagonals-thick_20_666666_40x40.png"; sourceTree = "<group>"; };
+		CA726DDF1BE31AEA0026612F /* ui-bg_flat_10_000000_40x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_flat_10_000000_40x100.png"; sourceTree = "<group>"; };
+		CA726DE01BE31AEA0026612F /* ui-bg_flat_75_ffffff_40x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_flat_75_ffffff_40x100.png"; sourceTree = "<group>"; };
+		CA726DE11BE31AEA0026612F /* ui-bg_glass_100_f6f6f6_1x400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_glass_100_f6f6f6_1x400.png"; sourceTree = "<group>"; };
+		CA726DE21BE31AEA0026612F /* ui-bg_glass_100_fdf5ce_1x400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_glass_100_fdf5ce_1x400.png"; sourceTree = "<group>"; };
+		CA726DE31BE31AEA0026612F /* ui-bg_glass_55_fbf9ee_1x400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_glass_55_fbf9ee_1x400.png"; sourceTree = "<group>"; };
+		CA726DE41BE31AEA0026612F /* ui-bg_glass_65_ffffff_1x400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_glass_65_ffffff_1x400.png"; sourceTree = "<group>"; };
+		CA726DE51BE31AEA0026612F /* ui-bg_glass_75_dadada_1x400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_glass_75_dadada_1x400.png"; sourceTree = "<group>"; };
+		CA726DE61BE31AEA0026612F /* ui-bg_glass_75_e6e6e6_1x400.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_glass_75_e6e6e6_1x400.png"; sourceTree = "<group>"; };
+		CA726DE71BE31AEA0026612F /* ui-bg_gloss-wave_35_f6a828_500x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_gloss-wave_35_f6a828_500x100.png"; sourceTree = "<group>"; };
+		CA726DE81BE31AEA0026612F /* ui-bg_highlight-soft_100_eeeeee_1x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_highlight-soft_100_eeeeee_1x100.png"; sourceTree = "<group>"; };
+		CA726DE91BE31AEA0026612F /* ui-bg_highlight-soft_75_cccccc_1x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_highlight-soft_75_cccccc_1x100.png"; sourceTree = "<group>"; };
+		CA726DEA1BE31AEA0026612F /* ui-bg_highlight-soft_75_ffe45c_1x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-bg_highlight-soft_75_ffe45c_1x100.png"; sourceTree = "<group>"; };
+		CA726DEB1BE31AEA0026612F /* ui-icons_222222_256x240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-icons_222222_256x240.png"; sourceTree = "<group>"; };
+		CA726DEC1BE31AEA0026612F /* ui-icons_228ef1_256x240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-icons_228ef1_256x240.png"; sourceTree = "<group>"; };
+		CA726DED1BE31AEA0026612F /* ui-icons_454545_256x240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-icons_454545_256x240.png"; sourceTree = "<group>"; };
+		CA726DEE1BE31AEA0026612F /* ui-icons_ef8c08_256x240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-icons_ef8c08_256x240.png"; sourceTree = "<group>"; };
+		CA726DEF1BE31AEA0026612F /* ui-icons_ffd27a_256x240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-icons_ffd27a_256x240.png"; sourceTree = "<group>"; };
+		CA726DF01BE31AEA0026612F /* ui-icons_ffffff_256x240.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ui-icons_ffffff_256x240.png"; sourceTree = "<group>"; };
+		CA726DF11BE31AEA0026612F /* calendar.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = calendar.html; sourceTree = "<group>"; };
+		CA726DF21BE31AEA0026612F /* map.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = map.html; sourceTree = "<group>"; };
+		CA726DF31BE31AEA0026612F /* PickerSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerSelection.swift; sourceTree = "<group>"; };
+		CA726DF41BE31AEA0026612F /* PopDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDatePicker.swift; sourceTree = "<group>"; };
+		CA726DF51BE31AEA0026612F /* PopDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopDateViewController.swift; sourceTree = "<group>"; };
+		CA726DF61BE31AEA0026612F /* PopDateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopDateViewController.xib; sourceTree = "<group>"; };
+		CA726DF71BE31AEA0026612F /* PopTextPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopTextPicker.swift; sourceTree = "<group>"; };
+		CA726DF81BE31AEA0026612F /* PopTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopTextViewController.swift; sourceTree = "<group>"; };
+		CA726DF91BE31AEA0026612F /* PopTextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopTextViewController.xib; sourceTree = "<group>"; };
+		CA726DFA1BE31AEA0026612F /* SliderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderController.swift; sourceTree = "<group>"; };
+		CA726DFE1BE31AEA0026612F /* TransactionSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionSummary.swift; sourceTree = "<group>"; };
+		CA726DFF1BE31AEA0026612F /* TransactionSummaryCompanyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionSummaryCompanyCell.swift; sourceTree = "<group>"; };
+		CA726E001BE31AEA0026612F /* TransactionSummaryCompanyErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionSummaryCompanyErrorCell.swift; sourceTree = "<group>"; };
+		CA726E011BE31AEA0026612F /* TransactionSummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionSummaryViewController.swift; sourceTree = "<group>"; };
+		CA726E5B1BE31AF40026612F /* AgreementData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgreementData.swift; sourceTree = "<group>"; };
+		CA726E5C1BE31AF40026612F /* AgreementTypeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgreementTypeData.swift; sourceTree = "<group>"; };
+		CA726E5D1BE31AF40026612F /* BusinessSelectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessSelectionData.swift; sourceTree = "<group>"; };
+		CA726E5E1BE31AF40026612F /* CompanyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyData.swift; sourceTree = "<group>"; };
+		CA726E5F1BE31AF40026612F /* CompanyRoleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyRoleData.swift; sourceTree = "<group>"; };
+		CA726E601BE31AF40026612F /* ContactData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactData.swift; sourceTree = "<group>"; };
+		CA726E611BE31AF40026612F /* ContactRoleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactRoleData.swift; sourceTree = "<group>"; };
+		CA726E621BE31AF40026612F /* CountryData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryData.swift; sourceTree = "<group>"; };
+		CA726E631BE31AF40026612F /* DealStatusData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealStatusData.swift; sourceTree = "<group>"; };
+		CA726E641BE31AF40026612F /* IndustryData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndustryData.swift; sourceTree = "<group>"; };
+		CA726E651BE31AF40026612F /* LoanTypeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanTypeData.swift; sourceTree = "<group>"; };
+		CA726E661BE31AF40026612F /* MaterialityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialityData.swift; sourceTree = "<group>"; };
+		CA726E671BE31AF40026612F /* OfferingFormatData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferingFormatData.swift; sourceTree = "<group>"; };
+		CA726E681BE31AF40026612F /* ProductData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductData.swift; sourceTree = "<group>"; };
+		CA726E691BE31AF40026612F /* ProductMapData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMapData.swift; sourceTree = "<group>"; };
+		CA726E6A1BE31AF40026612F /* ProductSubData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSubData.swift; sourceTree = "<group>"; };
+		CA726E6B1BE31AF40026612F /* SegmentsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentsData.swift; sourceTree = "<group>"; };
+		CA726E6C1BE31AF40026612F /* SharedDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedDataModel.swift; sourceTree = "<group>"; };
+		CA726E6D1BE31AF40026612F /* TransactionCompanyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionCompanyData.swift; sourceTree = "<group>"; };
+		CA726E6E1BE31AF40026612F /* TransactionContactData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionContactData.swift; sourceTree = "<group>"; };
+		CA726E6F1BE31AF40026612F /* TransactionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
+		CA726E701BE31AF40026612F /* TransactionDetailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailData.swift; sourceTree = "<group>"; };
+		CA726E711BE31AF40026612F /* TransactionStatusData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionStatusData.swift; sourceTree = "<group>"; };
+		CA726E721BE31AF40026612F /* UseOfProceedsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseOfProceedsData.swift; sourceTree = "<group>"; };
 		D8EEDE9AAD9CB3293267C52F /* Pods-DealSentryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentryTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentryTests/Pods-DealSentryTests.release.xcconfig"; sourceTree = "<group>"; };
 		E9035901FB124984189BC2F2 /* Pods-DealSentryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentryUITests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentryUITests/Pods-DealSentryUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,15 +429,22 @@
 		CA4078F71BE2C9F900EEB6BA /* DealSentry */ = {
 			isa = PBXGroup;
 			children = (
+				CA726D421BE319390026612F /* DealSentry-Bridging-Header.h */,
 				CA4078FB1BE2C9F900EEB6BA /* AppDelegate.h */,
 				CA4078FC1BE2C9F900EEB6BA /* AppDelegate.m */,
-				CA4078FE1BE2C9F900EEB6BA /* ViewController.h */,
-				CA4078FF1BE2C9F900EEB6BA /* ViewController.m */,
-				CA4079011BE2C9F900EEB6BA /* Main.storyboard */,
+				CA726D481BE3194F0026612F /* Main.storyboard */,
+				CA726D4B1BE319710026612F /* AppAttributes.swift */,
+				CA726D441BE3193A0026612F /* DataManager.h */,
+				CA726D451BE3193A0026612F /* DataManager.m */,
+				CA726D431BE3193A0026612F /* VCConnection.swift */,
+				CA726D4C1BE319710026612F /* DateUtils.swift */,
+				CA726D4D1BE319710026612F /* DebugUtility.swift */,
+				CA726E5A1BE31AF40026612F /* ViewStateObjects */,
+				CA726D9E1BE31AEA0026612F /* ViewControllers */,
+				CA726D581BE31AD80026612F /* Models */,
+				CA726D521BE319F30026612F /* DealSentry.xcdatamodeld */,
 				CA4079071BE2C9FA00EEB6BA /* Assets.xcassets */,
-				CA4079091BE2C9FA00EEB6BA /* LaunchScreen.storyboard */,
 				CA40790C1BE2C9FA00EEB6BA /* Info.plist */,
-				CA4079041BE2C9F900EEB6BA /* DealSentry.xcdatamodeld */,
 				CA4078F81BE2C9F900EEB6BA /* Supporting Files */,
 			);
 			path = DealSentry;
@@ -171,6 +474,271 @@
 				CA4079221BE2C9FA00EEB6BA /* Info.plist */,
 			);
 			path = DealSentryUITests;
+			sourceTree = "<group>";
+		};
+		CA726D581BE31AD80026612F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CA726D591BE31AD80026612F /* Agreement.h */,
+				CA726D5A1BE31AD80026612F /* Agreement.m */,
+				CA726D5B1BE31AD80026612F /* AgreementType.h */,
+				CA726D5C1BE31AD80026612F /* AgreementType.m */,
+				CA726D5D1BE31AD80026612F /* BusinessSelection.h */,
+				CA726D5E1BE31AD80026612F /* BusinessSelection.m */,
+				CA726D5F1BE31AD80026612F /* Company.h */,
+				CA726D601BE31AD80026612F /* Company.m */,
+				CA726D611BE31AD80026612F /* CompanyRole.h */,
+				CA726D621BE31AD80026612F /* CompanyRole.m */,
+				CA726D631BE31AD80026612F /* Contact.h */,
+				CA726D641BE31AD80026612F /* Contact.m */,
+				CA726D651BE31AD80026612F /* ContactRole.h */,
+				CA726D661BE31AD80026612F /* ContactRole.m */,
+				CA726D671BE31AD80026612F /* Country.h */,
+				CA726D681BE31AD80026612F /* Country.m */,
+				CA726D691BE31AD80026612F /* DealStatus.h */,
+				CA726D6A1BE31AD80026612F /* DealStatus.m */,
+				CA726D6B1BE31AD80026612F /* Industry.h */,
+				CA726D6C1BE31AD80026612F /* Industry.m */,
+				CA726D6D1BE31AD80026612F /* LoanType.h */,
+				CA726D6E1BE31AD80026612F /* LoanType.m */,
+				CA726D6F1BE31AD80026612F /* Materiality.h */,
+				CA726D701BE31AD80026612F /* Materiality.m */,
+				CA726D711BE31AD80026612F /* OfferingFormat.h */,
+				CA726D721BE31AD80026612F /* OfferingFormat.m */,
+				CA726D731BE31AD80026612F /* Product.h */,
+				CA726D741BE31AD80026612F /* Product.m */,
+				CA726D751BE31AD80026612F /* ProductMap.h */,
+				CA726D761BE31AD80026612F /* ProductMap.m */,
+				CA726D771BE31AD80026612F /* Segment.h */,
+				CA726D781BE31AD80026612F /* Segment.m */,
+				CA726D791BE31AD80026612F /* SubProduct.h */,
+				CA726D7A1BE31AD80026612F /* SubProduct.m */,
+				CA726D7B1BE31AD80026612F /* Transaction.h */,
+				CA726D7C1BE31AD80026612F /* Transaction.m */,
+				CA726D7D1BE31AD80026612F /* TransactionCompany.h */,
+				CA726D7E1BE31AD80026612F /* TransactionCompany.m */,
+				CA726D7F1BE31AD80026612F /* TransactionContact.h */,
+				CA726D801BE31AD80026612F /* TransactionContact.m */,
+				CA726D811BE31AD80026612F /* TransactionDetail.h */,
+				CA726D821BE31AD80026612F /* TransactionDetail.m */,
+				CA726D831BE31AD80026612F /* TransactionStatus.h */,
+				CA726D841BE31AD80026612F /* TransactionStatus.m */,
+				CA726D851BE31AD80026612F /* UseOfProceeds.h */,
+				CA726D861BE31AD80026612F /* UseOfProceeds.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CA726D9E1BE31AEA0026612F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CA726D9F1BE31AEA0026612F /* Companies */,
+				CA726DB41BE31AEA0026612F /* Contacts */,
+				CA726DBC1BE31AEA0026612F /* Deals */,
+				CA726DC11BE31AEA0026612F /* Details */,
+				CA726DCA1BE31AEA0026612F /* DetailViewController.swift */,
+				CA726DCB1BE31AEA0026612F /* DismissModalSegue.swift */,
+				CA726DCC1BE31AEA0026612F /* MasterViewController.swift */,
+				CA726DCD1BE31AEA0026612F /* MnA */,
+				CA726DD51BE31AEA0026612F /* NewViewController.swift */,
+				CA726DD61BE31AEA0026612F /* Popovers */,
+				CA726DFD1BE31AEA0026612F /* Summary */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		CA726D9F1BE31AEA0026612F /* Companies */ = {
+			isa = PBXGroup;
+			children = (
+				CA726DA01BE31AEA0026612F /* AddCompaniesViewController.swift */,
+				CA726DA11BE31AEA0026612F /* Agreements */,
+				CA726DA61BE31AEA0026612F /* CompaniesQuestionsTableViewCell.swift */,
+				CA726DA71BE31AEA0026612F /* CompaniesQuestionsViewController.swift */,
+				CA726DA81BE31AEA0026612F /* CompaniesSearchHeaderTableViewCell.swift */,
+				CA726DA91BE31AEA0026612F /* CompaniesSearchTableViewCell.swift */,
+				CA726DAA1BE31AEA0026612F /* DefineCompanyPopupViewController.swift */,
+				CA726DAB1BE31AEA0026612F /* DefineCompanyViewController.swift */,
+				CA726DAC1BE31AEA0026612F /* Materiality */,
+				CA726DB21BE31AEA0026612F /* NoCompaniesTableViewCell.swift */,
+				CA726DB31BE31AEA0026612F /* SearchCompaniesViewController.swift */,
+			);
+			path = Companies;
+			sourceTree = "<group>";
+		};
+		CA726DA11BE31AEA0026612F /* Agreements */ = {
+			isa = PBXGroup;
+			children = (
+				CA726DA21BE31AEA0026612F /* AgreementsTableViewCell.swift */,
+				CA726DA31BE31AEA0026612F /* AgreementsTableViewController.swift */,
+				CA726DA41BE31AEA0026612F /* EnterAgreementViewController.swift */,
+				CA726DA51BE31AEA0026612F /* NoAgreementsTableViewCell.swift */,
+			);
+			path = Agreements;
+			sourceTree = "<group>";
+		};
+		CA726DAC1BE31AEA0026612F /* Materiality */ = {
+			isa = PBXGroup;
+			children = (
+				CA726DAD1BE31AEA0026612F /* MaterialityPage0ViewController.swift */,
+				CA726DAE1BE31AEA0026612F /* MaterialityPage1ViewController.swift */,
+				CA726DAF1BE31AEA0026612F /* MaterialityPage2ViewController.swift */,
+				CA726DB01BE31AEA0026612F /* MaterialityPageViewController.swift */,
+				CA726DB11BE31AEA0026612F /* MaterialityViewController.swift */,
+			);
+			path = Materiality;
+			sourceTree = "<group>";
+		};
+		CA726DB41BE31AEA0026612F /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				CA726DB51BE31AEA0026612F /* ContactsQuestionsCollectionsViewCell.swift */,
+				CA726DB61BE31AEA0026612F /* ContactsQuestionsCollectionsViewController.swift */,
+				CA726DB71BE31AEA0026612F /* ContactsSearchTableViewCell.swift */,
+				CA726DB81BE31AEA0026612F /* ContactsSearchTableViewController.swift */,
+				CA726DB91BE31AEA0026612F /* ContactsTableViewCell.swift */,
+				CA726DBA1BE31AEA0026612F /* ContactsTableViewController.swift */,
+				CA726DBB1BE31AEA0026612F /* NoContactsTableViewCell.swift */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		CA726DBC1BE31AEA0026612F /* Deals */ = {
+			isa = PBXGroup;
+			children = (
+				CA726DBD1BE31AEA0026612F /* SortFilterTxnTableViewCell.swift */,
+				CA726DBE1BE31AEA0026612F /* TransactionFilterTableViewCell.swift */,
+				CA726DBF1BE31AEA0026612F /* TransactionFilterTableViewController.swift */,
+				CA726DC01BE31AEA0026612F /* TransactionTableViewCell.swift */,
+			);
+			path = Deals;
+			sourceTree = "<group>";
+		};
+		CA726DC11BE31AEA0026612F /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				CA726DC21BE31AEA0026612F /* TransactionDetailPage1ViewController.swift */,
+				CA726DC31BE31AEA0026612F /* TransactionDetailPage2ViewController.swift */,
+				CA726DC41BE31AEA0026612F /* TransactionDetailPage3ViewController.swift */,
+				CA726DC51BE31AEA0026612F /* TransactionDetailPage4ViewController.swift */,
+				CA726DC61BE31AEA0026612F /* TransactionDetailPage5ViewController.swift */,
+				CA726DC71BE31AEA0026612F /* TransactionDetailPage6ViewController.swift */,
+				CA726DC81BE31AEA0026612F /* TransactionDetailPageViewController.swift */,
+				CA726DC91BE31AEA0026612F /* TransactionDetailViewController.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		CA726DCD1BE31AEA0026612F /* MnA */ = {
+			isa = PBXGroup;
+			children = (
+				CA726DCE1BE31AEA0026612F /* BusinessSelectionPage1ViewController.swift */,
+				CA726DCF1BE31AEA0026612F /* BusinessSelectionPage2ViewController.swift */,
+				CA726DD01BE31AEA0026612F /* BusinessSelectionPage3ViewController.swift */,
+				CA726DD11BE31AEA0026612F /* BusinessSelectionPage4ViewController.swift */,
+				CA726DD21BE31AEA0026612F /* BusinessSelectionPage5ViewController.swift */,
+				CA726DD31BE31AEA0026612F /* BusinessSelectionPageViewController.swift */,
+				CA726DD41BE31AEA0026612F /* BusinessSelectionViewController.swift */,
+			);
+			path = MnA;
+			sourceTree = "<group>";
+		};
+		CA726DD61BE31AEA0026612F /* Popovers */ = {
+			isa = PBXGroup;
+			children = (
+				CA726DF91BE31AEA0026612F /* PopTextViewController.xib */,
+				CA726DF61BE31AEA0026612F /* PopDateViewController.xib */,
+				CA726DD71BE31AEA0026612F /* CompanyMap.swift */,
+				CA726DD81BE31AEA0026612F /* DateCalendar.swift */,
+				CA726DD91BE31AEA0026612F /* DealSizeWidget.swift */,
+				CA726DDA1BE31AEA0026612F /* html */,
+				CA726DF31BE31AEA0026612F /* PickerSelection.swift */,
+				CA726DF41BE31AEA0026612F /* PopDatePicker.swift */,
+				CA726DF51BE31AEA0026612F /* PopDateViewController.swift */,
+				CA726DF71BE31AEA0026612F /* PopTextPicker.swift */,
+				CA726DF81BE31AEA0026612F /* PopTextViewController.swift */,
+				CA726DFA1BE31AEA0026612F /* SliderController.swift */,
+			);
+			path = Popovers;
+			sourceTree = "<group>";
+		};
+		CA726DDA1BE31AEA0026612F /* html */ = {
+			isa = PBXGroup;
+			children = (
+				CA726DDC1BE31AEA0026612F /* images */,
+				CA726DDB1BE31AEA0026612F /* dial.html */,
+				CA726DF11BE31AEA0026612F /* calendar.html */,
+				CA726DF21BE31AEA0026612F /* map.html */,
+			);
+			path = html;
+			sourceTree = "<group>";
+		};
+		CA726DDC1BE31AEA0026612F /* images */ = {
+			isa = PBXGroup;
+			children = (
+				CA726DDD1BE31AEA0026612F /* ui-bg_diagonals-thick_18_b81900_40x40.png */,
+				CA726DDE1BE31AEA0026612F /* ui-bg_diagonals-thick_20_666666_40x40.png */,
+				CA726DDF1BE31AEA0026612F /* ui-bg_flat_10_000000_40x100.png */,
+				CA726DE01BE31AEA0026612F /* ui-bg_flat_75_ffffff_40x100.png */,
+				CA726DE11BE31AEA0026612F /* ui-bg_glass_100_f6f6f6_1x400.png */,
+				CA726DE21BE31AEA0026612F /* ui-bg_glass_100_fdf5ce_1x400.png */,
+				CA726DE31BE31AEA0026612F /* ui-bg_glass_55_fbf9ee_1x400.png */,
+				CA726DE41BE31AEA0026612F /* ui-bg_glass_65_ffffff_1x400.png */,
+				CA726DE51BE31AEA0026612F /* ui-bg_glass_75_dadada_1x400.png */,
+				CA726DE61BE31AEA0026612F /* ui-bg_glass_75_e6e6e6_1x400.png */,
+				CA726DE71BE31AEA0026612F /* ui-bg_gloss-wave_35_f6a828_500x100.png */,
+				CA726DE81BE31AEA0026612F /* ui-bg_highlight-soft_100_eeeeee_1x100.png */,
+				CA726DE91BE31AEA0026612F /* ui-bg_highlight-soft_75_cccccc_1x100.png */,
+				CA726DEA1BE31AEA0026612F /* ui-bg_highlight-soft_75_ffe45c_1x100.png */,
+				CA726DEB1BE31AEA0026612F /* ui-icons_222222_256x240.png */,
+				CA726DEC1BE31AEA0026612F /* ui-icons_228ef1_256x240.png */,
+				CA726DED1BE31AEA0026612F /* ui-icons_454545_256x240.png */,
+				CA726DEE1BE31AEA0026612F /* ui-icons_ef8c08_256x240.png */,
+				CA726DEF1BE31AEA0026612F /* ui-icons_ffd27a_256x240.png */,
+				CA726DF01BE31AEA0026612F /* ui-icons_ffffff_256x240.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		CA726DFD1BE31AEA0026612F /* Summary */ = {
+			isa = PBXGroup;
+			children = (
+				CA726DFE1BE31AEA0026612F /* TransactionSummary.swift */,
+				CA726DFF1BE31AEA0026612F /* TransactionSummaryCompanyCell.swift */,
+				CA726E001BE31AEA0026612F /* TransactionSummaryCompanyErrorCell.swift */,
+				CA726E011BE31AEA0026612F /* TransactionSummaryViewController.swift */,
+			);
+			path = Summary;
+			sourceTree = "<group>";
+		};
+		CA726E5A1BE31AF40026612F /* ViewStateObjects */ = {
+			isa = PBXGroup;
+			children = (
+				CA726E5B1BE31AF40026612F /* AgreementData.swift */,
+				CA726E5C1BE31AF40026612F /* AgreementTypeData.swift */,
+				CA726E5D1BE31AF40026612F /* BusinessSelectionData.swift */,
+				CA726E5E1BE31AF40026612F /* CompanyData.swift */,
+				CA726E5F1BE31AF40026612F /* CompanyRoleData.swift */,
+				CA726E601BE31AF40026612F /* ContactData.swift */,
+				CA726E611BE31AF40026612F /* ContactRoleData.swift */,
+				CA726E621BE31AF40026612F /* CountryData.swift */,
+				CA726E631BE31AF40026612F /* DealStatusData.swift */,
+				CA726E641BE31AF40026612F /* IndustryData.swift */,
+				CA726E651BE31AF40026612F /* LoanTypeData.swift */,
+				CA726E661BE31AF40026612F /* MaterialityData.swift */,
+				CA726E671BE31AF40026612F /* OfferingFormatData.swift */,
+				CA726E681BE31AF40026612F /* ProductData.swift */,
+				CA726E691BE31AF40026612F /* ProductMapData.swift */,
+				CA726E6A1BE31AF40026612F /* ProductSubData.swift */,
+				CA726E6B1BE31AF40026612F /* SegmentsData.swift */,
+				CA726E6C1BE31AF40026612F /* SharedDataModel.swift */,
+				CA726E6D1BE31AF40026612F /* TransactionCompanyData.swift */,
+				CA726E6E1BE31AF40026612F /* TransactionContactData.swift */,
+				CA726E6F1BE31AF40026612F /* TransactionData.swift */,
+				CA726E701BE31AF40026612F /* TransactionDetailData.swift */,
+				CA726E711BE31AF40026612F /* TransactionStatusData.swift */,
+				CA726E721BE31AF40026612F /* UseOfProceedsData.swift */,
+			);
+			path = ViewStateObjects;
 			sourceTree = "<group>";
 		};
 		F83833E4F36F678AEDD26222 /* Frameworks */ = {
@@ -294,9 +862,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA40790B1BE2C9FA00EEB6BA /* LaunchScreen.storyboard in Resources */,
+				CA726E3E1BE31AEA0026612F /* ui-bg_glass_75_dadada_1x400.png in Resources */,
 				CA4079081BE2C9FA00EEB6BA /* Assets.xcassets in Resources */,
-				CA4079031BE2C9F900EEB6BA /* Main.storyboard in Resources */,
+				CA726E371BE31AEA0026612F /* ui-bg_diagonals-thick_20_666666_40x40.png in Resources */,
+				CA726E351BE31AEA0026612F /* dial.html in Resources */,
+				CA726E491BE31AEA0026612F /* ui-icons_ffffff_256x240.png in Resources */,
+				CA726E441BE31AEA0026612F /* ui-icons_222222_256x240.png in Resources */,
+				CA726E421BE31AEA0026612F /* ui-bg_highlight-soft_75_cccccc_1x100.png in Resources */,
+				CA726E4B1BE31AEA0026612F /* map.html in Resources */,
+				CA726E401BE31AEA0026612F /* ui-bg_gloss-wave_35_f6a828_500x100.png in Resources */,
+				CA726E3F1BE31AEA0026612F /* ui-bg_glass_75_e6e6e6_1x400.png in Resources */,
+				CA726E481BE31AEA0026612F /* ui-icons_ffd27a_256x240.png in Resources */,
+				CA726D491BE3194F0026612F /* Main.storyboard in Resources */,
+				CA726E361BE31AEA0026612F /* ui-bg_diagonals-thick_18_b81900_40x40.png in Resources */,
+				CA726E411BE31AEA0026612F /* ui-bg_highlight-soft_100_eeeeee_1x100.png in Resources */,
+				CA726E381BE31AEA0026612F /* ui-bg_flat_10_000000_40x100.png in Resources */,
+				CA726E3A1BE31AEA0026612F /* ui-bg_glass_100_f6f6f6_1x400.png in Resources */,
+				CA726E391BE31AEA0026612F /* ui-bg_flat_75_ffffff_40x100.png in Resources */,
+				CA726E3D1BE31AEA0026612F /* ui-bg_glass_65_ffffff_1x400.png in Resources */,
+				CA726E3C1BE31AEA0026612F /* ui-bg_glass_55_fbf9ee_1x400.png in Resources */,
+				CA726E471BE31AEA0026612F /* ui-icons_ef8c08_256x240.png in Resources */,
+				CA726E431BE31AEA0026612F /* ui-bg_highlight-soft_75_ffe45c_1x100.png in Resources */,
+				CA726E461BE31AEA0026612F /* ui-icons_454545_256x240.png in Resources */,
+				CA726E4F1BE31AEA0026612F /* PopDateViewController.xib in Resources */,
+				CA726E4A1BE31AEA0026612F /* calendar.html in Resources */,
+				CA726E521BE31AEA0026612F /* PopTextViewController.xib in Resources */,
+				CA726E451BE31AEA0026612F /* ui-icons_228ef1_256x240.png in Resources */,
+				CA726E3B1BE31AEA0026612F /* ui-bg_glass_100_fdf5ce_1x400.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,10 +1036,122 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA4079001BE2C9F900EEB6BA /* ViewController.m in Sources */,
+				CA726E731BE31AF40026612F /* AgreementData.swift in Sources */,
+				CA726E321BE31AEA0026612F /* CompanyMap.swift in Sources */,
+				CA726E1C1BE31AEA0026612F /* TransactionFilterTableViewCell.swift in Sources */,
+				CA726E341BE31AEA0026612F /* DealSizeWidget.swift in Sources */,
+				CA726D981BE31AD80026612F /* Transaction.m in Sources */,
+				CA726E4E1BE31AEA0026612F /* PopDateViewController.swift in Sources */,
+				CA726D9D1BE31AD80026612F /* UseOfProceeds.m in Sources */,
+				CA726D931BE31AD80026612F /* OfferingFormat.m in Sources */,
+				CA726E331BE31AEA0026612F /* DateCalendar.swift in Sources */,
+				CA726E531BE31AEA0026612F /* SliderController.swift in Sources */,
+				CA726E081BE31AEA0026612F /* CompaniesQuestionsViewController.swift in Sources */,
+				CA726E511BE31AEA0026612F /* PopTextViewController.swift in Sources */,
+				CA726E231BE31AEA0026612F /* TransactionDetailPage5ViewController.swift in Sources */,
+				CA726E0D1BE31AEA0026612F /* MaterialityPage0ViewController.swift in Sources */,
+				CA726E7F1BE31AF40026612F /* OfferingFormatData.swift in Sources */,
+				CA726D901BE31AD80026612F /* Industry.m in Sources */,
+				CA726E501BE31AEA0026612F /* PopTextPicker.swift in Sources */,
+				CA726E191BE31AEA0026612F /* ContactsTableViewController.swift in Sources */,
+				CA726E7C1BE31AF40026612F /* IndustryData.swift in Sources */,
+				CA726E0C1BE31AEA0026612F /* DefineCompanyViewController.swift in Sources */,
+				CA726E571BE31AEA0026612F /* TransactionSummaryCompanyCell.swift in Sources */,
+				CA726E241BE31AEA0026612F /* TransactionDetailPage6ViewController.swift in Sources */,
+				CA726D911BE31AD80026612F /* LoanType.m in Sources */,
+				CA726D891BE31AD80026612F /* BusinessSelection.m in Sources */,
+				CA726E251BE31AEA0026612F /* TransactionDetailPageViewController.swift in Sources */,
+				CA726D941BE31AD80026612F /* Product.m in Sources */,
+				CA726E851BE31AF40026612F /* TransactionCompanyData.swift in Sources */,
+				CA726E591BE31AEA0026612F /* TransactionSummaryViewController.swift in Sources */,
+				CA726E7A1BE31AF40026612F /* CountryData.swift in Sources */,
+				CA726E171BE31AEA0026612F /* ContactsSearchTableViewController.swift in Sources */,
+				CA726E211BE31AEA0026612F /* TransactionDetailPage3ViewController.swift in Sources */,
+				CA726E801BE31AF40026612F /* ProductData.swift in Sources */,
+				CA726D951BE31AD80026612F /* ProductMap.m in Sources */,
+				CA726D511BE319710026612F /* DebugUtility.swift in Sources */,
+				CA726E581BE31AEA0026612F /* TransactionSummaryCompanyErrorCell.swift in Sources */,
+				CA726D871BE31AD80026612F /* Agreement.m in Sources */,
+				CA726E131BE31AEA0026612F /* SearchCompaniesViewController.swift in Sources */,
+				CA726E111BE31AEA0026612F /* MaterialityViewController.swift in Sources */,
+				CA726E861BE31AF40026612F /* TransactionContactData.swift in Sources */,
+				CA726E561BE31AEA0026612F /* TransactionSummary.swift in Sources */,
+				CA726D501BE319710026612F /* DateUtils.swift in Sources */,
+				CA726E0E1BE31AEA0026612F /* MaterialityPage1ViewController.swift in Sources */,
+				CA726D971BE31AD80026612F /* SubProduct.m in Sources */,
+				CA726E1E1BE31AEA0026612F /* TransactionTableViewCell.swift in Sources */,
+				CA726E831BE31AF40026612F /* SegmentsData.swift in Sources */,
+				CA726E311BE31AEA0026612F /* NewViewController.swift in Sources */,
+				CA726E7B1BE31AF40026612F /* DealStatusData.swift in Sources */,
+				CA726E271BE31AEA0026612F /* DetailViewController.swift in Sources */,
+				CA726E101BE31AEA0026612F /* MaterialityPageViewController.swift in Sources */,
+				CA726D9C1BE31AD80026612F /* TransactionStatus.m in Sources */,
+				CA726E1D1BE31AEA0026612F /* TransactionFilterTableViewController.swift in Sources */,
+				CA726E181BE31AEA0026612F /* ContactsTableViewCell.swift in Sources */,
+				CA726E291BE31AEA0026612F /* MasterViewController.swift in Sources */,
+				CA726E031BE31AEA0026612F /* AgreementsTableViewCell.swift in Sources */,
+				CA726E821BE31AF40026612F /* ProductSubData.swift in Sources */,
+				CA726D8F1BE31AD80026612F /* DealStatus.m in Sources */,
+				CA726E7E1BE31AF40026612F /* MaterialityData.swift in Sources */,
+				CA726E161BE31AEA0026612F /* ContactsSearchTableViewCell.swift in Sources */,
+				CA726E261BE31AEA0026612F /* TransactionDetailViewController.swift in Sources */,
+				CA726E2E1BE31AEA0026612F /* BusinessSelectionPage5ViewController.swift in Sources */,
+				CA726E151BE31AEA0026612F /* ContactsQuestionsCollectionsViewController.swift in Sources */,
+				CA726E141BE31AEA0026612F /* ContactsQuestionsCollectionsViewCell.swift in Sources */,
+				CA726E4C1BE31AEA0026612F /* PickerSelection.swift in Sources */,
+				CA726E2D1BE31AEA0026612F /* BusinessSelectionPage4ViewController.swift in Sources */,
+				CA726D8B1BE31AD80026612F /* CompanyRole.m in Sources */,
+				CA726E871BE31AF40026612F /* TransactionData.swift in Sources */,
+				CA726D8D1BE31AD80026612F /* ContactRole.m in Sources */,
+				CA726E221BE31AEA0026612F /* TransactionDetailPage4ViewController.swift in Sources */,
 				CA4078FD1BE2C9F900EEB6BA /* AppDelegate.m in Sources */,
-				CA4079061BE2C9F900EEB6BA /* DealSentry.xcdatamodeld in Sources */,
+				CA726E281BE31AEA0026612F /* DismissModalSegue.swift in Sources */,
+				CA726E8A1BE31AF40026612F /* UseOfProceedsData.swift in Sources */,
+				CA726E741BE31AF40026612F /* AgreementTypeData.swift in Sources */,
+				CA726E891BE31AF40026612F /* TransactionStatusData.swift in Sources */,
+				CA726E761BE31AF40026612F /* CompanyData.swift in Sources */,
+				CA726E2C1BE31AEA0026612F /* BusinessSelectionPage3ViewController.swift in Sources */,
+				CA726E0A1BE31AEA0026612F /* CompaniesSearchTableViewCell.swift in Sources */,
+				CA726E091BE31AEA0026612F /* CompaniesSearchHeaderTableViewCell.swift in Sources */,
+				CA726E1B1BE31AEA0026612F /* SortFilterTxnTableViewCell.swift in Sources */,
+				CA726D8C1BE31AD80026612F /* Contact.m in Sources */,
+				CA726E301BE31AEA0026612F /* BusinessSelectionViewController.swift in Sources */,
+				CA726D541BE319F30026612F /* DealSentry.xcdatamodeld in Sources */,
+				CA726E121BE31AEA0026612F /* NoCompaniesTableViewCell.swift in Sources */,
+				CA726E841BE31AF40026612F /* SharedDataModel.swift in Sources */,
+				CA726E791BE31AF40026612F /* ContactRoleData.swift in Sources */,
+				CA726E1F1BE31AEA0026612F /* TransactionDetailPage1ViewController.swift in Sources */,
+				CA726E4D1BE31AEA0026612F /* PopDatePicker.swift in Sources */,
+				CA726D4F1BE319710026612F /* AppAttributes.swift in Sources */,
+				CA726D921BE31AD80026612F /* Materiality.m in Sources */,
+				CA726D991BE31AD80026612F /* TransactionCompany.m in Sources */,
+				CA726E0F1BE31AEA0026612F /* MaterialityPage2ViewController.swift in Sources */,
+				CA726E061BE31AEA0026612F /* NoAgreementsTableViewCell.swift in Sources */,
+				CA726D471BE3193A0026612F /* DataManager.m in Sources */,
+				CA726E041BE31AEA0026612F /* AgreementsTableViewController.swift in Sources */,
+				CA726E051BE31AEA0026612F /* EnterAgreementViewController.swift in Sources */,
+				CA726D461BE3193A0026612F /* VCConnection.swift in Sources */,
+				CA726D8E1BE31AD80026612F /* Country.m in Sources */,
+				CA726E2B1BE31AEA0026612F /* BusinessSelectionPage2ViewController.swift in Sources */,
+				CA726E201BE31AEA0026612F /* TransactionDetailPage2ViewController.swift in Sources */,
+				CA726E781BE31AF40026612F /* ContactData.swift in Sources */,
+				CA726E2F1BE31AEA0026612F /* BusinessSelectionPageViewController.swift in Sources */,
+				CA726D8A1BE31AD80026612F /* Company.m in Sources */,
+				CA726E2A1BE31AEA0026612F /* BusinessSelectionPage1ViewController.swift in Sources */,
+				CA726D961BE31AD80026612F /* Segment.m in Sources */,
 				CA4078FA1BE2C9F900EEB6BA /* main.m in Sources */,
+				CA726E771BE31AF40026612F /* CompanyRoleData.swift in Sources */,
+				CA726E811BE31AF40026612F /* ProductMapData.swift in Sources */,
+				CA726E0B1BE31AEA0026612F /* DefineCompanyPopupViewController.swift in Sources */,
+				CA726E071BE31AEA0026612F /* CompaniesQuestionsTableViewCell.swift in Sources */,
+				CA726D9A1BE31AD80026612F /* TransactionContact.m in Sources */,
+				CA726D881BE31AD80026612F /* AgreementType.m in Sources */,
+				CA726E7D1BE31AF40026612F /* LoanTypeData.swift in Sources */,
+				CA726E021BE31AEA0026612F /* AddCompaniesViewController.swift in Sources */,
+				CA726E1A1BE31AEA0026612F /* NoContactsTableViewCell.swift in Sources */,
+				CA726E881BE31AF40026612F /* TransactionDetailData.swift in Sources */,
+				CA726E751BE31AF40026612F /* BusinessSelectionData.swift in Sources */,
+				CA726D9B1BE31AD80026612F /* TransactionDetail.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,25 +1186,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		CA4079011BE2C9F900EEB6BA /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA4079021BE2C9F900EEB6BA /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CA4079091BE2C9FA00EEB6BA /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CA40790A1BE2C9FA00EEB6BA /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		CA4079231BE2C9FA00EEB6BA /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -522,6 +1207,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -542,6 +1228,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "DealSentry/DealSentry-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -566,6 +1253,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -579,6 +1267,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "DealSentry/DealSentry-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -589,10 +1278,13 @@
 			baseConfigurationReference = 73B5B4EA37748CAE817B68D7 /* Pods-DealSentry.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = DealSentry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Demo.DealSentry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DealSentry/DealSentry-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -601,10 +1293,14 @@
 			baseConfigurationReference = 7C24EA9BBF15A2725F314594 /* Pods-DealSentry.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				INFOPLIST_FILE = DealSentry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Demo.DealSentry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DealSentry/DealSentry-Bridging-Header.h";
+				"SWIFT_OPTIMIZATION_LEVEL[arch=*]" = "-O";
 			};
 			name = Release;
 		};
@@ -702,12 +1398,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		CA4079041BE2C9F900EEB6BA /* DealSentry.xcdatamodeld */ = {
+		CA726D521BE319F30026612F /* DealSentry.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				CA4079051BE2C9F900EEB6BA /* DealSentry.xcdatamodel */,
+				CA726D531BE319F30026612F /* DealSentry.xcdatamodel */,
 			);
-			currentVersion = CA4079051BE2C9F900EEB6BA /* DealSentry.xcdatamodel */;
+			currentVersion = CA726D531BE319F30026612F /* DealSentry.xcdatamodel */;
 			path = DealSentry.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
