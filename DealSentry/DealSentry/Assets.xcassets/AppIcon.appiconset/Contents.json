@@ -48,61 +48,61 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "true_mobile_blue_29x29.png",
+      "filename" : "DealSentryPlain29-1.png",
       "scale" : "1x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "true_mobile_blue_58x58.png",
+      "filename" : "DealSentryPlain29.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "true_mobile_blue_40x40-1.png",
+      "filename" : "DealSentryPlain40.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "true_mobile_blue_80x80.png",
+      "filename" : "DealSentryPlain40-1.png",
       "scale" : "2x"
     },
     {
       "size" : "50x50",
       "idiom" : "ipad",
-      "filename" : "true_mobile_blue_50x50.png",
+      "filename" : "DealSentryPlain50.png",
       "scale" : "1x"
     },
     {
       "size" : "50x50",
       "idiom" : "ipad",
-      "filename" : "true_mobile_blue_100x100.png",
+      "filename" : "DealSentryPlain50-1.png",
       "scale" : "2x"
     },
     {
       "size" : "72x72",
       "idiom" : "ipad",
-      "filename" : "Icon-72.png",
+      "filename" : "DealSentryPlain72.png",
       "scale" : "1x"
     },
     {
       "size" : "72x72",
       "idiom" : "ipad",
-      "filename" : "true_mobile_blue_144x144.png",
+      "filename" : "DealSentryPlain72-1.png",
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "true_mobile_blue_76x76.png",
+      "filename" : "DealSentryPlain76.png",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "true_mobile_blue_152x152.png",
+      "filename" : "DealSentryPlain76-1.png",
       "scale" : "2x"
     }
   ],
