@@ -1,0 +1,131 @@
+PRODUCT_SUB_ID,PRODUCT_SUB_DESCRIPTION
+1,Acquisition Finance
+2,Bank Loan
+3,Bridge Loan
+4,Islamics
+5,Loan Syndication/Structure
+6,Other Loans & Corporate Finance
+7,Stapled Financing
+8,Derivatives - Other
+9,Hedging
+10,Interest Rate Derivatives
+11,Common Stk - ADR
+12,Common Stk - AEO
+13,Common Stk - Block Trade
+14,Common Stk - Broking
+15,Common Stk - Closed End Fund
+16,Common Stk - Equity Advisory
+17,Common Stk - Follow on
+18,Common Stk - IDS
+19,Common Stk - IPO
+20,Common Stk - MLP
+21,Common Stk - Other
+22,Common Stk - Participations
+23,Common Stk - PIPE
+24,Common Stk - REIT
+25,Common Stk - Rights Offering
+26,Common Stk - Share Repurchase
+27,Convertible - Debt
+28,Convertible - Exchangeable
+29,Convertible - Liability Management
+30,Convertible - Mandatory
+31,Convertible - Preferred
+32,Derivative/Structured Products (Equity)
+33,Common Stk - SPAC
+34,Dual Track - IPO or Trade Sale
+35,FX Options
+36,High Yield Debt
+37,High Yield Preferred
+38,Liability Management
+39,Adjustable Rate Preferred
+40,Asset Backed
+41,Asset Finance
+42,CDO`s
+43,Commercial Paper
+44,Fixed Rate Preferred
+45,Floating Rate Notes
+46,Governments
+47,Investment Grade - Competitive
+48,Investment Grade - Negotiated
+49,Liability Management
+50,Market Share
+51,MTN - Yen Denominated MTN
+52,MTN Non-Yen Denominated MTN
+53,Note Programs
+54,Preferred Stock - Negotiated
+55,Private Placement - Debt
+56,Remarketings
+57,Retail MTN Programs
+58,SBIL Fixed Income
+59,Student Loan - Long Term
+60,Student Loan - Short Term
+61,Student Loan Securitization
+62,Taxable Municipal Debt
+78,Sale Of Assets
+63,Acquisition of Divestiture
+64,Acquisition of Private Company
+65,Acquisition of Public Company
+66,Advisory
+67,Buy Side Other
+68,Divestiture
+69,Equity Advisory
+70,Fairness Opinion Only
+71,Infrastructure Advisory
+72,Joint Venture
+73,M&A Other
+74,M&A / Infrastructure Advisory
+75,Privatization
+76,Public Company Merger-Buy
+77,Public Company Merger-Sell
+79,Sale of Ownership Stake
+80,Sale of Private Company
+81,Sale of Public Company
+82,Sell Side Other
+83,Spin Off/Split Off
+84,Strategic Alternatives Review
+85,Takeover Defense
+86,Dual Track Process - Trade Sale or IPO
+87,Mortgage Expense Receivable
+88,Municipal Underwriting
+89,Real Estate
+90,Financial Advisory
+91,Share Repurchases - Special Equity Transactions
+92,Structured Capital Markets
+93,Private Equity
+94,Worksite Marketing
+95,Private Placement
+96,EAF
+97,IEF
+98,CMBS
+99,Securitization
+100,Asset Finance - Other
+101,Capital Structuring
+102,CFG Project Finance
+103,Japan Real Estate
+104,Structured Trade
+105,Brokership
+106,Brokership Pitch
+107,Broking
+108,Ratings Advisor
+109,Ratings Advisory
+110,Distressed Debt Desk
+111,Distressed Trading
+112,Escrow Agent
+113,Trustee
+114,Municipal Bonds
+115,Municipal Derivatives
+116,Structuring
+117,Real Estate Finance (municipal)
+118,Real Estate Finance (non-municipal)
+119,Non-Real Estate Lending
+120,Hedge Fund Management
+121,P-Pass
+122,SS-Substandard
+123,D-Doubtful
+124,L-Loss
+125,SM-Special Mention
+126,Recapitalization
+127,Restructuring
+128,FX Other
+129,Equity Derivatives
+130,Acquisition Financing

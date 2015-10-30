@@ -154,6 +154,22 @@
 		CA726E881BE31AF40026612F /* TransactionDetailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E701BE31AF40026612F /* TransactionDetailData.swift */; };
 		CA726E891BE31AF40026612F /* TransactionStatusData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E711BE31AF40026612F /* TransactionStatusData.swift */; };
 		CA726E8A1BE31AF40026612F /* UseOfProceedsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E721BE31AF40026612F /* UseOfProceedsData.swift */; };
+		CA726E9C1BE32E690026612F /* agreement_type.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E8C1BE32E690026612F /* agreement_type.csv */; };
+		CA726E9D1BE32E690026612F /* company.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E8D1BE32E690026612F /* company.csv */; };
+		CA726E9E1BE32E690026612F /* company_role.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E8E1BE32E690026612F /* company_role.csv */; };
+		CA726E9F1BE32E690026612F /* contact.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E8F1BE32E690026612F /* contact.csv */; };
+		CA726EA01BE32E690026612F /* contact_role.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E901BE32E690026612F /* contact_role.csv */; };
+		CA726EA11BE32E690026612F /* country.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E911BE32E690026612F /* country.csv */; };
+		CA726EA21BE32E690026612F /* deal_status.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E921BE32E690026612F /* deal_status.csv */; };
+		CA726EA31BE32E690026612F /* industry.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E931BE32E690026612F /* industry.csv */; };
+		CA726EA41BE32E690026612F /* loan_type.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E941BE32E690026612F /* loan_type.csv */; };
+		CA726EA51BE32E690026612F /* offering_format.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E951BE32E690026612F /* offering_format.csv */; };
+		CA726EA61BE32E690026612F /* product.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E961BE32E690026612F /* product.csv */; };
+		CA726EA71BE32E690026612F /* product_map.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E971BE32E690026612F /* product_map.csv */; };
+		CA726EA81BE32E690026612F /* product_sub.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E981BE32E690026612F /* product_sub.csv */; };
+		CA726EA91BE32E690026612F /* segment.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E991BE32E690026612F /* segment.csv */; };
+		CA726EAA1BE32E690026612F /* transaction_status.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E9A1BE32E690026612F /* transaction_status.csv */; };
+		CA726EAB1BE32E690026612F /* use_of_proceeds.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E9B1BE32E690026612F /* use_of_proceeds.csv */; };
 		FA70BBF6A6C190B0317943A3 /* libPods-DealSentryTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9B85A16604738A691E1D4E /* libPods-DealSentryTests.a */; };
 /* End PBXBuildFile section */
 
@@ -359,6 +375,22 @@
 		CA726E701BE31AF40026612F /* TransactionDetailData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionDetailData.swift; sourceTree = "<group>"; };
 		CA726E711BE31AF40026612F /* TransactionStatusData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionStatusData.swift; sourceTree = "<group>"; };
 		CA726E721BE31AF40026612F /* UseOfProceedsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseOfProceedsData.swift; sourceTree = "<group>"; };
+		CA726E8C1BE32E690026612F /* agreement_type.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = agreement_type.csv; sourceTree = "<group>"; };
+		CA726E8D1BE32E690026612F /* company.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = company.csv; sourceTree = "<group>"; };
+		CA726E8E1BE32E690026612F /* company_role.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = company_role.csv; sourceTree = "<group>"; };
+		CA726E8F1BE32E690026612F /* contact.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = contact.csv; sourceTree = "<group>"; };
+		CA726E901BE32E690026612F /* contact_role.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = contact_role.csv; sourceTree = "<group>"; };
+		CA726E911BE32E690026612F /* country.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = country.csv; sourceTree = "<group>"; };
+		CA726E921BE32E690026612F /* deal_status.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = deal_status.csv; sourceTree = "<group>"; };
+		CA726E931BE32E690026612F /* industry.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = industry.csv; sourceTree = "<group>"; };
+		CA726E941BE32E690026612F /* loan_type.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = loan_type.csv; sourceTree = "<group>"; };
+		CA726E951BE32E690026612F /* offering_format.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = offering_format.csv; sourceTree = "<group>"; };
+		CA726E961BE32E690026612F /* product.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = product.csv; sourceTree = "<group>"; };
+		CA726E971BE32E690026612F /* product_map.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = product_map.csv; sourceTree = "<group>"; };
+		CA726E981BE32E690026612F /* product_sub.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = product_sub.csv; sourceTree = "<group>"; };
+		CA726E991BE32E690026612F /* segment.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = segment.csv; sourceTree = "<group>"; };
+		CA726E9A1BE32E690026612F /* transaction_status.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = transaction_status.csv; sourceTree = "<group>"; };
+		CA726E9B1BE32E690026612F /* use_of_proceeds.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = use_of_proceeds.csv; sourceTree = "<group>"; };
 		D8EEDE9AAD9CB3293267C52F /* Pods-DealSentryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentryTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentryTests/Pods-DealSentryTests.release.xcconfig"; sourceTree = "<group>"; };
 		E9035901FB124984189BC2F2 /* Pods-DealSentryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentryUITests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentryUITests/Pods-DealSentryUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -442,6 +474,7 @@
 				CA726E5A1BE31AF40026612F /* ViewStateObjects */,
 				CA726D9E1BE31AEA0026612F /* ViewControllers */,
 				CA726D581BE31AD80026612F /* Models */,
+				CA726E8B1BE32E690026612F /* DataFiles */,
 				CA726D521BE319F30026612F /* DealSentry.xcdatamodeld */,
 				CA4079071BE2C9FA00EEB6BA /* Assets.xcassets */,
 				CA40790C1BE2C9FA00EEB6BA /* Info.plist */,
@@ -741,6 +774,29 @@
 			path = ViewStateObjects;
 			sourceTree = "<group>";
 		};
+		CA726E8B1BE32E690026612F /* DataFiles */ = {
+			isa = PBXGroup;
+			children = (
+				CA726E8C1BE32E690026612F /* agreement_type.csv */,
+				CA726E8D1BE32E690026612F /* company.csv */,
+				CA726E8E1BE32E690026612F /* company_role.csv */,
+				CA726E8F1BE32E690026612F /* contact.csv */,
+				CA726E901BE32E690026612F /* contact_role.csv */,
+				CA726E911BE32E690026612F /* country.csv */,
+				CA726E921BE32E690026612F /* deal_status.csv */,
+				CA726E931BE32E690026612F /* industry.csv */,
+				CA726E941BE32E690026612F /* loan_type.csv */,
+				CA726E951BE32E690026612F /* offering_format.csv */,
+				CA726E961BE32E690026612F /* product.csv */,
+				CA726E971BE32E690026612F /* product_map.csv */,
+				CA726E981BE32E690026612F /* product_sub.csv */,
+				CA726E991BE32E690026612F /* segment.csv */,
+				CA726E9A1BE32E690026612F /* transaction_status.csv */,
+				CA726E9B1BE32E690026612F /* use_of_proceeds.csv */,
+			);
+			path = DataFiles;
+			sourceTree = "<group>";
+		};
 		F83833E4F36F678AEDD26222 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -866,28 +922,44 @@
 				CA4079081BE2C9FA00EEB6BA /* Assets.xcassets in Resources */,
 				CA726E371BE31AEA0026612F /* ui-bg_diagonals-thick_20_666666_40x40.png in Resources */,
 				CA726E351BE31AEA0026612F /* dial.html in Resources */,
+				CA726EA51BE32E690026612F /* offering_format.csv in Resources */,
 				CA726E491BE31AEA0026612F /* ui-icons_ffffff_256x240.png in Resources */,
 				CA726E441BE31AEA0026612F /* ui-icons_222222_256x240.png in Resources */,
 				CA726E421BE31AEA0026612F /* ui-bg_highlight-soft_75_cccccc_1x100.png in Resources */,
+				CA726EA01BE32E690026612F /* contact_role.csv in Resources */,
 				CA726E4B1BE31AEA0026612F /* map.html in Resources */,
 				CA726E401BE31AEA0026612F /* ui-bg_gloss-wave_35_f6a828_500x100.png in Resources */,
+				CA726EA81BE32E690026612F /* product_sub.csv in Resources */,
 				CA726E3F1BE31AEA0026612F /* ui-bg_glass_75_e6e6e6_1x400.png in Resources */,
+				CA726EAB1BE32E690026612F /* use_of_proceeds.csv in Resources */,
 				CA726E481BE31AEA0026612F /* ui-icons_ffd27a_256x240.png in Resources */,
+				CA726EA11BE32E690026612F /* country.csv in Resources */,
 				CA726D491BE3194F0026612F /* Main.storyboard in Resources */,
 				CA726E361BE31AEA0026612F /* ui-bg_diagonals-thick_18_b81900_40x40.png in Resources */,
+				CA726EAA1BE32E690026612F /* transaction_status.csv in Resources */,
+				CA726E9C1BE32E690026612F /* agreement_type.csv in Resources */,
 				CA726E411BE31AEA0026612F /* ui-bg_highlight-soft_100_eeeeee_1x100.png in Resources */,
 				CA726E381BE31AEA0026612F /* ui-bg_flat_10_000000_40x100.png in Resources */,
 				CA726E3A1BE31AEA0026612F /* ui-bg_glass_100_f6f6f6_1x400.png in Resources */,
 				CA726E391BE31AEA0026612F /* ui-bg_flat_75_ffffff_40x100.png in Resources */,
 				CA726E3D1BE31AEA0026612F /* ui-bg_glass_65_ffffff_1x400.png in Resources */,
 				CA726E3C1BE31AEA0026612F /* ui-bg_glass_55_fbf9ee_1x400.png in Resources */,
+				CA726EA71BE32E690026612F /* product_map.csv in Resources */,
+				CA726EA21BE32E690026612F /* deal_status.csv in Resources */,
 				CA726E471BE31AEA0026612F /* ui-icons_ef8c08_256x240.png in Resources */,
 				CA726E431BE31AEA0026612F /* ui-bg_highlight-soft_75_ffe45c_1x100.png in Resources */,
+				CA726E9E1BE32E690026612F /* company_role.csv in Resources */,
+				CA726EA31BE32E690026612F /* industry.csv in Resources */,
+				CA726E9D1BE32E690026612F /* company.csv in Resources */,
 				CA726E461BE31AEA0026612F /* ui-icons_454545_256x240.png in Resources */,
 				CA726E4F1BE31AEA0026612F /* PopDateViewController.xib in Resources */,
+				CA726EA41BE32E690026612F /* loan_type.csv in Resources */,
+				CA726EA91BE32E690026612F /* segment.csv in Resources */,
 				CA726E4A1BE31AEA0026612F /* calendar.html in Resources */,
 				CA726E521BE31AEA0026612F /* PopTextViewController.xib in Resources */,
+				CA726EA61BE32E690026612F /* product.csv in Resources */,
 				CA726E451BE31AEA0026612F /* ui-icons_228ef1_256x240.png in Resources */,
+				CA726E9F1BE32E690026612F /* contact.csv in Resources */,
 				CA726E3B1BE31AEA0026612F /* ui-bg_glass_100_fdf5ce_1x400.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

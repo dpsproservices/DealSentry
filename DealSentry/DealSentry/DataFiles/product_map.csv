@@ -1,0 +1,139 @@
+PRODUCT_ID,PRODUCT_SUB_ID,PRODUCT_DESCRIPTION,PRODUCT_SUB_DESCRIPTION
+1,1,Bank Loan,Acquisition Finance
+1,2,Bank Loan,Bank Loan
+1,3,Bank Loan,Bridge Loan
+1,4,Bank Loan,Islamics
+1,5,Bank Loan,Loan Syndication/Structure
+1,6,Bank Loan,Other Loans & Corporate Finance
+1,7,Bank Loan,Stapled Financing
+10,1,Private Equity,Acquisition Finance
+10,93,Private Equity,Private Equity
+10,94,Private Equity,Worksite Marketing
+10,95,Private Equity,Private Placement
+11,96,PSTF,EAF
+11,97,PSTF,IEF
+11,1,PSTF,Acquisition Finance
+12,1,Securitization,Acquisition Finance
+12,89,Securitization,Real Estate
+12,98,Securitization,CMBS
+12,99,Securitization,Securitization
+13,100,Structured Corporate Finance,Asset Finance - Other
+13,101,Structured Corporate Finance,Capital Structuring
+13,102,Structured Corporate Finance,CFG Project Finance
+13,103,Structured Corporate Finance,Japan Real Estate
+13,104,Structured Corporate Finance,Structured Trade
+13,71,Structured Corporate Finance,Infrastructure Advisory
+13,130,Structured Corporate Finance,Acquisition Financing
+14,105,Brokership,Brokership
+14,106,Brokership,Brokership Pitch
+14,107,Brokership,Broking
+15,108,Rating Advisory,Ratings Advisor
+15,109,Rating Advisory,Ratings Advisory
+16,110,Distressed Situations,Distressed Debt Desk
+16,111,Distressed Situations,Distressed Trading
+17,112,Agency & Trust,Escrow Agent
+17,113,Agency & Trust,Trustee
+18,114,Municipal Finance,Municipal Bonds
+18,115,Municipal Finance,Municipal Derivatives
+18,116,Municipal Finance,Structuring
+18,117,Municipal Finance,Real Estate Finance (municipal)
+18,118,Municipal Finance,Real Estate Finance (non-municipal)
+18,119,Municipal Finance,Non-Real Estate Lending
+19,120,Hedge Fund,Hedge Fund Management
+2,10,Derivatives,Interest Rate Derivatives
+2,8,Derivatives,Derivatives - Other
+2,9,Derivatives,Hedging
+2,129,Derivatives,Equity Derivatives
+20,121,IRM,P-Pass
+20,122,IRM,SS-Substandard
+20,123,IRM,D-Doubtful
+20,124,IRM,L-Loss
+20,125,IRM,SM-Special Mention
+3,1,Equity,Acquisition Finance
+3,11,Equity,Common Stk - ADR
+3,12,Equity,Common Stk - AEO
+3,13,Equity,Common Stk - Block Trade
+3,14,Equity,Common Stk - Broking
+3,15,Equity,Common Stk - Closed End Fund
+3,16,Equity,Common Stk - Equity Advisory
+3,17,Equity,Common Stk - Follow on
+3,18,Equity,Common Stk - IDS
+3,19,Equity,Common Stk - IPO
+3,20,Equity,Common Stk - MLP
+3,21,Equity,Common Stk - Other
+3,22,Equity,Common Stk - Participations
+3,23,Equity,Common Stk - PIPE
+3,24,Equity,Common Stk - REIT
+3,25,Equity,Common Stk - Rights Offering
+3,26,Equity,Common Stk - Share Repurchase
+3,27,Equity,Convertible - Debt
+3,28,Equity,Convertible - Exchangeable
+3,29,Equity,Convertible - Liability Management
+3,30,Equity,Convertible - Mandatory
+3,31,Equity,Convertible - Preferred
+3,32,Equity,Derivative/Structured Products (Equity)
+3,33,Equity,Common Stk - SPAC
+3,34,Equity,Dual Track - IPO or Trade Sale
+4,128,FX,FX Other
+4,35,FX,FX Options
+5,1,High Yield,Acquisition Finance
+5,36,High Yield,High Yield Debt
+5,37,High Yield,High Yield Preferred
+5,38,High Yield,Liability Management
+6,1,Investment Grade Debt,Acquisition Finance
+6,39,Investment Grade Debt,Adjustable Rate Preferred
+6,40,Investment Grade Debt,Asset Backed
+6,41,Investment Grade Debt,Asset Finance
+6,42,Investment Grade Debt,CDO`s
+6,43,Investment Grade Debt,Commercial Paper
+6,44,Investment Grade Debt,Fixed Rate Preferred
+6,45,Investment Grade Debt,Floating Rate Notes
+6,46,Investment Grade Debt,Governments
+6,47,Investment Grade Debt,Investment Grade - Competitive
+6,48,Investment Grade Debt,Investment Grade - Negotiated
+6,49,Investment Grade Debt,Liability Management
+6,50,Investment Grade Debt,Market Share
+6,51,Investment Grade Debt,MTN - Yen Denominated MTN
+6,52,Investment Grade Debt,MTN Non-Yen Denominated MTN
+6,53,Investment Grade Debt,Note Programs
+6,54,Investment Grade Debt,Preferred Stock - Negotiated
+6,55,Investment Grade Debt,Private Placement - Debt
+6,56,Investment Grade Debt,Remarketings
+6,57,Investment Grade Debt,Retail MTN Programs
+6,58,Investment Grade Debt,SBIL Fixed Income
+6,59,Investment Grade Debt,Student Loan - Long Term
+6,60,Investment Grade Debt,Student Loan - Short Term
+6,61,Investment Grade Debt,Student Loan Securitization
+6,62,Investment Grade Debt,Taxable Municipal Debt
+7,126,M&A,Recapitalization
+7,127,M&A,Restructuring
+7,63,M&A,Acquisition of Divestiture
+7,64,M&A,Acquisition of Private Company
+7,65,M&A,Acquisition of Public Company
+7,66,M&A,Advisory
+7,67,M&A,Buy Side Other
+7,68,M&A,Divestiture
+7,69,M&A,Equity Advisory
+7,70,M&A,Fairness Opinion Only
+7,71,M&A,Infrastructure Advisory
+7,72,M&A,Joint Venture
+7,73,M&A,M&A Other
+7,74,M&A,M&A / Infrastructure Advisory
+7,75,M&A,Privatization
+7,76,M&A,Public Company Merger-Buy
+7,77,M&A,Public Company Merger-Sell
+7,78,M&A,Sale of Assets
+7,79,M&A,Sale of Ownership Stake
+7,80,M&A,Sale of Private Company
+7,81,M&A,Sale of Public Company
+7,82,M&A,Sell Side Other
+7,83,M&A,Spin Off/Split Off
+7,84,M&A,Strategic Alternatives Review
+7,85,M&A,Takeover Defense
+7,86,M&A,Dual Track Process - Trade Sale or IPO
+8,87,Non-IBD Products,Mortgage Expense Receivable
+8,88,Non-IBD Products,Municipal Underwriting
+8,89,Non-IBD Products,Real Estate
+9,90,Other,Financial Advisory
+9,91,Other,Share Repurchases - Special Equity Transactions
+9,92,Other,Structured Capital Markets

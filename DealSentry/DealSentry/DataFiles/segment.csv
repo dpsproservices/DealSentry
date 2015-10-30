@@ -1,0 +1,31 @@
+SEGMENT_ID,MARKET_SEGMENT,SEGMENT_DESCRIPTION
+2,FR/BEL/LUX,France Belgium 
+3,GER/AUST,Germany/Austria
+5,IBERIA,Iberia
+6,ITALY,Italy
+7,NETH,Netherlands 
+9,SWITZERLND,Switzerland
+10,UK IRE,UK Ireland
+16,JAPAN,Japan
+17,ASIA,Asia
+21,N AMERICA,North America
+25,NOR EX DMK,Nordic Ex. Denmark
+19,LATAM,Latam
+20,CEEMEA,CEEMEA
+4,GREECE,Greece
+28,MEXICO,Mexico
+41,ASEAN,ASEAN
+42,AU/NZ,Australia and New Zealand
+43,GRTR CHINA,Greater China
+44,INDIA,India Sub-continent
+45,KOREA,Korea
+51,CENTRAL EU,Central Europe
+52,CIS,CIS
+53,MENA,Middle East  Africa
+54,POLAND,Poland
+55,SSA,SubSaharan Africa
+56,TRKY/ISRL,Turkey/Israel
+61,ANDEAN,Andean Region
+63,CCA,CCA Region
+64,CHILE,Chile
+65,SOUTH RGN,Latin America South

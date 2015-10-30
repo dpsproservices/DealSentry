@@ -1,0 +1,10 @@
+DEAL_STATUS_ID,DEAL_STATUS_DESCRIPTION
+1,Pitch
+2,Active Discussions
+3,Verbal Mandate
+4,Mandated/Engaged
+5,Announced
+6,Dormant
+7,Completed
+8,Terminated
+9,Duplicate

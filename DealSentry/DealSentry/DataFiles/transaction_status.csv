@@ -1,0 +1,8 @@
+TRANSACTION_STATUS_ID,TRANSACTION_STATUS_DESCRIPTION
+1,Draft
+2,Pending Review
+3,Cleared
+4,Completed
+5,Duplicate
+6,Terminated
+7,Fatal Conflicts

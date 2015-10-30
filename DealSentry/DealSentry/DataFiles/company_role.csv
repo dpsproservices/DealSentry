@@ -1,0 +1,8 @@
+ROLE_ID,ROLE_DESCRIPTION
+1,Primary Client
+2,Client
+3,Counterparty
+4,Client Parent
+5,Client Subsidiary
+6,CP Parent
+7,CP Subsidiary
