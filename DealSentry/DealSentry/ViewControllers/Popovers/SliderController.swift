@@ -1,6 +1,6 @@
 //
 //  SliderController.swift
-//  truemobile
+//  DealSentry
 //
 //  Created by Skarulis, Joseph    on 8/25/15.
 //  Copyright © 2015 Skarulis, Joseph   . All rights reserved.

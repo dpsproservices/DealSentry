@@ -1,6 +1,6 @@
 //
 //  DealSizeWidget
-//  truemobile
+//  DealSentry
 //
 //  Created by Skarulis, Joseph    on 6/30/15.
 //  Copyright (c) 2015 . All rights reserved.

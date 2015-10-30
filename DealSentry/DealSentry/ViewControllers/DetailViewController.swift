@@ -1,6 +1,6 @@
 //
 //  DetailViewController.swift
-//  truemobile
+//  DealSentry
 //
 //  Created by Skarulis, Joseph    on 6/11/15.
 //  Copyright (c) 2015 . All rights reserved.
@@ -12,7 +12,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
 
     var debugUtil = DebugUtility(thisClassName: "DetailViewController" , enabled: false)
     let appAttributes = AppAttributes()
-     let vcCon = VCConnection.sharedInstance
+    let vcCon = VCConnection.sharedInstance
     let sharedDataModel = SharedDataModel.sharedInstance
     var coverView:UIView = UIView()
     var deleteButtonForDismiss:UIButton = UIButton(type: UIButtonType.System)
@@ -112,18 +112,6 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         self.debugUtil.printLog("configureView", msg: "END")
     }
 
-/*    func changeToAddCompanyVC() {
-        var vc = self.viewControllers
-        vc![1] = embeddedAddCompaniesViewController
-        self.setViewControllers(vc!, animated: false)
-        var tb = self.tabBar.items as! [UITabBarItem]
-        let image = tb[1].image
-        tb[1].image = image!.imageWithColor(UIColor(CGColor: appAttributes.colorBlue)!).imageWithRenderingMode(.AlwaysOriginal)
-        let selectedImage = tb[1].selectedImage
-        tb[1].selectedImage = selectedImage!.imageWithColor(UIColor.whiteColor()).imageWithRenderingMode(.AlwaysOriginal)
-    }
-    
-*/
     /// this function will switch the current controller to Materality view controller in detail view
     func changeToMaterialityVC() {
         var vc = self.viewControllers

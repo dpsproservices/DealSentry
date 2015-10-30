@@ -1,6 +1,6 @@
 //
 //  ContactsTableViewCell.swift
-//  truemobile
+//  DealSentry
 //
 
 import UIKit

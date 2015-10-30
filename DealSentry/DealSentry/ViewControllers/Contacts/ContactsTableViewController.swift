@@ -1,6 +1,6 @@
 //
 //  ContactsTableViewController.swift
-//  truemobile
+//  DealSentry
 //
 //  Created by Skarulis, Joseph    on 7/22/15.
 //  Copyright (c) 2015 Skarulis, Joseph   . All rights reserved.

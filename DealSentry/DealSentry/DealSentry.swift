@@ -1,5 +1,0 @@
-//
-//  DealSentry.swift
-//
-
-import Foundation
