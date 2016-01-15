@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F27" minimumToolsVersion="Automatic">
     <entity name="AgreementEntity" representedClassName="Agreement" syncable="YES">
         <attribute name="agreementId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="agreementTerms" optional="YES" attributeType="String" syncable="YES"/>
@@ -60,12 +60,12 @@
     </entity>
     <entity name="ContactEntity" representedClassName="Contact" syncable="YES">
         <attribute name="contactId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="department" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="employeeId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="gocDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="soeId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="ContactRoleEntity" representedClassName="ContactRole" syncable="YES">
         <attribute name="roleDescription" optional="YES" attributeType="String" syncable="YES"/>
@@ -170,10 +170,10 @@
         <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransactionEntity" inverseName="transactionDetail" inverseEntity="TransactionEntity" syncable="YES"/>
     </entity>
     <entity name="TransactionEntity" representedClassName="Transaction" syncable="YES">
-        <attribute name="dbDraftId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dbTransactionId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="clearanceApprovedDate" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="counterparty" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbDraftId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dbTransactionId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ddtRestriction" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dealStatus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dealStatusChangedBackwards" optional="YES" attributeType="String" syncable="YES"/>
@@ -210,7 +210,7 @@
         <element name="BusinessSelectionEntity" positionX="-810" positionY="408" width="243" height="375"/>
         <element name="CompanyEntity" positionX="-153" positionY="549" width="162" height="225"/>
         <element name="CompanyRoleEntity" positionX="-155" positionY="792" width="128" height="75"/>
-        <element name="ContactEntity" positionX="-603" positionY="855" width="128" height="150"/>
+        <element name="ContactEntity" positionX="-603" positionY="855" width="128" height="148"/>
         <element name="ContactRoleEntity" positionX="-603" positionY="1023" width="128" height="75"/>
         <element name="CountryEntity" positionX="70" positionY="774" width="128" height="90"/>
         <element name="DealStatusEntity" positionX="-578" positionY="1176" width="128" height="75"/>

@@ -7,7 +7,7 @@ import UIKit
 class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "BusinessSelectionPage3ViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     let appAttributes = AppAttributes()
 
     @IBOutlet weak var servicesSegmentedControl: UISegmentedControl!
@@ -46,12 +46,12 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
     @IBAction func servicesValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
             self.servicesOpportunityTextView.editable = true
-            self.sharedDataModel.currentTransaction.businessSelection.isServicesOpportunity = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.isServicesOpportunity = "Yes"
             self.oppImgWarning.hidden = false
             self.oppTxtWarning.hidden = false
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.isServicesOpportunity = "No"
-            self.sharedDataModel.currentTransaction.businessSelection.servicesOpportunityDescription = ""
+            self.viewStateManager.currentTransaction.businessSelection.isServicesOpportunity = "No"
+            self.viewStateManager.currentTransaction.businessSelection.servicesOpportunityDescription = ""
             self.servicesOpportunityTextView.text = ""
             self.servicesOpportunityTextView.editable = false
             self.oppImgWarning.hidden = true
@@ -64,9 +64,9 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
     /// this method will set the index for includeCashSegmentedControl and update the corresponding object of the transaction
     @IBAction func includeCashValueChangeAction(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.toIncludeCash = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.toIncludeCash = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.toIncludeCash = "No"
+            self.viewStateManager.currentTransaction.businessSelection.toIncludeCash = "No"
         }
         self.cashImgWarning.hidden = true
         self.cashTxtWarning.hidden = true
@@ -75,9 +75,9 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
     /// this method will set the index for includeStockSegmentedControl and update the corresponding object of the transaction
     @IBAction func includeStockValueChangeAction(sender: AnyObject) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.toIncludeStock = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.toIncludeStock = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.toIncludeStock = "No"
+            self.viewStateManager.currentTransaction.businessSelection.toIncludeStock = "No"
         }
         self.stockImgWarning.hidden = true
         self.stockTxtWarning.hidden = true
@@ -87,12 +87,12 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
     @IBAction func includeOtherValueChangeAction(sender: AnyObject) {
         if sender.selectedSegmentIndex == 1 {
             self.considerationExplainTextView.editable = true
-            self.sharedDataModel.currentTransaction.businessSelection.toIncludeOther = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.toIncludeOther = "Yes"
             self.otherQImgWarning.hidden = false
             self.otherQTxtWarning.hidden = false
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.toIncludeOther = "No"
-            self.sharedDataModel.currentTransaction.businessSelection.pleaseExplain = ""
+            self.viewStateManager.currentTransaction.businessSelection.toIncludeOther = "No"
+            self.viewStateManager.currentTransaction.businessSelection.pleaseExplain = ""
             self.considerationExplainTextView.text = ""
             self.considerationExplainTextView.editable = false
             self.otherQImgWarning.hidden = true
@@ -121,12 +121,12 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
     
     ///this method provides data from the object to the view controller
     func resetViewsFromModel() {
-        if (self.sharedDataModel.currentTransaction.businessSelection.isServicesOpportunity == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.isServicesOpportunity == "Yes") {
             self.servicesOpportunityTextView.editable = true
             self.servicesSegmentedControl.selectedSegmentIndex = 1
             self.escrowImgWarning.hidden = true
             self.escrowTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.isServicesOpportunity == "No"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.isServicesOpportunity == "No"{
             self.servicesOpportunityTextView.editable = false
             self.servicesSegmentedControl.selectedSegmentIndex = 0
             self.escrowImgWarning.hidden = true
@@ -138,11 +138,11 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
             self.escrowTxtWarning.hidden = false
         }
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.toIncludeCash == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.toIncludeCash == "Yes") {
             self.includeCashSegmentedControl.selectedSegmentIndex = 1
             self.cashImgWarning.hidden = true
             self.cashTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.toIncludeCash == "No"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.toIncludeCash == "No"{
             self.includeCashSegmentedControl.selectedSegmentIndex = 0
             self.cashImgWarning.hidden = true
             self.cashTxtWarning.hidden = true
@@ -153,11 +153,11 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
         }
         
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.toIncludeStock == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.toIncludeStock == "Yes") {
             self.includeStockSegmentedControl.selectedSegmentIndex = 1
             self.stockImgWarning.hidden = true
             self.stockTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.toIncludeStock == "No" {
+        } else if self.viewStateManager.currentTransaction.businessSelection.toIncludeStock == "No" {
             self.includeStockSegmentedControl.selectedSegmentIndex = 0
             self.stockImgWarning.hidden = true
             self.stockTxtWarning.hidden = true
@@ -168,12 +168,12 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
         }
         
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.toIncludeOther == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.toIncludeOther == "Yes") {
             self.considerationExplainTextView.editable = true
             self.includeOtherSegmentedControl.selectedSegmentIndex = 1
             self.otherImgWarning.hidden = true
             self.otherTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.toIncludeOther == "No"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.toIncludeOther == "No"{
             self.considerationExplainTextView.editable = false
             self.includeOtherSegmentedControl.selectedSegmentIndex = 0
             self.otherImgWarning.hidden = true
@@ -185,24 +185,24 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
             self.otherTxtWarning.hidden = false
         }
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.servicesOpportunityDescription == "" && self.sharedDataModel.currentTransaction.businessSelection.isServicesOpportunity == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.servicesOpportunityDescription == "" && self.viewStateManager.currentTransaction.businessSelection.isServicesOpportunity == "Yes") {
             self.servicesOpportunityTextView.text = "enter a Opportunity Description"
             self.servicesOpportunityTextView.textColor = UIColor.lightGrayColor()
             self.oppImgWarning.hidden = false
             self.oppTxtWarning.hidden = false
         } else {
-            self.servicesOpportunityTextView.text = self.sharedDataModel.currentTransaction.businessSelection.servicesOpportunityDescription
+            self.servicesOpportunityTextView.text = self.viewStateManager.currentTransaction.businessSelection.servicesOpportunityDescription
             self.oppImgWarning.hidden = true
             self.oppTxtWarning.hidden = true
         }
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.pleaseExplain == "" && self.sharedDataModel.currentTransaction.businessSelection.toIncludeOther == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.pleaseExplain == "" && self.viewStateManager.currentTransaction.businessSelection.toIncludeOther == "Yes") {
             self.considerationExplainTextView.text = "enter an Explanation"
             self.considerationExplainTextView.textColor = UIColor.lightGrayColor()
             self.otherQImgWarning.hidden = false
             self.otherQTxtWarning.hidden = false
         } else {
-            self.considerationExplainTextView.text = self.sharedDataModel.currentTransaction.businessSelection.pleaseExplain
+            self.considerationExplainTextView.text = self.viewStateManager.currentTransaction.businessSelection.pleaseExplain
             self.otherQImgWarning.hidden = true
             self.otherQTxtWarning.hidden = true
         }
@@ -211,7 +211,7 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
     /// this method determines to show the next page or not by enabling/hiding the forward button based on current transaction business type
     func showHidePage4or5() {
         if (forwardButton != nil) {
-            if self.sharedDataModel.getBusinessType(self.sharedDataModel.currentTransaction) != "Either"{
+            if self.viewStateManager.getBusinessType(self.viewStateManager.currentTransaction) != "Either"{
                 self.forwardButton.enabled = true
                 self.forwardImage.hidden = false
             } else {
@@ -223,7 +223,7 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             backImageCenterX.constant = -215.0
             forwardImageCenterX.constant = 215.0
@@ -255,7 +255,7 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -475.5
                 forwardImageCenterX.constant = 475.5
@@ -268,7 +268,7 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -365.0
                 forwardImageCenterX.constant = 365.0
@@ -307,7 +307,7 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
             forwardImage.image = image.imageWithColor(UIColor(CGColor: appAttributes.colorBlue)).imageWithRenderingMode(.AlwaysOriginal)
         }
         
-       if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+       if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.servicesSegmentedControl.userInteractionEnabled = false
             self.servicesSegmentedControl.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -342,9 +342,9 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -475.5
                 forwardImageCenterX.constant = 475.5
@@ -359,7 +359,7 @@ class BusinessSelectionPage3ViewController: BusinessSelectionPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -325.5
                 forwardImageCenterX.constant = 325.5
@@ -390,9 +390,9 @@ extension BusinessSelectionPage3ViewController: UITextViewDelegate {
         switch textView {
         
         case servicesOpportunityTextView:
-            self.sharedDataModel.currentTransaction.businessSelection.servicesOpportunityDescription = self.servicesOpportunityTextView.text
+            self.viewStateManager.currentTransaction.businessSelection.servicesOpportunityDescription = self.servicesOpportunityTextView.text
         case considerationExplainTextView:
-            self.sharedDataModel.currentTransaction.businessSelection.pleaseExplain = self.considerationExplainTextView.text
+            self.viewStateManager.currentTransaction.businessSelection.pleaseExplain = self.considerationExplainTextView.text
             
         default:
             break

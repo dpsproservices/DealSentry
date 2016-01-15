@@ -8,7 +8,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "MaterialityPage2ViewController", enabled: false)
     var selectedCompany : TransactionCompanyData!
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     let appAttributes = AppAttributes()
     @IBOutlet weak var backImage: UIImageView!
 
@@ -63,7 +63,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
             self.selectedCompany.materiality.hasPRC = "Yes"
         }
         newMat = self.selectedCompany.materiality
-        self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
+        self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
         self.debugUtil.printLog("PROC", msg: self.selectedCompany.materiality.hasPRC)
         self.prcImgWarning.hidden = true
         self.prcTxtWarning.hidden = true
@@ -83,7 +83,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
         else if (sender.selectedSegmentIndex==1){
             self.selectedCompany.materiality.hasStandardAgreements = "Yes"
             self.selectedCompany.removeAllAgreements()
-            self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].removeAllAgreements()
+            self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].removeAllAgreements()
         }
         else
         {
@@ -96,7 +96,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
         
 
         newMat = self.selectedCompany.materiality
-        self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
+        self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
         self.agreementImgWarning.hidden = true
         self.agreementTxtWarning.hidden = true
     }
@@ -104,7 +104,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
  
     override func viewWillAppear(animated: Bool) {
         debugUtil.printLog("viewWillappear", msg: "called")
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             backImageCenterX.constant = -215.0
         }
@@ -112,7 +112,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
         {
             backImageCenterX.constant = -325.5
         }
-        checkForOrientationChange()
+        checkOrientation()
 
         initTextFields()
         checkViewChangeForHiddenPRC()
@@ -133,18 +133,18 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
         super.touchesBegan(touches, withEvent: event)
     }
     
-    func checkForOrientationChange()
+    func checkOrientation()
     {
-        if sharedDataModel.checkForOrientationChange == "landscape"
+        if viewStateManager.currentOrientation == "landscape"
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.companyDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x , companyDescriptionLabel.frame.origin.y, companyDescriptionLabel.frame.size.width, companyDescriptionLabel.frame.size.height)
             }
         }
         else
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.companyDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x - 150, companyDescriptionLabel.frame.origin.y, companyDescriptionLabel.frame.size.width, companyDescriptionLabel.frame.size.height)
             }
@@ -156,7 +156,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.companyDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x , companyDescriptionLabel.frame.origin.y, companyDescriptionLabel.frame.size.width, companyDescriptionLabel.frame.size.height)
             
@@ -170,7 +170,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
         }
         else
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.companyDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x - 150, companyDescriptionLabel.frame.origin.y, companyDescriptionLabel.frame.size.width, companyDescriptionLabel.frame.size.height)
             
@@ -222,7 +222,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
         }
         self.view.layer.backgroundColor = (appAttributes.colorBackgroundColor).CGColor
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.procTransactionField.userInteractionEnabled = false
             self.procTransactionField.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -310,8 +310,8 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
     }
     
     func initTextFields() {
-        if (self.sharedDataModel.currentTransaction.transactionCompanies.count != 0) {
-            self.selectedCompany = self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex]
+        if (self.viewStateManager.currentTransaction.transactionCompanies.count != 0) {
+            self.selectedCompany = self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex]
         
             companyDescriptionLabel.attributedText = changeStringToBold("Materiality: ",textBold:self.selectedCompany.company.companyName)
             if (self.selectedCompany.materiality.hasPRC == "Yes") {
@@ -382,7 +382,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
       //  var height = bounds.size.height
         widthforScreen = CGFloat(width)
         
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
             
             
@@ -399,7 +399,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
                 let companyHeight = self.companyDescriptionLabel.frame.size.height
                 
                 
-                if self.sharedDataModel.checkForOrientationChange == "portrait"
+                if self.viewStateManager.currentOrientation == "portrait"
                 {
                     self.companyDescriptionLabel.frame = CGRectMake(companyX - 150, companyY, companyWidth, companyHeight)
                 }
@@ -413,7 +413,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
                 self.viewForDealSummary1.backgroundColor = UIColor(CGColor: self.appAttributes.colorCyan)
                 
             })
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -475.5
             }
@@ -437,7 +437,7 @@ class MaterialityPage2ViewController: MaterialityPageViewController {
                 self.companyDescriptionLabel.frame = CGRectMake( 150,  10,  width, 30.00)
                 self.companyDescriptionLabel.textAlignment = NSTextAlignment.Natural
             })
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -325.5
             }
@@ -470,7 +470,7 @@ extension MaterialityPage2ViewController: UITextViewDelegate {
             var newMat : MaterialityData
             self.selectedCompany.materiality.specialCircumstances = self.specialCircumstanceField.text
             newMat = self.selectedCompany.materiality
-            self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
+            self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
             
         }
     }

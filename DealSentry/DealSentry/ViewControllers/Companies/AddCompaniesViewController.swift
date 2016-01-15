@@ -14,7 +14,7 @@ class AddCompaniesViewController: UIViewController {
     
     var debugUtil = DebugUtility(thisClassName: "AddCompaniesViewController", enabled: false)
     let appAttributes = AppAttributes()
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var detailViewController: DetailViewController! // reference the parent detail view controller which this is embedded
 
     @IBOutlet weak var searchImageView: UIImageView!
@@ -37,14 +37,14 @@ class AddCompaniesViewController: UIViewController {
     /// dismisses search companies view and add the company to the already present transaction companies stack
     @IBAction func dismissSearchCompaniesView(unwindSeque: UIStoryboardSegue ){
         self.debugUtil.printLog("dismissSearchCompaniesView", msg: "BEGIN")
-        if !self.sharedDataModel.currentTransaction.transactionCompanies.isEmpty {
+        if !self.viewStateManager.currentTransaction.transactionCompanies.isEmpty {
 
             //dont forget to update company index
-            self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = self.sharedDataModel.currentTransaction.transactionCompanies.count - 1
+            self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = self.viewStateManager.currentTransaction.transactionCompanies.count - 1
             
             //if there is only one company being added in the total list.  force the role of company to be primary client
-            if self.sharedDataModel.currentTransaction.transactionCompanies.count == 1 {
-                self.sharedDataModel.currentTransaction.transactionCompanies[0].role = "Primary Client"
+            if self.viewStateManager.currentTransaction.transactionCompanies.count == 1 {
+                self.viewStateManager.currentTransaction.transactionCompanies[0].role = "Primary Client"
             }
             // toggle to company questions tab
 
@@ -65,11 +65,11 @@ class AddCompaniesViewController: UIViewController {
         self.debugUtil.printLog("dismissDefineCompanyView", msg: "BEGIN")
         
         
-        if !self.sharedDataModel.currentTransaction.transactionCompanies.isEmpty {
+        if !self.viewStateManager.currentTransaction.transactionCompanies.isEmpty {
 
             //ADD the company index - IMPORTANT
-            self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = self.sharedDataModel.currentTransaction.transactionCompanies.count - 1
-           self.sharedDataModel.companynameArrayForManuallyDefined = [String]()
+            self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = self.viewStateManager.currentTransaction.transactionCompanies.count - 1
+           self.viewStateManager.companynameArrayForManuallyDefined = [String]()
 
             self.detailViewController.embeddedCompaniesQuestions2ViewController.tableView.reloadData()
             self.performSegueWithIdentifier("dismissAddCompany", sender: self)
@@ -97,7 +97,7 @@ class AddCompaniesViewController: UIViewController {
         self..navigationBar.setBackgroundImage(navImage, forBarMetrics: .Default)
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
 
-        if self.sharedDataModel.currentTransaction.transactionCompanies.isEmpty {
+        if self.viewStateManager.currentTransaction.transactionCompanies.isEmpty {
             self.navView.hidden = true
         } else {
             self.navView.hidden = false
@@ -108,13 +108,11 @@ class AddCompaniesViewController: UIViewController {
     override func shouldAutorotate() -> Bool {
         return true
     }
-//    override func supportedInterfaceOrientations() -> Int {
-//        return Int(UIInterfaceOrientation.Portrait.rawValue) | Int(UIInterfaceOrientation.LandscapeLeft.rawValue) | Int(UIInterfaceOrientation.LandscapeRight.rawValue)
-//    }
+
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.Portrait, UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
-        return orientation
+        let currentOrientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.Portrait, UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
+        return currentOrientation
     }
 
     override func didReceiveMemoryWarning() {

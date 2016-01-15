@@ -14,7 +14,7 @@ class ContactsQuestionsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var roleTextField: UITextField!
-    @IBOutlet weak var gocDescriptionLabel: UILabel!
+    @IBOutlet weak var departmentLabel: UILabel!
     
     @IBOutlet weak var employeeBackgroundView: UIView!
     @IBOutlet weak var telLabel: UILabel!

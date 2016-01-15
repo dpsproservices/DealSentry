@@ -7,7 +7,7 @@ import UIKit
 class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "BusinessSelectionPage4ViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     let appAttributes = AppAttributes()
     @IBOutlet weak var backImage: UIImageView!
     
@@ -78,9 +78,9 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
     /// this method will set the index for hasDerivativesExposureSegmentedControl and update the corresponding object of the transaction
     @IBAction func derivativesExposureValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.hasDerivativesExposure = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.hasDerivativesExposure = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.hasDerivativesExposure  = "No"
+            self.viewStateManager.currentTransaction.businessSelection.hasDerivativesExposure  = "No"
         }
         self.materialImgWarning.hidden = true
         self.materialImgWarning.hidden = true
@@ -92,9 +92,9 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
     /// this method will set the index for hasCommodityExposureSegmentedControl and update the corresponding object of the transaction 
         @IBAction func commodityExposureValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.hasCommoditiesExposure = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.hasCommoditiesExposure = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.hasCommoditiesExposure  = "No"
+            self.viewStateManager.currentTransaction.businessSelection.hasCommoditiesExposure  = "No"
         }
         self.commoditiesImgWarning.hidden = true
         self.commoditiesTxtWarning.hidden = true
@@ -105,14 +105,14 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
     /// this method will set the index for hasPotentialWealthManagement and update the corresponding object of the transaction
     @IBAction func hasPotentialWealthManagementValueChanged(sender: UISegmentedControl) {
     if sender.selectedSegmentIndex == 1 {
-        self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity = "Yes"
+        self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity = "Yes"
         self.descriptionWealthManagementImgWarning.hidden = false
         self.descriptionWealthManagementTxtWarning.hidden = false
         self.textViewForDescription.editable = true
 
     } else {
-        self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity  = "No"
-        self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity = ""
+        self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity  = "No"
+        self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity = ""
         self.textViewForDescription.text = ""
         self.textViewForDescription.editable = false
 
@@ -130,7 +130,7 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
     @IBAction func hasTypeBuyOrSellValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0
     {
-        self.sharedDataModel.currentTransaction.businessSelection.businessSelectionTypeForEither = "Buy"
+        self.viewStateManager.currentTransaction.businessSelection.businessSelectionTypeForEither = "Buy"
         self.hasTypeBuyOrSell.hidden = false
         self.typeLabelForEither.hidden  = false
         self.buySellHeading.hidden = false
@@ -145,8 +145,8 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
         hasPotentialWealthManagement.hidden = true
         textViewForDescription.text = ""
         hasPotentialWealthManagement.selectedSegmentIndex = 0
-        self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity = "No"
-        self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity = ""
+        self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity = "No"
+        self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity = ""
         
         self.materialImgWarning.hidden = true
         self.materialQuestionLabel.hidden = false
@@ -161,7 +161,7 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
     }
     else if sender.selectedSegmentIndex == 1
     {
-        self.sharedDataModel.currentTransaction.businessSelection.businessSelectionTypeForEither = "Sell"
+        self.viewStateManager.currentTransaction.businessSelection.businessSelectionTypeForEither = "Sell"
 
         self.hasTypeBuyOrSell.hidden = false
         self.typeLabelForEither.hidden  = false
@@ -189,8 +189,8 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
         self.hasCommodityExposureSegmentedControl.selectedSegmentIndex = 0
         self.hasDerivativesExposureSegmentedControl.selectedSegmentIndex = 0
         
-        self.sharedDataModel.currentTransaction.businessSelection.hasCommoditiesExposure = "No"
-        self.sharedDataModel.currentTransaction.businessSelection.hasDerivativesExposure = "No"
+        self.viewStateManager.currentTransaction.businessSelection.hasCommoditiesExposure = "No"
+        self.viewStateManager.currentTransaction.businessSelection.hasDerivativesExposure = "No"
         
         potentialWealthManagementQuestionLabelConstraint.constant = 145.5
         
@@ -240,7 +240,7 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -475.5
             }
@@ -251,7 +251,7 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -365.0
             }
@@ -286,7 +286,7 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
             backImage.image = image.imageWithColor(UIColor(CGColor: appAttributes.colorBlue)).imageWithRenderingMode(.AlwaysOriginal)
         }
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.hasDerivativesExposureSegmentedControl.userInteractionEnabled = false
             self.hasDerivativesExposureSegmentedControl.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -312,11 +312,11 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
     ///this method provides data from the object to the view controller
     func resetViewsFromModel() {
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.hasDerivativesExposure == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.hasDerivativesExposure == "Yes") {
             self.hasDerivativesExposureSegmentedControl.selectedSegmentIndex = 1
             self.materialImgWarning.hidden = true
             self.materialTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.hasDerivativesExposure == "No" {
+        } else if self.viewStateManager.currentTransaction.businessSelection.hasDerivativesExposure == "No" {
             self.hasDerivativesExposureSegmentedControl.selectedSegmentIndex = 0
             self.materialImgWarning.hidden = true
             self.materialTxtWarning.hidden = true
@@ -335,11 +335,11 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
             
         }
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.hasCommoditiesExposure == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.hasCommoditiesExposure == "Yes") {
             self.hasCommodityExposureSegmentedControl.selectedSegmentIndex = 1
             self.commoditiesImgWarning.hidden = true
             self.commoditiesTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.hasCommoditiesExposure == "No" {
+        } else if self.viewStateManager.currentTransaction.businessSelection.hasCommoditiesExposure == "No" {
             self.hasCommodityExposureSegmentedControl.selectedSegmentIndex = 0
             self.commoditiesImgWarning.hidden = true
             self.commoditiesTxtWarning.hidden = true
@@ -358,15 +358,15 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
             
         }
         
-        if self.sharedDataModel.getBusinessType(self.sharedDataModel.currentTransaction) == "Either"
+        if self.viewStateManager.getBusinessType(self.viewStateManager.currentTransaction) == "Either"
         {
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity == "Yes") {
             self.hasPotentialWealthManagement.selectedSegmentIndex = 1
             self.potentialWealthManagementImgWarning.hidden = true
             self.potentialWealthManagementTxtWarning.hidden = true
             self.textViewForDescription.editable = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity == "No"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity == "No"{
             self.hasPotentialWealthManagement.selectedSegmentIndex = 0
             self.potentialWealthManagementImgWarning.hidden = true
             self.potentialWealthManagementTxtWarning.hidden = true
@@ -389,18 +389,18 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
             
         }
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity == "" && self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity == "" && self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity == "Yes") {
             self.textViewForDescription.text = "enter a Deal Description"
             self.textViewForDescription.textColor = UIColor.lightGrayColor()
             self.descriptionWealthManagementImgWarning.hidden = false
             self.descriptionWealthManagementTxtWarning.hidden = false
         } else {
-            self.textViewForDescription.text = self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity
+            self.textViewForDescription.text = self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity
             self.descriptionWealthManagementImgWarning.hidden = true
             self.descriptionWealthManagementTxtWarning.hidden = true
         }
         
-        if self.sharedDataModel.currentTransaction.businessSelection.businessSelectionTypeForEither == "Buy"
+        if self.viewStateManager.currentTransaction.businessSelection.businessSelectionTypeForEither == "Buy"
         {
             self.hasTypeBuyOrSell.selectedSegmentIndex = 0
             self.potentialWealthManagementImgWarning.hidden = true
@@ -408,7 +408,7 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
             self.descriptionWealthManagementImgWarning.hidden = true
             self.descriptionWealthManagementTxtWarning.hidden = true
         }
-        else if self.sharedDataModel.currentTransaction.businessSelection.businessSelectionTypeForEither == "Sell"
+        else if self.viewStateManager.currentTransaction.businessSelection.businessSelectionTypeForEither == "Sell"
         {
             self.hasTypeBuyOrSell.selectedSegmentIndex = 1
             self.commoditiesImgWarning.hidden = true
@@ -425,7 +425,7 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             backImageCenterX.constant = -215.0
         }
@@ -456,9 +456,9 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -475.5
             }
@@ -470,7 +470,7 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -325.5
             }
@@ -487,7 +487,7 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
     /// this method shows buy/sell views based on the selection of buySell segment control selection only if the business type is either. if the business type is Buy then Buy views will be shown
     func uiChangeForBuyAndSell()
     {
-        if self.sharedDataModel.getBusinessType(self.sharedDataModel.currentTransaction) == "Buy"
+        if self.viewStateManager.getBusinessType(self.viewStateManager.currentTransaction) == "Buy"
     {
         self.hasTypeBuyOrSell.hidden = true
         self.typeLabelForEither.hidden  = true
@@ -512,9 +512,9 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
         
     }
     
-    else if self.sharedDataModel.getBusinessType(self.sharedDataModel.currentTransaction) == "Either"
+    else if self.viewStateManager.getBusinessType(self.viewStateManager.currentTransaction) == "Either"
     {
-        if self.sharedDataModel.currentTransaction.businessSelection.businessSelectionTypeForEither == "Sell"
+        if self.viewStateManager.currentTransaction.businessSelection.businessSelectionTypeForEither == "Sell"
         {
             self.hasTypeBuyOrSell.hidden = false
             self.typeLabelForEither.hidden  = false
@@ -561,7 +561,7 @@ class BusinessSelectionPage4ViewController: BusinessSelectionPageViewController 
         
             opportunitiesDescriptionErrorTextConstraint.constant = -147.5
         }
-        else if self.sharedDataModel.currentTransaction.businessSelection.businessSelectionTypeForEither == "Buy"
+        else if self.viewStateManager.currentTransaction.businessSelection.businessSelectionTypeForEither == "Buy"
         {
             self.hasTypeBuyOrSell.hidden = false
             self.typeLabelForEither.hidden  = false
@@ -628,13 +628,13 @@ extension BusinessSelectionPage4ViewController: UITextViewDelegate {
         if (textView === textViewForDescription) {
             if(!textViewForDescription.text.isEmpty)
             {
-                self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity = self.textViewForDescription.text
+                self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity = self.textViewForDescription.text
                 self.descriptionWealthManagementImgWarning.hidden = true
                 self.descriptionWealthManagementTxtWarning.hidden = true
             }
             else
             {
-                self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity = ""
+                self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity = ""
                 self.descriptionWealthManagementImgWarning.hidden = false
                 self.descriptionWealthManagementTxtWarning.hidden = false
             }

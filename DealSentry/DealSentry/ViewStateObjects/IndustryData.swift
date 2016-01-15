@@ -4,7 +4,7 @@
 
 import Foundation
 
-class IndustryData: NSObject {
+@objc class IndustryData: NSObject {
     
     var id: String = ""
     var name: String = ""

@@ -8,7 +8,7 @@ class TransactionDetailPage2ViewController: TransactionDetailPageViewController 
     
     var debugUtil = DebugUtility(thisClassName: "TransactionDetailPage2ViewController", enabled: false)
     var dealSizeWidget: DealSizeWidget!
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
   
     @IBOutlet weak var forwardImage: UIImageView!
     @IBOutlet weak var backImage: UIImageView!
@@ -59,7 +59,7 @@ class TransactionDetailPage2ViewController: TransactionDetailPageViewController 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -475.5
                 forwardImageCenterX.constant = 475.5
@@ -73,7 +73,7 @@ class TransactionDetailPage2ViewController: TransactionDetailPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -365.0
                 forwardImageCenterX.constant = 365.0
@@ -103,7 +103,7 @@ class TransactionDetailPage2ViewController: TransactionDetailPageViewController 
         
         
          self.appAttributes.setColorAttributesTF(offeringFormatTextField)
-        var offeringFormat = self.sharedDataModel.offeringFormatArray.map { (OfferingFormatData) -> String in
+        var offeringFormat = self.viewStateManager.offeringFormatArray.map { (OfferingFormatData) -> String in
             return OfferingFormatData.offeringFormatDescription
         }
         
@@ -120,7 +120,7 @@ class TransactionDetailPage2ViewController: TransactionDetailPageViewController 
         self.appAttributes.setColorAttributesTF(useOfProceedsTextField)
         
         
-        var useOfProceeds = self.sharedDataModel.useOfProceedsArray.map { (UseOfProceedsData) -> String in
+        var useOfProceeds = self.viewStateManager.useOfProceedsArray.map { (UseOfProceedsData) -> String in
             return UseOfProceedsData.useOfProceedsDescription
         }
         useOfProceeds = useOfProceeds.sort({ $0 < $1 })
@@ -143,7 +143,7 @@ class TransactionDetailPage2ViewController: TransactionDetailPageViewController 
         }
 
        
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.bankRoleTextField.userInteractionEnabled = false
             self.bankRoleTextField.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -179,7 +179,7 @@ class TransactionDetailPage2ViewController: TransactionDetailPageViewController 
             case "dealSizeWidget":
                 dealSizeWidget =  segue.destinationViewController as! DealSizeWidget
                 dealSizeWidget.transDetail2VC = self
-                dealSizeWidget.dealSize = self.sharedDataModel.currentTransaction.transactionDetail.dealSize
+                dealSizeWidget.dealSize = self.viewStateManager.currentTransaction.transactionDetail.dealSize
             default :
                 break
             }
@@ -190,7 +190,7 @@ class TransactionDetailPage2ViewController: TransactionDetailPageViewController 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             backImageCenterX.constant = -215.0
             forwardImageCenterX.constant = 215.0
@@ -224,9 +224,9 @@ class TransactionDetailPage2ViewController: TransactionDetailPageViewController 
     
     ///this method passses the data from object to the view controllers
     func resetViewsFromModel() {
-        self.bankRoleTextField.text = self.sharedDataModel.currentTransaction.transactionDetail.bankRole
-        if self.sharedDataModel.currentTransaction.transactionDetail.dealSize != "" {
-            let origPrice = NSString(string: self.sharedDataModel.currentTransaction.transactionDetail.dealSize).doubleValue
+        self.bankRoleTextField.text = self.viewStateManager.currentTransaction.transactionDetail.bankRole
+        if self.viewStateManager.currentTransaction.transactionDetail.dealSize != "" {
+            let origPrice = NSString(string: self.viewStateManager.currentTransaction.transactionDetail.dealSize).doubleValue
             
             //price is in millions (MILLIONS)
             //format to k or m or b
@@ -249,47 +249,47 @@ class TransactionDetailPage2ViewController: TransactionDetailPageViewController 
             
             self.dealSizeTextField.text = price! /*+ unit*/
         }
-        if(self.sharedDataModel.checkForNewDraftOfferingFormat == "YES" && self.sharedDataModel.currentTransaction.transactionId == "New" && self.sharedDataModel.currentTransaction.transactionDetail.offeringFormat.isEmpty)
+        if(self.viewStateManager.checkForNewDraftOfferingFormat == "YES" && self.viewStateManager.currentTransaction.transactionId == "New" && self.viewStateManager.currentTransaction.transactionDetail.offeringFormat.isEmpty)
         {
             self.offeringFormatTextField.text = "N/A"
-            self.sharedDataModel.currentTransaction.transactionDetail.offeringFormat = self.offeringFormatTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.offeringFormat = self.offeringFormatTextField.text!
 
         }
         else
         {
-            self.offeringFormatTextField.text = self.sharedDataModel.currentTransaction.transactionDetail.offeringFormat
+            self.offeringFormatTextField.text = self.viewStateManager.currentTransaction.transactionDetail.offeringFormat
         }
-        if (self.sharedDataModel.currentTransaction.transactionDetail.offeringFormatComments == "") {
+        if (self.viewStateManager.currentTransaction.transactionDetail.offeringFormatComments == "") {
             self.offeringFormatCommentsTextView.text = "enter an Offering Comment"
             self.offeringFormatCommentsTextView.textColor = UIColor.lightGrayColor()
         } else {
-            self.offeringFormatCommentsTextView.text = self.sharedDataModel.currentTransaction.transactionDetail.offeringFormatComments
+            self.offeringFormatCommentsTextView.text = self.viewStateManager.currentTransaction.transactionDetail.offeringFormatComments
         }
-        if(self.sharedDataModel.checkForNewDraftUseOfProceeds == "YES" && self.sharedDataModel.currentTransaction.transactionId == "New" && self.sharedDataModel.currentTransaction.transactionDetail.useOfProceeds.isEmpty)
+        if(self.viewStateManager.checkForNewDraftUseOfProceeds == "YES" && self.viewStateManager.currentTransaction.transactionId == "New" && self.viewStateManager.currentTransaction.transactionDetail.useOfProceeds.isEmpty)
         {
             
             self.useOfProceedsTextField.text = "M&A/Strategic"
-            self.sharedDataModel.currentTransaction.transactionDetail.useOfProceeds = self.useOfProceedsTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.useOfProceeds = self.useOfProceedsTextField.text!
         }
         else
         {
-            self.useOfProceedsTextField.text = self.sharedDataModel.currentTransaction.transactionDetail.useOfProceeds
+            self.useOfProceedsTextField.text = self.viewStateManager.currentTransaction.transactionDetail.useOfProceeds
         }
         
-        if (self.sharedDataModel.currentTransaction.transactionDetail.useOfProceedsComments == "") {
+        if (self.viewStateManager.currentTransaction.transactionDetail.useOfProceedsComments == "") {
             self.useOfProceedsCommentsTextView.text = "enter a Use of Proceeds Comment"
             self.useOfProceedsCommentsTextView.textColor = UIColor.lightGrayColor()
         } else {
-            self.useOfProceedsCommentsTextView.text = self.sharedDataModel.currentTransaction.transactionDetail.useOfProceedsComments
+            self.useOfProceedsCommentsTextView.text = self.viewStateManager.currentTransaction.transactionDetail.useOfProceedsComments
         }
     }
     
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -475.5
                 forwardImageCenterX.constant = 475.5
@@ -305,7 +305,7 @@ class TransactionDetailPage2ViewController: TransactionDetailPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -325.5
                 forwardImageCenterX.constant = 325.5
@@ -333,7 +333,7 @@ extension TransactionDetailPage2ViewController: UITextFieldDelegate {
         
         switch textField {
         case bankRoleTextField:
-            self.sharedDataModel.currentTransaction.transactionDetail.bankRole = bankRoleTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.bankRole = bankRoleTextField.text!
         case dealSizeTextField:
             let aString: String = dealSizeTextField.text!
             var newString = aString.stringByReplacingOccurrencesOfString("M", withString: "")
@@ -345,9 +345,9 @@ extension TransactionDetailPage2ViewController: UITextFieldDelegate {
             
             newString = newString.stringByReplacingOccurrencesOfString("$", withString: "")
             newString = newString.stringByReplacingOccurrencesOfString(",", withString: "")
-            self.sharedDataModel.currentTransaction.transactionDetail.dealSize = newString
+            self.viewStateManager.currentTransaction.transactionDetail.dealSize = newString
         case useOfProceedsTextField:
-            self.sharedDataModel.currentTransaction.transactionDetail.useOfProceeds = useOfProceedsTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.useOfProceeds = useOfProceedsTextField.text!
         default:
             break
             
@@ -359,7 +359,7 @@ extension TransactionDetailPage2ViewController: UITextFieldDelegate {
         
         if (textField === offeringFormatTextField) {
             
-            self.sharedDataModel.checkForNewDraftOfferingFormat = "NO"
+            self.viewStateManager.checkForNewDraftOfferingFormat = "NO"
             self.offeringFormatTextField.resignFirstResponder()
             
             let initText: String? = offeringFormatTextField.text
@@ -377,7 +377,7 @@ extension TransactionDetailPage2ViewController: UITextFieldDelegate {
             
         } else if (textField === useOfProceedsTextField) {
             
-            self.sharedDataModel.checkForNewDraftUseOfProceeds = "NO"
+            self.viewStateManager.checkForNewDraftUseOfProceeds = "NO"
 
             self.useOfProceedsTextField.resignFirstResponder()
             
@@ -406,9 +406,9 @@ extension TransactionDetailPage2ViewController: PopTextPickerDelegate {
         
         switch textField {
         case offeringFormatTextField:
-            self.sharedDataModel.currentTransaction.transactionDetail.offeringFormat = offeringFormatTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.offeringFormat = offeringFormatTextField.text!
         case useOfProceedsTextField:
-            self.sharedDataModel.currentTransaction.transactionDetail.useOfProceeds = useOfProceedsTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.useOfProceeds = useOfProceedsTextField.text!
         default:
             break
             
@@ -428,9 +428,9 @@ extension TransactionDetailPage2ViewController: UITextViewDelegate {
     func textViewDidChange(textView: UITextView) {
         switch textView {
         case offeringFormatCommentsTextView:
-            self.sharedDataModel.currentTransaction.transactionDetail.offeringFormatComments = offeringFormatCommentsTextView.text
+            self.viewStateManager.currentTransaction.transactionDetail.offeringFormatComments = offeringFormatCommentsTextView.text
         case useOfProceedsCommentsTextView:
-            self.sharedDataModel.currentTransaction.transactionDetail.useOfProceedsComments = useOfProceedsCommentsTextView.text
+            self.viewStateManager.currentTransaction.transactionDetail.useOfProceedsComments = useOfProceedsCommentsTextView.text
         default:
             break
         }

@@ -4,7 +4,7 @@
 
 import Foundation
 
-class BusinessSelectionData: NSObject {
+@objc class BusinessSelectionData: NSObject {
     
     var isDifferentCurrencies: String = "No" // Yes or No
     

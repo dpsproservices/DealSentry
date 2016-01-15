@@ -15,7 +15,7 @@ class DefineCompanyPopupViewController: UIViewController {
     
     var debugUtil = DebugUtility(thisClassName: "DefineCompanyPopupViewController", enabled: false)
     
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     
     @IBOutlet weak var popupPromptLabel: UILabel!
     
@@ -36,8 +36,8 @@ class DefineCompanyPopupViewController: UIViewController {
         self.genericPickerView.dataSource? = self
         
         // reset selected row in Model
-   //     self.sharedDataModel.defineCompanyPopupPickerSelectedRow = -1
-    //    self.sharedDataModel.defineCompanyPopupPickerSelectedValue = ""
+   //     self.viewStateManager.defineCompanyPopupPickerSelectedRow = -1
+    //    self.viewStateManager.defineCompanyPopupPickerSelectedValue = ""
         self.selectedValue = ""
         
         //self.genericPickerView.reloadAllComponents()
@@ -85,13 +85,13 @@ extension DefineCompanyPopupViewController: UIPickerViewDelegate, UIPickerViewDa
         
         switch self.genericPickerType {
         case GenericPickerEnum.marketSegment:
-            return self.sharedDataModel.segmentsArray.count
+            return self.viewStateManager.segmentsArray.count
         case GenericPickerEnum.franchiseIndustry:
-            return self.sharedDataModel.industriesArray.count
+            return self.viewStateManager.industriesArray.count
         case GenericPickerEnum.country:
-            return self.sharedDataModel.countriesArray.count
+            return self.viewStateManager.countriesArray.count
         case GenericPickerEnum.assignRole:
-            return self.sharedDataModel.companyRolesArray.count
+            return self.viewStateManager.companyRolesArray.count
 
         }
         
@@ -101,13 +101,13 @@ extension DefineCompanyPopupViewController: UIPickerViewDelegate, UIPickerViewDa
        
         switch self.genericPickerType {
         case GenericPickerEnum.marketSegment:
-            return self.sharedDataModel.segmentsArray[row].name
+            return self.viewStateManager.segmentsArray[row].name
         case GenericPickerEnum.franchiseIndustry:
-            return self.sharedDataModel.industriesArray[row].name
+            return self.viewStateManager.industriesArray[row].name
         case GenericPickerEnum.country:
-            return self.sharedDataModel.countriesArray[row].countryName
+            return self.viewStateManager.countriesArray[row].countryName
         case GenericPickerEnum.assignRole:
-            return self.sharedDataModel.companyRolesArray[row].roleDescription
+            return self.viewStateManager.companyRolesArray[row].roleDescription
 
         }
         
@@ -117,13 +117,13 @@ extension DefineCompanyPopupViewController: UIPickerViewDelegate, UIPickerViewDa
          
         switch self.genericPickerType {
         case GenericPickerEnum.marketSegment:
-            self.selectedValue = self.sharedDataModel.segmentsArray[row].name
+            self.selectedValue = self.viewStateManager.segmentsArray[row].name
         case GenericPickerEnum.franchiseIndustry:
-            self.selectedValue = self.sharedDataModel.industriesArray[row].name
+            self.selectedValue = self.viewStateManager.industriesArray[row].name
         case GenericPickerEnum.country:
-            self.selectedValue = self.sharedDataModel.countriesArray[row].countryName
+            self.selectedValue = self.viewStateManager.countriesArray[row].countryName
         case GenericPickerEnum.assignRole:
-            self.selectedValue = self.sharedDataModel.companyRolesArray[row].roleDescription
+            self.selectedValue = self.viewStateManager.companyRolesArray[row].roleDescription
 
         }
         

@@ -3,6 +3,7 @@
 //
 
 #import "DataManager.h"
+#import "AppDelegate.h"
 #import "CompanyRole.h"
 #import "Contact.h"
 #import "ContactRole.h"
@@ -19,6 +20,7 @@
 #import "Country.h"
 #import "ProductMap.h"
 #import "Company.h"
+#import "Transaction.h"
 #import "TransactionDetail.h"
 #import "BusinessSelection.h"
 #import "TransactionCompany.h"
@@ -28,12 +30,13 @@
 #import "DealSentry-Swift.h"
 
 @implementation DataManager
-@synthesize arrayForCompanyRoles,sharedDelegate,arrayForContact,arrayForContactRoles;
+@synthesize arrayForCompanyRoles,arrayForContact,arrayForContactRoles;
 @synthesize arrayForAgreementTypes,arrayForDealStatuses,arrayForIndustries;
 @synthesize arrayForLoanTypes,arrayForOfferingFormat,arrayForSegments;
 @synthesize arrayForTransactionStatuses,arrayForUseOfProceeds,arrayForCompanies;
-@synthesize arrayForProduct,arrayForProductSub,arrayForCountries,arrayForProductmap,checkIndependentEntities,arrayForTransaction;
+@synthesize arrayForProduct,arrayForProductSub,arrayForCountries,arrayForProductmap,arrayForTransaction;
 @synthesize transactionIdFromTransaction;
+@synthesize sharedDelegate,checkIndependentEntities;
 
 static DataManager *singletonInstance;
 
@@ -50,12 +53,15 @@ static DataManager *singletonInstance;
 {
     
     if (self = [super init]) {
+        
         sharedDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        context =[sharedDelegate managedObjectContext];
-        self.checkForOrientationChange = sharedDelegate.currentOrientation;
+        
+        context = [sharedDelegate managedObjectContext];
+        
         NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
         
         checkIndependentEntities = [userdefault objectForKey:@"SAVED"];
+        
         if([checkIndependentEntities isEqualToString:@"YES"])
         {
             isSaved = YES;
@@ -69,7 +75,6 @@ static DataManager *singletonInstance;
         if(!isSaved)
         {
             [self saveIndependentEntities];
-            self.userIdFromLogin = sharedDelegate.userId;
             if([self.userIdFromLogin length]==0)
             {
                 self.userIdFromLogin = @"ew57483";
@@ -77,6 +82,7 @@ static DataManager *singletonInstance;
             [userdefault setObject:@"YES" forKey:@"SAVED"];
             [userdefault synchronize];
         }
+        
         [self fetchIndependentEntities];
 
     }
@@ -109,11 +115,10 @@ static DataManager *singletonInstance;
 
 }
 
-/// fetching independent entities from database in an array to pass it on to the view controllers via sharedDataModel
+/// fetching independent entities from database in an array to pass it on to the view controllers via viewStateManager
 -(void)fetchIndependentEntities
 {
     arrayForCompanyRoles = [NSArray arrayWithArray:[self fetchCompanyRoleData]];
-    arrayForContact = [NSMutableArray arrayWithArray:[self fetchContactData]];
     arrayForContactRoles = [NSArray arrayWithArray:[self fetchContactRoleData]];
     arrayForAgreementTypes = [NSArray arrayWithArray:[self fetchAgreementTypesData]];
     arrayForDealStatuses = [NSArray arrayWithArray:[self fetchDealStatusesData]];
@@ -127,15 +132,10 @@ static DataManager *singletonInstance;
     arrayForProductSub = [NSArray arrayWithArray:[self fetchSubProductData]];
     arrayForCountries = [NSArray arrayWithArray:[self fetchCountriesData]];
     arrayForProductmap = [NSArray arrayWithArray:[self fetchProductMapData]];
+    
+    arrayForContact = [NSMutableArray arrayWithArray:[self fetchContactData]];
     arrayForCompanies = [NSMutableArray arrayWithArray:[self fetchCompaniesData]];
 }
-
-
-//-(void)getArrayFromSharedModel
-//{
-//    SharedDataModel *sharedData = [SharedDataModel sharedInstance];
-//    [self saveTransactionValue:sharedData.transactionSaveArray];
-//}
 
 /// this method parses the company role csv and save it in companyRole entity as attributes which in turn present in coredata datamodel
 -(void)saveCompanyRoleData
@@ -172,10 +172,10 @@ static DataManager *singletonInstance;
     newContact.contactId = [contactDictionary objectForKey:@"CONTACT_ID"];
     newContact.email = [contactDictionary objectForKey:@"EMAIL"];
     newContact.firstName = [contactDictionary objectForKey:@"FIRST_NAME"];
-    newContact.gocDescription = [contactDictionary objectForKey:@"GOC_DESCRIPTION"];
+    newContact.department = [contactDictionary objectForKey:@"DEPARTMENT"];
     newContact.lastName = [contactDictionary objectForKey:@"LAST_NAME"];
     newContact.phone = [contactDictionary objectForKey:@"PHONE"];
-    newContact.soeId = [contactDictionary objectForKey:@"SOE_ID"];
+    newContact.employeeId = [contactDictionary objectForKey:@"EMPLOYEE_ID"];
     }
    }
 
@@ -359,6 +359,7 @@ static DataManager *singletonInstance;
         [self checkTransactionIdForNewAndExistingTransaction:transactionData.transactionId];
         
         Transaction *newTransaction = [NSEntityDescription insertNewObjectForEntityForName:@"TransactionEntity" inManagedObjectContext:context];
+        
         newTransaction.transactionId = self.transactionId;
         //compare with transactionStatus array and pass the id
         newTransaction.transactionStatusId =  transactionData.transactionStatus;
@@ -422,7 +423,7 @@ static DataManager *singletonInstance;
 /// @param transaction this object passes the transaction id as transaction is the parent of transaction detail and stores this id in business selection table
 /// @return void
 
--(void)saveBusinessSelectionValue:(BusinessSelectionData*)bsData transactionObjectInstance:(Transaction*)transaction
+-(void) saveBusinessSelectionValue:(BusinessSelectionData*)bsData transactionObjectInstance:(Transaction*)transaction
 {
     BusinessSelection *newBusinessSelection = [NSEntityDescription insertNewObjectForEntityForName:@"BusinessSelectionEntity" inManagedObjectContext:context];
     
@@ -608,9 +609,9 @@ static DataManager *singletonInstance;
 /// @param contactData this object stores the contact details of an user
 /// @param transaction this object passes the transactionContact id as transaction contact is the parent of contact and stores this id in contact table
 /// @return void
--(void)saveContactValue:(ContactData*)contactData transactionObjectInstance:(TransactionContact*)transactionContact
+- (void) saveContactValue :(ContactData*)contactData transactionObjectInstance:(TransactionContact*)transactionContact
 {
-    transactionContact.contactId = contactData.soeID;
+    transactionContact.contactId = contactData.employeeId;
     if(contactData.crossSellDesignee)
     {
         transactionContact.crossSellDesignee = @"true";
@@ -784,8 +785,8 @@ static DataManager *singletonInstance;
         {
             NSString *firstName;
             NSString *lastName;
-            NSString *gocDescription;
-            NSString *soeID;
+            NSString *department;
+            NSString *employeeId;
             NSString *phone;
             NSString *email;
             BOOL crossSellDesignee;
@@ -805,12 +806,12 @@ static DataManager *singletonInstance;
             
             for(ContactData *conData in arrayForContact)
             {
-                if([tContact.contactId isEqualToString:conData.soeID])
+                if([tContact.contactId isEqualToString:conData.employeeId])
                 {
                     firstName = conData.firstName;
                     lastName = conData.lastName;
-                    gocDescription = conData.gocDescription;
-                    soeID = conData.soeID;
+                    department = conData.department;
+                    employeeId = conData.employeeId;
                     phone = conData.phone;
                     email = conData.email;
                     break;
@@ -826,7 +827,7 @@ static DataManager *singletonInstance;
                 crossSellDesignee = NO;
             }
             
-            ContactData *contactDataForTransaction = [[ContactData alloc] initWithFirstName:firstName lastName:lastName gocDescription:gocDescription soeID:soeID phone:phone email:email crossSellDesignee:crossSellDesignee];
+            ContactData *contactDataForTransaction = [[ContactData alloc] initWithFirstName:firstName lastName:lastName department:department employeeId:employeeId phone:phone email:email crossSellDesignee:crossSellDesignee];
             
             if([contactRoleForContact length]==0)
             {
@@ -1240,7 +1241,7 @@ static DataManager *singletonInstance;
     {
        // ContactData *contactData =
        // [[NSClassFromString(@"ContactData") alloc] init];
-        ContactData *contactData = [[ContactData alloc] initWithFirstName:contact.firstName lastName:contact.lastName gocDescription:contact.gocDescription soeID:contact.soeId phone:contact.phone email:contact.email crossSellDesignee:false];
+        ContactData *contactData = [[ContactData alloc] initWithFirstName:contact.firstName lastName:contact.lastName department:contact.department employeeId:contact.employeeId phone:contact.phone email:contact.email crossSellDesignee:false];
         
         [contactArray addObject:contactData];
     }

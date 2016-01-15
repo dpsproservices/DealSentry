@@ -8,7 +8,7 @@ class CompanyMap: UIViewController , WKScriptMessageHandler, WKNavigationDelegat
 {
     @IBOutlet weak var activity: UIActivityIndicatorView!
     @IBOutlet weak var containerView:UIView!
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var defineCompanyController: DefineCompanyViewController!
     var testFrame : CGRect = CGRect()
     var webView: WKWebView?
@@ -55,15 +55,15 @@ class CompanyMap: UIViewController , WKScriptMessageHandler, WKNavigationDelegat
         var selectedFlag = ""
         var i = 0
         var found = false
-        while i<self.sharedDataModel.countriesArray.count && !found{
-            if self.sharedDataModel.countriesArray[i].countryCode == self.selectedCountry {
-                selectedCountryName = self.sharedDataModel.countriesArray[i].countryName
+        while i<self.viewStateManager.countriesArray.count && !found{
+            if self.viewStateManager.countriesArray[i].countryCode == self.selectedCountry {
+                selectedCountryName = self.viewStateManager.countriesArray[i].countryName
                 selectedFlag = self.selectedCountry
                 found = true
             }
             i++
         }
-        self.sharedDataModel.checkForCountryPicker = "NO"
+        self.viewStateManager.checkForCountryPicker = "NO"
         defineCompanyController.countryCode = self.selectedCountry
         defineCompanyController.countryTextField.text = selectedCountryName
         defineCompanyController.countryFlag = selectedFlag
@@ -76,9 +76,9 @@ class CompanyMap: UIViewController , WKScriptMessageHandler, WKNavigationDelegat
         
     }
     
-    func checkForOrientationChange()
+    func checkOrientation()
     {
-        if sharedDataModel.checkForOrientationChange == "landscape"
+        if viewStateManager.currentOrientation == "landscape"
         {
             testFrame = CGRectMake(0,80,1024 ,550)
             self.webView?.frame = testFrame
@@ -91,7 +91,7 @@ class CompanyMap: UIViewController , WKScriptMessageHandler, WKNavigationDelegat
     }
     
     override func viewWillAppear(animated: Bool) {
-        checkForOrientationChange()
+        checkOrientation()
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {

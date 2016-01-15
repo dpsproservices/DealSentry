@@ -7,7 +7,7 @@ import UIKit
 class TransactionDetailPage6ViewController: TransactionDetailPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "TransactionDetailPage5ViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     
     @IBAction func backButtonAction(sender: UIButton) {
         self.transactionDetailViewController.goToPage(5,whichWay: -1)
@@ -30,7 +30,7 @@ class TransactionDetailPage6ViewController: TransactionDetailPageViewController 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -475.5
             }
@@ -42,7 +42,7 @@ class TransactionDetailPage6ViewController: TransactionDetailPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -365.0
             }
@@ -72,7 +72,7 @@ class TransactionDetailPage6ViewController: TransactionDetailPageViewController 
             backImage.image = image.imageWithColor(UIColor(CGColor: appAttributes.colorBlue)).imageWithRenderingMode(.AlwaysOriginal)
         }
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.backwardExplanationTextView.userInteractionEnabled = false
             self.backwardExplanationTextView.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -93,7 +93,7 @@ class TransactionDetailPage6ViewController: TransactionDetailPageViewController 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             backImageCenterX.constant = -215.0
         }
@@ -120,22 +120,22 @@ class TransactionDetailPage6ViewController: TransactionDetailPageViewController 
     }
     
     func resetViewsFromModel() {
-        if (self.sharedDataModel.currentTransaction.transactionDetail.backwardsDealStatusExplanation == "") {
+        if (self.viewStateManager.currentTransaction.transactionDetail.backwardsDealStatusExplanation == "") {
             self.backwardExplanationTextView.text = "enter a Backwards Deal Status Explanation"
             self.backwardExplanationTextView.textColor = UIColor.lightGrayColor()
         } else {
-            self.backwardExplanationTextView.text = self.sharedDataModel.currentTransaction.transactionDetail.backwardsDealStatusExplanation
+            self.backwardExplanationTextView.text = self.viewStateManager.currentTransaction.transactionDetail.backwardsDealStatusExplanation
         }
 
-        if (self.sharedDataModel.currentTransaction.transactionDetail.terminatedExplanation == "") {
+        if (self.viewStateManager.currentTransaction.transactionDetail.terminatedExplanation == "") {
             self.terminatedExplanationTextView.text = "enter a Terminated Explanation"
             self.terminatedExplanationTextView.textColor = UIColor.lightGrayColor()
         } else {
-            self.terminatedExplanationTextView.text = self.sharedDataModel.currentTransaction.transactionDetail.terminatedExplanation
+            self.terminatedExplanationTextView.text = self.viewStateManager.currentTransaction.transactionDetail.terminatedExplanation
         }
-        if self.sharedDataModel.currentTransaction.transactionDetail.uncollectedFees == "Yes" {
+        if self.viewStateManager.currentTransaction.transactionDetail.uncollectedFees == "Yes" {
             self.uncollectedFeesSegmentedControl.selectedSegmentIndex = 1
-        } else  if self.sharedDataModel.currentTransaction.transactionDetail.uncollectedFees == "No" {
+        } else  if self.viewStateManager.currentTransaction.transactionDetail.uncollectedFees == "No" {
             self.uncollectedFeesSegmentedControl.selectedSegmentIndex = 0
         } else {
             self.uncollectedFeesSegmentedControl.selectedSegmentIndex = -1
@@ -147,9 +147,9 @@ class TransactionDetailPage6ViewController: TransactionDetailPageViewController 
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -475.5
             }
@@ -161,7 +161,7 @@ class TransactionDetailPage6ViewController: TransactionDetailPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -325.5
             }
@@ -189,9 +189,9 @@ extension TransactionDetailPage6ViewController: UITextViewDelegate {
     func textViewDidChange(textView: UITextView) {
         switch textView {
         case backwardExplanationTextView:
-            self.sharedDataModel.currentTransaction.transactionDetail.backwardsDealStatusExplanation = backwardExplanationTextView.text
+            self.viewStateManager.currentTransaction.transactionDetail.backwardsDealStatusExplanation = backwardExplanationTextView.text
         case terminatedExplanationTextView:
-            self.sharedDataModel.currentTransaction.transactionDetail.terminatedExplanation = terminatedExplanationTextView.text
+            self.viewStateManager.currentTransaction.transactionDetail.terminatedExplanation = terminatedExplanationTextView.text
         default:
             break
         }

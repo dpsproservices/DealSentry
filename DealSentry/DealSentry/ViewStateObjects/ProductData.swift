@@ -4,7 +4,7 @@
 
 import Foundation
 
-class ProductData: NSObject {
+@objc class ProductData: NSObject {
     
     var productId: String = ""
     var productDescription: String = ""

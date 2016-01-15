@@ -1,4 +1,4 @@
-CONTACT_ID,FIRST_NAME,LAST_NAME,GOC_DESCRIPTION,SOE_ID,PHONE,EMAIL
+CONTACT_ID,FIRST_NAME,LAST_NAME,DEPARTMENT,EMPLOYEE_ID,PHONE,EMAIL
 1,Abraham,Stratton,Sales Department,as12345,949-765-1234,abraham.stratton@dealservices.com
 2,Bart,Thatcher,Investment Advisory,bt67890,949-765-5678,bart.thatcher@dealservices.com
 3,Carol,Uberman,Sales Department,cu10295,949-765-9012,carol.uberman@dealservices.com

@@ -7,7 +7,7 @@ import UIKit
 class MaterialityViewController: UIViewController {
     
     var debugUtil = DebugUtility(thisClassName: "MaterialityViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     let appAttributes = AppAttributes()
     var pageViewController: UIPageViewController!
     var detailViewController: DetailViewController!
@@ -134,7 +134,7 @@ class MaterialityViewController: UIViewController {
         appearance.pageIndicatorTintColor = UIColor(CGColor: appAttributes.colorBlue)
         appearance.currentPageIndicatorTintColor = UIColor.whiteColor()
         appearance.backgroundColor = UIColor.blackColor()//clearColor()
-        if(self.sharedDataModel.currentTransaction.transactionCompanies.count == 0)
+        if(self.viewStateManager.currentTransaction.transactionCompanies.count == 0)
         {
             appearance.numberOfPages = 0//self.numberOfPages
         }
@@ -216,7 +216,7 @@ class MaterialityViewController: UIViewController {
         self.debugUtil.printLog("prepareForSegue", msg: "BEGIN")
         
         //var indexPath: NSIndexPath = self.tableView.indexPathForSelectedRow()!
-        self.debugUtil.printLog("prepareForSegue", msg: " selectedStatus = " + self.sharedDataModel.selectedCategory)
+        self.debugUtil.printLog("prepareForSegue", msg: " selectedStatus = " + self.viewStateManager.selectedCategory)
         
         if let segueId = segue.identifier {
             
@@ -240,7 +240,7 @@ extension MaterialityViewController: UIPageViewControllerDataSource {
     
     // mark - UIPageViewControllerDataSource
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-    if(self.sharedDataModel.currentTransaction.transactionCompanies.count == 0)
+    if(self.viewStateManager.currentTransaction.transactionCompanies.count == 0)
     {
         return 0//self.numberOfPages
     }
@@ -252,7 +252,7 @@ extension MaterialityViewController: UIPageViewControllerDataSource {
     // MARK: - Page Indicator
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        if(self.sharedDataModel.currentTransaction.transactionCompanies.count == 0)
+        if(self.viewStateManager.currentTransaction.transactionCompanies.count == 0)
     {
         return 0//self.numberOfPages
     }

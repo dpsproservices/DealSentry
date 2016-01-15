@@ -25,7 +25,7 @@
         <!--Split View Controller-->
         <scene sceneID="Nki-YV-4Qg">
             <objects>
-                <splitViewController storyboardIdentifier="MainStoryboard" id="H1p-Uh-vWS" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="SplitViewController" id="H1p-Uh-vWS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
@@ -917,9 +917,9 @@
                                     <outlet property="avatarRoleButton" destination="3CZ-jZ-6GS" id="8hS-yM-KqP"/>
                                     <outlet property="crossSellButton" destination="BtC-EB-N2G" id="2VA-K7-faJ"/>
                                     <outlet property="deleteButton" destination="aOP-CG-FGp" id="Cfu-Ly-COQ"/>
+                                    <outlet property="departmentLabel" destination="BoX-8I-jM8" id="OQh-yy-eZR"/>
                                     <outlet property="emailLabel" destination="K5e-at-UuE" id="NXq-lh-F6I"/>
                                     <outlet property="employeeBackgroundView" destination="xFs-kD-376" id="KLo-mV-klb"/>
-                                    <outlet property="gocDescriptionLabel" destination="BoX-8I-jM8" id="OQh-yy-eZR"/>
                                     <outlet property="nameLabel" destination="BAH-8e-Dgd" id="DV4-er-FS7"/>
                                     <outlet property="roleTextField" destination="rJV-Qm-GnN" id="28Q-5m-orr"/>
                                     <outlet property="telLabel" destination="btr-7b-Vkp" id="oWI-rZ-UyV"/>
@@ -1192,7 +1192,7 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="GOC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dK7-8D-dxi">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DPT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dK7-8D-dxi">
                                             <rect key="frame" x="367" y="14" width="31" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1231,8 +1231,8 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="departmentLabel" destination="dK7-8D-dxi" id="VUV-uW-cac"/>
                                     <outlet property="emailLabel" destination="RIZ-d2-shA" id="Ke0-Cd-S7l"/>
-                                    <outlet property="gocDescriptionLabel" destination="dK7-8D-dxi" id="VUV-uW-cac"/>
                                     <outlet property="nameLabel" destination="wy4-pz-dLh" id="b2z-O4-qmP"/>
                                     <outlet property="phoneLabel" destination="Gfq-rW-mya" id="tfY-j3-iyw"/>
                                 </connections>
@@ -1964,10 +1964,10 @@
             </objects>
             <point key="canvasLocation" x="880" y="108"/>
         </scene>
-        <!--New View Controller-->
+        <!--Start View Controller-->
         <scene sceneID="UQ0-aj-RWv">
             <objects>
-                <viewController storyboardIdentifier="NewViewController" id="Vpj-GT-1n8" customClass="NewViewController" customModule="DealSentry" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartViewController" id="Vpj-GT-1n8" customClass="StartViewController" customModule="DealSentry" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gua-mA-oRw"/>
                         <viewControllerLayoutGuide type="bottom" id="ziB-V8-hcD"/>
@@ -1976,15 +1976,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DealSentry" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZ9-ok-1GQ">
-                                <rect key="frame" x="114" y="270" width="373" height="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uZ9-ok-1GQ">
+                                <rect key="frame" x="92" y="270" width="373" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="373" id="5tb-VU-208"/>
                                     <constraint firstAttribute="width" constant="373" id="fWW-hT-PgP"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="50"/>
-                                <color key="textColor" white="0.95506785729999999" alpha="1" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="DealSentry">
+                                        <attributes>
+                                            <color key="NSColor" white="0.95506785729999999" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="50" name="HelveticaNeue-BoldItalic"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="clipping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="3" height="2"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1993,7 +2001,7 @@
                                 </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hdf-kz-jL8">
-                                <rect key="frame" x="227" y="394" width="147" height="45"/>
+                                <rect key="frame" x="205" y="400" width="147" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="147" id="JVg-lK-D0b"/>
                                 </constraints>
@@ -8300,11 +8308,11 @@ Comments:</string>
         <image name="view_details_filled.png" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Tll-UG-LXB"/>
-        <segue reference="mGH-KS-cka"/>
-        <segue reference="pKJ-LL-3Aq"/>
-        <segue reference="4LU-4h-oTq"/>
-        <segue reference="lGl-rA-aOE"/>
         <segue reference="OVq-z4-CF5"/>
+        <segue reference="mRr-oW-VyK"/>
+        <segue reference="mGH-KS-cka"/>
+        <segue reference="4LU-4h-oTq"/>
+        <segue reference="pKJ-LL-3Aq"/>
+        <segue reference="lGl-rA-aOE"/>
     </inferredMetricsTieBreakers>
 </document>

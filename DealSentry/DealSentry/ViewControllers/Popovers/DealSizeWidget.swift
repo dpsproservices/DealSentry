@@ -11,7 +11,7 @@ import WebKit
 class DealSizeWidget: UIViewController , WKScriptMessageHandler
 {
     @IBOutlet weak var containerView:UIView!
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var transDetail2VC: TransactionDetailPage2ViewController!
     
     var webView: WKWebView?
@@ -111,7 +111,7 @@ class DealSizeWidget: UIViewController , WKScriptMessageHandler
             self.transDetail2VC.dealSizeTextField.text = price! /*+ unit*/
             
             
-            self.sharedDataModel.currentTransaction.transactionDetail.dealSize = msg
+            self.viewStateManager.currentTransaction.transactionDetail.dealSize = msg
         }
         
         

@@ -4,7 +4,7 @@
 
 import Foundation
 
-class TransactionData: NSObject {
+@objc class TransactionData: NSObject {
     
     var transactionId: String = ""
     var transactionStatus: String = ""

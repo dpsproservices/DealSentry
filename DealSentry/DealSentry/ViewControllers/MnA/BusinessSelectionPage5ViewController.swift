@@ -7,7 +7,7 @@ import UIKit
 class BusinessSelectionPage5ViewController: BusinessSelectionPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "BusinessSelectionPage5ViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     let appAttributes = AppAttributes()
     @IBOutlet weak var backImage: UIImageView!
    
@@ -34,13 +34,13 @@ class BusinessSelectionPage5ViewController: BusinessSelectionPageViewController 
     /// this method will set the index for wealthManagementSegmentedControl and update the corresponding object of the transaction
     @IBAction func wealthManagementValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity = "Yes"
             self.oppDescImgWarning.hidden = false
             self.oppDescTxtWarning.hidden = false
             self.wealthManagementOpportunityTextView.editable = true
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity  = "No"
-            self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity = ""
+            self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity  = "No"
+            self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity = ""
             self.wealthManagementOpportunityTextView.text = ""
             self.oppDescImgWarning.hidden = true
             self.oppDescTxtWarning.hidden = true
@@ -63,7 +63,7 @@ class BusinessSelectionPage5ViewController: BusinessSelectionPageViewController 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -475.5
             }
@@ -75,7 +75,7 @@ class BusinessSelectionPage5ViewController: BusinessSelectionPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -365.0
             }
@@ -102,7 +102,7 @@ class BusinessSelectionPage5ViewController: BusinessSelectionPageViewController 
             backImage.image = image.imageWithColor(UIColor(CGColor: appAttributes.colorBlue)).imageWithRenderingMode(.AlwaysOriginal)
         }
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.wealthManagementSegmentedControl.userInteractionEnabled = false
             self.wealthManagementSegmentedControl.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -126,12 +126,12 @@ class BusinessSelectionPage5ViewController: BusinessSelectionPageViewController 
     ///this method provides data from the object to the view controller
     func resetViewsFromModel() {
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity == "Yes") {
             self.wealthManagementSegmentedControl.selectedSegmentIndex = 1
             self.oppImgWarning.hidden = true
             self.oppTxtWarning.hidden = true
             self.wealthManagementOpportunityTextView.editable = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity == "No"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity == "No"{
             self.wealthManagementSegmentedControl.selectedSegmentIndex = 0
             self.oppImgWarning.hidden = true
             self.oppTxtWarning.hidden = true
@@ -144,13 +144,13 @@ class BusinessSelectionPage5ViewController: BusinessSelectionPageViewController 
 
         }
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity == "" && self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity == "" && self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity == "Yes") {
             self.wealthManagementOpportunityTextView.text = "enter a Deal Description"
             self.wealthManagementOpportunityTextView.textColor = UIColor.lightGrayColor()
             self.oppDescImgWarning.hidden = false
             self.oppDescTxtWarning.hidden = false
         } else {
-            self.wealthManagementOpportunityTextView.text = self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity
+            self.wealthManagementOpportunityTextView.text = self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity
             self.oppDescImgWarning.hidden = true
             self.oppDescTxtWarning.hidden = true
         }
@@ -158,7 +158,7 @@ class BusinessSelectionPage5ViewController: BusinessSelectionPageViewController 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             backImageCenterX.constant = -215.0
         }
@@ -180,9 +180,9 @@ class BusinessSelectionPage5ViewController: BusinessSelectionPageViewController 
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -475.5
             }
@@ -194,7 +194,7 @@ class BusinessSelectionPage5ViewController: BusinessSelectionPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -325.5
             }
@@ -224,13 +224,13 @@ extension BusinessSelectionPage5ViewController: UITextViewDelegate {
         if (textView === wealthManagementOpportunityTextView) {
             if(!wealthManagementOpportunityTextView.text.isEmpty)
             {
-                self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity = self.wealthManagementOpportunityTextView.text
+                self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity = self.wealthManagementOpportunityTextView.text
                 self.oppDescImgWarning.hidden = true
                 self.oppDescTxtWarning.hidden = true
             }
             else
             {
-                self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity = ""
+                self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity = ""
                 self.oppDescImgWarning.hidden = false
                 self.oppDescTxtWarning.hidden = false
             }

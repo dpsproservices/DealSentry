@@ -10,9 +10,9 @@
 @dynamic contactId;
 @dynamic email;
 @dynamic firstName;
-@dynamic gocDescription;
+@dynamic department;
 @dynamic lastName;
 @dynamic phone;
-@dynamic soeId;
+@dynamic employeeId;
 
 @end

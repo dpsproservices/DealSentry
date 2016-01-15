@@ -4,7 +4,7 @@
 
 import Foundation
 
-class UseOfProceedsData: NSObject {
+@objc class UseOfProceedsData: NSObject {
     
     var useOfProceedsId: String = ""
     var useOfProceedsDescription: String = ""

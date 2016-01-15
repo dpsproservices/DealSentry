@@ -13,7 +13,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
     var debugUtil = DebugUtility(thisClassName: "DetailViewController" , enabled: false)
     let appAttributes = AppAttributes()
     let vcCon = VCConnection.sharedInstance
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var coverView:UIView = UIView()
     var deleteButtonForDismiss:UIButton = UIButton(type: UIButtonType.System)
     var labelForSelectedTab:UILabel = UILabel()
@@ -177,28 +177,28 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         
         requestorLabel.textColor = UIColor.whiteColor()
         requestorLabel.textAlignment = NSTextAlignment.Natural
-        requestorLabel.attributedText = changeStringToBold("Requestor: ", textBold: sharedDataModel.loggedInUserName)
+        requestorLabel.attributedText = changeStringToBold("Requestor: ", textBold: viewStateManager.loggedInUserName)
         requestorLabel.font = UIFont(name: requestorLabel.font.fontName, size: 13)
         viewForDealSummary.addSubview(requestorLabel)
         
         primaryClientLabel.textColor = UIColor.whiteColor()
         primaryClientLabel.textAlignment = NSTextAlignment.Natural
-        primaryClientLabel.attributedText = changeStringToBold("Primary Client: ", textBold: sharedDataModel.currentTransaction.primaryClient)
+        primaryClientLabel.attributedText = changeStringToBold("Primary Client: ", textBold: viewStateManager.currentTransaction.primaryClient)
         primaryClientLabel.font = UIFont(name: primaryClientLabel.font.fontName, size: 13)
         viewForDealSummary.addSubview(primaryClientLabel)
         
         subProductLabel.textColor = UIColor.whiteColor()
         subProductLabel.textAlignment = NSTextAlignment.Natural
-        subProductLabel.attributedText = changeStringToBold("Sub Product: ", textBold: sharedDataModel.currentTransaction.transactionDetail.productSub)
+        subProductLabel.attributedText = changeStringToBold("Sub Product: ", textBold: viewStateManager.currentTransaction.transactionDetail.productSub)
         subProductLabel.font = UIFont(name: subProductLabel.font.fontName, size: 13)
         viewForDealSummary.addSubview(subProductLabel)
         
         
         submittedDateLabel.textColor = UIColor.whiteColor()
         submittedDateLabel.textAlignment = NSTextAlignment.Natural
-        submittedDateLabel.attributedText = changeStringToBold("Submitted Date: ", textBold:sharedDataModel.separateStringFromTime(sharedDataModel.currentTransaction.submitDate))
+        submittedDateLabel.attributedText = changeStringToBold("Submitted Date: ", textBold:viewStateManager.separateStringFromTime(viewStateManager.currentTransaction.submitDate))
         submittedDateLabel.font = UIFont(name: submittedDateLabel.font.fontName, size: 13)
-        if sharedDataModel.currentTransaction.transactionStatus == "Draft"
+        if viewStateManager.currentTransaction.transactionStatus == "Draft"
         {
             submittedDateLabel.hidden = true
         }
@@ -243,7 +243,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
     override func viewWillAppear(animated: Bool) {
         self.debugUtil.printLog("viewWillAppear", msg: "BEGIN")
         self.debugUtil.printLog("viewWillAppear", msg: "END")
-        checkForOrientationChange()
+        checkOrientation()
         notificationCheck()
     }
 
@@ -270,7 +270,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         self.updateMenu()
         self.initVC()
         dealSummary()
-      /*  if sharedDataModel.currentTransaction.transactionCompanies.count == 0 {
+      /*  if viewStateManager.currentTransaction.transactionCompanies.count == 0 {
             self.changeToAddCompanyVC()
         }
       */
@@ -301,7 +301,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
     
     func updateMenu(){
         let tb = self.tabBar.items?[2] as UITabBarItem!
-        if self.sharedDataModel.currentTransaction.transactionDetail.product == "M&A" {
+        if self.viewStateManager.currentTransaction.transactionDetail.product == "M&A" {
             // enable Business Selection tab
             tb.enabled = true
         } else {
@@ -322,7 +322,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             }
             self.resizeButton.image = UIImage(named: self.buttonNames[7] + ".png")
             UIView.animateWithDuration(appAttributes.fadeInDuration, animations: animations, completion: nil)
-            sharedDataModel.checkForCollapseButton = "YES"
+            viewStateManager.checkForCollapseButton = "YES"
             NSNotificationCenter.defaultCenter().postNotificationName("NotificationIdentifier", object: nil)
         } else {
             let animations: () -> Void = {
@@ -330,7 +330,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             }
             self.resizeButton.image = UIImage(named: self.buttonNames[6] + ".png")
             UIView.animateWithDuration(appAttributes.fadeInDuration, animations: animations, completion: nil)
-            sharedDataModel.checkForCollapseButton = "NO"
+            viewStateManager.checkForCollapseButton = "NO"
             NSNotificationCenter.defaultCenter().postNotificationName("NotificationIdentifier", object: nil)
             
         }
@@ -345,7 +345,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
             UIView.animateWithDuration(0.1, animations: {
                 self.viewForDealSummary.hidden = false
@@ -355,7 +355,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             imageFingerForExpand.frame = CGRectMake( 20,  42,  50, 50)
             labelForExpand.frame = CGRectMake( 72,  49,  175, 50)
             
-            if sharedDataModel.checkForOrientationChange == "landscape"
+            if viewStateManager.currentOrientation == "landscape"
             {
                 imageForForwardArrow.frame = CGRectMake( 965,  356,  44, 44)
                 imageForBackwardArrow.frame = CGRectMake( 14,  356,  44, 44)
@@ -379,7 +379,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             })
             imageFingerForExpand.frame = CGRectMake( 330,  42,  50, 50)
             labelForExpand.frame = CGRectMake( 382,  49,  175, 50)
-            if sharedDataModel.checkForOrientationChange == "landscape"
+            if viewStateManager.currentOrientation == "landscape"
             {
                 imageForForwardArrow.frame = CGRectMake( 975,  356,  44, 44)
                 imageForBackwardArrow.frame = CGRectMake( 324,  356,  44, 44)
@@ -463,7 +463,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         self.helpButton.setBackgroundImage(UIImage(named:self.buttonNames[5] + "_filled.png"), forState: UIControlState.Highlighted, barMetrics: UIBarMetrics.Default)
 
         */
-//        if sharedDataModel.currentTransaction.transactionStatus == "Draft" || sharedDataModel.currentTransaction.transactionStatus == "Pending Review" || sharedDataModel.currentTransaction.transactionStatus == "Cleared" || sharedDataModel.currentTransaction.transactionStatus == "Template" {
+//        if viewStateManager.currentTransaction.transactionStatus == "Draft" || viewStateManager.currentTransaction.transactionStatus == "Pending Review" || viewStateManager.currentTransaction.transactionStatus == "Cleared" || viewStateManager.currentTransaction.transactionStatus == "Template" {
 //            self.navigationItem.setRightBarButtonItems(
 //                // buttons right to left
 //                [self.helpButton,self.submitButton,self.saveButton,self.deleteButton, self.newButton, ],  animated: true
@@ -477,20 +477,20 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
 //            
 //        }
         
-        if sharedDataModel.currentTransaction.transactionStatus == "Draft"  {
+        if viewStateManager.currentTransaction.transactionStatus == "Draft"  {
             self.navigationItem.setRightBarButtonItems(
                 // buttons right to left
                 [self.helpButton,self.submitButton,self.saveButton,self.deleteButton, self.newButton],  animated: true
             )
             
-        } else if sharedDataModel.currentTransaction.transactionStatus == "Pending Review" || sharedDataModel.currentTransaction.transactionStatus == "Cleared" {
+        } else if viewStateManager.currentTransaction.transactionStatus == "Pending Review" || viewStateManager.currentTransaction.transactionStatus == "Cleared" {
             self.navigationItem.setRightBarButtonItems(
                 // buttons right to left
                 [self.helpButton,self.submitButton, self.newButton],  animated: true
             )
             
-        } else if sharedDataModel.currentTransaction.transactionStatus == "Completed" || sharedDataModel.currentTransaction.transactionStatus == "Terminated" || sharedDataModel.currentTransaction.transactionStatus == "Fatal Conflicts" ||
-            sharedDataModel.currentTransaction.transactionStatus == "Duplicate" {
+        } else if viewStateManager.currentTransaction.transactionStatus == "Completed" || viewStateManager.currentTransaction.transactionStatus == "Terminated" || viewStateManager.currentTransaction.transactionStatus == "Fatal Conflicts" ||
+            viewStateManager.currentTransaction.transactionStatus == "Duplicate" {
                 self.navigationItem.setRightBarButtonItems(
                     // buttons right to left
                     [self.helpButton,self.newButton],  animated: true
@@ -520,57 +520,57 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             switch action.style{
             case .Default:
                 
-                if self.sharedDataModel.currentTransaction.transactionId == "New"
+                if self.viewStateManager.currentTransaction.transactionId == "New"
                 {
-                    self.sharedDataModel.checkForNewDraft = "NO"
-                    self.sharedDataModel.transactionsArray.removeAtIndex(0)
+                    self.viewStateManager.checkForNewDraft = "NO"
+                    self.viewStateManager.transactionsArray.removeAtIndex(0)
                     
                     
-                    if(self.sharedDataModel.selectedCategory == "Draft" && self.sharedDataModel.filteredTransactionArray.count > 1)
+                    if(self.viewStateManager.selectedCategory == "Draft" && self.viewStateManager.filteredTransactionArray.count > 1)
                     {
-                        self.sharedDataModel.prepareQuestionaireModel(0, filtered: false)
+                        self.viewStateManager.prepareQuestionaireModel(0, filtered: false)
                     }
                     
-                    self.sharedDataModel.filteredTransactionArray = self.sharedDataModel.transactionsArray
-                    self.sharedDataModel.selectedTransactionArray = self.sharedDataModel.transactionsArray
+                    self.viewStateManager.filteredTransactionArray = self.viewStateManager.transactionsArray
+                    self.viewStateManager.selectedTransactionArray = self.viewStateManager.transactionsArray
                     
-                    self.sharedDataModel.selectedCategory = "All"
+                    self.viewStateManager.selectedCategory = "All"
 
                     self.vcCon.masterViewController.setNavigationItemTitle()
                     self.vcCon.masterViewController.tableView.reloadData()
                 }
                 else
                 {
-                let coreDataManager: AnyObject! = DataManager.getInstance()
-                    coreDataManager.checkForDeletePressed("YES")
-                //saveTransactionArray.append(self.sharedDataModel.currentTransaction)
-                coreDataManager.deleteTransaction(self.sharedDataModel.currentTransaction.transactionId)
+                let dataManager: AnyObject! = DataManager.getInstance()
+                    dataManager.checkForDeletePressed("YES")
+                //saveTransactionArray.append(self.viewStateManager.currentTransaction)
+                dataManager.deleteTransaction(self.viewStateManager.currentTransaction.transactionId)
                 
-                let arrayFortransaction = coreDataManager.transactionArray() as NSArray as! [TransactionData]
-                self.sharedDataModel.transactionsArray = arrayFortransaction
+                let arrayFortransaction = dataManager.transactionArray() as NSArray as! [TransactionData]
+                self.viewStateManager.transactionsArray = arrayFortransaction
                 
                     
-                    if(self.sharedDataModel.selectedCategory == "Draft" && self.sharedDataModel.filteredTransactionArray.count > 1)
+                    if(self.viewStateManager.selectedCategory == "Draft" && self.viewStateManager.filteredTransactionArray.count > 1)
                     {
-                        self.sharedDataModel.prepareQuestionaireModel(0, filtered: false)
+                        self.viewStateManager.prepareQuestionaireModel(0, filtered: false)
                     }
                     
-                if self.sharedDataModel.checkForNewDraft == "YES"
+                if self.viewStateManager.checkForNewDraft == "YES"
                 {
-                    self.sharedDataModel.transactionsArray =  self.sharedDataModel.preserveDrafttransaction + self.sharedDataModel.transactionsArray
+                    self.viewStateManager.transactionsArray =  self.viewStateManager.preserveDrafttransaction + self.viewStateManager.transactionsArray
                 }
                 
-                self.sharedDataModel.filteredTransactionArray = self.sharedDataModel.transactionsArray
-                self.sharedDataModel.selectedTransactionArray = self.sharedDataModel.transactionsArray
+                self.viewStateManager.filteredTransactionArray = self.viewStateManager.transactionsArray
+                self.viewStateManager.selectedTransactionArray = self.viewStateManager.transactionsArray
                     
                   
                     
-                    self.sharedDataModel.selectedCategory = "All"
+                    self.viewStateManager.selectedCategory = "All"
 
                 self.vcCon.masterViewController.setNavigationItemTitle()
                 self.vcCon.masterViewController.tableView.reloadData()
                 }
-                self.sharedDataModel.lastViewedTransactionsIndexes[self.sharedDataModel.selectedCategory] = 0
+                self.viewStateManager.lastViewedTransactionsIndexes[self.viewStateManager.selectedCategory] = 0
                 self.vcCon.masterViewController.reselectLastSelectedRow()
                 self.vcCon.masterViewController.initDefault()
                 
@@ -599,30 +599,30 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
     /// until the user save the draft he cannot create a new draft again
     func newDraft(sender: UIBarButtonItem) {
         
-        self.sharedDataModel.checkForNewDraft = "YES"
-        self.sharedDataModel.checkForNewDraftProduct = "YES"
-        self.sharedDataModel.checkForNewDraftSubProduct = "YES"
-        self.sharedDataModel.checkForNewDraftOfferingFormat = "YES"
-        self.sharedDataModel.checkForNewDraftUseOfProceeds = "YES"
-        self.sharedDataModel.checkForNewDraftLoanType = "YES"
-        self.sharedDataModel.checkForNewDealStatus = "YES"
-       self.sharedDataModel.preserveDrafttransaction = [TransactionData]()
+        self.viewStateManager.checkForNewDraft = "YES"
+        self.viewStateManager.checkForNewDraftProduct = "YES"
+        self.viewStateManager.checkForNewDraftSubProduct = "YES"
+        self.viewStateManager.checkForNewDraftOfferingFormat = "YES"
+        self.viewStateManager.checkForNewDraftUseOfProceeds = "YES"
+        self.viewStateManager.checkForNewDraftLoanType = "YES"
+        self.viewStateManager.checkForNewDealStatus = "YES"
+       self.viewStateManager.preserveDrafttransaction = [TransactionData]()
         
         
-        for transactionDataForId in self.sharedDataModel.transactionsArray
+        for transactionDataForId in self.viewStateManager.transactionsArray
         {
             if transactionDataForId.transactionId == "New"
             {
-                self.sharedDataModel.checkForExistingDraft = "YES"
+                self.viewStateManager.checkForExistingDraft = "YES"
                 break
             }
             else
             {
-                self.sharedDataModel.checkForExistingDraft = "NO"
+                self.viewStateManager.checkForExistingDraft = "NO"
             }
         }
         
-        if self.sharedDataModel.checkForExistingDraft == "YES" {
+        if self.viewStateManager.checkForExistingDraft == "YES" {
             
             
             //trash the currentTransaction
@@ -671,15 +671,15 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
                 
                 transactionContacts: [
                     TransactionContactData(
-                        contact: sharedDataModel.userContactData,
+                        contact: viewStateManager.userContactData,
                         role: "Requestor"
                     )
                 ]
                 
             )
-            self.sharedDataModel.preserveDrafttransaction.append(txn)
-            self.sharedDataModel.currentTransaction =   txn
-            self.sharedDataModel.currentTransactionIndex = 0
+            self.viewStateManager.preserveDrafttransaction.append(txn)
+            self.viewStateManager.currentTransaction =   txn
+            self.viewStateManager.currentTransactionIndex = 0
             
             /*
             
@@ -752,35 +752,35 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
                 
                 transactionContacts: [
                     TransactionContactData(
-                        contact: sharedDataModel.userContactData,
+                        contact: viewStateManager.userContactData,
                         role: "Requestor"
                     )
                 ]
             )
             
-            self.sharedDataModel.preserveDrafttransaction.append(txn)
+            self.viewStateManager.preserveDrafttransaction.append(txn)
 
             
             var arrayForNewDraft = [TransactionData]()
             arrayForNewDraft.append(txn)
             
-            self.sharedDataModel.transactionsArray = arrayForNewDraft + self.sharedDataModel.transactionsArray
+            self.viewStateManager.transactionsArray = arrayForNewDraft + self.viewStateManager.transactionsArray
             
-            if self.sharedDataModel.selectedCategory != "All"
+            if self.viewStateManager.selectedCategory != "All"
             {
-                self.sharedDataModel.selectedCategory = "Draft"
-                self.sharedDataModel.prepareTransactionListModel(self.sharedDataModel.selectedCategory)
+                self.viewStateManager.selectedCategory = "Draft"
+                self.viewStateManager.prepareTransactionListModel(self.viewStateManager.selectedCategory)
             }
             else
             {
-                self.sharedDataModel.selectedCategory = "All"
-                self.sharedDataModel.filteredTransactionArray = self.sharedDataModel.transactionsArray
-                self.sharedDataModel.selectedTransactionArray = self.sharedDataModel.transactionsArray
+                self.viewStateManager.selectedCategory = "All"
+                self.viewStateManager.filteredTransactionArray = self.viewStateManager.transactionsArray
+                self.viewStateManager.selectedTransactionArray = self.viewStateManager.transactionsArray
                 
             }
             
-            self.sharedDataModel.currentTransaction =   txn
-            self.sharedDataModel.currentTransactionIndex = 0
+            self.viewStateManager.currentTransaction =   txn
+            self.viewStateManager.currentTransactionIndex = 0
             
         }
         
@@ -788,7 +788,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         vcCon.masterViewController.setNavigationItemTitle()
         vcCon.masterViewController.tableView.reloadData()
         
-        self.sharedDataModel.lastViewedTransactionsIndexes[self.sharedDataModel.selectedCategory] = 0
+        self.viewStateManager.lastViewedTransactionsIndexes[self.viewStateManager.selectedCategory] = 0
         self.vcCon.masterViewController.reselectLastSelectedRow()
         self.vcCon.masterViewController.initDefault()
         self.vcCon.masterNavigationController.popToRootViewControllerAnimated(true)
@@ -809,21 +809,21 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MM/dd/yy HH:mm:ss"
         let dateString = dateFormatter.stringFromDate(NSDate())
-        self.sharedDataModel.currentTransaction.savedOnDate = dateString
+        self.viewStateManager.currentTransaction.savedOnDate = dateString
         
         //
-        if self.sharedDataModel.currentTransaction.transactionId == "Template"
+        if self.viewStateManager.currentTransaction.transactionId == "Template"
         {
-                self.sharedDataModel.currentTransaction.transactionId = "New"
-                self.sharedDataModel.currentTransaction.transactionStatus = "Draft"
+                self.viewStateManager.currentTransaction.transactionId = "New"
+                self.viewStateManager.currentTransaction.transactionStatus = "Draft"
         }
         
         var messageForAlert: String = ""
         
-        if self.sharedDataModel.currentTransaction.transactionId == "New"
+        if self.viewStateManager.currentTransaction.transactionId == "New"
         {
                 messageForAlert = "Do you want to save the draft?"
-                self.sharedDataModel.checkForNewDraft = "NO"
+                self.viewStateManager.checkForNewDraft = "NO"
         }
         else
         {
@@ -838,24 +838,24 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             switch action.style{
             case .Default:
                 
-                self.sharedDataModel.currentTransaction.requestorName = self.sharedDataModel.loggedInUserName
-                self.sharedDataModel.currentTransaction.ddtRestriction = "No"
-                let coreDataManager: AnyObject! = DataManager.getInstance()
+                self.viewStateManager.currentTransaction.requestorName = self.viewStateManager.loggedInUserName
+                self.viewStateManager.currentTransaction.ddtRestriction = "No"
+                let dataManager: AnyObject! = DataManager.getInstance()
                 var saveTransactionArray = [TransactionData]()
-                saveTransactionArray.append(self.sharedDataModel.currentTransaction)
-                coreDataManager.saveTransactionValue(saveTransactionArray)
+                saveTransactionArray.append(self.viewStateManager.currentTransaction)
+                dataManager.saveTransactionValue(saveTransactionArray)
                 
-                let arrayFortransaction = coreDataManager.transactionArray() as NSArray as! [TransactionData]
-                self.sharedDataModel.transactionsArray = arrayFortransaction
+                let arrayFortransaction = dataManager.transactionArray() as NSArray as! [TransactionData]
+                self.viewStateManager.transactionsArray = arrayFortransaction
                 
-                if self.sharedDataModel.checkForNewDraft == "YES"
+                if self.viewStateManager.checkForNewDraft == "YES"
                 {
-                    self.sharedDataModel.transactionsArray =  self.sharedDataModel.preserveDrafttransaction + self.sharedDataModel.transactionsArray
+                    self.viewStateManager.transactionsArray =  self.viewStateManager.preserveDrafttransaction + self.viewStateManager.transactionsArray
                 }
                 
-                self.sharedDataModel.filteredTransactionArray = self.sharedDataModel.transactionsArray
-                self.sharedDataModel.selectedTransactionArray = self.sharedDataModel.transactionsArray
-                self.sharedDataModel.selectedCategory = "All"
+                self.viewStateManager.filteredTransactionArray = self.viewStateManager.transactionsArray
+                self.viewStateManager.selectedTransactionArray = self.viewStateManager.transactionsArray
+                self.viewStateManager.selectedCategory = "All"
                 
                 self.vcCon.masterViewController.setNavigationItemTitle()
                 self.vcCon.masterViewController.tableView.reloadData()
@@ -888,19 +888,19 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         // do validation ? maybe not needed only on submit
         //for now update the save date
         
-        if self.sharedDataModel.currentTransaction.transactionId == "New"
+        if self.viewStateManager.currentTransaction.transactionId == "New"
         {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "MM/dd/yy HH:mm:ss"
             let dateString = dateFormatter.stringFromDate(NSDate())
-            self.sharedDataModel.currentTransaction.savedOnDate = dateString
-            self.sharedDataModel.checkForNewDraft = "NO"
+            self.viewStateManager.currentTransaction.savedOnDate = dateString
+            self.viewStateManager.checkForNewDraft = "NO"
         }
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "MM/dd/yy HH:mm:ss"
         let dateString = dateFormatter.stringFromDate(NSDate())
-        self.sharedDataModel.currentTransaction.submitDate = dateString
+        self.viewStateManager.currentTransaction.submitDate = dateString
         
         let alert = UIAlertController(title: "Submit Transaction", message: "Do you want to submit the draft as transaction?", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
@@ -908,38 +908,38 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         alert.addAction(UIAlertAction(title: "Submit", style: .Default, handler: { action in
             switch action.style{
             case .Default:
-                self.sharedDataModel.currentTransaction.requestorName = self.sharedDataModel.loggedInUserName
+                self.viewStateManager.currentTransaction.requestorName = self.viewStateManager.loggedInUserName
                 
-                if self.sharedDataModel.currentTransaction.ddtRestriction.isEmpty
+                if self.viewStateManager.currentTransaction.ddtRestriction.isEmpty
                 {
-                    self.sharedDataModel.currentTransaction.ddtRestriction = "No"
+                    self.viewStateManager.currentTransaction.ddtRestriction = "No"
                 }
 
                 
-                if self.sharedDataModel.currentTransaction.transactionId != "New"
+                if self.viewStateManager.currentTransaction.transactionId != "New"
                 {
-                    if self.sharedDataModel.currentTransaction.transactionStatus == "Draft"
+                    if self.viewStateManager.currentTransaction.transactionStatus == "Draft"
                     {
-                        self.sharedDataModel.currentTransaction.transactionStatus = "Pending Review"
+                        self.viewStateManager.currentTransaction.transactionStatus = "Pending Review"
                     }
                 }
-                let coreDataManager: AnyObject! = DataManager.getInstance()
+                let dataManager: AnyObject! = DataManager.getInstance()
                 var saveTransactionArray = [TransactionData]()
-                saveTransactionArray.append(self.sharedDataModel.currentTransaction)
-                coreDataManager.saveTransactionValue(saveTransactionArray)
+                saveTransactionArray.append(self.viewStateManager.currentTransaction)
+                dataManager.saveTransactionValue(saveTransactionArray)
                 
-                let arrayFortransaction = coreDataManager.transactionArray() as NSArray as! [TransactionData]
-                self.sharedDataModel.transactionsArray = arrayFortransaction
+                let arrayFortransaction = dataManager.transactionArray() as NSArray as! [TransactionData]
+                self.viewStateManager.transactionsArray = arrayFortransaction
                 
-                if self.sharedDataModel.checkForNewDraft == "YES"
+                if self.viewStateManager.checkForNewDraft == "YES"
                 {
-                    self.sharedDataModel.transactionsArray =  self.sharedDataModel.preserveDrafttransaction + self.sharedDataModel.transactionsArray
+                    self.viewStateManager.transactionsArray =  self.viewStateManager.preserveDrafttransaction + self.viewStateManager.transactionsArray
                 }
                 
-                self.sharedDataModel.filteredTransactionArray = self.sharedDataModel.transactionsArray
-                self.sharedDataModel.selectedTransactionArray = self.sharedDataModel.transactionsArray
+                self.viewStateManager.filteredTransactionArray = self.viewStateManager.transactionsArray
+                self.viewStateManager.selectedTransactionArray = self.viewStateManager.transactionsArray
                 
-                self.sharedDataModel.selectedCategory = "All"
+                self.viewStateManager.selectedCategory = "All"
                 
                 self.vcCon.masterViewController.setNavigationItemTitle()
                 self.vcCon.masterViewController.tableView.reloadData()
@@ -977,16 +977,16 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         self.coverView.removeFromSuperview()
         deleteButtonForDismiss.hidden = true
         iconPosition = 0
-        self.sameTransactionFromDismiss = self.sharedDataModel.currentTransaction.transactionId
+        self.sameTransactionFromDismiss = self.viewStateManager.currentTransaction.transactionId
         showhelpScreenActive = "NO"
        // labelForSelectedTab.hidden = true
     }
     
     /// this method set the frames for deal summary labels as well as help screen views based on the current orientation of the device
-    func checkForOrientationChange()
+    func checkOrientation()
     {
         let screenRect = UIScreen.mainScreen().bounds
-        if sharedDataModel.checkForOrientationChange == "landscape"
+        if viewStateManager.currentOrientation == "landscape"
         {
             coverView.frame = screenRect
             coverView.frame = CGRectMake(coverView.frame.origin.x, coverView.frame.origin.y + 20, coverView.frame.size.width, coverView.frame.size.height+300)
@@ -1029,7 +1029,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             primaryClientLabel.frame = CGRectMake(requestorLabel.frame.origin.x + requestorLabel.frame.size.width + 50,  10,  270, 30.00)
             subProductLabel.frame = CGRectMake(primaryClientLabel.frame.origin.x +  primaryClientLabel.frame.size.width + 15,  10,  205, 30.00)
             submittedDateLabel.frame = CGRectMake( subProductLabel.frame.origin.x + subProductLabel.frame.size.width + 75,  10,  175, 30.00)
-            if sharedDataModel.currentTransaction.transactionStatus == "Draft"
+            if viewStateManager.currentTransaction.transactionStatus == "Draft"
             {
                 requestorLabel.frame = CGRectMake( 100,  10,  175, 30.00)
                 primaryClientLabel.frame = CGRectMake(requestorLabel.frame.origin.x + requestorLabel.frame.size.width + 5,  10,  300, 30.00)
@@ -1084,7 +1084,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             primaryClientLabel.frame = CGRectMake(requestorLabel.frame.origin.x + requestorLabel.frame.size.width + 5,  10,  240, 30.00)
             subProductLabel.frame = CGRectMake(primaryClientLabel.frame.origin.x +  primaryClientLabel.frame.size.width + 5,  10,  175, 30.00)
             submittedDateLabel.frame = CGRectMake( subProductLabel.frame.origin.x + subProductLabel.frame.size.width + 5,  10,  175, 30.00)
-            if sharedDataModel.currentTransaction.transactionStatus == "Draft"
+            if viewStateManager.currentTransaction.transactionStatus == "Draft"
             {
                 requestorLabel.frame = CGRectMake( 50,  10,  175, 30.00)
                 primaryClientLabel.frame = CGRectMake(requestorLabel.frame.origin.x + requestorLabel.frame.size.width + 5,  10,  300, 30.00)
@@ -1113,7 +1113,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             pullDownToUpdate.frame = CGRectMake( 76,  525,  175, 50)
             downArrow.frame = CGRectMake( 131,  600,  50, 50)
             resizeButtonForHelp.frame = CGRectMake( 338,  9,  24, 24)
-            if sharedDataModel.checkForCollapseButton == "NO"
+            if viewStateManager.checkForCollapseButton == "NO"
             {
                 imageFingerForExpand.frame = CGRectMake( 330,  42,  50, 50)
                 labelForExpand.frame = CGRectMake( 382,  49,  175, 50)
@@ -1137,7 +1137,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             imageForsubmitDeal.frame = CGRectMake( 930,  9,  22, 22)
             imageForHelp.frame = CGRectMake( 982,  9,  22, 22)
             
-            if sharedDataModel.checkForCollapseButton == "NO"
+            if viewStateManager.checkForCollapseButton == "NO"
             {
                 imageForForwardArrow.frame = CGRectMake( 975,  356,  44, 44)
                 imageForBackwardArrow.frame = CGRectMake( 324,  356,  44, 44)
@@ -1162,9 +1162,9 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             primaryClientLabel.frame = CGRectMake(requestorLabel.frame.origin.x + requestorLabel.frame.size.width + 50,  10,  270, 30.00)
             subProductLabel.frame = CGRectMake(primaryClientLabel.frame.origin.x +  primaryClientLabel.frame.size.width + 15,  10,  205, 30.00)
             submittedDateLabel.frame = CGRectMake( subProductLabel.frame.origin.x + subProductLabel.frame.size.width + 75,  10,  175, 30.00)
-            sharedDataModel.checkForOrientationChange = "landscape"
+            viewStateManager.currentOrientation = "landscape"
             
-            if sharedDataModel.currentTransaction.transactionStatus == "Draft"
+            if viewStateManager.currentTransaction.transactionStatus == "Draft"
             {
                 requestorLabel.frame = CGRectMake( 100,  10,  175, 30.00)
                 primaryClientLabel.frame = CGRectMake(requestorLabel.frame.origin.x + requestorLabel.frame.size.width + 5,  10,  300, 30.00)
@@ -1184,7 +1184,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             pullDownToUpdate.frame = CGRectMake( 76,  525,  175, 50)
             downArrow.frame = CGRectMake( 131,  600,  50, 50)
             resizeButtonForHelp.frame = CGRectMake( 328,  9,  24, 24)
-            if sharedDataModel.checkForCollapseButton == "NO"
+            if viewStateManager.checkForCollapseButton == "NO"
             {
                 imageFingerForExpand.frame = CGRectMake( 320,  42,  50, 50)
                 labelForExpand.frame = CGRectMake( 372,  49,  175, 50)
@@ -1210,7 +1210,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             imageFingerForCompany.frame = CGRectMake( 205,  0,  50, 50)
             labelForCompany.frame = CGRectMake( 50,  3,  150, 50)
             
-            if sharedDataModel.checkForCollapseButton == "NO"
+            if viewStateManager.checkForCollapseButton == "NO"
             {
                 imageForForwardArrow.frame = CGRectMake( 732,  484,  44, 44)
                 imageForBackwardArrow.frame = CGRectMake( 301,  484,  44, 44)
@@ -1230,9 +1230,9 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             primaryClientLabel.frame = CGRectMake(requestorLabel.frame.origin.x + requestorLabel.frame.size.width + 5,  10,  240, 30.00)
             subProductLabel.frame = CGRectMake(primaryClientLabel.frame.origin.x +  primaryClientLabel.frame.size.width + 5,  10,  175, 30.00)
             submittedDateLabel.frame = CGRectMake( subProductLabel.frame.origin.x + subProductLabel.frame.size.width + 5,  10,  175, 30.00)
-            sharedDataModel.checkForOrientationChange = "portrait"
+            viewStateManager.currentOrientation = "portrait"
             
-            if sharedDataModel.currentTransaction.transactionStatus == "Draft"
+            if viewStateManager.currentTransaction.transactionStatus == "Draft"
             {
                 requestorLabel.frame = CGRectMake( 50,  10,  175, 30.00)
                 primaryClientLabel.frame = CGRectMake(requestorLabel.frame.origin.x + requestorLabel.frame.size.width + 5,  10,  300, 30.00)
@@ -1414,7 +1414,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         var imageForBriefCase:UILabel = UILabel()
         
         */
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
             deleteButtonForDismiss.hidden = true
             imageFinger.hidden = true
@@ -1444,9 +1444,9 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             resizeButtonForHelp.hidden = false
         }
         
-        if !sharedDataModel.filteredTransactionArray.isEmpty
+        if !viewStateManager.filteredTransactionArray.isEmpty
         {
-            if sharedDataModel.filteredTransactionArray.count < 2 || selectedIndex == 1 || selectedIndex == 3
+            if viewStateManager.filteredTransactionArray.count < 2 || selectedIndex == 1 || selectedIndex == 3
             {
                 deleteButtonForDismiss.hidden = true
                 imageFinger.hidden = true
@@ -1460,13 +1460,13 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             imageForBriefCase.hidden = true
             labelForBriefCase.hidden = true
             
-            if selectedIndex == 1 && self.sharedDataModel.checkForAgreementClicked == "NO"
+            if selectedIndex == 1 && self.viewStateManager.checkForAgreementClicked == "NO"
             {
                 imageForCompany.image = UIImage(named: "plusOrganization44")
                 labelForCompany.attributedText = changeStringToBold("TAP HERE TO CHOOSE A COMPANY",textBold: "")
                 labelForCompany.font = UIFont(name: labelForCompany.font.fontName, size: 14)
             }
-            else if selectedIndex == 1 && self.sharedDataModel.checkForAgreementClicked == "YES"
+            else if selectedIndex == 1 && self.viewStateManager.checkForAgreementClicked == "YES"
             {
                 imageForCompany.image = UIImage(named: "addList44")
                 labelForCompany.attributedText = changeStringToBold("TAP HERE TO CREATE A NEW AGREEMENT",textBold: "")
@@ -1479,7 +1479,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
                 labelForCompany.font = UIFont(name: labelForCompany.font.fontName, size: 14)
             }
             
-            if sharedDataModel.checkForCollapseButton == "NO"
+            if viewStateManager.checkForCollapseButton == "NO"
             {
                 imageFingerForCompany.hidden = false
                 imageForCompany.hidden = false
@@ -1501,7 +1501,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             labelForCompany.hidden = true
         }
         
-        if selectedIndex == 3 || selectedIndex == 4 || self.sharedDataModel.checkForAgreementClicked == "YES"
+        if selectedIndex == 3 || selectedIndex == 4 || self.viewStateManager.checkForAgreementClicked == "YES"
         {
             imageForBackwardArrow.hidden = true
             imageForForwardArrow.hidden = true
@@ -1524,7 +1524,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         
         
         var iconAction = ""
-        if sharedDataModel.currentTransaction.transactionStatus == "Draft"  {
+        if viewStateManager.currentTransaction.transactionStatus == "Draft"  {
             if indexForicons == 0
             {
                 self.imageForNewDraft.hidden = false
@@ -1557,7 +1557,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             }
 
             
-        } else if sharedDataModel.currentTransaction.transactionStatus == "Pending Review" || sharedDataModel.currentTransaction.transactionStatus == "Cleared" {
+        } else if viewStateManager.currentTransaction.transactionStatus == "Pending Review" || viewStateManager.currentTransaction.transactionStatus == "Cleared" {
             if indexForicons == 0
             {
                 self.imageForNewDraft.hidden = false
@@ -1579,8 +1579,8 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
             }
 
             
-        } else if sharedDataModel.currentTransaction.transactionStatus == "Completed" || sharedDataModel.currentTransaction.transactionStatus == "Terminated" || sharedDataModel.currentTransaction.transactionStatus == "Fatal Conflicts" ||
-            sharedDataModel.currentTransaction.transactionStatus == "Duplicate" {
+        } else if viewStateManager.currentTransaction.transactionStatus == "Completed" || viewStateManager.currentTransaction.transactionStatus == "Terminated" || viewStateManager.currentTransaction.transactionStatus == "Fatal Conflicts" ||
+            viewStateManager.currentTransaction.transactionStatus == "Duplicate" {
                 if indexForicons == 0
                 {
                     self.imageForNewDraft.hidden = false
@@ -1601,7 +1601,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
                 self.imageForNewDraft.hidden = false
                 self.imageForNewDraft.alpha = 1.0
                 iconAction = "NEW DRAFT"
-                self.sameTransactionFromHelp = self.sharedDataModel.currentTransaction.transactionId
+                self.sameTransactionFromHelp = self.viewStateManager.currentTransaction.transactionId
                 
                 if iconPosition == 0 && self.sameTransactionFromDismiss != self.sameTransactionFromHelp
                 {
@@ -1649,7 +1649,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         
         UIView.animateWithDuration(0.5, delay: 0.8, options: UIViewAnimationOptions.CurveEaseIn, animations: { () -> Void in
             
-             if self.sharedDataModel.currentTransaction.transactionStatus == "Draft"  {
+             if self.viewStateManager.currentTransaction.transactionStatus == "Draft"  {
                 if self.indexForicons == 0
                 {
                     self.imageForNewDraft.alpha = 0.0
@@ -1677,7 +1677,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
                 }
             }
             
-             else if self.sharedDataModel.currentTransaction.transactionStatus == "Pending Review" || self.sharedDataModel.currentTransaction.transactionStatus == "Cleared" {
+             else if self.viewStateManager.currentTransaction.transactionStatus == "Pending Review" || self.viewStateManager.currentTransaction.transactionStatus == "Cleared" {
                 if self.indexForicons == 0
                 {
                     self.imageForNewDraft.alpha = 0.0
@@ -1694,8 +1694,8 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
                     self.indexForicons = 0
                 }
             }
-             else if self.sharedDataModel.currentTransaction.transactionStatus == "Completed" || self.sharedDataModel.currentTransaction.transactionStatus == "Terminated" || self.sharedDataModel.currentTransaction.transactionStatus == "Fatal Conflicts" ||
-                self.sharedDataModel.currentTransaction.transactionStatus == "Duplicate" {
+             else if self.viewStateManager.currentTransaction.transactionStatus == "Completed" || self.viewStateManager.currentTransaction.transactionStatus == "Terminated" || self.viewStateManager.currentTransaction.transactionStatus == "Fatal Conflicts" ||
+                self.viewStateManager.currentTransaction.transactionStatus == "Duplicate" {
                     if self.indexForicons == 0
                     {
                         self.imageForNewDraft.alpha = 0.0
@@ -1768,7 +1768,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         if tabBar.selectedItem!.title == "Companies" {
               //  let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
                 vcCon.masterViewController.performSegueWithIdentifier("showCompanies", sender: nil)
-            /*    if self.sharedDataModel.currentTransaction.transactionCompanies.count == 0 {
+            /*    if self.viewStateManager.currentTransaction.transactionCompanies.count == 0 {
                     self.changeToAddCompanyVC()
                 } else {
                     self.changeToMaterialityVC()
@@ -1779,7 +1779,7 @@ class DetailViewController: UITabBarController, UITabBarControllerDelegate{
         else if tabBar.selectedItem!.title == "Contacts" {
                 //  let appDel = UIApplication.sharedApplication().delegate! as! AppDelegate
                 vcCon.masterViewController.performSegueWithIdentifier("showContacts", sender: nil)
-                /*    if self.sharedDataModel.currentTransaction.transactionCompanies.count == 0 {
+                /*    if self.viewStateManager.currentTransaction.transactionCompanies.count == 0 {
                 self.changeToAddCompanyVC()
                 } else {
                 self.changeToMaterialityVC()

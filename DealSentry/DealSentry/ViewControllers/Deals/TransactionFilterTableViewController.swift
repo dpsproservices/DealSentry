@@ -6,7 +6,7 @@ import UIKit
 
 class TransactionFilterTableViewController: UITableViewController {
     var debugUtil = DebugUtility(thisClassName: "TransactionFilterTVC", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     let appAttributes = AppAttributes()
 
     var detailViewController: DetailViewController!
@@ -70,9 +70,9 @@ class TransactionFilterTableViewController: UITableViewController {
         var countStr = ""
         var isBold = false
         str = cats[index]
-        if self.sharedDataModel.getTransactionCountByCategory(cats[index]) > 0 {
+        if self.viewStateManager.getTransactionCountByCategory(cats[index]) > 0 {
             if index != 8 {
-                countStr +=  " (" + String(self.sharedDataModel.getTransactionCountByCategory(cats[index])) + ")"
+                countStr +=  " (" + String(self.viewStateManager.getTransactionCountByCategory(cats[index])) + ")"
             }
             isBold = true
         }
@@ -86,25 +86,25 @@ class TransactionFilterTableViewController: UITableViewController {
     /// - Parameter indexPath: selected row in tableview
     func launchDeal(indexPath: NSIndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
-            self.sharedDataModel.prepareTransactionListModel(cats[0])
+            self.viewStateManager.prepareTransactionListModel(cats[0])
         } else if indexPath.section == 1 && indexPath.row == 0 {
-            self.sharedDataModel.prepareTransactionListModel(cats[1])
+            self.viewStateManager.prepareTransactionListModel(cats[1])
         } else if indexPath.section == 1 && indexPath.row == 1 {
-            self.sharedDataModel.prepareTransactionListModel(cats[2])
+            self.viewStateManager.prepareTransactionListModel(cats[2])
         } else if indexPath.section == 1 && indexPath.row == 2 {
-            self.sharedDataModel.prepareTransactionListModel(cats[3])
+            self.viewStateManager.prepareTransactionListModel(cats[3])
         } else if indexPath.section == 2 && indexPath.row == 0 {
-            self.sharedDataModel.prepareTransactionListModel(cats[4])
+            self.viewStateManager.prepareTransactionListModel(cats[4])
         } else if indexPath.section == 2 && indexPath.row == 1 {
-            self.sharedDataModel.prepareTransactionListModel(cats[5])
+            self.viewStateManager.prepareTransactionListModel(cats[5])
         } else if indexPath.section == 2 && indexPath.row == 2 {
-            self.sharedDataModel.prepareTransactionListModel(cats[6])
+            self.viewStateManager.prepareTransactionListModel(cats[6])
         } else if indexPath.section == 2 && indexPath.row == 3 {
-            self.sharedDataModel.prepareTransactionListModel(cats[7])
+            self.viewStateManager.prepareTransactionListModel(cats[7])
         } else if indexPath.section == 3 && indexPath.row == 0 {
-            self.sharedDataModel.prepareTransactionListModel(cats[8])
+            self.viewStateManager.prepareTransactionListModel(cats[8])
         }
-        if sharedDataModel.selectedTransactionArray.count > 0 {
+        if viewStateManager.selectedTransactionArray.count > 0 {
             
         
             self.detailViewController.vcCon.masterViewController.tableView.reloadData()

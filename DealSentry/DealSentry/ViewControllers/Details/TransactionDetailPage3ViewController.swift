@@ -7,7 +7,7 @@ import UIKit
 class TransactionDetailPage3ViewController: TransactionDetailPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "TransactionDetailPage3ViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     @IBOutlet weak var backImage: UIImageView!
     @IBOutlet weak var forwardImage: UIImageView!
     var embeddedDateController: DateCalendar!
@@ -47,10 +47,10 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
         
         if  self.confidentialitySegmentedControl.selectedSegmentIndex == 1 {
             
-            self.sharedDataModel.currentTransaction.transactionDetail.isConfidential = "Confidential"
+            self.viewStateManager.currentTransaction.transactionDetail.isConfidential = "Confidential"
             
         } else {
-            self.sharedDataModel.currentTransaction.transactionDetail.isConfidential = "Public"
+            self.viewStateManager.currentTransaction.transactionDetail.isConfidential = "Public"
             
         }
     }
@@ -106,7 +106,7 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
     @IBAction func calendarButtonAction(sender: UIButton) {
         if(sender.tag == 221)
         {
-            self.sharedDataModel.selectedButtonTextForDate = "PitchDate"
+            self.viewStateManager.selectedButtonTextForDate = "PitchDate"
             invisibleButtonForPopover.frame = CGRectMake(sender.frame.origin.x + (sender.frame.size.width/2), (sender.frame.origin.y - 2), invisibleButtonForPopover.frame.size.width, invisibleButtonForPopover.frame.size.height)
             invisibleButtonCenterYConstraint.constant = calendarImageForPitchDateYConstraint.constant - 15.0
             invisibleButtonCenterXConstraint.constant = calendarImageForPitchDateXConstraint.constant
@@ -114,21 +114,21 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
         }
         else if(sender.tag == 222)
         {
-            self.sharedDataModel.selectedButtonTextForDate = "AnnouncementDate"
+            self.viewStateManager.selectedButtonTextForDate = "AnnouncementDate"
             invisibleButtonForPopover.frame = CGRectMake(sender.frame.origin.x + (sender.frame.size.width/2), (sender.frame.origin.y - 2), invisibleButtonForPopover.frame.size.width, invisibleButtonForPopover.frame.size.height)
             invisibleButtonCenterYConstraint.constant = calendarImageForAnnouncementDateCenterY.constant - 15.0
             invisibleButtonCenterXConstraint.constant = calendarImageAnnouncementX.constant
         }
         else if(sender.tag == 223)
         {
-            self.sharedDataModel.selectedButtonTextForDate = "ClosingDate"
+            self.viewStateManager.selectedButtonTextForDate = "ClosingDate"
             invisibleButtonForPopover.frame = CGRectMake(sender.frame.origin.x + (sender.frame.size.width/2), (sender.frame.origin.y - 2), invisibleButtonForPopover.frame.size.width, invisibleButtonForPopover.frame.size.height)
             invisibleButtonCenterYConstraint.constant = calendarImageForClosingDateCenterY.constant - 15.0
             invisibleButtonCenterXConstraint.constant = calendarImageClosingDateX.constant
         }
         else
         {
-            self.sharedDataModel.selectedButtonTextForDate = "PitchDate"
+            self.viewStateManager.selectedButtonTextForDate = "PitchDate"
             invisibleButtonCenterYConstraint.constant = calendarImageForPitchDateYConstraint.constant - 15.0
             invisibleButtonCenterXConstraint.constant = calendarImageForPitchDateXConstraint.constant
         }
@@ -140,28 +140,28 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
     @IBAction func launchDateCalendar(sender: UITextField) {
         if(sender.tag == 111)
         {
-            self.sharedDataModel.selectedButtonTextForDate = "PitchDate"
+            self.viewStateManager.selectedButtonTextForDate = "PitchDate"
             invisibleButtonForPopover.frame = CGRectMake(sender.frame.origin.x + (sender.frame.size.width/2), (sender.frame.origin.y - 2), invisibleButtonForPopover.frame.size.width, invisibleButtonForPopover.frame.size.height)
             invisibleButtonCenterYConstraint.constant = estimatedPitchDateTextCenterY.constant - 15.0
             invisibleButtonCenterXConstraint.constant = estimatedPitchTextCenterX.constant
         }
         else if(sender.tag == 112)
         {
-            self.sharedDataModel.selectedButtonTextForDate = "AnnouncementDate"
+            self.viewStateManager.selectedButtonTextForDate = "AnnouncementDate"
             invisibleButtonForPopover.frame = CGRectMake(sender.frame.origin.x + (sender.frame.size.width/2), (sender.frame.origin.y - 2), invisibleButtonForPopover.frame.size.width, invisibleButtonForPopover.frame.size.height)
             invisibleButtonCenterYConstraint.constant = estimatedAnnouncementTextCenterY.constant - 15.0
             invisibleButtonCenterXConstraint.constant = estiamtedAnnouncementTextX.constant
         }
         else if(sender.tag == 113)
         {
-            self.sharedDataModel.selectedButtonTextForDate = "ClosingDate"
+            self.viewStateManager.selectedButtonTextForDate = "ClosingDate"
             invisibleButtonForPopover.frame = CGRectMake(sender.frame.origin.x + (sender.frame.size.width/2), (sender.frame.origin.y - 2), invisibleButtonForPopover.frame.size.width, invisibleButtonForPopover.frame.size.height)
             invisibleButtonCenterYConstraint.constant = estimatedClosingDateTextCenterY.constant - 15.0
             invisibleButtonCenterXConstraint.constant = estimatedClosingTextX.constant
         }
         else
         {
-            self.sharedDataModel.selectedButtonTextForDate = "PitchDate"
+            self.viewStateManager.selectedButtonTextForDate = "PitchDate"
         }
         self.performSegueWithIdentifier("dateCalendar", sender: sender)
     }
@@ -170,7 +170,7 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -477.5
                 forwardImageCenterX.constant = 475.5
@@ -184,7 +184,7 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -367.0
                 forwardImageCenterX.constant = 365.0
@@ -206,7 +206,7 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
         super.viewDidLoad()
         super.pageNumber=3
         
-        var loanType = self.sharedDataModel.loanTypesArray.map { (LoanTypeData) -> String in
+        var loanType = self.viewStateManager.loanTypesArray.map { (LoanTypeData) -> String in
             return LoanTypeData.loanTypeDescription
         }
         
@@ -242,7 +242,7 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
         }
         
         
-       if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+       if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.loanTypeTextField.userInteractionEnabled = false
             self.loanTypeTextField.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -279,7 +279,7 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
                 embeddedDateController =  segue.destinationViewController as! DateCalendar
                 embeddedDateController.transDetail3VC = self
                 embeddedDateController.preferredContentSize = CGSize(width: 390, height: 360)
-                //  dealSizeWidget.dealSize = self.sharedDataModel.currentTransaction.transactionDetail.dealSize
+                //  dealSizeWidget.dealSize = self.viewStateManager.currentTransaction.transactionDetail.dealSize
             default :
                 break
             }
@@ -290,7 +290,7 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             backImageCenterX.constant = -217.0
             forwardImageCenterX.constant = 215.0
@@ -325,28 +325,28 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
     ///this method passses the data from object to the view controllers
     func resetViewsFromModel() {
         
-        if(self.sharedDataModel.checkForNewDraftLoanType == "YES" && self.sharedDataModel.currentTransaction.transactionId == "New" && self.sharedDataModel.currentTransaction.transactionDetail.loanType.isEmpty)
+        if(self.viewStateManager.checkForNewDraftLoanType == "YES" && self.viewStateManager.currentTransaction.transactionId == "New" && self.viewStateManager.currentTransaction.transactionDetail.loanType.isEmpty)
         {
             self.loanTypeTextField.text = "New Structure"
-            self.sharedDataModel.currentTransaction.transactionDetail.loanType = self.loanTypeTextField.text!        }
+            self.viewStateManager.currentTransaction.transactionDetail.loanType = self.loanTypeTextField.text!        }
         else
         {
-            self.loanTypeTextField.text = self.sharedDataModel.currentTransaction.transactionDetail.loanType
+            self.loanTypeTextField.text = self.viewStateManager.currentTransaction.transactionDetail.loanType
         }
         
-        if self.sharedDataModel.currentTransaction.transactionDetail.isConfidential == "Confidential" {
+        if self.viewStateManager.currentTransaction.transactionDetail.isConfidential == "Confidential" {
             
             self.confidentialitySegmentedControl.selectedSegmentIndex = 0
             
-        } else if self.sharedDataModel.currentTransaction.transactionDetail.isConfidential == "Public" {
+        } else if self.viewStateManager.currentTransaction.transactionDetail.isConfidential == "Public" {
             self.confidentialitySegmentedControl.selectedSegmentIndex = 1
             
         } else {
             self.confidentialitySegmentedControl.selectedSegmentIndex = -1
         }
         
-        self.estimatedPitchDateTextField.text = self.sharedDataModel.currentTransaction.transactionDetail.estimatedPitchDate
-        if self.sharedDataModel.currentTransaction.transactionDetail.product != "M&A" {
+        self.estimatedPitchDateTextField.text = self.viewStateManager.currentTransaction.transactionDetail.estimatedPitchDate
+        if self.viewStateManager.currentTransaction.transactionDetail.product != "M&A" {
             self.estimatedPitchDateTextField.enabled = false
             self.pitchDateImgWarning.hidden = true
             self.pitchDateTxtWarning.hidden = true
@@ -363,8 +363,8 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
 
         }
         
-        self.announcementDateTextField.text = self.sharedDataModel.currentTransaction.transactionDetail.expectedAnnouncementDate
-        if (self.sharedDataModel.currentTransaction.transactionDetail.expectedAnnouncementDate == "") {
+        self.announcementDateTextField.text = self.viewStateManager.currentTransaction.transactionDetail.expectedAnnouncementDate
+        if (self.viewStateManager.currentTransaction.transactionDetail.expectedAnnouncementDate == "") {
             self.announcementDateTxtWarning.hidden = false
             self.announcementDateImgWarning.hidden = false
         } else {
@@ -372,15 +372,15 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
             self.announcementDateImgWarning.hidden = true
         }
         
-        self.closingDateTextField.text = self.sharedDataModel.currentTransaction.transactionDetail.expectedClosingDate
+        self.closingDateTextField.text = self.viewStateManager.currentTransaction.transactionDetail.expectedClosingDate
     }
     
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -477.5
                 forwardImageCenterX.constant = 475.5
@@ -395,7 +395,7 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -327.5
                 forwardImageCenterX.constant = 325.5
@@ -420,7 +420,7 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
     /// - Based on the above product center y constraint value of pitch date is used. if it is hidden then the same constraint is used for the next view and simlilarly for the views coming after
     func methodForViewArrange()
     {
-        if self.sharedDataModel.currentTransaction.transactionDetail.product != "M&A"
+        if self.viewStateManager.currentTransaction.transactionDetail.product != "M&A"
         {
             estimatedPitchDateLabel.hidden = true
             estimatedPitchDateTextField.hidden = true
@@ -466,7 +466,7 @@ class TransactionDetailPage3ViewController: TransactionDetailPageViewController 
             estimatedPitchDateLabel.hidden = false
             estimatedPitchDateTextField.hidden = false
             calendarImageForPitchDate.hidden = false
-            if(self.sharedDataModel.currentTransaction.transactionDetail.estimatedPitchDate.isEmpty)
+            if(self.viewStateManager.currentTransaction.transactionDetail.estimatedPitchDate.isEmpty)
             {
                 pitchDateImgWarning.hidden = false
                 pitchDateTxtWarning.hidden = false
@@ -515,7 +515,7 @@ extension TransactionDetailPage3ViewController: PopTextPickerDelegate {
     func textDelegateCallBack(textField: UITextField) {
         switch textField {
         case loanTypeTextField:
-            self.sharedDataModel.currentTransaction.transactionDetail.loanType = self.loanTypeTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.loanType = self.loanTypeTextField.text!
         default:
             break
         }
@@ -527,7 +527,7 @@ extension TransactionDetailPage3ViewController: PopDatePickerDelegate {
     func textDateDelegateCallBack(textField: UITextField) {
         switch textField {
         case estimatedPitchDateTextField:
-            self.sharedDataModel.currentTransaction.transactionDetail.estimatedPitchDate = self.estimatedPitchDateTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.estimatedPitchDate = self.estimatedPitchDateTextField.text!
             if estimatedPitchDateTextField.text == "" {
                 self.pitchDateImgWarning.hidden = false
                 self.pitchDateTxtWarning.hidden = false
@@ -536,11 +536,11 @@ extension TransactionDetailPage3ViewController: PopDatePickerDelegate {
                 self.pitchDateTxtWarning.hidden = true
             }
         case announcementDateTextField:
-            self.sharedDataModel.currentTransaction.transactionDetail.expectedAnnouncementDate = self.announcementDateTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.expectedAnnouncementDate = self.announcementDateTextField.text!
             self.announcementDateImgWarning.hidden = true
             self.announcementDateTxtWarning.hidden = true
         case closingDateTextField:
-            self.sharedDataModel.currentTransaction.transactionDetail.expectedClosingDate = self.closingDateTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.expectedClosingDate = self.closingDateTextField.text!
         default:
             break
         }
@@ -554,7 +554,7 @@ extension TransactionDetailPage3ViewController: UITextFieldDelegate {
         
         if (textField === loanTypeTextField) {
             
-            self.sharedDataModel.checkForNewDraftLoanType = "NO"
+            self.viewStateManager.checkForNewDraftLoanType = "NO"
             self.loanTypeTextField.resignFirstResponder()
             
             let initText: String? = loanTypeTextField.text

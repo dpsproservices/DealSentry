@@ -91,7 +91,7 @@
 		CA726E2E1BE31AEA0026612F /* BusinessSelectionPage5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD21BE31AEA0026612F /* BusinessSelectionPage5ViewController.swift */; };
 		CA726E2F1BE31AEA0026612F /* BusinessSelectionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD31BE31AEA0026612F /* BusinessSelectionPageViewController.swift */; };
 		CA726E301BE31AEA0026612F /* BusinessSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD41BE31AEA0026612F /* BusinessSelectionViewController.swift */; };
-		CA726E311BE31AEA0026612F /* NewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD51BE31AEA0026612F /* NewViewController.swift */; };
+		CA726E311BE31AEA0026612F /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD51BE31AEA0026612F /* StartViewController.swift */; };
 		CA726E321BE31AEA0026612F /* CompanyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD71BE31AEA0026612F /* CompanyMap.swift */; };
 		CA726E331BE31AEA0026612F /* DateCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD81BE31AEA0026612F /* DateCalendar.swift */; };
 		CA726E341BE31AEA0026612F /* DealSizeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726DD91BE31AEA0026612F /* DealSizeWidget.swift */; };
@@ -147,7 +147,7 @@
 		CA726E811BE31AF40026612F /* ProductMapData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E691BE31AF40026612F /* ProductMapData.swift */; };
 		CA726E821BE31AF40026612F /* ProductSubData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6A1BE31AF40026612F /* ProductSubData.swift */; };
 		CA726E831BE31AF40026612F /* SegmentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6B1BE31AF40026612F /* SegmentsData.swift */; };
-		CA726E841BE31AF40026612F /* SharedDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6C1BE31AF40026612F /* SharedDataModel.swift */; };
+		CA726E841BE31AF40026612F /* ViewStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6C1BE31AF40026612F /* ViewStateManager.swift */; };
 		CA726E851BE31AF40026612F /* TransactionCompanyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6D1BE31AF40026612F /* TransactionCompanyData.swift */; };
 		CA726E861BE31AF40026612F /* TransactionContactData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6E1BE31AF40026612F /* TransactionContactData.swift */; };
 		CA726E871BE31AF40026612F /* TransactionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA726E6F1BE31AF40026612F /* TransactionData.swift */; };
@@ -170,6 +170,7 @@
 		CA726EA91BE32E690026612F /* segment.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E991BE32E690026612F /* segment.csv */; };
 		CA726EAA1BE32E690026612F /* transaction_status.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E9A1BE32E690026612F /* transaction_status.csv */; };
 		CA726EAB1BE32E690026612F /* use_of_proceeds.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA726E9B1BE32E690026612F /* use_of_proceeds.csv */; };
+		CAD25CCE1C48A693006F9693 /* transactions.json in Resources */ = {isa = PBXBuildFile; fileRef = CAD25CCD1C48A693006F9693 /* transactions.json */; };
 		FA70BBF6A6C190B0317943A3 /* libPods-DealSentryTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F9B85A16604738A691E1D4E /* libPods-DealSentryTests.a */; };
 /* End PBXBuildFile section */
 
@@ -211,7 +212,7 @@
 		CA4079201BE2C9FA00EEB6BA /* DealSentryUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DealSentryUITests.m; sourceTree = "<group>"; };
 		CA4079221BE2C9FA00EEB6BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA726D421BE319390026612F /* DealSentry-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DealSentry-Bridging-Header.h"; sourceTree = "<group>"; };
-		CA726D431BE3193A0026612F /* VCConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCConnection.swift; sourceTree = "<group>"; };
+		CA726D431BE3193A0026612F /* VCConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = VCConnection.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CA726D441BE3193A0026612F /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		CA726D451BE3193A0026612F /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		CA726D481BE3194F0026612F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -312,7 +313,7 @@
 		CA726DD21BE31AEA0026612F /* BusinessSelectionPage5ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessSelectionPage5ViewController.swift; sourceTree = "<group>"; };
 		CA726DD31BE31AEA0026612F /* BusinessSelectionPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessSelectionPageViewController.swift; sourceTree = "<group>"; };
 		CA726DD41BE31AEA0026612F /* BusinessSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessSelectionViewController.swift; sourceTree = "<group>"; };
-		CA726DD51BE31AEA0026612F /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
+		CA726DD51BE31AEA0026612F /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = StartViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CA726DD71BE31AEA0026612F /* CompanyMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyMap.swift; sourceTree = "<group>"; };
 		CA726DD81BE31AEA0026612F /* DateCalendar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCalendar.swift; sourceTree = "<group>"; };
 		CA726DD91BE31AEA0026612F /* DealSizeWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealSizeWidget.swift; sourceTree = "<group>"; };
@@ -368,7 +369,7 @@
 		CA726E691BE31AF40026612F /* ProductMapData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMapData.swift; sourceTree = "<group>"; };
 		CA726E6A1BE31AF40026612F /* ProductSubData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSubData.swift; sourceTree = "<group>"; };
 		CA726E6B1BE31AF40026612F /* SegmentsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentsData.swift; sourceTree = "<group>"; };
-		CA726E6C1BE31AF40026612F /* SharedDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedDataModel.swift; sourceTree = "<group>"; };
+		CA726E6C1BE31AF40026612F /* ViewStateManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ViewStateManager.swift; path = ViewStateObjects/ViewStateManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CA726E6D1BE31AF40026612F /* TransactionCompanyData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionCompanyData.swift; sourceTree = "<group>"; };
 		CA726E6E1BE31AF40026612F /* TransactionContactData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionContactData.swift; sourceTree = "<group>"; };
 		CA726E6F1BE31AF40026612F /* TransactionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionData.swift; sourceTree = "<group>"; };
@@ -391,6 +392,7 @@
 		CA726E991BE32E690026612F /* segment.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = segment.csv; sourceTree = "<group>"; };
 		CA726E9A1BE32E690026612F /* transaction_status.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = transaction_status.csv; sourceTree = "<group>"; };
 		CA726E9B1BE32E690026612F /* use_of_proceeds.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = use_of_proceeds.csv; sourceTree = "<group>"; };
+		CAD25CCD1C48A693006F9693 /* transactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = transactions.json; sourceTree = "<group>"; };
 		D8EEDE9AAD9CB3293267C52F /* Pods-DealSentryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentryTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentryTests/Pods-DealSentryTests.release.xcconfig"; sourceTree = "<group>"; };
 		E9035901FB124984189BC2F2 /* Pods-DealSentryUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DealSentryUITests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-DealSentryUITests/Pods-DealSentryUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -461,14 +463,15 @@
 		CA4078F71BE2C9F900EEB6BA /* DealSentry */ = {
 			isa = PBXGroup;
 			children = (
+				CA726D481BE3194F0026612F /* Main.storyboard */,
 				CA726D421BE319390026612F /* DealSentry-Bridging-Header.h */,
 				CA4078FB1BE2C9F900EEB6BA /* AppDelegate.h */,
 				CA4078FC1BE2C9F900EEB6BA /* AppDelegate.m */,
-				CA726D481BE3194F0026612F /* Main.storyboard */,
 				CA726D4B1BE319710026612F /* AppAttributes.swift */,
 				CA726D441BE3193A0026612F /* DataManager.h */,
 				CA726D451BE3193A0026612F /* DataManager.m */,
 				CA726D431BE3193A0026612F /* VCConnection.swift */,
+				CA726E6C1BE31AF40026612F /* ViewStateManager.swift */,
 				CA726D4C1BE319710026612F /* DateUtils.swift */,
 				CA726D4D1BE319710026612F /* DebugUtility.swift */,
 				CA726E5A1BE31AF40026612F /* ViewStateObjects */,
@@ -573,7 +576,7 @@
 				CA726DCB1BE31AEA0026612F /* DismissModalSegue.swift */,
 				CA726DCC1BE31AEA0026612F /* MasterViewController.swift */,
 				CA726DCD1BE31AEA0026612F /* MnA */,
-				CA726DD51BE31AEA0026612F /* NewViewController.swift */,
+				CA726DD51BE31AEA0026612F /* StartViewController.swift */,
 				CA726DD61BE31AEA0026612F /* Popovers */,
 				CA726DFD1BE31AEA0026612F /* Summary */,
 			);
@@ -763,7 +766,6 @@
 				CA726E691BE31AF40026612F /* ProductMapData.swift */,
 				CA726E6A1BE31AF40026612F /* ProductSubData.swift */,
 				CA726E6B1BE31AF40026612F /* SegmentsData.swift */,
-				CA726E6C1BE31AF40026612F /* SharedDataModel.swift */,
 				CA726E6D1BE31AF40026612F /* TransactionCompanyData.swift */,
 				CA726E6E1BE31AF40026612F /* TransactionContactData.swift */,
 				CA726E6F1BE31AF40026612F /* TransactionData.swift */,
@@ -793,6 +795,7 @@
 				CA726E991BE32E690026612F /* segment.csv */,
 				CA726E9A1BE32E690026612F /* transaction_status.csv */,
 				CA726E9B1BE32E690026612F /* use_of_proceeds.csv */,
+				CAD25CCD1C48A693006F9693 /* transactions.json */,
 			);
 			path = DataFiles;
 			sourceTree = "<group>";
@@ -960,6 +963,7 @@
 				CA726EA61BE32E690026612F /* product.csv in Resources */,
 				CA726E451BE31AEA0026612F /* ui-icons_228ef1_256x240.png in Resources */,
 				CA726E9F1BE32E690026612F /* contact.csv in Resources */,
+				CAD25CCE1C48A693006F9693 /* transactions.json in Resources */,
 				CA726E3B1BE31AEA0026612F /* ui-bg_glass_100_fdf5ce_1x400.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1153,7 +1157,7 @@
 				CA726D971BE31AD80026612F /* SubProduct.m in Sources */,
 				CA726E1E1BE31AEA0026612F /* TransactionTableViewCell.swift in Sources */,
 				CA726E831BE31AF40026612F /* SegmentsData.swift in Sources */,
-				CA726E311BE31AEA0026612F /* NewViewController.swift in Sources */,
+				CA726E311BE31AEA0026612F /* StartViewController.swift in Sources */,
 				CA726E7B1BE31AF40026612F /* DealStatusData.swift in Sources */,
 				CA726E271BE31AEA0026612F /* DetailViewController.swift in Sources */,
 				CA726E101BE31AEA0026612F /* MaterialityPageViewController.swift in Sources */,
@@ -1190,7 +1194,7 @@
 				CA726E301BE31AEA0026612F /* BusinessSelectionViewController.swift in Sources */,
 				CA726D541BE319F30026612F /* DealSentry.xcdatamodeld in Sources */,
 				CA726E121BE31AEA0026612F /* NoCompaniesTableViewCell.swift in Sources */,
-				CA726E841BE31AF40026612F /* SharedDataModel.swift in Sources */,
+				CA726E841BE31AF40026612F /* ViewStateManager.swift in Sources */,
 				CA726E791BE31AF40026612F /* ContactRoleData.swift in Sources */,
 				CA726E1F1BE31AEA0026612F /* TransactionDetailPage1ViewController.swift in Sources */,
 				CA726E4D1BE31AEA0026612F /* PopDatePicker.swift in Sources */,
@@ -1280,6 +1284,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1299,8 +1304,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_MODULE_NAME = DealSentry;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "DealSentry/DealSentry-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jskarulis/XcodeProjects/DealSentry/DealSentry/DealSentry/DealSentry-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1326,6 +1332,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1338,8 +1345,9 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_MODULE_NAME = DealSentry;
 				SDKROOT = iphoneos;
-				SWIFT_OBJC_BRIDGING_HEADER = "DealSentry/DealSentry-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jskarulis/XcodeProjects/DealSentry/DealSentry/DealSentry/DealSentry-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1351,11 +1359,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = DealSentry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Demo.DealSentry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "DealSentry/DealSentry-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jskarulis/XcodeProjects/DealSentry/DealSentry/DealSentry/DealSentry-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1367,11 +1376,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = DealSentry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Demo.DealSentry;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "DealSentry/DealSentry-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/jskarulis/XcodeProjects/DealSentry/DealSentry/DealSentry/DealSentry-Bridging-Header.h";
 				"SWIFT_OPTIMIZATION_LEVEL[arch=*]" = "-O";
 			};
 			name = Release;

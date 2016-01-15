@@ -4,7 +4,7 @@
 
 import Foundation
 
-class TransactionDetailData: NSObject { // one per Transaction
+@objc class TransactionDetailData: NSObject { // one per Transaction
     
     var projectName: String = ""
     var dealStatusDB: String = "" //this will be the value read from DB

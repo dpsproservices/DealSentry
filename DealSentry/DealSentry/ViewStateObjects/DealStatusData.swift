@@ -4,7 +4,7 @@
 
 import Foundation
 
-class DealStatusData: NSObject {
+@objc class DealStatusData: NSObject {
     
     var dealStatusId: String = ""
     var dealStatusDescription: String = ""

@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "DealSentry-Swift.h"
 
+#import "DataManager.h"
+
 @interface AppDelegate ()
 
 @end
@@ -127,51 +129,30 @@
 
 #pragma mark - application specifics
 
-@synthesize userId,currentOrientation;
-
-// checks the current device orientation and sets the global property for use in UI layout logic
--(void)checkLaunchOrientation {
-    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    if (UIInterfaceOrientationIsPortrait(orientation))
-    {
-        currentOrientation = @"portrait";
-    }
-    else
-    {
-        currentOrientation = @"landscape";
-    }
-}
 
 -(void) performInitialization {
 
-    [self initializeModels];
+    // initialize the DataManager singleton
+    DataManager *dataManager = [DataManager getInstance];
+       
+    // initialize the ViewStateManager singleton
+    ViewStateManager *viewStateManager = [ViewStateManager sharedInstance];
     
-    [self initializeViewControllers];
-}
-
--(void) initializeModels {
-    
-    // defaults, globals and singletons
-    userId = @"ew57483";
-
-}
-
--(void) initializeViewControllers {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    [self checkLaunchOrientation];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle: nil];
     
-    self.splitViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainStoryboard"];
-
+    UISplitViewController *splitViewController = [storyboard instantiateViewControllerWithIdentifier:@"SplitViewController"];
+    splitViewController.presentsWithGesture = NO;
+    splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    
+    viewStateManager.splitViewController = splitViewController;
+    
     VCConnection *vcConnection = [VCConnection sharedInstance];
     vcConnection.window = self.window;
-    vcConnection.splitViewController = self.splitViewController;
+    vcConnection.splitViewController = splitViewController;
     [vcConnection forViewController];
-
-    self.splitViewController.presentsWithGesture = NO;
-    self.splitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    
     
     [self.window makeKeyAndVisible];
 }

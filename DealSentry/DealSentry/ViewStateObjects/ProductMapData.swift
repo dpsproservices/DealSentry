@@ -2,10 +2,9 @@
 //  ProductMapData.swift
 //
 
-
 import Foundation
 
-class ProductMapData: NSObject {
+@objc class ProductMapData: NSObject {
     
     var product: String = ""
     var productSub: String = ""

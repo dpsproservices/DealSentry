@@ -7,7 +7,7 @@ import UIKit
 class TransactionDetailViewController: UIViewController {
     
     var debugUtil = DebugUtility(thisClassName: "TransactionDetailViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     
     var pageViewController: UIPageViewController!
     var detailViewController: DetailViewController!
@@ -45,7 +45,7 @@ class TransactionDetailViewController: UIViewController {
         self.pageViewController.view.frame = self.view.frame
         
         //create new Transaction
-        currentTransaction  = self.sharedDataModel.currentTransaction
+        currentTransaction  = self.viewStateManager.currentTransaction
         
         //setup detail controller for menu item changes
         self.debugUtil.printLog("viewDidLoad", msg: "END")
@@ -125,7 +125,7 @@ class TransactionDetailViewController: UIViewController {
         self.view.addSubview(self.pageViewController!.view)
         self.pageViewController!.didMoveToParentViewController(self)
         
-        if self.sharedDataModel.currentTransaction.transactionDetail.dealStatus == "Terminated" {
+        if self.viewStateManager.currentTransaction.transactionDetail.dealStatus == "Terminated" {
             self.numberOfPages = 6
         } else {
             self.numberOfPages = 5
@@ -253,7 +253,7 @@ extension TransactionDetailViewController: UIPageViewControllerDataSource {
         case is TransactionDetailPage4ViewController :
             return self.pageViewsArray[4]
         case is TransactionDetailPage5ViewController :
-            if (self.sharedDataModel.currentTransaction.transactionDetail.dealStatus == "Terminated" ){//@TODO: dealStatusChangedBackwards == true
+            if (self.viewStateManager.currentTransaction.transactionDetail.dealStatus == "Terminated" ){//@TODO: dealStatusChangedBackwards == true
                 return self.pageViewsArray[5]
             }else{
                 return nil

@@ -4,8 +4,6 @@
 
 import Foundation
 
-
-
 @objc class CompanyRoleData: NSObject {
     
     var roleId: String = ""

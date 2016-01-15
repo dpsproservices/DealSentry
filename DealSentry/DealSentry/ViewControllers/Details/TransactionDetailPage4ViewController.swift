@@ -7,7 +7,7 @@ import UIKit
 class TransactionDetailPage4ViewController: TransactionDetailPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "TransactionDetailPage4ViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
 
     @IBOutlet weak var indyImgWarning: UIImageView!
     @IBOutlet weak var indyTxtWarning: UILabel!
@@ -42,9 +42,9 @@ class TransactionDetailPage4ViewController: TransactionDetailPageViewController 
     @IBAction func sponsorValueChanged(sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.transactionDetail.isSubjectToTakeOver = "Yes"
+            self.viewStateManager.currentTransaction.transactionDetail.isSubjectToTakeOver = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.transactionDetail.isSubjectToTakeOver = "No"
+            self.viewStateManager.currentTransaction.transactionDetail.isSubjectToTakeOver = "No"
         }
         self.indyImgWarning.hidden = true
         self.indyTxtWarning.hidden = true
@@ -57,9 +57,9 @@ class TransactionDetailPage4ViewController: TransactionDetailPageViewController 
     /// this method will set the index for watchListingSegmentedControl segmentControl and update the corresponding object of the transaction
     @IBAction func watchListingValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.transactionDetail.likelyToTakePlace = "Yes"
+            self.viewStateManager.currentTransaction.transactionDetail.likelyToTakePlace = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.transactionDetail.likelyToTakePlace = "No"
+            self.viewStateManager.currentTransaction.transactionDetail.likelyToTakePlace = "No"
         }
     }
     
@@ -67,7 +67,7 @@ class TransactionDetailPage4ViewController: TransactionDetailPageViewController 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -475.5
                 forwardImageCenterX.constant = 475.5
@@ -81,7 +81,7 @@ class TransactionDetailPage4ViewController: TransactionDetailPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -365.0
                 forwardImageCenterX.constant = 365.0
@@ -113,7 +113,7 @@ class TransactionDetailPage4ViewController: TransactionDetailPageViewController 
             forwardImage.image = image.imageWithColor(UIColor(CGColor: appAttributes.colorBlue)).imageWithRenderingMode(.AlwaysOriginal)
         }
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.sponsorSegmentedControl.userInteractionEnabled = false
             self.sponsorSegmentedControl.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -128,7 +128,7 @@ class TransactionDetailPage4ViewController: TransactionDetailPageViewController 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             backImageCenterX.constant = -215.0
             forwardImageCenterX.constant = 215.0
@@ -164,11 +164,11 @@ class TransactionDetailPage4ViewController: TransactionDetailPageViewController 
     func resetViewsFromModel() {
         
         
-        if self.sharedDataModel.currentTransaction.transactionDetail.isSubjectToTakeOver == "Yes" {
+        if self.viewStateManager.currentTransaction.transactionDetail.isSubjectToTakeOver == "Yes" {
             self.sponsorSegmentedControl.selectedSegmentIndex = 1
             self.indyImgWarning.hidden = true
             self.indyTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.transactionDetail.isSubjectToTakeOver == "No"{
+        } else if self.viewStateManager.currentTransaction.transactionDetail.isSubjectToTakeOver == "No"{
             self.sponsorSegmentedControl.selectedSegmentIndex = 0
             self.indyImgWarning.hidden = true
             self.indyTxtWarning.hidden = true
@@ -178,10 +178,10 @@ class TransactionDetailPage4ViewController: TransactionDetailPageViewController 
             self.indyTxtWarning.hidden = true
         }
         
-        if self.sharedDataModel.currentTransaction.transactionDetail.likelyToTakePlace == "Yes" {
+        if self.viewStateManager.currentTransaction.transactionDetail.likelyToTakePlace == "Yes" {
             
             self.watchListingSegmentedControl.selectedSegmentIndex = 1
-        } else if self.sharedDataModel.currentTransaction.transactionDetail.likelyToTakePlace == "No"{
+        } else if self.viewStateManager.currentTransaction.transactionDetail.likelyToTakePlace == "No"{
             self.watchListingSegmentedControl.selectedSegmentIndex = 0
         } else {
             self.watchListingSegmentedControl.selectedSegmentIndex = -1
@@ -192,9 +192,9 @@ class TransactionDetailPage4ViewController: TransactionDetailPageViewController 
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -475.5
                 forwardImageCenterX.constant = 475.5
@@ -210,7 +210,7 @@ class TransactionDetailPage4ViewController: TransactionDetailPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -325.5
                 forwardImageCenterX.constant = 325.5

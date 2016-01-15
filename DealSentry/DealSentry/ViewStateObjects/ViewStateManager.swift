@@ -1,27 +1,41 @@
 //
-// SharedDataModel.swift
+// ViewStateManager.swift
 //
 
 import Foundation
 
- class SharedDataModel{
+@objc class ViewStateManager: NSObject {
     
-    class var sharedInstance: SharedDataModel {
+    var debugUtil = DebugUtility(thisClassName: "ViewStateManager", enabled: false)
+    
+    class var sharedInstance: ViewStateManager {
         
-        struct StaticObject {
-            static var instance: SharedDataModel?
+        struct SingletonObject {
+            static var instance: ViewStateManager?
             static var token: dispatch_once_t = 0
         }
         
-        dispatch_once(&StaticObject.token) {
-            StaticObject.instance = SharedDataModel()
+        dispatch_once(&SingletonObject.token) {
+            SingletonObject.instance = ViewStateManager()
         }
         
-        
-        return StaticObject.instance!
+        return SingletonObject.instance!
     }
     
-    let coreDataManager: AnyObject! = DataManager.getInstance()
+    //let appDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
+    var appDelegate: AppDelegate!
+    
+    var window: UIWindow?
+    
+    var splitViewController: UISplitViewController!
+    var masterViewController: MasterViewController!
+    var detailViewController: DetailViewController!
+    var startViewController: StartViewController!
+    
+    var masterNavigationController: UINavigationController!
+    var detailNavigationController: UINavigationController!
+    
+    let dataManager: AnyObject! = DataManager.getInstance()
     
     var isLoggedIn = false
     var loggedInUserName = "Eric Wattson"
@@ -29,7 +43,7 @@ import Foundation
     var userSavedTemplate = true
     
     // sample transaction preloaded during app first launch
-    var transactionSaveArray = [
+    var savedTransactionsArray = [
         
         TransactionData(
             transactionId: "12349",
@@ -116,27 +130,15 @@ import Foundation
                     contact: ContactData (
                         firstName: "Eric",
                         lastName: "Wattson",
-                        gocDescription: "Sales Department",
-                        soeID: "ew57483",
-                        phone: "716-995-2319",
-                        email: "mike.henderson@bank.com",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
                         crossSellDesignee: false
                     ),
                     role: "Requestor"
-                ),
-                
-                TransactionContactData(
-                    contact: ContactData (
-                        firstName: "John",
-                        lastName: "Barkley",
-                        gocDescription: "Sales Department",
-                        soeID: "jb02201",
-                        phone: "777-712-2779",
-                        email: "john.barkley@bank.com",
-                        crossSellDesignee: false
-                    ),
-                    role: "Other"
                 )
+                
             ]
         ),
         
@@ -287,61 +289,31 @@ import Foundation
                 
                 TransactionContactData(
                     contact: ContactData (
-                        firstName: "Mike",
-                        lastName: "Henderson",
-                        gocDescription: "Sales Department",
-                        soeID: "mh90210",
-                        phone: "716-995-2319",
-                        email: "Mike.Henderson@bank.com",
+                        firstName: "Eric",
+                        lastName: "Wattson",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
                         crossSellDesignee: false
                     ),
                     role: "Requestor"
                 ),
                 
+                               
                 TransactionContactData(
-                    
                     contact: ContactData (
-                        firstName: "Thomas",
-                        lastName: "Daniels",
-                        gocDescription: "Sales Department",
-                        soeID: "td15930",
-                        phone: "616-367-6321",
-                        email: "Thomas.Daniels@bank.com",
-                        crossSellDesignee: true
-                    ),
-                    
-                    role: "Other"
-                ),
-                
-                TransactionContactData(
-                    
-                    contact: ContactData (
-                        firstName: "Kreg",
-                        lastName: "Rutherford",
-                        gocDescription: "Sales Department",
-                        soeID: "kr11765",
-                        phone: "616-367-3999",
-                        email: "kreg.rutherford@bank.com",
+                        firstName: "Carol",
+                        lastName: "Uberman",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
                         crossSellDesignee: false
                     ),
-                    
-                    role: "Sponsoring MD"
-                ),
-                
-                TransactionContactData(
-                    
-                    contact: ContactData (
-                        firstName: "Alice",
-                        lastName: "Mathews",
-                        gocDescription: "Sales Department",
-                        soeID: "am34567",
-                        phone: "616-367-4576",
-                        email: "alice.mathews@bank.com",
-                        crossSellDesignee: false
-                    ),
-                    
                     role: "Other"
                 )
+                
             ]
         ),
         
@@ -429,12 +401,12 @@ import Foundation
                 
                 TransactionContactData(
                     contact: ContactData (
-                        firstName: "Mike",
-                        lastName: "Henderson",
-                        gocDescription: "Sales Department",
-                        soeID: "mh90210",
-                        phone: "716-995-2319",
-                        email: "Mike.Henderson@bank.com",
+                        firstName: "Eric",
+                        lastName: "Wattson",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
                         crossSellDesignee: false
                     ),
                     role: "Requestor"
@@ -442,16 +414,30 @@ import Foundation
                 
                 TransactionContactData(
                     contact: ContactData (
-                        firstName: "Alice",
-                        lastName: "Mathews",
-                        gocDescription: "Sales Department",
-                        soeID: "am34567",
-                        phone: "616-367-4576",
-                        email: "alice.mathews@bank.com",
+                        firstName: "Bart",
+                        lastName: "Thatcher",
+                        department: "Sales Department",
+                        employeeId: "bt67890",
+                        phone: "949-765-5678",
+                        email: "bart.thatcher@dealservices.com",
                         crossSellDesignee: false
                     ),
                     role: "Sponsoring MD"
+                ),
+                
+                TransactionContactData(
+                    contact: ContactData (
+                        firstName: "Carol",
+                        lastName: "Uberman",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
+                        crossSellDesignee: false
+                    ),
+                    role: "Other"
                 )
+                
             ]
         ),
         
@@ -569,64 +555,48 @@ import Foundation
             ),
             
             transactionContacts: [
+                
                 TransactionContactData(
                     contact: ContactData (
-                        firstName: "Mike",
-                        lastName: "Henderson",
-                        gocDescription: "Sales Department",
-                        soeID: "mh90210",
-                        phone: "716-995-2319",
-                        email: "Mike.Henderson@bank.com",
+                        firstName: "Eric",
+                        lastName: "Wattson",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
                         crossSellDesignee: false
                     ),
                     role: "Requestor"
                 ),
                 
                 TransactionContactData(
-                    
                     contact: ContactData (
-                        firstName: "Alice",
-                        lastName: "Mathews",
-                        gocDescription: "Sales Department",
-                        soeID: "am34567",
-                        phone: "616-367-4576",
-                        email: "alice.mathews@bank.com",
+                        firstName: "Bart",
+                        lastName: "Thatcher",
+                        department: "Sales Department",
+                        employeeId: "bt67890",
+                        phone: "949-765-5678",
+                        email: "bart.thatcher@dealservices.com",
                         crossSellDesignee: false
                     ),
-                    
-                    role: "Other"
-                ),
-                
-                TransactionContactData(
-                    
-                    contact: ContactData (
-                        firstName: "Ronald",
-                        lastName: "Mackintosh",
-                        gocDescription: "Sales Department",
-                        soeID: "rm84444",
-                        phone: "616-663-2947",
-                        email: "ronald.mackintosh@bank.com",
-                        crossSellDesignee: false
-                    ),
-                    
                     role: "Sponsoring MD"
                 ),
                 
                 TransactionContactData(
-                    
                     contact: ContactData (
-                        firstName: "Edward",
-                        lastName: "Kepler",
-                        gocDescription: "Sales Department",
-                        soeID: "ek78945",
-                        phone: "616-667-8923",
-                        email: "edward.kepler@bank.com",
+                        firstName: "Carol",
+                        lastName: "Uberman",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
                         crossSellDesignee: false
                     ),
-                    
                     role: "Other"
                 )
-            ]        ),
+                
+            ]
+        ),
         
         TransactionData(
             transactionId: "12345",
@@ -767,31 +737,43 @@ import Foundation
                 
                 TransactionContactData(
                     contact: ContactData (
-                        firstName: "Mike",
-                        lastName: "Henderson",
-                        gocDescription: "Sales Department",
-                        soeID: "mh90210",
-                        phone: "716-995-2319",
-                        email: "Mike.Henderson@bank.com",
-                        crossSellDesignee: true
+                        firstName: "Eric",
+                        lastName: "Wattson",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
+                        crossSellDesignee: false
                     ),
                     role: "Requestor"
                 ),
                 
                 TransactionContactData(
-                    
                     contact: ContactData (
-                        firstName: "Grace",
-                        lastName: "Landor",
-                        gocDescription: "Sales Department",
-                        soeID: "gl92201",
-                        phone: "(201) 763-1772",
-                        email: "gl92201@bank.com",
+                        firstName: "Bart",
+                        lastName: "Thatcher",
+                        department: "Sales Department",
+                        employeeId: "bt67890",
+                        phone: "949-765-5678",
+                        email: "bart.thatcher@dealservices.com",
                         crossSellDesignee: false
                     ),
-                    
                     role: "Sponsoring MD"
+                ),
+                
+                TransactionContactData(
+                    contact: ContactData (
+                        firstName: "Carol",
+                        lastName: "Uberman",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
+                        crossSellDesignee: false
+                    ),
+                    role: "Other"
                 )
+                
             ]
         ),
         
@@ -933,31 +915,43 @@ import Foundation
                 
                 TransactionContactData(
                     contact: ContactData (
-                        firstName: "Mike",
-                        lastName: "Henderson",
-                        gocDescription: "Sales Department",
-                        soeID: "mh90210",
-                        phone: "716-995-2319",
-                        email: "Mike.Henderson@bank.com",
-                        crossSellDesignee: true
+                        firstName: "Eric",
+                        lastName: "Wattson",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
+                        crossSellDesignee: false
                     ),
                     role: "Requestor"
                 ),
                 
                 TransactionContactData(
-                    
                     contact: ContactData (
-                        firstName: "Grace",
-                        lastName: "Landor",
-                        gocDescription: "Sales Department",
-                        soeID: "gl92201",
-                        phone: "(201) 763-1772",
-                        email: "gl92201@bank.com",
+                        firstName: "Bart",
+                        lastName: "Thatcher",
+                        department: "Sales Department",
+                        employeeId: "bt67890",
+                        phone: "949-765-5678",
+                        email: "bart.thatcher@dealservices.com",
                         crossSellDesignee: false
                     ),
-                    
                     role: "Sponsoring MD"
+                ),
+                
+                TransactionContactData(
+                    contact: ContactData (
+                        firstName: "Carol",
+                        lastName: "Uberman",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
+                        crossSellDesignee: false
+                    ),
+                    role: "Other"
                 )
+                
             ]
         ),
         
@@ -1045,73 +1039,43 @@ import Foundation
                 
                 TransactionContactData(
                     contact: ContactData (
-                        firstName: "Mike",
-                        lastName: "Henderson",
-                        gocDescription: "Sales Department",
-                        soeID: "mh90210",
-                        phone: "716-995-2319",
-                        email: "Mike.Henderson@bank.com",
-                        crossSellDesignee: true
+                        firstName: "Eric",
+                        lastName: "Wattson",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
+                        crossSellDesignee: false
                     ),
                     role: "Requestor"
                 ),
                 
                 TransactionContactData(
-                    
                     contact: ContactData (
-                        firstName: "Grace",
-                        lastName: "Landor",
-                        gocDescription: "Sales Department",
-                        soeID: "gl92201",
-                        phone: "(201) 763-1772",
-                        email: "gl92201@bank.com",
+                        firstName: "Bart",
+                        lastName: "Thatcher",
+                        department: "Sales Department",
+                        employeeId: "bt67890",
+                        phone: "949-765-5678",
+                        email: "bart.thatcher@dealservices.com",
                         crossSellDesignee: false
                     ),
-                    
-                    role: "Other"
-                ),
-                
-                TransactionContactData(
-                    contact: ContactData (
-                        firstName: "Joe",
-                        lastName: "Skarulis",
-                        gocDescription: "Sales Department",
-                        soeID: "js33237",
-                        phone: "212-657-1898",
-                        email: "joe.skarulis@bank.com",
-                        crossSellDesignee: false
-                    ),
-                    
-                    role: "Other"
-                ),
-                
-                TransactionContactData(
-                    contact: ContactData (
-                        firstName: "Derek",
-                        lastName: "Armstrong",
-                        gocDescription: "BELFAST PROJECT",
-                        soeID: "da42560",
-                        phone: "(777) 777-7777",
-                        email: "da42560@imceu.eu.ssmb.com",
-                        crossSellDesignee: true
-                    ),
-                    
-                    role: "Other"
-                ),
-                
-                TransactionContactData(
-                    contact: ContactData (
-                        firstName: "Adam",
-                        lastName: "Taub",
-                        gocDescription: "Sales Department",
-                        soeID: "at42928",
-                        phone: "(908) 563-5327",
-                        email: "at42928@bank.com",
-                        crossSellDesignee: false
-                    ),
-                    
                     role: "Sponsoring MD"
+                ),
+                
+                TransactionContactData(
+                    contact: ContactData (
+                        firstName: "Carol",
+                        lastName: "Uberman",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
+                        crossSellDesignee: false
+                    ),
+                    role: "Other"
                 )
+                
             ]
         ),
         
@@ -1255,44 +1219,43 @@ import Foundation
                 
                 TransactionContactData(
                     contact: ContactData (
-                        firstName: "Mike",
-                        lastName: "Henderson",
-                        gocDescription: "Sales Department",
-                        soeID: "mh90210",
-                        phone: "716-995-2319",
-                        email: "Mike.Henderson@bank.com",
-                        crossSellDesignee: true
+                        firstName: "Eric",
+                        lastName: "Wattson",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
+                        crossSellDesignee: false
                     ),
                     role: "Requestor"
                 ),
                 
                 TransactionContactData(
                     contact: ContactData (
-                        firstName: "Konstantinos",
-                        lastName: "Rizakos",
-                        gocDescription: "Sales Department",
-                        soeID: "kr17986",
-                        phone: "212-657-1899",
-                        email: "konstantinos.rizakos@bank.com",
+                        firstName: "Bart",
+                        lastName: "Thatcher",
+                        department: "Sales Department",
+                        employeeId: "bt67890",
+                        phone: "949-765-5678",
+                        email: "bart.thatcher@dealservices.com",
                         crossSellDesignee: false
                     ),
                     role: "Sponsoring MD"
                 ),
                 
                 TransactionContactData(
-                    
                     contact: ContactData (
-                        firstName: "Alice",
-                        lastName: "Mathews",
-                        gocDescription: "Sales Department",
-                        soeID: "aa08467",
-                        phone: "212-657-6776",
-                        email: "alice.mathews@bank.com",
-                        crossSellDesignee: true
+                        firstName: "Carol",
+                        lastName: "Uberman",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
+                        crossSellDesignee: false
                     ),
-                    
                     role: "Other"
                 )
+                
             ]
         ),
         
@@ -1436,12 +1399,12 @@ import Foundation
                 
                 TransactionContactData(
                     contact: ContactData (
-                        firstName: "Mike",
-                        lastName: "Henderson",
-                        gocDescription: "Sales Department",
-                        soeID: "mh90210",
-                        phone: "716-995-2319",
-                        email: "Mike.Henderson@bank.com",
+                        firstName: "Eric",
+                        lastName: "Wattson",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
                         crossSellDesignee: false
                     ),
                     role: "Requestor"
@@ -1449,31 +1412,30 @@ import Foundation
                 
                 TransactionContactData(
                     contact: ContactData (
-                        firstName: "Konstantinos",
-                        lastName: "Rizakos",
-                        gocDescription: "Sales Department",
-                        soeID: "kr17986",
-                        phone: "212-657-1899",
-                        email: "konstantinos.rizakos@bank.com",
+                        firstName: "Bart",
+                        lastName: "Thatcher",
+                        department: "Sales Department",
+                        employeeId: "bt67890",
+                        phone: "949-765-5678",
+                        email: "bart.thatcher@dealservices.com",
                         crossSellDesignee: false
                     ),
                     role: "Sponsoring MD"
                 ),
                 
                 TransactionContactData(
-                    
                     contact: ContactData (
-                        firstName: "Alice",
-                        lastName: "Mathews",
-                        gocDescription: "Sales Department",
-                        soeID: "aa08467",
-                        phone: "212-657-6776",
-                        email: "alice.mathews@bank.com",
-                        crossSellDesignee: true
+                        firstName: "Carol",
+                        lastName: "Uberman",
+                        department: "Sales Department",
+                        employeeId: "ew57483",
+                        phone: "949-765-7890",
+                        email: "Eric.Wattson@dealservices.com",
+                        crossSellDesignee: false
                     ),
-                    
                     role: "Other"
                 )
+                
             ]
             
         )
@@ -1484,218 +1446,10 @@ import Foundation
     var transactionsArray = [TransactionData]()
     
     // dummy template
-    var templateTransaction = TransactionData(
-        transactionId: "Template",
-        transactionStatus: "Template",
-        dealStatus: "Pitch",
-        ddtRestriction: "No",
-        savedOnDate: "07/07/2007",
-        submitDate: "",
-        requestorName: "Mike Henderson",
-        primaryClient: "ACME Corp",
-        counterparty: "",
-        product: "Equity",
-        productSub: "Common Stk - IPO",
-        fulfillmentCondition: "N/A",
-        clearanceApprovedDate: "",
-        transactionCompanies: [
-            
-            TransactionCompanyData(
-                
-                company: CompanyData (
-                    companyId: "6",
-                    companyName: "ACME Corp",
-                    ticker: "ACME",
-                    country: "US",
-                    gfcid: "1000123461",
-                    level: "",
-                    exchange: "NYSE",
-                    marketSegment: "GREECE",
-                    franchiseIndustry: "TECHMEDCOM",
-                    parentCompany: "",
-                    countryFlag: "usa.png"
-                    
-                ),
-                
-                role: "Primary Client",
-                
-                materiality: MaterialityData(
-                    isMaterial: "No",
-                    isMaterialDescription: "",
-                    hasPubliclyTradedSecurities: "No",
-                    isGovtOwned: "No",
-                    percentOwned: "",
-                    hasPRC: "No",
-                    hasStandardAgreements: "Yes",
-                    specialCircumstances: ""
-                ),
-                
-                agreements: []
-            )
-        ],
-        
-        transactionDetail: TransactionDetailData (
-            projectName: "Template Loan",
-            dealStatusDB: "Pitch",
-            dealStatus: "Pitch",
-            product: "Bank Loan",
-            productSub: "Bank Loan",
-            dealDescription: "Loan to primary client",
-            bankRole: "Lender",
-            dealSize: "1.00",
-            offeringFormat: "N/A",
-            offeringFormatComments: "",
-            useOfProceeds: "N/A",
-            useOfProceedsComments: "",
-            loanType: "N/A",
-            isConfidential: "Confidential",
-            estimatedPitchDate: "02/04/2015",
-            expectedAnnouncementDate: "06/04/2015",
-            expectedClosingDate: "07/04/2015",
-            isSubjectToTakeOver: "No",
-            hasFinancialSponsor: "No",
-            hasNonProfitOrganization: "No",
-            hasUSGovtAffiliatedMunicipality: "No",
-            likelyToTakePlace: "Yes",
-            backwardsDealStatusExplanation: "",
-            terminatedExplanation: "",
-            uncollectedFees: "",
-            requests: "No"
-        ),
-        
-        transactionContacts: [
-            
-            TransactionContactData(
-                contact: ContactData (
-                    firstName: "Mike",
-                    lastName: "Henderson",
-                    gocDescription: "Sales Department",
-                    soeID: "mh90210",
-                    phone: "716-995-2319",
-                    email: "Mike.Henderson@bank.com",
-                    crossSellDesignee: false
-                ),
-                role: "Requestor"
-            ),
-            
-            TransactionContactData(
-                contact: ContactData (
-                    firstName: "Jake",
-                    lastName: "Barayev",
-                    gocDescription: "Sales Department",
-                    soeID: "jb02201",
-                    phone: "212-723-2876",
-                    email: "jake.barayev@bank.com",
-                    crossSellDesignee: false
-                ),
-                role: "Sponsoring MD"
-            ),
-            
-            TransactionContactData(
-                
-                contact: ContactData (
-                    firstName: "Boris",
-                    lastName: "Rabinovich",
-                    gocDescription: "Sales Department",
-                    soeID: "br91708",
-                    phone: "212-657-6732",
-                    email: "boris.rabinovich@bank.com",
-                    crossSellDesignee: false
-                ),
-                
-                role: "Other"
-            )
-        ]
-    )
+    var templateTransaction: TransactionData!
     
     // the currently selected transaction updated on txn list view 'didselect' event
-    
-    var currentTransaction = TransactionData(
-        transactionId: "New",
-        transactionStatus: "Draft",
-        dealStatus: "Pitch",
-        ddtRestriction: "No",
-        savedOnDate: "Not Saved",
-        submitDate: "",
-        requestorName: "Mike Henderson",
-        primaryClient: "",
-        counterparty: "",
-        product: "",
-        productSub: "",
-        fulfillmentCondition: "N/A",
-        clearanceApprovedDate: "",
-        
-        transactionCompanies: [],
-        
-        transactionDetail: TransactionDetailData (
-            projectName: "",
-            dealStatusDB: "",
-            dealStatus: "",
-            product: "",
-            productSub: "",
-            dealDescription: "",
-            bankRole: "",
-            dealSize: "",
-            offeringFormat: "",
-            offeringFormatComments: "",
-            useOfProceeds: "",
-            useOfProceedsComments: "",
-            loanType: "",
-            isConfidential: "Confidential",
-            estimatedPitchDate: "",
-            expectedAnnouncementDate: "",
-            expectedClosingDate: "",
-            isSubjectToTakeOver: "",
-            hasFinancialSponsor: "",
-            hasNonProfitOrganization: "",
-            hasUSGovtAffiliatedMunicipality: "",
-            likelyToTakePlace: "",
-            backwardsDealStatusExplanation: "",
-            terminatedExplanation: "",
-            uncollectedFees: "",
-            requests: ""
-        ),
-        transactionContacts: [
-            TransactionContactData(
-                contact: ContactData (
-                    firstName: "Mike",
-                    lastName: "Henderson",
-                    gocDescription: "Sales Department",
-                    soeID: "mh90210",
-                    phone: "716-995-2319",
-                    email: "Mike.Henderson@bank.com",
-                    crossSellDesignee: false
-                ),
-                role: "Requestor"
-            ),
-            
-            TransactionContactData(
-                contact: ContactData (
-                    firstName: "Ella",
-                    lastName: "Fisher",
-                    gocDescription: "Sales Department",
-                    soeID: "ef67892",
-                    phone: "(973) 464-3325",
-                    email: "ef67892@bank.com",
-                    crossSellDesignee: false
-                ),
-                role: "Sponsoring MD"
-            ),
-            
-            TransactionContactData(
-                contact: ContactData (
-                    firstName: "Alex",
-                    lastName: "Boguslavsky",
-                    gocDescription: "ICG Compliance PMO",
-                    soeID: "ab61532",
-                    phone: "(201) 763-1362",
-                    email: "ab61532@bank.com",
-                    crossSellDesignee: false
-                ),
-                role: "Other"
-            )
-        ]
-    )
+    var currentTransaction: TransactionData!
     
     //  TRue status category selected from My Transactions Home view
     var selectedCategory: String!
@@ -1716,7 +1470,7 @@ import Foundation
     var checkForCountryPicker = "NO"
     var checkForExistingDraft = "NO"
     var selectedButtonTextForDate = "PitchDate"
-    var checkForOrientationChange = "portrait"
+    var currentOrientation = "portrait"
     var checkForDeleteDraftClicked = "NO"
     var checkForAgreementClicked = "NO"
     var preserveDrafttransaction = [TransactionData]()
@@ -1733,6 +1487,55 @@ import Foundation
     
     // filtered subset of transactions to display search results
     var filteredTransactionArray = [TransactionData]()
+    //create contacts
+    var contactsArray = [ContactData]()
+    // the currently selected Contact updated on txn list view 'didselect' event
+    
+    var currentContact: ContactData!
+    
+    //   var selectedContactsArray = [Contact]()
+    
+    // contacts filtered from search
+    var filteredContactsArray = [ContactData]()
+    
+    
+    /// MARK Companies model
+    var companiesArray = [CompanyData]()
+    
+    var previousCompaniesArray = [CompanyData]()
+    
+    // updated when user touches one of the Company based table views
+    //var currentCompany: Company!
+    
+    // companies filtered from search
+    var filteredCompaniesArray = [CompanyData]()
+    
+    // companies selected from Search or Previous
+    
+    
+    var definedCompany: TransactionCompanyData!
+    
+    // company Industry picker values
+    var industriesArray = [IndustryData]()
+    var countriesArray = [CountryData]()
+    var segmentsArray = [SegmentsData]()
+    var productArray = [ProductData]()
+    var productSubArray = [ProductSubData]()
+    var productMapArray = [ProductMapData]()
+    var transactionStatusesArray = [TransactionStatusData]()
+    var dealStatusesArray = [DealStatusData]()
+    var companyRolesArray = [CompanyRoleData]()
+    var offeringFormatArray = [OfferingFormatData]()
+    var useOfProceedsArray = [UseOfProceedsData]()
+    var loanTypesArray = [LoanTypeData]()
+    var agreementTypesArray = [AgreementTypeData]()
+    var contactRolesArray = [ContactRoleData]()
+    var userContactData: ContactData!
+
+    var companynameArrayForManuallyDefined = [String]()
+    
+    
+    
     
     func separateStringFromTime(normalText:String)-> String
     {
@@ -1771,11 +1574,11 @@ import Foundation
         } else {
             return self.transactionsArray.filter({
                 (transaction: TransactionData) -> Bool in
-                if (transaction.transactionStatus == transactionStatus) {
-                    return true
-                } else {
-                    return false
-                }
+                    if (transaction.transactionStatus == transactionStatus) {
+                        return true
+                    } else {
+                        return false
+                    }
                 }
             )
         }
@@ -1786,13 +1589,6 @@ import Foundation
         
         return self.getTransactionsBytransactionStatus(transactionStatus).first
     }
-    
-    // set the currently selected transaction
-    /*
-    func setCurrentTransaction(selectedTransaction : Transaction) {
-    self.currentTransaction = selectedTransaction
-    }
-    */
     
     // this will be called during seque from transaction list view to questionaire view
     func prepareQuestionaireModel(index: Int, filtered: Bool){
@@ -1945,98 +1741,109 @@ import Foundation
         }
     }
     
-    //create contacts
-    var contactsArray = [ContactData]()
-    // the currently selected Contact updated on txn list view 'didselect' event
-    
-    var currentContact:ContactData
-    
-    //   var selectedContactsArray = [Contact]()
-    
-    // contacts filtered from search
-    var filteredContactsArray = [ContactData]()
-//    func initContacts() {
-//        var newC = contactsArray[0]
-//    }
-    
-    
-    /// MARK Companies model
-    var companiesArray = [CompanyData]()
-    
-    var previousCompaniesArray = [CompanyData]()
-    
-    // updated when user touches one of the Company based table views
-    //var currentCompany: Company!
-    
-    // companies filtered from search
-    var filteredCompaniesArray = [CompanyData]()
-    
-    // companies selected from Search or Previous
-    
-    
-    var definedCompany: TransactionCompanyData!
-    
-    // company Industry picker values
-    var industriesArray = [IndustryData]()
-    var countriesArray = [CountryData]()
-    var segmentsArray = [SegmentsData]()
-    var productArray = [ProductData]()
-    var productSubArray = [ProductSubData]()
-    
-    //new change
-    var transactionStatusesArray = [TransactionStatusData]()
-    var dealStatusesArray = [DealStatusData]()
-    var companyRolesArray = [CompanyRoleData]()
-    var offeringFormatArray = [OfferingFormatData]()
-    var useOfProceedsArray = [UseOfProceedsData]()
-    var loanTypesArray = [LoanTypeData]()
-    var agreementTypesArray = [AgreementTypeData]()
-    var contactRolesArray = [ContactRoleData]()
-    var userContactData: ContactData!
-    var companynameArrayForManuallyDefined = [String]()
-    // new change
-    
-    var productMapArray = [ProductMapData]()
-    
-    
-    
-     init () {
-        // default user contact will be the user who activates the app. if the user name is not present in the CSV then default will be shown
+    // load the static arrays for the pickers and tableviews
+    func loadStaticArrays() {
         
-        let arrayForContactData = self.coreDataManager.arrayForContact as NSArray as! [ContactData]
-        
-        self.contactsArray = arrayForContactData
+        self.companyRolesArray = self.dataManager.arrayForCompanyRoles as NSArray as! [CompanyRoleData]
 
-        loggedInUserId = self.coreDataManager.userIdFromLogin as String
-        checkForOrientationChange = self.coreDataManager.checkForOrientationChange as String
-        for contactdataForUserName in arrayForContactData
+        self.contactRolesArray = self.dataManager.arrayForContactRoles as NSArray as! [ContactRoleData]
+        
+        self.agreementTypesArray  = self.dataManager.arrayForAgreementTypes as NSArray as! [AgreementTypeData]
+        
+        self.dealStatusesArray = self.dataManager.arrayForDealStatuses as NSArray as! [DealStatusData]
+        
+        self.industriesArray = self.dataManager.arrayForIndustries as NSArray as! [IndustryData]
+        
+        self.loanTypesArray = self.dataManager.arrayForLoanTypes as NSArray as! [LoanTypeData]
+        
+        self.offeringFormatArray = self.dataManager.arrayForOfferingFormat as NSArray as! [OfferingFormatData]
+        
+        self.segmentsArray = self.dataManager.arrayForSegments as NSArray as! [SegmentsData]
+        
+        self.transactionStatusesArray = self.dataManager.arrayForTransactionStatuses as NSArray as! [TransactionStatusData]
+        
+        self.useOfProceedsArray = self.dataManager.arrayForUseOfProceeds as NSArray as! [UseOfProceedsData]
+        
+        self.productArray = self.dataManager.arrayForProduct as NSArray as! [ProductData]
+        
+        let arrayForProductSub = self.dataManager.arrayForProductSub as NSArray as! [ProductSubData]
+        self.productSubArray = arrayForProductSub
+        
+        self.countriesArray = self.dataManager.arrayForCountries as NSArray as! [CountryData]
+        
+        self.productMapArray = self.dataManager.arrayForProductmap as NSArray as! [ProductMapData]
+    }
+    
+    func splashScreen() {
+        
+        let startViewController:StartViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("StartViewController") as! StartViewController
+        
+        self.window?.rootViewController?.presentViewController(startViewController, animated: false, completion: nil)
+        self.window?.rootViewController = startViewController
+        self.startViewController = startViewController
+        self.startViewController.appDelegate = self.appDelegate
+        
+        self.masterNavigationController = self.splitViewController.viewControllers[0] as! UINavigationController
+        self.masterViewController = masterNavigationController.topViewController as! MasterViewController
+        self.masterViewController.appDelegate = self.appDelegate
+        
+        self.detailNavigationController = self.splitViewController.viewControllers[1] as! UINavigationController
+        self.detailViewController = detailNavigationController.topViewController as! DetailViewController
+        self.detailViewController.appDelegate = self.appDelegate
+        
+        // double arrow icon to expand or collapse the master view
+        self.detailViewController.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem()
+    }
+    
+    func loadContactsArray() {
+        self.contactsArray = self.dataManager.arrayForContact as NSArray as! [ContactData]
+        self.contactsArray =  self.contactsArray.sort({ $0.firstName < $1.firstName })
+    }
+    
+    func loadCompaniesArray() {
+        self.companiesArray = self.dataManager.arrayForCompanies as NSArray as! [CompanyData]
+        self.companiesArray =  self.companiesArray.sort({ $0.companyName < $1.companyName })
+    }
+    
+    func loadPreviousCompaniesArray() {
+        //self.previousCompaniesArray = self.companiesArray
+    }
+    
+   
+    // checks the current device orientation and sets the global property for use in UI layout logic
+    func checkOrientation () {
+
+        if UIDevice.currentDevice().orientation.isPortrait.boolValue {
+            currentOrientation = "portrait"
+        }
+        else {
+            currentOrientation = "landscape"
+        }
+    }
+    
+    override init () {
+        
+        super.init()
+
+        if self.dataManager.checkIndependentEntities == "NO"
         {
-            if contactdataForUserName.soeID == loggedInUserId
-            {
-                loggedInUserName = contactdataForUserName.firstName
-                    + " " + contactdataForUserName.lastName
-                userContactData = contactdataForUserName
-                break
-            }
+            self.dataManager.saveTransactionValue(self.savedTransactionsArray)
         }
         
-        //
-        //set current contacts
-        let arrayForCompaniesData = self.coreDataManager.arrayForCompanies as NSArray as! [CompanyData]
-        self.companiesArray = arrayForCompaniesData
-        self.previousCompaniesArray = arrayForCompaniesData
+        self.loadStaticArrays()
         
-        if self.coreDataManager.checkIndependentEntities == "NO"
-        {
-            self.coreDataManager.saveTransactionValue(self.transactionSaveArray)
-        }
+        self.loadContactsArray()
         
-        let arrayFortransaction = self.coreDataManager.transactionArray() as NSArray as! [TransactionData]
+        self.loadCompaniesArray()
+        
+        
+        let arrayFortransaction = self.dataManager.transactionArray() as NSArray as! [TransactionData]
+        
         self.transactionsArray = arrayFortransaction
         
         self.currentContact = self.contactsArray[0]
-        self.companiesArray =  self.companiesArray.sort({ $0.companyName < $1.companyName })
-        self.contactsArray =  self.contactsArray.sort({ $0.firstName < $1.firstName })
+        
+        
         
         // keep track of last viewed transaction of each status category
         
@@ -2055,19 +1862,7 @@ import Foundation
         self.lastViewedTransactions["Terminated"] = self.getFirstTransactionBytransactionStatus("Terminated")
         
         self.lastViewedTransactions["Fatal Conflicts"] = self.getFirstTransactionBytransactionStatus("Fatal Conflicts")
-        
-        //defaults
-        
-        /*
-        self.lastViewedTransactions = [
-        "All":transactionsArray[0],
-        "Draft":transactionsArray[1],
-        "Pending Review":transactionsArray[3],
-        "Cleared":transactionsArray[5],
-        "Completed":transactionsArray[6],
-        "Template":templateTransaction
-        ]
-        */
+
         
         // last viewed
         // index path row indexes
@@ -2095,13 +1890,7 @@ import Foundation
         
         self.currentTransaction = self.transactionsArray[0]
         self.currentTransactionIndex = 0
-        
-        //hard code own user as contact initially
-        //create new Transaction contact from contact
-        //Change Done 08-07-2015
-       // self.currentTransaction.transactionContacts.append(TransactionContactData(contact: self.contactsArray[0], role: "Requestor"))
-        
-        // defaults for companies model
+
     }
     
 }

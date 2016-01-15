@@ -7,7 +7,7 @@
  class TransactionDetailPage1ViewController: TransactionDetailPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "TransactionDetailPage1ViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     
     @IBOutlet weak var fwdImage: UIImageView!
     
@@ -50,7 +50,7 @@
     ///this method passes the products present in productMap table in core data.
     func setProducts() {
         
-        var allProducts = self.sharedDataModel.productMapArray.map({ (ProductMapData) -> String in
+        var allProducts = self.viewStateManager.productMapArray.map({ (ProductMapData) -> String in
             return ProductMapData.productDescription
         })
         
@@ -77,7 +77,7 @@
     ///this method passes the sub products present in productMap table in core data.
     func setProductSubs() {
         
-        var allProductSubs = self.sharedDataModel.productMapArray.map({ (ProductMapData) -> String in
+        var allProductSubs = self.viewStateManager.productMapArray.map({ (ProductMapData) -> String in
             return ProductMapData.productSubDescription
         })
         
@@ -99,7 +99,7 @@
     ///this method reset the sub product based on the product choosen
     func resetProductSubs() {
         
-        let productSubsMap = self.sharedDataModel.productMapArray.filter({ (ProductMapData) -> Bool in
+        let productSubsMap = self.viewStateManager.productMapArray.filter({ (ProductMapData) -> Bool in
             if ProductMapData.productDescription == self.productTextField.text {
                 return true
             } else {
@@ -134,7 +134,7 @@
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 fwdImageForCenterX.constant = 475.5
             }
@@ -145,7 +145,7 @@
         }
         else
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 fwdImageForCenterX.constant = 365.0
             }
@@ -174,7 +174,7 @@
         self.projectNameTextField.delegate = self
         self.appAttributes.setColorAttributesTF(projectNameTextField)
         
-        var dealStatus = self.sharedDataModel.dealStatusesArray.map { (DealStatusData) -> String in
+        var dealStatus = self.viewStateManager.dealStatusesArray.map { (DealStatusData) -> String in
             return DealStatusData.dealStatusDescription
         }
         dealStatus = dealStatus.sort({ $0 < $1 })
@@ -204,7 +204,7 @@
             fwdImage.image = image.imageWithColor(UIColor(CGColor: appAttributes.colorBlue)).imageWithRenderingMode(.AlwaysOriginal)
         }
         // some of the true statuses are not editable and their user interaction is disabled and painted with grey color
-       if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+       if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
        {
         self.projectNameTextField.userInteractionEnabled = false
         self.projectNameTextField.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -228,7 +228,7 @@
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             fwdImageForCenterX.constant = 215.0
         }
@@ -259,35 +259,35 @@
     ///this method passses the data from object to the view controllers
     func resetViewsFromModel() {
         
-        self.projectNameTextField.text = self.sharedDataModel.currentTransaction.transactionDetail.projectName
+        self.projectNameTextField.text = self.viewStateManager.currentTransaction.transactionDetail.projectName
         
-        if(self.sharedDataModel.checkForNewDealStatus == "YES" && self.sharedDataModel.currentTransaction.transactionId == "New" && self.sharedDataModel.currentTransaction.transactionDetail.dealStatus.isEmpty)
+        if(self.viewStateManager.checkForNewDealStatus == "YES" && self.viewStateManager.currentTransaction.transactionId == "New" && self.viewStateManager.currentTransaction.transactionDetail.dealStatus.isEmpty)
         {
             self.dealStatusTextField.text = "Pitch"
-            self.sharedDataModel.currentTransaction.transactionDetail.dealStatus = self.dealStatusTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.dealStatus = self.dealStatusTextField.text!
         }
         else
         {
-            self.dealStatusTextField.text = self.sharedDataModel.currentTransaction.transactionDetail.dealStatus
+            self.dealStatusTextField.text = self.viewStateManager.currentTransaction.transactionDetail.dealStatus
         }
-        if(self.sharedDataModel.checkForNewDraftProduct == "YES" && self.sharedDataModel.currentTransaction.transactionId == "New" && self.sharedDataModel.currentTransaction.transactionDetail.product.isEmpty)
+        if(self.viewStateManager.checkForNewDraftProduct == "YES" && self.viewStateManager.currentTransaction.transactionId == "New" && self.viewStateManager.currentTransaction.transactionDetail.product.isEmpty)
         {
             self.productTextField.text = "Bank Loan"
-            self.sharedDataModel.currentTransaction.transactionDetail.product = self.productTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.product = self.productTextField.text!
         }
         else
         {
-            self.productTextField.text = self.sharedDataModel.currentTransaction.transactionDetail.product
+            self.productTextField.text = self.viewStateManager.currentTransaction.transactionDetail.product
         }
 
-        if(self.sharedDataModel.checkForNewDraftSubProduct == "YES" && self.sharedDataModel.currentTransaction.transactionId == "New" && self.sharedDataModel.currentTransaction.transactionDetail.productSub.isEmpty)
+        if(self.viewStateManager.checkForNewDraftSubProduct == "YES" && self.viewStateManager.currentTransaction.transactionId == "New" && self.viewStateManager.currentTransaction.transactionDetail.productSub.isEmpty)
         {
             self.productSubTextField.text = self.productSubs[0]
-            self.sharedDataModel.currentTransaction.transactionDetail.productSub = self.productSubTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.productSub = self.productSubTextField.text!
         }
         else
         {
-            self.productSubTextField.text = self.sharedDataModel.currentTransaction.transactionDetail.productSub
+            self.productSubTextField.text = self.viewStateManager.currentTransaction.transactionDetail.productSub
         }
         //change the product sub here
         self.resetProductSubs()
@@ -297,13 +297,13 @@
             self.productSubPicker?.delegate = self
         }
 
-        if (self.sharedDataModel.currentTransaction.transactionDetail.dealDescription == "") {
+        if (self.viewStateManager.currentTransaction.transactionDetail.dealDescription == "") {
             self.dealDescriptionTextView.text = "enter a Deal Description"
             self.dealDescriptionTextView.textColor = UIColor.lightGrayColor()
             self.dealDescriptionImgWarning.hidden = false
             self.dealDescriptionTxtWarning.hidden = false
         } else {
-            self.dealDescriptionTextView.text = self.sharedDataModel.currentTransaction.transactionDetail.dealDescription
+            self.dealDescriptionTextView.text = self.viewStateManager.currentTransaction.transactionDetail.dealDescription
             self.dealDescriptionImgWarning.hidden = true
             self.dealDescriptionTxtWarning.hidden = true
         }
@@ -315,28 +315,28 @@
 
         //must also reset the Business M&A to a init state since sub has changed
         
-        switch sharedDataModel.getBusinessType(self.sharedDataModel.currentTransaction) {
+        switch viewStateManager.getBusinessType(self.viewStateManager.currentTransaction) {
         case "Buy","Sell","Either":
-            self.sharedDataModel.currentTransaction.businessSelection.hasDerivativesExposure = ""
-            self.sharedDataModel.currentTransaction.businessSelection.hasCommoditiesExposure = ""
-            self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity = ""
-            self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity = ""
+            self.viewStateManager.currentTransaction.businessSelection.hasDerivativesExposure = ""
+            self.viewStateManager.currentTransaction.businessSelection.hasCommoditiesExposure = ""
+            self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity = ""
+            self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity = ""
         case "N/A":
             //reset all after page 1
-            self.sharedDataModel.currentTransaction.businessSelection.isConsolidatedBankingOpportunity = ""
-            self.sharedDataModel.currentTransaction.businessSelection.consolidatedBankingOpportunityDescription = ""
-            self.sharedDataModel.currentTransaction.businessSelection.isInvestmentOpportunity = ""
-            self.sharedDataModel.currentTransaction.businessSelection.investmentOpportunityDescription = ""
-            self.sharedDataModel.currentTransaction.businessSelection.isServicesOpportunity = ""
-            self.sharedDataModel.currentTransaction.businessSelection.servicesOpportunityDescription = ""
-            self.sharedDataModel.currentTransaction.businessSelection.toIncludeCash = ""
-            self.sharedDataModel.currentTransaction.businessSelection.toIncludeStock = ""
-            self.sharedDataModel.currentTransaction.businessSelection.toIncludeOther = ""
-            self.sharedDataModel.currentTransaction.businessSelection.pleaseExplain = ""
-            self.sharedDataModel.currentTransaction.businessSelection.hasDerivativesExposure = ""
-            self.sharedDataModel.currentTransaction.businessSelection.hasCommoditiesExposure = ""
-            self.sharedDataModel.currentTransaction.businessSelection.hasWealthManagementOpportunity = ""
-            self.sharedDataModel.currentTransaction.businessSelection.wealthManagementOpportunity = ""
+            self.viewStateManager.currentTransaction.businessSelection.isConsolidatedBankingOpportunity = ""
+            self.viewStateManager.currentTransaction.businessSelection.consolidatedBankingOpportunityDescription = ""
+            self.viewStateManager.currentTransaction.businessSelection.isInvestmentOpportunity = ""
+            self.viewStateManager.currentTransaction.businessSelection.investmentOpportunityDescription = ""
+            self.viewStateManager.currentTransaction.businessSelection.isServicesOpportunity = ""
+            self.viewStateManager.currentTransaction.businessSelection.servicesOpportunityDescription = ""
+            self.viewStateManager.currentTransaction.businessSelection.toIncludeCash = ""
+            self.viewStateManager.currentTransaction.businessSelection.toIncludeStock = ""
+            self.viewStateManager.currentTransaction.businessSelection.toIncludeOther = ""
+            self.viewStateManager.currentTransaction.businessSelection.pleaseExplain = ""
+            self.viewStateManager.currentTransaction.businessSelection.hasDerivativesExposure = ""
+            self.viewStateManager.currentTransaction.businessSelection.hasCommoditiesExposure = ""
+            self.viewStateManager.currentTransaction.businessSelection.hasWealthManagementOpportunity = ""
+            self.viewStateManager.currentTransaction.businessSelection.wealthManagementOpportunity = ""
         default:
             break
         }
@@ -352,9 +352,9 @@
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 fwdImageForCenterX.constant = 475.5
             }
@@ -365,7 +365,7 @@
         }
         else
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 fwdImageForCenterX.constant = 325.5
             }
@@ -388,7 +388,7 @@
            
         case dealStatusTextField:
          
-            if ((self.sharedDataModel.currentTransaction.transactionStatus == "Draft") && (dealStatusTextField.text == "Completed" || dealStatusTextField.text == "Terminated" || dealStatusTextField.text == "Duplicate")) {
+            if ((self.viewStateManager.currentTransaction.transactionStatus == "Draft") && (dealStatusTextField.text == "Completed" || dealStatusTextField.text == "Terminated" || dealStatusTextField.text == "Duplicate")) {
                 let alert = UIAlertController(title: "Deal Status", message: "Deal Status should not be Terminated/Completed/Duplicate for new deals.Reverting to default Pitch status", preferredStyle: UIAlertControllerStyle.Alert)
                 
                 alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { action in
@@ -407,11 +407,11 @@
                 
                 self.presentViewController(alert, animated: true, completion: nil)
                 self.dealStatusTextField.text = "Pitch"
-                self.sharedDataModel.currentTransaction.transactionDetail.dealStatus = self.dealStatusTextField.text!
+                self.viewStateManager.currentTransaction.transactionDetail.dealStatus = self.dealStatusTextField.text!
             }
             else
             {
-                self.sharedDataModel.currentTransaction.transactionDetail.dealStatus = dealStatusTextField.text!
+                self.viewStateManager.currentTransaction.transactionDetail.dealStatus = dealStatusTextField.text!
 
             }
             if (dealStatusTextField.text == "Dormant" || dealStatusTextField.text == "Completed" || dealStatusTextField.text == "Terminated" || dealStatusTextField.text == "Duplicate") {
@@ -420,11 +420,11 @@
                 //check to see if deal status went backwards by status from db
                 //get index of deal status from DB first
                 
-                let dealStatus = self.sharedDataModel.dealStatusesArray.map { (DealStatusData) -> String in
+                let dealStatus = self.viewStateManager.dealStatusesArray.map { (DealStatusData) -> String in
                     return DealStatusData.dealStatusDescription
                 }
-               // var dbIndex = find(dealStatus,self.sharedDataModel.currentTransaction.transactionDetail.dealStatusDB)
-                let dbIndex = dealStatus.indexOf(self.sharedDataModel.currentTransaction.transactionDetail.dealStatusDB)
+               // var dbIndex = find(dealStatus,self.viewStateManager.currentTransaction.transactionDetail.dealStatusDB)
+                let dbIndex = dealStatus.indexOf(self.viewStateManager.currentTransaction.transactionDetail.dealStatusDB)
                // var selectedIndex = find(dealStatus, dealStatusTextField.text)
                 let selectedIndex = dealStatus.indexOf(dealStatusTextField.text!)
                 if (dbIndex != nil && selectedIndex < dbIndex) {
@@ -432,20 +432,20 @@
                 } else {
                     self.transactionDetailViewController.numberOfPages = 5
                     //clear the backward deal statuses
-                    self.sharedDataModel.currentTransaction.transactionDetail.backwardsDealStatusExplanation = ""
-                    self.sharedDataModel.currentTransaction.transactionDetail.terminatedExplanation = ""
-                    self.sharedDataModel.currentTransaction.transactionDetail.uncollectedFees = "No"
+                    self.viewStateManager.currentTransaction.transactionDetail.backwardsDealStatusExplanation = ""
+                    self.viewStateManager.currentTransaction.transactionDetail.terminatedExplanation = ""
+                    self.viewStateManager.currentTransaction.transactionDetail.uncollectedFees = "No"
                 }
              }
             
 
             self.transactionDetailViewController.transactionDetailPageViewController.setViewControllers([self], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
         case productTextField:
-            self.sharedDataModel.currentTransaction.transactionDetail.product = productTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.product = productTextField.text!
             // enable M&A Business Selection tab
             self.detailViewController.updateMenu()
             if productTextField.text == "M&A" {
-                self.sharedDataModel.currentTransaction.transactionDetail.estimatedPitchDate = ""
+                self.viewStateManager.currentTransaction.transactionDetail.estimatedPitchDate = ""
             }
             
             //also reset the sub product
@@ -454,15 +454,15 @@
             //change the product sub here
             self.resetProductSubs()
             
-            if (self.sharedDataModel.currentTransaction.transactionId == "New"  && productSubTextField.text!.isEmpty)
+            if (self.viewStateManager.currentTransaction.transactionId == "New"  && productSubTextField.text!.isEmpty)
             {
                 self.productSubTextField.text = self.productSubs[0]
-                self.sharedDataModel.currentTransaction.transactionDetail.productSub = self.productSubTextField.text!
+                self.viewStateManager.currentTransaction.transactionDetail.productSub = self.productSubTextField.text!
             }
             else
             {
                 self.productSubTextField.text = self.productSubs[0]
-                self.sharedDataModel.currentTransaction.transactionDetail.productSub = self.productSubTextField.text!
+                self.viewStateManager.currentTransaction.transactionDetail.productSub = self.productSubTextField.text!
             }
             
             if self.productSubs.count != 0 {
@@ -474,7 +474,7 @@
             //self.detailViewController.embeddedHeaderViewController.viewWillAppear(true)
           
         case productSubTextField:
-            self.sharedDataModel.currentTransaction.transactionDetail.productSub = productSubTextField.text!
+            self.viewStateManager.currentTransaction.transactionDetail.productSub = productSubTextField.text!
             self.updateBusinessType()
             //also update the header
             //dont need to do this since it is now refreshed by each click
@@ -494,7 +494,7 @@
         switch textField {
             
             case projectNameTextField:
-                self.sharedDataModel.currentTransaction.transactionDetail.projectName = projectNameTextField.text!
+                self.viewStateManager.currentTransaction.transactionDetail.projectName = projectNameTextField.text!
         default:
             break
         }
@@ -505,7 +505,7 @@
         
         if (textField === dealStatusTextField) {
             
-            self.sharedDataModel.checkForNewDealStatus = "NO"
+            self.viewStateManager.checkForNewDealStatus = "NO"
             self.dealStatusTextField.resignFirstResponder()
             
             let initText: String? = dealStatusTextField.text
@@ -521,7 +521,7 @@
             return false
             
         } else if (textField === productTextField) {
-            self.sharedDataModel.checkForNewDraftProduct = "NO"
+            self.viewStateManager.checkForNewDraftProduct = "NO"
             
             self.productTextField.resignFirstResponder()
             
@@ -539,7 +539,7 @@
             
             
         } else if (textField === productSubTextField) {
-            self.sharedDataModel.checkForNewDraftSubProduct = "NO"
+            self.viewStateManager.checkForNewDraftSubProduct = "NO"
             self.productSubTextField.resignFirstResponder()
             
             let initText: String? = productSubTextField.text
@@ -586,7 +586,7 @@ extension TransactionDetailPage1ViewController: UITextViewDelegate {
             self.dealDescriptionTxtWarning.hidden = true
             textView.textColor = UIColor.blackColor()
 
-            self.sharedDataModel.currentTransaction.transactionDetail.dealDescription = self.dealDescriptionTextView.text
+            self.viewStateManager.currentTransaction.transactionDetail.dealDescription = self.dealDescriptionTextView.text
         }
     }
 }

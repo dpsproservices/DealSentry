@@ -20,7 +20,7 @@ class ContactsTableViewController: UITableViewController {
     var contactsArray: [ContactData]!
     let appAttributes = AppAttributes()
     var contactSearchtableViewController : ContactsSearchTableViewController!
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var selectedContact: TransactionContactData!
     var selectedContactDataFromFilter: ContactData!
     let vcCon = VCConnection.sharedInstance
@@ -131,7 +131,7 @@ class ContactsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.navigationItem.rightBarButtonItem = nil
             
@@ -141,7 +141,7 @@ class ContactsTableViewController: UITableViewController {
     ///this method is used to update the contactsArrayForSearch array if a new contact is added or deleted from transaction contact
     func getContactFromCurrentTransaction()
     {
-        for ContactData in self.sharedDataModel.currentTransaction.transactionContacts
+        for ContactData in self.viewStateManager.currentTransaction.transactionContacts
         {
             contactsArrayForSearch.append(ContactData.contact)
         }
@@ -173,11 +173,11 @@ class ContactsTableViewController: UITableViewController {
     
     @IBAction func dismissSearchContactsView(unwindSeque: UIStoryboardSegue ){
         self.debugUtil.printLog("dismissSearchContactsView", msg: "BEGIN")
-        if !self.sharedDataModel.currentTransaction.transactionContacts.isEmpty {
+        if !self.viewStateManager.currentTransaction.transactionContacts.isEmpty {
             
             // toggle to company questions tab
             contactsArrayForSearch = [ContactData]()
-            currentContactIndex = self.sharedDataModel.currentTransaction.currentTransactionContactIndex
+            currentContactIndex = self.viewStateManager.currentTransaction.currentTransactionContactIndex
             getContactFromCurrentTransaction()
             self.tableView.reloadData()
             setSelectedRow(currentContactIndex)
@@ -193,7 +193,7 @@ class ContactsTableViewController: UITableViewController {
     /// - Parameter sender: this paramater ensures that this method will be invoked only using button
     func addContactAction(sender: UIBarButtonItem) {
         
-        if self.sharedDataModel.currentTransaction.ddtRestriction == "Yes"
+        if self.viewStateManager.currentTransaction.ddtRestriction == "Yes"
         {
             let alert = UIAlertController(title: "DDT Restriction", message: "Ring fenced transaction.Additions to the deal team can only be done by contacting your local Control Group", preferredStyle: UIAlertControllerStyle.Alert)
             
@@ -247,7 +247,7 @@ class ContactsTableViewController: UITableViewController {
             {
                 self.selectedContactDataFromFilter = self.filteredContactsArrayForSearch[selectedIndex]
                 
-                for contactDataSearch in self.sharedDataModel.currentTransaction.transactionContacts
+                for contactDataSearch in self.viewStateManager.currentTransaction.transactionContacts
                 {
                     indexForCollection++
                     
@@ -265,7 +265,7 @@ class ContactsTableViewController: UITableViewController {
         }
         else
         {
-            contactName = self.sharedDataModel.currentTransaction.transactionContacts[selectedIndex].contact.firstName + " " + self.sharedDataModel.currentTransaction.transactionContacts[selectedIndex].contact.lastName
+            contactName = self.viewStateManager.currentTransaction.transactionContacts[selectedIndex].contact.firstName + " " + self.viewStateManager.currentTransaction.transactionContacts[selectedIndex].contact.lastName
         }
         
         setSelectedRow(sender.tag)
@@ -288,7 +288,7 @@ class ContactsTableViewController: UITableViewController {
                         self.selectedContactDataFromFilter = self.filteredContactsArrayForSearch[selectedIndex]
                         self.filteredContactsArrayForSearch.removeAtIndex(selectedIndex)
                         
-                        for contactDataSearch in self.sharedDataModel.currentTransaction.transactionContacts
+                        for contactDataSearch in self.viewStateManager.currentTransaction.transactionContacts
                         {
                             indexForCollection++
                             
@@ -299,7 +299,7 @@ class ContactsTableViewController: UITableViewController {
                             
                         }
                         
-                        self.sharedDataModel.currentTransaction.transactionContacts.removeAtIndex(indexForCollection)
+                        self.viewStateManager.currentTransaction.transactionContacts.removeAtIndex(indexForCollection)
                         self.contactsArrayForSearch = [ContactData]()
                         self.getContactFromCurrentTransaction()
                         self.tableView.reloadData()
@@ -309,7 +309,7 @@ class ContactsTableViewController: UITableViewController {
                             indexForCollection = -1
                             self.selectedContactDataFromFilter = self.filteredContactsArrayForSearch[0]
                             
-                            for contactDataSearch in self.sharedDataModel.currentTransaction.transactionContacts
+                            for contactDataSearch in self.viewStateManager.currentTransaction.transactionContacts
                             {
                                 indexForCollection++
                                 
@@ -334,7 +334,7 @@ class ContactsTableViewController: UITableViewController {
                 }
                 else
                 {
-                    self.sharedDataModel.currentTransaction.transactionContacts.removeAtIndex(selectedIndex)
+                    self.viewStateManager.currentTransaction.transactionContacts.removeAtIndex(selectedIndex)
                     self.contactsArrayForSearch = [ContactData]()
                     self.getContactFromCurrentTransaction()
                     self.tableView.reloadData()
@@ -377,28 +377,28 @@ class ContactsTableViewController: UITableViewController {
 
         if(searchController.active && deleteButtonClicked == "YES")
         {
-            self.selectedContact = self.sharedDataModel.currentTransaction.transactionContacts[searchControlContactIndex]
+            self.selectedContact = self.viewStateManager.currentTransaction.transactionContacts[searchControlContactIndex]
         }
         else
         {
-            self.selectedContact = self.sharedDataModel.currentTransaction.transactionContacts[index]
+            self.selectedContact = self.viewStateManager.currentTransaction.transactionContacts[index]
         }
         currentContactIndex = index
-        self.sharedDataModel.currentTransaction.currentTransactionContactIndex = index
+        self.viewStateManager.currentTransaction.currentTransactionContactIndex = index
     }
     
 
     func reselectRow() {
         var lastSelectedRowIndex: Int = 0
         //We will now have to either display the last selected row.  or "FORCE" create a new row
-        if self.sharedDataModel.currentTransaction.transactionContacts.count > 0 {
-            lastSelectedRowIndex = self.sharedDataModel.currentTransaction.currentTransactionContactIndex
+        if self.viewStateManager.currentTransaction.transactionContacts.count > 0 {
+            lastSelectedRowIndex = self.viewStateManager.currentTransaction.currentTransactionContactIndex
             let lastSelectedIndexPath = NSIndexPath(forRow: lastSelectedRowIndex, inSection: 0)
             self.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             //self.detailViewController.selectedIndex = 1
             self.editContactAction(lastSelectedRowIndex)
         } else {
-            lastSelectedRowIndex = self.sharedDataModel.currentTransaction.currentTransactionContactIndex
+            lastSelectedRowIndex = self.viewStateManager.currentTransaction.currentTransactionContactIndex
             let lastSelectedIndexPath = NSIndexPath(forRow: lastSelectedRowIndex, inSection: 0)
             self.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             //self.detailViewController.selectedIndex = 1
@@ -420,8 +420,8 @@ class ContactsTableViewController: UITableViewController {
 //    }
 //    
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.Portrait, UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
-        return orientation
+        let currentOrientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.Portrait, UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
+        return currentOrientation
     }
     
     func handleEditButtonState(){
@@ -464,7 +464,7 @@ class ContactsTableViewController: UITableViewController {
     /// - Returns: returns count as integer
     func getRequestorCount() -> Int{
         var count = 0
-        for c in self.sharedDataModel.currentTransaction.transactionContacts {
+        for c in self.viewStateManager.currentTransaction.transactionContacts {
             if c.role == "Requestor" {
                 count++
             }
@@ -476,7 +476,7 @@ class ContactsTableViewController: UITableViewController {
     /// - Returns: returns count as integer
     func getSponsoringMDCount() -> Int{
         var count = 0
-        for c in self.sharedDataModel.currentTransaction.transactionContacts {
+        for c in self.viewStateManager.currentTransaction.transactionContacts {
             if c.role == "Sponsoring MD" {
                 count++
             }
@@ -488,9 +488,9 @@ class ContactsTableViewController: UITableViewController {
     /// - Returns: returns count as integer
     func getCrossSellCount() -> Int{
         var count = 0
-        if self.sharedDataModel.currentTransaction.transactionDetail.product == "M&A"
+        if self.viewStateManager.currentTransaction.transactionDetail.product == "M&A"
         {
-        for c in self.sharedDataModel.currentTransaction.transactionContacts {
+        for c in self.viewStateManager.currentTransaction.transactionContacts {
             if c.contact.crossSellDesignee {
                 count++
             }
@@ -540,7 +540,7 @@ class ContactsTableViewController: UITableViewController {
     func showHideWarningForCrossSell()
     {
         crossSellCount = getCrossSellCount()
-        if(crossSellCount == 0 && self.sharedDataModel.currentTransaction.transactionDetail.product == "M&A")
+        if(crossSellCount == 0 && self.viewStateManager.currentTransaction.transactionDetail.product == "M&A")
         {
             roleImgWarningForCrossSell.hidden = false
             roleTxtWarningForCrossSell.hidden = false
@@ -584,7 +584,7 @@ extension ContactsTableViewController{
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // Return the number of rows in the section.
       //  self.debugUtil.printLog("numberOfRowsInSect", msg: String(self.contactsArray.count))
-        if self.sharedDataModel.currentTransaction.transactionContacts.count == 0 {
+        if self.viewStateManager.currentTransaction.transactionContacts.count == 0 {
             return 1
         } else {
             return  self.contactsForShowing().count
@@ -607,7 +607,7 @@ extension ContactsTableViewController{
         cell.nameLabel.text = cellContact.firstName +  " " + cellContact.lastName
         
         cell.contactBackgroundView.backgroundColor = UIColor(CGColor: appAttributes.colorOcean)
-            //self.sharedDataModel.selectedCompaniesArray[self.sharedDataModel.currentTransactionCompanyIndex].agreements[indexPath.row]
+            //self.viewStateManager.selectedCompaniesArray[self.viewStateManager.currentTransactionCompanyIndex].agreements[indexPath.row]
             //comment out temporarily
             cell.selectedBackgroundView = appAttributes.getcolorHighlightRowColor()
             
@@ -620,7 +620,7 @@ extension ContactsTableViewController{
             //companyCell.companyBackgroundView.layer.insertSublayer(bgLayer, atIndex: 0)
             cell.contactBackgroundView.backgroundColor = UIColor(CGColor: appAttributes.colorCyan)
         }
-            //self.sharedDataModel.selectedCompaniesArray[self.sharedDataModel.currentTransactionCompanyIndex].company.companyName
+            //self.viewStateManager.selectedCompaniesArray[self.viewStateManager.currentTransactionCompanyIndex].company.companyName
         
         
         var indexForCollection = -1
@@ -631,7 +631,7 @@ extension ContactsTableViewController{
             {
                 selectedContactDataFromFilter = filteredContactsArrayForSearch[indexPath.row]
                 
-                for contactDataSearch in self.sharedDataModel.currentTransaction.transactionContacts
+                for contactDataSearch in self.viewStateManager.currentTransaction.transactionContacts
                 {
                     indexForCollection++
                     
@@ -641,12 +641,12 @@ extension ContactsTableViewController{
                     }
                     
                 }
-                cellContactRole = self.sharedDataModel.currentTransaction.transactionContacts[indexForCollection]
+                cellContactRole = self.viewStateManager.currentTransaction.transactionContacts[indexForCollection]
             }
         }
         else
         {
-            cellContactRole = self.sharedDataModel.currentTransaction.transactionContacts[indexPath.row]
+            cellContactRole = self.viewStateManager.currentTransaction.transactionContacts[indexPath.row]
         }
         
             cell.roleLabel.text = cellContactRole.role
@@ -656,17 +656,17 @@ extension ContactsTableViewController{
             
             showHideWarnings()
         
-            if sharedDataModel.currentTransaction.transactionDetail.product == "M&A"
+            if viewStateManager.currentTransaction.transactionDetail.product == "M&A"
             {
                 showHideWarningForCrossSell()
             }
 
-            if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+            if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
             {
                 cell.deleteButton.hidden = true
             }
         
-           else if self.sharedDataModel.currentTransaction.transactionContacts.count == 1 || cellContactRole.role == "Requestor" || self.sharedDataModel.currentTransaction.ddtRestriction == "Yes"
+           else if self.viewStateManager.currentTransaction.transactionContacts.count == 1 || cellContactRole.role == "Requestor" || self.viewStateManager.currentTransaction.ddtRestriction == "Yes"
             {
                 cell.deleteButton.hidden = true
             }
@@ -707,7 +707,7 @@ extension ContactsTableViewController{
                 {
                     selectedContactDataFromFilter = filteredContactsArrayForSearch[selectedIndex]
                
-                    for contactDataSearch in self.sharedDataModel.currentTransaction.transactionContacts
+                    for contactDataSearch in self.viewStateManager.currentTransaction.transactionContacts
                         {
                             indexForCollection++
 
@@ -717,13 +717,13 @@ extension ContactsTableViewController{
                             }
 
                         }
-                self.selectedContact = self.sharedDataModel.currentTransaction.transactionContacts[indexForCollection]
+                self.selectedContact = self.viewStateManager.currentTransaction.transactionContacts[indexForCollection]
                 currentContactIndex = indexForCollection
                 }
             }
             else
             {
-                self.selectedContact = self.sharedDataModel.currentTransaction.transactionContacts[selectedIndex]
+                self.selectedContact = self.viewStateManager.currentTransaction.transactionContacts[selectedIndex]
                 currentContactIndex = selectedIndex
             }
             
@@ -731,7 +731,7 @@ extension ContactsTableViewController{
             self.selectedContact = nil
             
         }
-        self.sharedDataModel.currentTransaction.currentTransactionContactIndex = selectedIndex
+        self.viewStateManager.currentTransaction.currentTransactionContactIndex = selectedIndex
          
         self.editContactAction(indexPath.row)
        // var index = String(indexPath.row)

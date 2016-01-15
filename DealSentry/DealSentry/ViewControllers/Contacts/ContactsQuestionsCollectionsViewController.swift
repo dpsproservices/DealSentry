@@ -13,7 +13,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
     
     var viewForDealSummary1:UIView = UIView()
     var agreementDescriptionLabel:UILabel = UILabel()
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var detailViewController: DetailViewController!
     let appAttributes = AppAttributes()
     var contactSearchtableViewController : ContactsSearchTableViewController!
@@ -40,7 +40,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
         
         var contactName = ""
         
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
             let lastSelectedIndexPath1 = NSIndexPath(forRow: currentContactIndex, inSection: 0)
             [self.collectionView(self.collectionView!, didDeselectItemAtIndexPath: lastSelectedIndexPath1)]
@@ -49,7 +49,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
             [self.collectionView(self.collectionView!, didSelectItemAtIndexPath: lastSelectedIndexPath)]
             deleteButtonClicked = "YES"
             
-            contactName = self.sharedDataModel.currentTransaction.transactionContacts[sender.tag].contact.firstName + " " + self.sharedDataModel.currentTransaction.transactionContacts[sender.tag].contact.lastName
+            contactName = self.viewStateManager.currentTransaction.transactionContacts[sender.tag].contact.firstName + " " + self.viewStateManager.currentTransaction.transactionContacts[sender.tag].contact.lastName
             
             let alert = UIAlertController(title: "Delete Contact" , message: "Deleting company " + " Are you certain you wish to delete " + contactName + " from the deal team?", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
@@ -60,7 +60,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
                 case .Default:
                     
                     
-                        self.sharedDataModel.currentTransaction.transactionContacts.removeAtIndex(sender.tag)
+                        self.viewStateManager.currentTransaction.transactionContacts.removeAtIndex(sender.tag)
                         self.contactsTableViewController.contactsArrayForSearch = [ContactData]()
                         self.contactsTableViewController.getContactFromCurrentTransaction()
                         self.contactsTableViewController.tableView.reloadData()
@@ -108,7 +108,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
         let lab1 = v.subviews[1] as! UILabel
 */
         
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
             let lastSelectedIndexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
             collectionViewSelectedIndex = sender.tag
@@ -119,7 +119,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
             
             var indexForCurrentCrossSellDesignee = -1
             var designeeName = ""
-            for contactDataForCrossSellDesignee in self.sharedDataModel.currentTransaction.transactionContacts
+            for contactDataForCrossSellDesignee in self.viewStateManager.currentTransaction.transactionContacts
             {
                 indexForCurrentCrossSellDesignee = indexForCurrentCrossSellDesignee + 1
                 if contactDataForCrossSellDesignee.contact.crossSellDesignee
@@ -132,13 +132,13 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
             if designeeName.isEmpty
             {
                 sender.selected = true
-                if sharedDataModel.checkForCollapseButton == "YES"
+                if viewStateManager.checkForCollapseButton == "YES"
                 {
                     collectionViewSelectedIndex = sender.tag
-                    self.sharedDataModel.currentTransaction.transactionContacts[collectionViewSelectedIndex].contact.crossSellDesignee = true
+                    self.viewStateManager.currentTransaction.transactionContacts[collectionViewSelectedIndex].contact.crossSellDesignee = true
                     self.crossSellImgWarning = false
                     
-                    self.selectedContact = self.sharedDataModel.currentTransaction.transactionContacts[collectionViewSelectedIndex]
+                    self.selectedContact = self.viewStateManager.currentTransaction.transactionContacts[collectionViewSelectedIndex]
                     self.contactsTableViewController.tableView.reloadData()
                     let lastSelectedIndexPath = NSIndexPath(forRow: self.collectionViewSelectedIndex, inSection: 0)
                     self.contactsTableViewController.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -150,7 +150,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
                     self.crossSellImgWarning = false
                     
                     self.contactsTableViewController.tableView.reloadData()
-                    let lastSelectedIndexPath = NSIndexPath(forRow: self.sharedDataModel.currentTransaction.currentTransactionContactIndex, inSection: 0)
+                    let lastSelectedIndexPath = NSIndexPath(forRow: self.viewStateManager.currentTransaction.currentTransactionContactIndex, inSection: 0)
                     self.contactsTableViewController.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                     self.collectionView!.reloadData()
                 }
@@ -168,14 +168,14 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
                     case .Default:
                         
                         sender.selected = true
-                        self.sharedDataModel.currentTransaction.transactionContacts[indexForCurrentCrossSellDesignee].contact.crossSellDesignee = false
+                        self.viewStateManager.currentTransaction.transactionContacts[indexForCurrentCrossSellDesignee].contact.crossSellDesignee = false
                         
-                        if self.sharedDataModel.checkForCollapseButton == "YES"
+                        if self.viewStateManager.checkForCollapseButton == "YES"
                         {
                             self.collectionViewSelectedIndex = sender.tag
-                            self.sharedDataModel.currentTransaction.transactionContacts[self.collectionViewSelectedIndex].contact.crossSellDesignee = true
+                            self.viewStateManager.currentTransaction.transactionContacts[self.collectionViewSelectedIndex].contact.crossSellDesignee = true
                             self.crossSellImgWarning = false
-                            self.selectedContact = self.sharedDataModel.currentTransaction.transactionContacts[self.collectionViewSelectedIndex]
+                            self.selectedContact = self.viewStateManager.currentTransaction.transactionContacts[self.collectionViewSelectedIndex]
                             self.contactsTableViewController.tableView.reloadData()
                             let lastSelectedIndexPath = NSIndexPath(forRow: self.collectionViewSelectedIndex, inSection: 0)
                             self.contactsTableViewController.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -187,7 +187,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
                             self.crossSellImgWarning = false
                             
                             self.contactsTableViewController.tableView.reloadData()
-                            let lastSelectedIndexPath = NSIndexPath(forRow: self.sharedDataModel.currentTransaction.currentTransactionContactIndex, inSection: 0)
+                            let lastSelectedIndexPath = NSIndexPath(forRow: self.viewStateManager.currentTransaction.currentTransactionContactIndex, inSection: 0)
                             self.contactsTableViewController.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                             self.collectionView!.reloadData()
                         }
@@ -205,12 +205,12 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
         } else {
             sender.selected = false
 
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 collectionViewSelectedIndex = sender.tag
-                self.sharedDataModel.currentTransaction.transactionContacts[collectionViewSelectedIndex].contact.crossSellDesignee = false
+                self.viewStateManager.currentTransaction.transactionContacts[collectionViewSelectedIndex].contact.crossSellDesignee = false
                 self.crossSellImgWarning = true
-                self.selectedContact = self.sharedDataModel.currentTransaction.transactionContacts[self.collectionViewSelectedIndex]
+                self.selectedContact = self.viewStateManager.currentTransaction.transactionContacts[self.collectionViewSelectedIndex]
                 self.contactsTableViewController.tableView.reloadData()
                 let lastSelectedIndexPath = NSIndexPath(forRow: self.collectionViewSelectedIndex, inSection: 0)
                 self.contactsTableViewController.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -222,7 +222,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
                 self.crossSellImgWarning = true
                 
                 self.contactsTableViewController.tableView.reloadData()
-                let lastSelectedIndexPath = NSIndexPath(forRow: self.sharedDataModel.currentTransaction.currentTransactionContactIndex, inSection: 0)
+                let lastSelectedIndexPath = NSIndexPath(forRow: self.viewStateManager.currentTransaction.currentTransactionContactIndex, inSection: 0)
                 self.contactsTableViewController.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
                 self.collectionView!.reloadData()
             }
@@ -238,9 +238,9 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
     @IBAction func avatarRoleAction(sender: UIButton) {
         self.debugUtil.printLog("avatar", msg: "BEGIN")
         self.debugUtil.printLog("avatar", msg: String(sender.tag))
-            self.contactRolesArrayForContact = self.sharedDataModel.contactRolesArray
+            self.contactRolesArrayForContact = self.viewStateManager.contactRolesArray
             checkForRequestor()
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
             let lastSelectedIndexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
             collectionViewSelectedIndex = sender.tag
@@ -286,7 +286,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
 //        
 //            var selectedIndex = selectedIndexPath
 //            if (selectedIndex != nil) {
-//       //         self.sharedDataModel.currentTransaction.transactionContacts.removeAtIndex(selectedIndex)
+//       //         self.viewStateManager.currentTransaction.transactionContacts.removeAtIndex(selectedIndex)
 //                self.collectionView!.reloadData()
 //            }
 //            self.deleteButton.enabled = false
@@ -300,7 +300,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
 //    func deleteContactFromIconAction(sender: UIBarButtonItem) {
 //        var selectedIndexPath = self.collectionView!.indexPathsForSelectedItems()
 //        
-//        self.sharedDataModel.currentTransaction.transactionContacts.removeAtIndex(sender.tag)
+//        self.viewStateManager.currentTransaction.transactionContacts.removeAtIndex(sender.tag)
 //        self.collectionView!.reloadData()
 // //       self.deleteButton.enabled = false
 //
@@ -313,7 +313,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
         
         if selectedContact == nil
         {
-            selectedContact = self.sharedDataModel.currentTransaction.transactionContacts[self.sharedDataModel.currentTransaction.currentTransactionContactIndex]
+            selectedContact = self.viewStateManager.currentTransaction.transactionContacts[self.viewStateManager.currentTransaction.currentTransactionContactIndex]
         }
 
         var sponsFound:Bool = false
@@ -327,7 +327,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
 
         if crossFound == true {
             crossSellImgWarning = false
-        } else if self.sharedDataModel.currentTransaction.transactionDetail.product == "M&A" {
+        } else if self.viewStateManager.currentTransaction.transactionDetail.product == "M&A" {
             crossSellImgWarning = true
         }
         if sponsFound == true {
@@ -343,7 +343,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
     /// - Parameter sender: this paramater ensures that this method will be invoked only using button
     func addContactAction(sender: UIButton) {
         
-        if self.sharedDataModel.currentTransaction.ddtRestriction == "Yes"
+        if self.viewStateManager.currentTransaction.ddtRestriction == "Yes"
         {
             let alert = UIAlertController(title: "DDT Restriction", message: "Ring fenced transaction.Additions to the deal team can only be done by contacting your local Control Group", preferredStyle: UIAlertControllerStyle.Alert)
             
@@ -392,12 +392,12 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
     
     @IBAction func dismissSearchContactsView(unwindSeque: UIStoryboardSegue ){
         self.debugUtil.printLog("dismissSearchContactsView", msg: "BEGIN")
-        if !self.sharedDataModel.currentTransaction.transactionContacts.isEmpty {
+        if !self.viewStateManager.currentTransaction.transactionContacts.isEmpty {
             
             // toggle to company questions tab
             
             self.contactsTableViewController.contactsArrayForSearch = [ContactData]()
-            self.contactsTableViewController.currentContactIndex = self.sharedDataModel.currentTransaction.currentTransactionContactIndex
+            self.contactsTableViewController.currentContactIndex = self.viewStateManager.currentTransaction.currentTransactionContactIndex
             currentContactIndex = self.contactsTableViewController.currentContactIndex
 
             self.contactsTableViewController.getContactFromCurrentTransaction()
@@ -417,7 +417,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        checkForOrientationChange()
+        checkOrientation()
         //showToolBar()
         initHeaderMsg()
         self.collectionView!.reloadData()
@@ -466,11 +466,11 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
 //        toolBarCustom.setItems(toolBarItems, animated: true)
 //    }
     
-    func checkForOrientationChange()
+    func checkOrientation()
     {
-        if sharedDataModel.checkForOrientationChange == "landscape"
+        if viewStateManager.currentOrientation == "landscape"
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.agreementDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x , agreementDescriptionLabel.frame.origin.y, agreementDescriptionLabel.frame.size.width, agreementDescriptionLabel.frame.size.height)
                 addAgreementButton.frame = CGRectMake( 800,  15,  22, 22)
@@ -479,7 +479,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
         }
         else
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.agreementDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x - 150, agreementDescriptionLabel.frame.origin.y, agreementDescriptionLabel.frame.size.width, agreementDescriptionLabel.frame.size.height)
                 addAgreementButton.frame = CGRectMake( 650,  15,  22, 22)
@@ -490,9 +490,10 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+      
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.agreementDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x , agreementDescriptionLabel.frame.origin.y, agreementDescriptionLabel.frame.size.width, agreementDescriptionLabel.frame.size.height)
                 addAgreementButton.frame = CGRectMake( 800,  15,  22, 22)
@@ -501,7 +502,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
         }
         else
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.agreementDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x - 150, agreementDescriptionLabel.frame.origin.y, agreementDescriptionLabel.frame.size.width, agreementDescriptionLabel.frame.size.height)
                 addAgreementButton.frame = CGRectMake( 650,  15,  22, 22)
@@ -545,7 +546,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
         self.handleDeleteButtonState()
         self.collectionView!.backgroundColor = appAttributes.colorBackgroundColor
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             addAgreementButton.userInteractionEnabled = false
         }
@@ -583,7 +584,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
         //  var height = bounds.size.height
         widthforScreen = CGFloat(width)
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
             
             UIView.animateWithDuration(0.1, animations: {
@@ -598,7 +599,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
                 let companyWidth =  self.agreementDescriptionLabel.frame.size.width
                 let companyHeight = self.agreementDescriptionLabel.frame.size.height
                 
-                if self.sharedDataModel.checkForOrientationChange == "portrait"
+                if self.viewStateManager.currentOrientation == "portrait"
                 {
                     self.agreementDescriptionLabel.frame = CGRectMake(companyX - 150, companyY, companyWidth, companyHeight)
                     self.addAgreementButton.frame = CGRectMake( 650,  15,  22, 22)
@@ -627,7 +628,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
                 self.agreementDescriptionLabel.frame = CGRectMake( 150, 10,  width, 30.00)
                 self.agreementDescriptionLabel.textAlignment = NSTextAlignment.Natural
             })
-            self.sharedDataModel.currentTransaction.currentTransactionContactIndex = currentContactIndex
+            self.viewStateManager.currentTransaction.currentTransactionContactIndex = currentContactIndex
            // toolBarCustom.hidden = true
         }
         self.collectionView!.reloadData()
@@ -643,7 +644,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
         var countForRequestor = -1
       //  var countForSponsoringMD = -1
         
-        for contacRoleValue in self.sharedDataModel.currentTransaction.transactionContacts
+        for contacRoleValue in self.viewStateManager.currentTransaction.transactionContacts
         {
             if contacRoleValue.role == "Requestor"
             {
@@ -675,7 +676,7 @@ class ContactsQuestionsCollectionsViewController: UICollectionViewController {
         if countForRequestor == -1 /*&& countForSponsoringMD == -1*/
         {
             self.contactRolesArrayForContact = [ContactRoleData]()
-            self.contactRolesArrayForContact = self.sharedDataModel.contactRolesArray
+            self.contactRolesArrayForContact = self.viewStateManager.contactRolesArray
         }
     }
     
@@ -710,10 +711,10 @@ extension ContactsQuestionsCollectionsViewController: PopTextPickerDelegate {
            
         }
         //self.collectionView?.indexPathsForSelectedItems()
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            self.sharedDataModel.currentTransaction.transactionContacts[collectionViewSelectedIndex].role = textField.text!
-            self.selectedContact = self.sharedDataModel.currentTransaction.transactionContacts[self.collectionViewSelectedIndex]
+            self.viewStateManager.currentTransaction.transactionContacts[collectionViewSelectedIndex].role = textField.text!
+            self.selectedContact = self.viewStateManager.currentTransaction.transactionContacts[self.collectionViewSelectedIndex]
             contactsTableViewController.tableView.reloadData()
             let lastSelectedIndexPath = NSIndexPath(forRow: self.collectionViewSelectedIndex, inSection: 0)
             contactsTableViewController.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -724,7 +725,7 @@ extension ContactsQuestionsCollectionsViewController: PopTextPickerDelegate {
         {
             self.selectedContact.role = textField.text!
             contactsTableViewController.tableView.reloadData()
-            let lastSelectedIndexPath = NSIndexPath(forRow: self.sharedDataModel.currentTransaction.currentTransactionContactIndex, inSection: 0)
+            let lastSelectedIndexPath = NSIndexPath(forRow: self.viewStateManager.currentTransaction.currentTransactionContactIndex, inSection: 0)
             contactsTableViewController.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
             self.initHeaderMsg()
             self.collectionView!.reloadData()
@@ -736,7 +737,7 @@ extension ContactsQuestionsCollectionsViewController: PopTextPickerDelegate {
 }
 extension ContactsQuestionsCollectionsViewController: UITextFieldDelegate {
  /*   func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        self.rolePicker = PopTextPicker(forTextField: textField, pickerItemsArray: self.sharedDataModel.contactRolesArray)
+        self.rolePicker = PopTextPicker(forTextField: textField, pickerItemsArray: self.viewStateManager.contactRolesArray)
         self.rolePicker?.delegate = self
      
         textField.resignFirstResponder()
@@ -762,9 +763,9 @@ extension ContactsQuestionsCollectionsViewController {
         return 1
     }
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            return sharedDataModel.currentTransaction.transactionContacts.count
+            return viewStateManager.currentTransaction.transactionContacts.count
         }
         else
         {
@@ -827,10 +828,10 @@ extension ContactsQuestionsCollectionsViewController {
             
             let cell: ContactsQuestionsCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("ContactsQuestionCollectionsViewCell", forIndexPath: indexPath) as! ContactsQuestionsCollectionViewCell
             let cellContact:TransactionContactData!
-            // var cellContact = self.sharedDataModel.selectedContactsArray[indexPath.row]
-            if sharedDataModel.checkForCollapseButton == "YES"
+            // var cellContact = self.viewStateManager.selectedContactsArray[indexPath.row]
+            if viewStateManager.checkForCollapseButton == "YES"
             {
-                cellContact = self.sharedDataModel.currentTransaction.transactionContacts[indexPath.row]
+                cellContact = self.viewStateManager.currentTransaction.transactionContacts[indexPath.row]
                 cell.employeeBackgroundView.backgroundColor = UIColor(CGColor: appAttributes.colorCyan)
 
             }
@@ -848,7 +849,7 @@ extension ContactsQuestionsCollectionsViewController {
         }
         else
         {
-            if sharedDataModel.checkForCollapseButton == "NO"
+            if viewStateManager.checkForCollapseButton == "NO"
             {
                 cell.employeeBackgroundView.backgroundColor = UIColor(CGColor: appAttributes.colorOcean)
             }
@@ -867,7 +868,7 @@ extension ContactsQuestionsCollectionsViewController {
             cell.roleTextField.text = cellContact.role
             cell.roleTextField.tag = indexPath.row
             
-            cell.gocDescriptionLabel.text = cellContact.contact.gocDescription
+            cell.departmentLabel.text = cellContact.contact.department
             cell.crossSellButton.tag = indexPath.row
             cell.emailLabel.text = cellContact.contact.email
             cell.telLabel.text = cellContact.contact.phone
@@ -882,7 +883,7 @@ extension ContactsQuestionsCollectionsViewController {
             cell.avatarRoleButton.tag = indexPath.row
         
             appAttributes.setColorAttributesButton(cell.crossSellButton)
-            if (sharedDataModel.currentTransaction.transactionDetail.product == "M&A") {
+            if (viewStateManager.currentTransaction.transactionDetail.product == "M&A") {
                 cell.crossSellButton.hidden = false
                 if (cellContact.contact.crossSellDesignee) {
                     cell.crossSellButton.selected = true
@@ -905,7 +906,7 @@ extension ContactsQuestionsCollectionsViewController {
             
             // Configure the cell...
             self.debugUtil.printLog("tableView index ", msg: String(indexPath.row))
-            self.debugUtil.printLog("tableView count ", msg: String(self.sharedDataModel.currentTransaction.transactionContacts.count))
+            self.debugUtil.printLog("tableView count ", msg: String(self.viewStateManager.currentTransaction.transactionContacts.count))
 
             
             
@@ -914,7 +915,7 @@ extension ContactsQuestionsCollectionsViewController {
             cell.layer.cornerRadius = appAttributes.textViewCornerRadius
             cell.backgroundColor = appAttributes.textBackgroundColor
 
-            if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+            if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
             {
                 cell.avatarRoleButton.userInteractionEnabled = false
                 cell.roleTextField.userInteractionEnabled = false
@@ -931,9 +932,9 @@ extension ContactsQuestionsCollectionsViewController {
                 //cell.deleteButton.hidden = false
         }
         
-        if self.sharedDataModel.checkForCollapseButton == "YES"
+        if self.viewStateManager.checkForCollapseButton == "YES"
         {
-            if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+            if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
             {
                 cell.deleteButton.userInteractionEnabled = false
                 cell.deleteButton.hidden = true
@@ -949,7 +950,7 @@ extension ContactsQuestionsCollectionsViewController {
             cell.deleteButton.hidden = true
         }
         
-        if  cellContact.role == "Requestor" || self.sharedDataModel.currentTransaction.ddtRestriction == "Yes"
+        if  cellContact.role == "Requestor" || self.viewStateManager.currentTransaction.ddtRestriction == "Yes"
         {
             cell.avatarRoleButton.userInteractionEnabled = false
             cell.roleTextField.userInteractionEnabled = false
@@ -970,7 +971,7 @@ extension ContactsQuestionsCollectionsViewController {
         if (selectedIndex != nil){
             self.handleDeleteButtonState()
         }
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
             
             if deleteButtonClicked == "YES" || defaultRowSelected == "YES"
@@ -983,7 +984,7 @@ extension ContactsQuestionsCollectionsViewController {
             
             let cell = self.collectionView?.cellForItemAtIndexPath(indexPath) as! ContactsQuestionsCollectionViewCell
             cell.employeeBackgroundView.backgroundColor = UIColor(CGColor: appAttributes.colorOcean)
-            self.selectedContact = self.sharedDataModel.currentTransaction.transactionContacts[indexPath.row]
+            self.selectedContact = self.viewStateManager.currentTransaction.transactionContacts[indexPath.row]
            // let lastSelectedIndexPath = NSIndexPath(forRow: self.collectionViewSelectedIndex, inSection: 0)
             if(searchControllerActive == "NO")
             {
@@ -1003,7 +1004,7 @@ extension ContactsQuestionsCollectionsViewController {
 
     
     override func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
          let paths = collectionView.indexPathsForVisibleItems()
         for indexPath in paths

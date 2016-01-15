@@ -8,7 +8,7 @@ class DefineCompanyViewController: UIViewController {
     
     var debugUtil = DebugUtility(thisClassName: "DefineCompanyViewController",enabled: false)
     
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var detailViewController: DetailViewController!
     var embeddedMapController: CompanyMap!
     
@@ -77,7 +77,7 @@ class DefineCompanyViewController: UIViewController {
         {
         if(self.companyNameTextField.text != "")
         {
-            for companyName in self.sharedDataModel.companynameArrayForManuallyDefined
+            for companyName in self.viewStateManager.companynameArrayForManuallyDefined
             {
                 if companyName.caseInsensitiveCompare(self.companyNameTextField.text!) == NSComparisonResult.OrderedSame
                 {
@@ -105,9 +105,9 @@ class DefineCompanyViewController: UIViewController {
             if(self.editMode && self.definedCompany != nil){
                 //update company edited record with the new manual defined Company
                 
-                let companyIndex = self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex
+                let companyIndex = self.viewStateManager.currentTransaction.currentTransactionCompanyIndex
                 
-                self.sharedDataModel.currentTransaction.editCompanyAtIndex(companyIndex,transactionCompany: self.getManuallyDefinedCompany() )
+                self.viewStateManager.currentTransaction.editCompanyAtIndex(companyIndex,transactionCompany: self.getManuallyDefinedCompany() )
                 self.detailViewController.changeToMaterialityVC()
                 self.detailViewController.selectedIndex = 1
                 self.detailViewController.embeddedMaterialityViewController.materialityPage1ViewController.viewWillAppear(true)
@@ -117,7 +117,7 @@ class DefineCompanyViewController: UIViewController {
             } else {
                 //add as manual defined company
                 
-                self.sharedDataModel.currentTransaction.addCompany(self.getManuallyDefinedCompany())
+                self.viewStateManager.currentTransaction.addCompany(self.getManuallyDefinedCompany())
           
                 self.performSegueWithIdentifier("dismissDefineCompanyView", sender: self)
                 //self.debugUtil.printLog("doneAction",  msg: self.getManuallyDefinedCompany().companyName)
@@ -147,7 +147,7 @@ class DefineCompanyViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        var segments = self.sharedDataModel.segmentsArray.map { (SegmentsData) -> String in
+        var segments = self.viewStateManager.segmentsArray.map { (SegmentsData) -> String in
             return SegmentsData.name
         }
         segments = segments.sort({ $0 < $1 })
@@ -155,7 +155,7 @@ class DefineCompanyViewController: UIViewController {
         self.marketSegmentPicker = PopTextPicker(forTextField: marketSegmentTextField, pickerItemsArray: segments)
         self.marketSegmentTextField.delegate = self
         
-        var industries = self.sharedDataModel.industriesArray.map { (IndustryData) -> String in
+        var industries = self.viewStateManager.industriesArray.map { (IndustryData) -> String in
             return IndustryData.name
         }
         industries = industries.sort({ $0 < $1 })
@@ -163,14 +163,14 @@ class DefineCompanyViewController: UIViewController {
         self.franchiseIndustryPicker = PopTextPicker(forTextField: franchiseIndustryTextField, pickerItemsArray: industries)
         self.franchiseIndustryTextField.delegate = self
         
-        var countries = self.sharedDataModel.countriesArray.map { (CountryData) -> String in
+        var countries = self.viewStateManager.countriesArray.map { (CountryData) -> String in
             return CountryData.countryName
         }
          countries = countries.sort({ $0 < $1 })
         
         self.countryPicker = PopTextPicker(forTextField: countryTextField, pickerItemsArray: countries)
         self.countryTextField.delegate = self
-        var companyRole = self.sharedDataModel.companyRolesArray.map { (CompanyRoleData) -> String in
+        var companyRole = self.viewStateManager.companyRolesArray.map { (CompanyRoleData) -> String in
             return CompanyRoleData.roleDescription
         }
         companyRole = companyRole.sort({ $0 < $1 })
@@ -234,14 +234,14 @@ class DefineCompanyViewController: UIViewController {
     /// this method add an object of transaction company to the transaction object data
     func getManuallyDefinedCompany() -> TransactionCompanyData {
         var parComp = ""
-        if(self.sharedDataModel.checkForCountryPicker == "YES")
+        if(self.viewStateManager.checkForCountryPicker == "YES")
         {
             var i = 0
             var found = false
             var selectedCountry = ""
-            while i<self.sharedDataModel.countriesArray.count && !found{
-                if self.sharedDataModel.countriesArray[i].countryName == self.self.countryTextField.text {
-                    selectedCountry = self.sharedDataModel.countriesArray[i].countryCode
+            while i<self.viewStateManager.countriesArray.count && !found{
+                if self.viewStateManager.countriesArray[i].countryName == self.self.countryTextField.text {
+                    selectedCountry = self.viewStateManager.countriesArray[i].countryCode
                     found = true
                 }
                 i++
@@ -294,7 +294,7 @@ class DefineCompanyViewController: UIViewController {
     
     
     func resetView() {
-        self.sharedDataModel.definedCompany = nil
+        self.viewStateManager.definedCompany = nil
         self.companyNameTextField.text = ""
         self.exchangeTextField.text = ""
         self.tickerTextField.text = ""
@@ -330,9 +330,9 @@ class DefineCompanyViewController: UIViewController {
             var selectedCountryName = ""
             var i = 0
             var found = false
-            while i<self.sharedDataModel.countriesArray.count && !found{
-                if self.sharedDataModel.countriesArray[i].countryCode == self.countryCode {
-                    selectedCountryName = self.sharedDataModel.countriesArray[i].countryName
+            while i<self.viewStateManager.countriesArray.count && !found{
+                if self.viewStateManager.countriesArray[i].countryCode == self.countryCode {
+                    selectedCountryName = self.viewStateManager.countriesArray[i].countryName
                     found = true
                 }
                 i++
@@ -385,7 +385,7 @@ extension DefineCompanyViewController: UITextFieldDelegate {
             return false
             
         } else if (textField === countryTextField) {
-            self.sharedDataModel.checkForCountryPicker = "YES"
+            self.viewStateManager.checkForCountryPicker = "YES"
             self.countryTextField.resignFirstResponder()
             
             let initText: String? = countryTextField.text

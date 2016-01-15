@@ -3,8 +3,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AppDelegate.h"
-#import "Transaction.h"
+#import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+
+//#import "DealSentry-Swift.h"
+
+@class AppDelegate;
 
 @interface DataManager : NSObject
 {
@@ -13,35 +17,36 @@
     BOOL isTransactionIdChanged;
     BOOL isSaved;
 }
+
 @property(weak,nonatomic) AppDelegate *sharedDelegate;
 
-@property(nonatomic,strong) NSArray *arrayForCompanyRoles;
+@property(strong,nonatomic) NSArray *arrayForCompanyRoles;
+@property(strong,nonatomic) NSArray *arrayForContactRoles;
+@property(strong,nonatomic) NSArray *arrayForAgreementTypes;
+@property(strong,nonatomic) NSArray *arrayForDealStatuses;
+@property(strong,nonatomic) NSArray *arrayForIndustries;
+@property(strong,nonatomic) NSArray *arrayForLoanTypes;
+@property(strong,nonatomic) NSArray *arrayForOfferingFormat;
+@property(strong,nonatomic) NSArray *arrayForSegments;
+@property(strong,nonatomic) NSArray *arrayForTransactionStatuses;
+@property(strong,nonatomic) NSArray *arrayForUseOfProceeds;
+@property(strong,nonatomic) NSArray *arrayForProduct;
+@property(strong,nonatomic) NSArray *arrayForProductSub;
+@property(strong,nonatomic) NSArray *arrayForCountries;
+@property(strong,nonatomic) NSArray *arrayForProductmap;
 
-@property(nonatomic,strong) NSMutableArray *arrayForContact;
-@property(nonatomic,strong) NSArray *arrayForContactRoles;
-@property(nonatomic,strong) NSArray *arrayForAgreementTypes;
-@property(nonatomic,strong) NSArray *arrayForDealStatuses;
-@property(nonatomic,strong) NSArray *arrayForIndustries;
-@property(nonatomic,strong) NSArray *arrayForLoanTypes;
-@property(nonatomic,strong) NSArray *arrayForOfferingFormat;
-@property(nonatomic,strong) NSArray *arrayForSegments;
-@property(nonatomic,strong) NSArray *arrayForTransactionStatuses;
-@property(nonatomic,strong) NSArray *arrayForUseOfProceeds;
-@property(nonatomic,strong) NSArray *arrayForProduct;
-@property(nonatomic,strong) NSArray *arrayForProductSub;
-@property(nonatomic,strong) NSArray *arrayForCountries;
-@property(nonatomic,strong) NSArray *arrayForProductmap;
-@property(nonatomic,strong) NSMutableArray *arrayForCompanies;
-@property(nonatomic,strong) NSMutableArray *arrayForTransaction;
+@property(strong,nonatomic) NSMutableArray *arrayForContact;
+@property(strong,nonatomic) NSMutableArray *arrayForCompanies;
+@property(strong,nonatomic) NSMutableArray *arrayForTransaction;
 
-@property(nonatomic,strong) NSString *checkIndependentEntities;
 @property(strong,nonatomic) NSString *draftId;
 @property(strong,nonatomic) NSString *transactionId;
 @property(strong,nonatomic) NSString *companyId;
 @property(strong,nonatomic) NSString *deletedTransactionId;
 @property(strong,nonatomic) NSString *transactionIdFromTransaction;
 @property(strong,nonatomic) NSString *userIdFromLogin;
-@property(strong,nonatomic) NSString *checkForOrientationChange;
+@property(strong,nonatomic) NSString *checkIndependentEntities;
+@property(strong,nonatomic) NSString *currentOrientation;
 @property(strong,nonatomic) NSMutableArray *transactionIdArray;
 
 +(id) getInstance;

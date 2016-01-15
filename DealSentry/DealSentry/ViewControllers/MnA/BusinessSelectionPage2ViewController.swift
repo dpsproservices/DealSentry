@@ -7,7 +7,7 @@ import UIKit
 class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "BusinessSelectionPage2ViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     let appAttributes = AppAttributes()
     @IBOutlet weak var backImage: UIImageView!
     @IBOutlet weak var forwardImage: UIImageView!
@@ -33,14 +33,14 @@ class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController 
     /// this method will set the index for consolidatedBankSegmentedControl and update the corresponding object of the transaction
     @IBAction func consolidatedBankValueChangeAction(sender: AnyObject) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.isConsolidatedBankingOpportunity = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.isConsolidatedBankingOpportunity = "Yes"
             self.consolidatedBenefitTextView.editable = true
             opp1ImgWarning.hidden = false
             opp1TxtWarning.hidden = false
 
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.isConsolidatedBankingOpportunity = "No"
-            self.sharedDataModel.currentTransaction.businessSelection.consolidatedBankingOpportunityDescription = ""
+            self.viewStateManager.currentTransaction.businessSelection.isConsolidatedBankingOpportunity = "No"
+            self.viewStateManager.currentTransaction.businessSelection.consolidatedBankingOpportunityDescription = ""
             self.consolidatedBenefitTextView.text = ""
             self.consolidatedBenefitTextView.editable = false
             opp1ImgWarning.hidden = true
@@ -53,13 +53,13 @@ class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController 
         /// this method will set the index for investmentOpportunitySegmentedControl and update the corresponding object of the transaction
     @IBAction func investmentOpportunityValueChangeAction(sender: AnyObject) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.isInvestmentOpportunity = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.isInvestmentOpportunity = "Yes"
             self.investmentOpportunityTextView.editable = true
             opp2ImgWarning.hidden = false
             opp2TxtWarning.hidden = false
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.isInvestmentOpportunity = "No"
-            self.sharedDataModel.currentTransaction.businessSelection.investmentOpportunityDescription = ""
+            self.viewStateManager.currentTransaction.businessSelection.isInvestmentOpportunity = "No"
+            self.viewStateManager.currentTransaction.businessSelection.investmentOpportunityDescription = ""
             self.investmentOpportunityTextView.text = ""
             self.investmentOpportunityTextView.editable = false
             opp2ImgWarning.hidden = true
@@ -87,12 +87,12 @@ class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController 
     ///this method provides data from the object to the view controller
     func resetViewsFromModel() {
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.isConsolidatedBankingOpportunity == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.isConsolidatedBankingOpportunity == "Yes") {
             self.consolidatedBankSegmentedControl.selectedSegmentIndex = 1
             self.consolidatedBenefitTextView.editable = true
             seg1ImgWarning.hidden = true
             seg1TxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.isConsolidatedBankingOpportunity == "No"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.isConsolidatedBankingOpportunity == "No"{
             self.consolidatedBankSegmentedControl.selectedSegmentIndex = 0
             self.consolidatedBenefitTextView.editable = false
             seg1ImgWarning.hidden = true
@@ -104,12 +104,12 @@ class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController 
             seg1TxtWarning.hidden = false
 
         }
-        if (self.sharedDataModel.currentTransaction.businessSelection.isInvestmentOpportunity == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.isInvestmentOpportunity == "Yes") {
             self.investmentOpportunitySegmentedControl.selectedSegmentIndex = 1
             self.investmentOpportunityTextView.editable = true
             seg2ImgWarning.hidden = true
             seg2TxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.isInvestmentOpportunity == "No"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.isInvestmentOpportunity == "No"{
             self.investmentOpportunitySegmentedControl.selectedSegmentIndex = 0
             self.investmentOpportunityTextView.editable = false
             seg2ImgWarning.hidden = false
@@ -122,25 +122,25 @@ class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController 
         }
 
 
-        if (self.sharedDataModel.currentTransaction.businessSelection.consolidatedBankingOpportunityDescription == "" && self.sharedDataModel.currentTransaction.businessSelection.isConsolidatedBankingOpportunity == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.consolidatedBankingOpportunityDescription == "" && self.viewStateManager.currentTransaction.businessSelection.isConsolidatedBankingOpportunity == "Yes") {
             self.consolidatedBenefitTextView.text = "enter a Opportunity Description"
             self.consolidatedBenefitTextView.textColor = UIColor.lightGrayColor()
             opp1ImgWarning.hidden = false
             opp1TxtWarning.hidden = false
           
         } else {
-            self.consolidatedBenefitTextView.text = self.sharedDataModel.currentTransaction.businessSelection.consolidatedBankingOpportunityDescription
+            self.consolidatedBenefitTextView.text = self.viewStateManager.currentTransaction.businessSelection.consolidatedBankingOpportunityDescription
             opp1ImgWarning.hidden = true
             opp1TxtWarning.hidden = true
         }
-        if (self.sharedDataModel.currentTransaction.businessSelection.investmentOpportunityDescription == "" && self.sharedDataModel.currentTransaction.businessSelection.isInvestmentOpportunity == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.investmentOpportunityDescription == "" && self.viewStateManager.currentTransaction.businessSelection.isInvestmentOpportunity == "Yes") {
             self.investmentOpportunityTextView.text = "enter a Opportunity Description"
             self.investmentOpportunityTextView.textColor = UIColor.lightGrayColor()
             opp2ImgWarning.hidden = false
             opp2TxtWarning.hidden = false
 
         } else {
-            self.investmentOpportunityTextView.text = self.sharedDataModel.currentTransaction.businessSelection.investmentOpportunityDescription
+            self.investmentOpportunityTextView.text = self.viewStateManager.currentTransaction.businessSelection.investmentOpportunityDescription
             opp2ImgWarning.hidden = true
             opp2TxtWarning.hidden = true
         }
@@ -148,7 +148,7 @@ class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController 
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             backImageCenterX.constant = -215.0
             forwardImageCenterX.constant = 215.0
@@ -180,7 +180,7 @@ class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -475.5
                 forwardImageCenterX.constant = 475.5
@@ -194,7 +194,7 @@ class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -365.0
                 forwardImageCenterX.constant = 365.0
@@ -229,7 +229,7 @@ class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController 
             forwardImage.image = image.imageWithColor(UIColor(CGColor: appAttributes.colorBlue)).imageWithRenderingMode(.AlwaysOriginal)
         }
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.consolidatedBankSegmentedControl.userInteractionEnabled = false
             self.consolidatedBankSegmentedControl.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -257,9 +257,9 @@ class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController 
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -475.5
                 forwardImageCenterX.constant = 475.5
@@ -275,7 +275,7 @@ class BusinessSelectionPage2ViewController: BusinessSelectionPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -325.5
                 forwardImageCenterX.constant = 325.5
@@ -304,7 +304,7 @@ extension BusinessSelectionPage2ViewController: UITextViewDelegate {
     
     func textViewDidChange(textView: UITextView) {
         if (textView === consolidatedBenefitTextView) {
-            self.sharedDataModel.currentTransaction.businessSelection.consolidatedBankingOpportunityDescription = self.consolidatedBenefitTextView.text
+            self.viewStateManager.currentTransaction.businessSelection.consolidatedBankingOpportunityDescription = self.consolidatedBenefitTextView.text
             if self.consolidatedBenefitTextView == "" {
                 opp1ImgWarning.hidden = false
                 opp1TxtWarning.hidden = false
@@ -315,7 +315,7 @@ extension BusinessSelectionPage2ViewController: UITextViewDelegate {
             }
         }
         if (textView === investmentOpportunityTextView) {
-            self.sharedDataModel.currentTransaction.businessSelection.investmentOpportunityDescription = self.investmentOpportunityTextView.text
+            self.viewStateManager.currentTransaction.businessSelection.investmentOpportunityDescription = self.investmentOpportunityTextView.text
             if self.investmentOpportunityTextView == "" {
                 opp2ImgWarning.hidden = false
                 opp2TxtWarning.hidden = false

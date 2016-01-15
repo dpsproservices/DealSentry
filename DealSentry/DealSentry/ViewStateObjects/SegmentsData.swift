@@ -4,7 +4,7 @@
 
 import Foundation
 
-class SegmentsData: NSObject {
+@objc class SegmentsData: NSObject {
     
     var id: String = ""
     var name: String = ""

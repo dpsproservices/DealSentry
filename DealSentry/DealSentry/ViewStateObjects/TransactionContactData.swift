@@ -5,7 +5,7 @@
 
 import Foundation
 
-class TransactionContactData: NSObject {
+@objc class TransactionContactData: NSObject {
     var contact: ContactData
     var role: String = ""
     var currentTransactionContactIndex:Int = 0

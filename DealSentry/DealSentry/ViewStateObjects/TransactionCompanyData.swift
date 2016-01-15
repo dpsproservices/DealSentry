@@ -4,7 +4,7 @@
 
 import Foundation
 
-class TransactionCompanyData: NSObject {
+@objc class TransactionCompanyData: NSObject {
     var company: CompanyData
     var role: String = ""
     var materiality : MaterialityData

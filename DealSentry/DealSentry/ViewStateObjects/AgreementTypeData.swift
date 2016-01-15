@@ -4,7 +4,7 @@
 
 import Foundation
 
-class AgreementTypeData: NSObject {
+@objc class AgreementTypeData: NSObject {
     
     var agreementTypeId: String = ""
     var agreementDesc: String = ""

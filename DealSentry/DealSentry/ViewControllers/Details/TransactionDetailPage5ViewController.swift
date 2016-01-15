@@ -7,7 +7,7 @@ import UIKit
 class TransactionDetailPage5ViewController: TransactionDetailPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "TransactionDetailPage4ViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
 
     @IBOutlet weak var nonProfitImgWarning: UIImageView!
     @IBOutlet weak var nonProfitTxtWarning: UILabel!
@@ -24,7 +24,7 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
     }
     
     @IBAction func forwardButtonAction(sender: UIButton) {
-        if (!self.sharedDataModel.currentTransaction.transactionDetail.dealStatus.isEmpty){
+        if (!self.viewStateManager.currentTransaction.transactionDetail.dealStatus.isEmpty){
             self.transactionDetailViewController.goToPage(6,whichWay: 1)
             NSNotificationCenter.defaultCenter().postNotificationName("NotificationIdentifier", object: nil)
 
@@ -46,18 +46,18 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
     /// this method will set the index for financialSponsorSegmentedControl segmentControl and update the corresponding object of the transaction
     @IBAction func sponsorValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.transactionDetail.hasFinancialSponsor = "Yes"
+            self.viewStateManager.currentTransaction.transactionDetail.hasFinancialSponsor = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.transactionDetail.hasFinancialSponsor = "No"
+            self.viewStateManager.currentTransaction.transactionDetail.hasFinancialSponsor = "No"
         }
     }
     
     /// this method will set the index for nonProfitSegmentedControl segmentControl and update the corresponding object of the transaction
     @IBAction func nonProfitValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.transactionDetail.hasNonProfitOrganization = "Yes"
+            self.viewStateManager.currentTransaction.transactionDetail.hasNonProfitOrganization = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.transactionDetail.hasNonProfitOrganization = "No"
+            self.viewStateManager.currentTransaction.transactionDetail.hasNonProfitOrganization = "No"
         }
         self.nonProfitImgWarning.hidden = true
         self.nonProfitTxtWarning.hidden = true
@@ -66,9 +66,9 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
     /// this method will set the index for govtAffiliatedSegmentedControl segmentControl and update the corresponding object of the transaction
     @IBAction func govtAffiliatedValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.transactionDetail.hasUSGovtAffiliatedMunicipality = "Yes"
+            self.viewStateManager.currentTransaction.transactionDetail.hasUSGovtAffiliatedMunicipality = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.transactionDetail.hasUSGovtAffiliatedMunicipality = "No"
+            self.viewStateManager.currentTransaction.transactionDetail.hasUSGovtAffiliatedMunicipality = "No"
         }
         self.govtImgWarning.hidden = true
         self.govtTxtWarning.hidden = true
@@ -76,18 +76,18 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
     
 //    @IBAction func likelyToTakePlaceValueChanged(sender: UISegmentedControl) {
 //        if sender.selectedSegmentIndex == 1 {
-//            self.sharedDataModel.currentTransaction.transactionDetail.likelyToTakePlace = "Yes"
+//            self.viewStateManager.currentTransaction.transactionDetail.likelyToTakePlace = "Yes"
 //        } else {
-//            self.sharedDataModel.currentTransaction.transactionDetail.likelyToTakePlace = "No"
+//            self.viewStateManager.currentTransaction.transactionDetail.likelyToTakePlace = "No"
 //        }
 //    }
     
     
     @IBAction func requestsValueChanged(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.transactionDetail.requests = "Yes"
+            self.viewStateManager.currentTransaction.transactionDetail.requests = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.transactionDetail.requests = "No"
+            self.viewStateManager.currentTransaction.transactionDetail.requests = "No"
         }
         
     }
@@ -96,7 +96,7 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -475.5
                 forwardImageCenterX.constant = 475.5
@@ -110,7 +110,7 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForCollapseButton == "YES"
+            if self.viewStateManager.checkForCollapseButton == "YES"
             {
                 backImageCenterX.constant = -365.0
                 forwardImageCenterX.constant = 365.0
@@ -145,7 +145,7 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
             forwardImage.image = image.imageWithColor(UIColor(CGColor: appAttributes.colorBlue)).imageWithRenderingMode(.AlwaysOriginal)
         }
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.financialSponsorSegmentedControl.userInteractionEnabled = false
             self.financialSponsorSegmentedControl.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -166,7 +166,7 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             backImageCenterX.constant = -215.0
             forwardImageCenterX.constant = 215.0
@@ -200,19 +200,19 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
     
     /// this method provides data from object to view controller
     func resetViewsFromModel() {
-        if self.sharedDataModel.currentTransaction.transactionDetail.hasFinancialSponsor == "Yes" {
+        if self.viewStateManager.currentTransaction.transactionDetail.hasFinancialSponsor == "Yes" {
             self.financialSponsorSegmentedControl.selectedSegmentIndex = 1
-        } else  if self.sharedDataModel.currentTransaction.transactionDetail.hasFinancialSponsor == "No" {
+        } else  if self.viewStateManager.currentTransaction.transactionDetail.hasFinancialSponsor == "No" {
             self.financialSponsorSegmentedControl.selectedSegmentIndex = 0
         } else {
             self.financialSponsorSegmentedControl.selectedSegmentIndex = -1
 
         }
-        if self.sharedDataModel.currentTransaction.transactionDetail.hasNonProfitOrganization == "Yes" {
+        if self.viewStateManager.currentTransaction.transactionDetail.hasNonProfitOrganization == "Yes" {
             self.nonProfitImgWarning.hidden = true
             self.nonProfitTxtWarning.hidden = true
             self.nonProfitSegmentedControl.selectedSegmentIndex = 1
-        } else if self.sharedDataModel.currentTransaction.transactionDetail.hasNonProfitOrganization == "No" {
+        } else if self.viewStateManager.currentTransaction.transactionDetail.hasNonProfitOrganization == "No" {
             self.nonProfitSegmentedControl.selectedSegmentIndex = 0
             self.nonProfitImgWarning.hidden = true
             self.nonProfitTxtWarning.hidden = true
@@ -221,11 +221,11 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
             self.nonProfitImgWarning.hidden = true
             self.nonProfitTxtWarning.hidden = true
         }
-        if self.sharedDataModel.currentTransaction.transactionDetail.hasUSGovtAffiliatedMunicipality == "Yes" {
+        if self.viewStateManager.currentTransaction.transactionDetail.hasUSGovtAffiliatedMunicipality == "Yes" {
             self.govtAffiliatedSegmentedControl.selectedSegmentIndex = 1
             self.govtImgWarning.hidden = true
             self.govtTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.transactionDetail.hasUSGovtAffiliatedMunicipality == "No" {
+        } else if self.viewStateManager.currentTransaction.transactionDetail.hasUSGovtAffiliatedMunicipality == "No" {
             self.govtAffiliatedSegmentedControl.selectedSegmentIndex = 0
             self.govtImgWarning.hidden = true
             self.govtTxtWarning.hidden = true
@@ -234,18 +234,18 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
             self.govtImgWarning.hidden = true
             self.govtTxtWarning.hidden = true
         }
-//        if self.sharedDataModel.currentTransaction.transactionDetail.likelyToTakePlace == "Yes" {
+//        if self.viewStateManager.currentTransaction.transactionDetail.likelyToTakePlace == "Yes" {
 //            self.likelyTakePlaceSegmentedControl.selectedSegmentIndex = 1
-//        } else if self.sharedDataModel.currentTransaction.transactionDetail.likelyToTakePlace == "No"{
+//        } else if self.viewStateManager.currentTransaction.transactionDetail.likelyToTakePlace == "No"{
 //            self.likelyTakePlaceSegmentedControl.selectedSegmentIndex = 0
 //        } else {
 //            self.likelyTakePlaceSegmentedControl.selectedSegmentIndex = -1
 //
 //        }
         /*
-        if self.sharedDataModel.currentTransaction.transactionDetail.requests == "Yes" {
+        if self.viewStateManager.currentTransaction.transactionDetail.requests == "Yes" {
             self.requestsSegmentedControl.selectedSegmentIndex = 1
-        } else if self.sharedDataModel.currentTransaction.transactionDetail.requests == "No"{
+        } else if self.viewStateManager.currentTransaction.transactionDetail.requests == "No"{
             self.requestsSegmentedControl.selectedSegmentIndex = 0
         } else {
             self.requestsSegmentedControl.selectedSegmentIndex = -1
@@ -269,9 +269,9 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -475.5
                 forwardImageCenterX.constant = 475.5
@@ -287,7 +287,7 @@ class TransactionDetailPage5ViewController: TransactionDetailPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 backImageCenterX.constant = -325.5
                 forwardImageCenterX.constant = 325.5

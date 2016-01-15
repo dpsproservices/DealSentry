@@ -11,7 +11,7 @@ import WebKit
 class SliderController: UIViewController
 {
     
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var materialityPage1Controller: MaterialityPage1ViewController!
     @IBOutlet weak var percentSlider: UISlider!
     @IBOutlet weak var percentMinusButton: UIButton!
@@ -25,7 +25,7 @@ class SliderController: UIViewController
         materialityPage1Controller.selectedCompany.materiality.percentOwned = NSString(format: "%.1f", sender.value) as String
         
         newMat = materialityPage1Controller.selectedCompany.materiality
-        self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
+        self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
         materialityPage1Controller.percentOwnedImgWarning.hidden = true
         materialityPage1Controller.percentOwnedTxtWarning.hidden = true
     }
@@ -43,7 +43,7 @@ class SliderController: UIViewController
         materialityPage1Controller.selectedCompany.materiality.percentOwned = String(stringInterpolationSegment: doubleValue)
         
         newMat = materialityPage1Controller.selectedCompany.materiality
-        self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
+        self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
         materialityPage1Controller.percentOwnedImgWarning.hidden = true
         materialityPage1Controller.percentOwnedTxtWarning.hidden = true
         
@@ -62,7 +62,7 @@ class SliderController: UIViewController
         materialityPage1Controller.selectedCompany.materiality.percentOwned = String(stringInterpolationSegment: doubleValue)
         
         newMat = materialityPage1Controller.selectedCompany.materiality
-        self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
+        self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].materiality = newMat
         
     }
     

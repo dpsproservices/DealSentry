@@ -8,7 +8,7 @@ class EnterAgreementViewController: UIViewController {
     
     var debugUtil = DebugUtility(thisClassName: "EnterAgreementViewController",enabled: true)
 
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var detailViewController: DetailViewController!
     var masterViewController: MasterViewController!
     let appAttributes = AppAttributes()
@@ -88,14 +88,14 @@ class EnterAgreementViewController: UIViewController {
     @IBAction func calendarButtonAction(sender: UIButton) {
         if(sender.tag == 441)
         {
-            self.sharedDataModel.selectedButtonTextForDate = "EffectiveDate"
+            self.viewStateManager.selectedButtonTextForDate = "EffectiveDate"
             invisibleButtonForPopover.frame = CGRectMake(sender.frame.origin.x + (sender.frame.size.width/2), (sender.frame.origin.y - 2), invisibleButtonForPopover.frame.size.width, invisibleButtonForPopover.frame.size.height)
             invisibleButtonCenterY.constant = calendarImageEffectiveDateCenterY.constant - 15.0
             invisibleButtonCenterX.constant = calendarImageEffectiveDateCenterX.constant
         }
         else if(sender.tag == 442)
         {
-            self.sharedDataModel.selectedButtonTextForDate = "ExpirationDate"
+            self.viewStateManager.selectedButtonTextForDate = "ExpirationDate"
             invisibleButtonForPopover.frame = CGRectMake(sender.frame.origin.x + (sender.frame.size.width/2), (sender.frame.origin.y - 2), invisibleButtonForPopover.frame.size.width, invisibleButtonForPopover.frame.size.height)
             invisibleButtonCenterY.constant = calendarImageExpirationDateCenterY.constant - 17.0
             invisibleButtonCenterX.constant = calendarImageExpirationDateCenterX.constant
@@ -103,7 +103,7 @@ class EnterAgreementViewController: UIViewController {
 
         else
         {
-            self.sharedDataModel.selectedButtonTextForDate = "EffectiveDate"
+            self.viewStateManager.selectedButtonTextForDate = "EffectiveDate"
         }
         self.performSegueWithIdentifier("dateCalendar", sender: sender)
     }
@@ -113,14 +113,14 @@ class EnterAgreementViewController: UIViewController {
     @IBAction func launchDateCalendar(sender: UITextField) {
         if(sender.tag == 331)
         {
-            self.sharedDataModel.selectedButtonTextForDate = "EffectiveDate"
+            self.viewStateManager.selectedButtonTextForDate = "EffectiveDate"
             invisibleButtonForPopover.frame = CGRectMake(sender.frame.origin.x + (sender.frame.size.width/2), (sender.frame.origin.y - 2), invisibleButtonForPopover.frame.size.width, invisibleButtonForPopover.frame.size.height)
             invisibleButtonCenterY.constant = effectiveDateTextCenterY.constant - 15.0
             invisibleButtonCenterX.constant = effectiveDateTextCenterX.constant
         }
         else if(sender.tag == 332)
         {
-            self.sharedDataModel.selectedButtonTextForDate = "ExpirationDate"
+            self.viewStateManager.selectedButtonTextForDate = "ExpirationDate"
             invisibleButtonForPopover.frame = CGRectMake(sender.frame.origin.x + (sender.frame.size.width/2), (sender.frame.origin.y - 2), invisibleButtonForPopover.frame.size.width, invisibleButtonForPopover.frame.size.height)
             invisibleButtonCenterY.constant = expirationDateTextCenterY.constant - 15.0
             invisibleButtonCenterX.constant = expirationDateTextCenterX.constant
@@ -128,7 +128,7 @@ class EnterAgreementViewController: UIViewController {
             
         else
         {
-            self.sharedDataModel.selectedButtonTextForDate = "EffectiveDate"
+            self.viewStateManager.selectedButtonTextForDate = "EffectiveDate"
         }
         self.performSegueWithIdentifier("dateCalendar", sender: sender)
     }
@@ -148,7 +148,7 @@ class EnterAgreementViewController: UIViewController {
             //update agreement edited record with the new manually entered Agreement
             
             self.debugUtil.printLog("doneAction", msg: "EDITED " + String(currentCompanyIndex) + " " + String(agreementIndex) )
-            self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
+            self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
             
         }
         
@@ -168,7 +168,7 @@ class EnterAgreementViewController: UIViewController {
     
     func initFields() {
         
-        var agreementType = self.sharedDataModel.agreementTypesArray.map { (AgreementTypeData) -> String in
+        var agreementType = self.viewStateManager.agreementTypesArray.map { (AgreementTypeData) -> String in
             return AgreementTypeData.agreementDesc
         }
         agreementType = agreementType.sort({ $0 < $1 })
@@ -188,18 +188,18 @@ class EnterAgreementViewController: UIViewController {
         self.agreementTermsTextView.delegate = self
         self.legalReviewByTextField.delegate = self
         self.exclusivityTextField.delegate = self
-        agreementDescriptionLabel.attributedText = changeStringToBold("Agreements: ",textBold:self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].company.companyName)
+        agreementDescriptionLabel.attributedText = changeStringToBold("Agreements: ",textBold:self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].company.companyName)
             
             
         
         
-        self.currentCompanyIndex = self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex
-        self.agreementIndex =  self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].currentTransactionCompanyAgreementIndex
+        self.currentCompanyIndex = self.viewStateManager.currentTransaction.currentTransactionCompanyIndex
+        self.agreementIndex =  self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].currentTransactionCompanyAgreementIndex
 
 
     }
     override func viewWillAppear(animated: Bool) {
-        checkForOrientationChange()
+        checkOrientation()
 
         initFields()
         if editMode {
@@ -215,15 +215,15 @@ class EnterAgreementViewController: UIViewController {
     
     override func viewWillDisappear(animated: Bool) {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "NotificationIdentifier", object: nil)
-        self.sharedDataModel.checkForAgreementClicked = "NO"
+        self.viewStateManager.checkForAgreementClicked = "NO"
     }
 
     
-    func checkForOrientationChange()
+    func checkOrientation()
     {
-        if sharedDataModel.checkForOrientationChange == "landscape"
+        if viewStateManager.currentOrientation == "landscape"
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.agreementDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x , agreementDescriptionLabel.frame.origin.y, agreementDescriptionLabel.frame.size.width, agreementDescriptionLabel.frame.size.height)
                 addAgreementButton.frame = CGRectMake( 800,  15,  22, 22)
@@ -232,7 +232,7 @@ class EnterAgreementViewController: UIViewController {
         }
         else
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.agreementDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x - 150, agreementDescriptionLabel.frame.origin.y, agreementDescriptionLabel.frame.size.width, agreementDescriptionLabel.frame.size.height)
                 addAgreementButton.frame = CGRectMake( 650,  15,  22, 22)
@@ -245,7 +245,7 @@ class EnterAgreementViewController: UIViewController {
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.agreementDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x , agreementDescriptionLabel.frame.origin.y, agreementDescriptionLabel.frame.size.width, agreementDescriptionLabel.frame.size.height)
                 addAgreementButton.frame = CGRectMake( 800,  15,  22, 22)
@@ -254,7 +254,7 @@ class EnterAgreementViewController: UIViewController {
         }
         else
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 self.agreementDescriptionLabel.frame = CGRectMake(viewForDealSummary1.frame.origin.x - 150, agreementDescriptionLabel.frame.origin.y, agreementDescriptionLabel.frame.size.width, agreementDescriptionLabel.frame.size.height)
                 addAgreementButton.frame = CGRectMake( 650,  15,  22, 22)
@@ -275,8 +275,8 @@ class EnterAgreementViewController: UIViewController {
             legalReviewBy: "",
             exclusivityApprovedBy: ""
         )
-        self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].addAgreement(newAgmt)
-        self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count - 1
+        self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].addAgreement(newAgmt)
+        self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count - 1
         self.agreementsTableViewController.updateLocalVariables()
         self.agreementsTableViewController.tableView.reloadData()
         self.agreementsTableViewController.reselectRow()
@@ -285,7 +285,7 @@ class EnterAgreementViewController: UIViewController {
         
 //        self.detailViewController.embeddedEnterAgreementsViewController.agreementsTableViewController = self
 //        self.detailViewController.embeddedEnterAgreementsViewController.editMode = true
-        self.agreementIndex = self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex 
+        self.agreementIndex = self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex 
         self.enteredAgreement = self.agreementsTableViewController.selectedAgreement
         self.detailViewController.changeToAgreementsVC()
         self.detailViewController.selectedIndex = 1
@@ -302,11 +302,11 @@ class EnterAgreementViewController: UIViewController {
 
         if self.agreementTypeTextField.text!.isEmpty
         {
-            agreementMessage = "Delete this agreement with " + self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].company.companyName + "?"
+            agreementMessage = "Delete this agreement with " + self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].company.companyName + "?"
         }
         else
         {
-            agreementMessage =  "Are you certain you wish to delete " + self.agreementTypeTextField.text!  + " with " + self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].company.companyName + "?"
+            agreementMessage =  "Are you certain you wish to delete " + self.agreementTypeTextField.text!  + " with " + self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].company.companyName + "?"
         }
         
         let alert = UIAlertController(title: "Delete Agreement ", message: agreementMessage, preferredStyle: UIAlertControllerStyle.Alert)
@@ -316,17 +316,17 @@ class EnterAgreementViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { action in
             switch action.style{
             case .Default:
-                self.sharedDataModel.checkForDeleteDraftClicked = "YES"
-                self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.removeAtIndex(self.lastSelectedIndexFromTable)
+                self.viewStateManager.checkForDeleteDraftClicked = "YES"
+                self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.removeAtIndex(self.lastSelectedIndexFromTable)
                 //update index of sharedModel
-                if self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count == 0 {
-                    self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = -1
+                if self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count == 0 {
+                    self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = -1
                     self.vcCon.masterNavigationController.popViewControllerAnimated(true)
 
                     //return back to companies if there are no more agreements
                     self.detailViewController.changeToMaterialityVC()
                 } else {
-                    self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count  - 1
+                    self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count  - 1
                     
                     self.agreementsTableViewController.updateLocalVariables()
                     self.agreementsTableViewController.tableView.reloadData()
@@ -399,7 +399,7 @@ class EnterAgreementViewController: UIViewController {
 
         self.view.backgroundColor = appAttributes.colorBackgroundColor
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.agreementTypeTextField.userInteractionEnabled = false
             self.agreementTypeTextField.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -469,7 +469,7 @@ class EnterAgreementViewController: UIViewController {
                 embeddedDateController =  segue.destinationViewController as! DateCalendar
                 embeddedDateController.enterAgreementVC = self
                 embeddedDateController.preferredContentSize = CGSize(width: 390, height: 360)
-                //  dealSizeWidget.dealSize = self.sharedDataModel.currentTransaction.transactionDetail.dealSize
+                //  dealSizeWidget.dealSize = self.viewStateManager.currentTransaction.transactionDetail.dealSize
             default :
                 break
             }
@@ -587,7 +587,7 @@ class EnterAgreementViewController: UIViewController {
       //  var height = bounds.size.height
         widthforScreen = CGFloat(width)
         
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
             
             UIView.animateWithDuration(0.1, animations: {
@@ -602,7 +602,7 @@ class EnterAgreementViewController: UIViewController {
                 let companyWidth =  self.agreementDescriptionLabel.frame.size.width
                 let companyHeight = self.agreementDescriptionLabel.frame.size.height
                 
-                if self.sharedDataModel.checkForOrientationChange == "portrait"
+                if self.viewStateManager.currentOrientation == "portrait"
                 {
                     self.agreementDescriptionLabel.frame = CGRectMake(companyX - 150, companyY, companyWidth, companyHeight)
                     self.addAgreementButton.frame = CGRectMake( 650,  15,  22, 22)
@@ -654,7 +654,7 @@ extension EnterAgreementViewController: PopTextPickerDelegate {
         case agreementTypeTextField:
             self.enteredAgreement.agreementType = agreementTypeTextField.text!
             //update shared data model
-            self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
+            self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
             agreementsTableViewController.tableView.reloadData()
             let lastSelectedIndexPath = NSIndexPath(forRow: agreementIndex, inSection: 0)
             agreementsTableViewController.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -693,7 +693,7 @@ extension EnterAgreementViewController: PopDatePickerDelegate {
 
             self.effectiveDateImgWarning.hidden = true
             self.effectiveDateTxtWarning.hidden = true
-            self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
+            self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
 
         case expirationDateTextField:
             self.enteredAgreement.expirationDate = expirationDateTextField.text!
@@ -701,7 +701,7 @@ extension EnterAgreementViewController: PopDatePickerDelegate {
             
             self.expirationDateImgWarning.hidden = true
             self.expirationDateTxtWarning.hidden = true
-            self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
+            self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
 
         default:
             break
@@ -726,7 +726,7 @@ extension EnterAgreementViewController: UITextViewDelegate {
 
             self.agreementTermsImgWarning.hidden = true
             self.agreementTermsTxtWarning.hidden = true
-            self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
+            self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
             
            
         }
@@ -744,14 +744,14 @@ extension EnterAgreementViewController: UITextFieldDelegate {
             self.legalReviewTxtWarning.hidden = true
             self.enteredAgreement.legalReviewBy = legalReviewByTextField.text!
             //update shared data model
-            self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
+            self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
 
         case exclusivityTextField:
             self.exclusivelyApprovedImgWarning.hidden = true
             self.exclusivelyApprovedTxtWarning.hidden = true
             self.enteredAgreement.exclusivityApprovedBy = exclusivityTextField.text!
             //update shared data model
-            self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
+            self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].editAgreement(agreementIndex, agreement: self.enteredAgreement)
 
         default:
             break

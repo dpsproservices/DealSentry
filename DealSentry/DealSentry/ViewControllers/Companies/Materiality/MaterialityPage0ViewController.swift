@@ -8,7 +8,7 @@ class MaterialityPage0ViewController: MaterialityPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "MaterialityPage2ViewController", enabled: false)
     var selectedCompany : TransactionCompanyData!
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     let appAttributes = AppAttributes()
     var addCompaniesViewController: AddCompaniesViewController!
     @IBOutlet weak var companyDescriptionLabel: UILabel!

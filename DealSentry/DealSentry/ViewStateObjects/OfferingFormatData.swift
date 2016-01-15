@@ -4,8 +4,7 @@
 
 import Foundation
 
-
-class OfferingFormatData: NSObject {
+@objc class OfferingFormatData: NSObject {
     
     var offeringFormatId: String = ""
     var offeringFormatDescription: String = ""

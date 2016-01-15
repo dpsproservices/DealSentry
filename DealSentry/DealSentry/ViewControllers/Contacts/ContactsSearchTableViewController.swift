@@ -9,7 +9,7 @@ import UIKit
 
 class ContactsSearchTableViewController: UITableViewController {
     var debugUtil = DebugUtility(thisClassName: "ContactsSearchTableViewController", enabled:false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var searchController = UISearchController()
     var selectedContact: ContactData?
     let appAttributes = AppAttributes()
@@ -22,9 +22,9 @@ class ContactsSearchTableViewController: UITableViewController {
         
         if self.selectedContact != nil {
             
-            for ContactData in self.sharedDataModel.currentTransaction.transactionContacts
+            for ContactData in self.viewStateManager.currentTransaction.transactionContacts
             {
-               if ContactData.contact.soeID == selectedContact?.soeID
+               if ContactData.contact.employeeId == selectedContact?.employeeId
                {
                         contactAlreadyPresent = "YES"
                         break
@@ -35,9 +35,9 @@ class ContactsSearchTableViewController: UITableViewController {
             {
                 let newTransContact = TransactionContactData( contact: self.selectedContact!, role: "")
                 
-                self.sharedDataModel.currentTransaction.addContacts([newTransContact]
+                self.viewStateManager.currentTransaction.addContacts([newTransContact]
                 )
-                self.sharedDataModel.currentTransaction.currentTransactionContactIndex = self.sharedDataModel.currentTransaction.transactionContacts.count - 1
+                self.viewStateManager.currentTransaction.currentTransactionContactIndex = self.viewStateManager.currentTransaction.transactionContacts.count - 1
                 
                 self.performSegueWithIdentifier("dismissSearchContactsView", sender: self)
             }
@@ -71,9 +71,9 @@ class ContactsSearchTableViewController: UITableViewController {
     }
     
     @IBAction func cancelAction(sender: UIBarButtonItem) {
-        if self.sharedDataModel.currentTransaction.transactionContacts.count == 1
+        if self.viewStateManager.currentTransaction.transactionContacts.count == 1
         {
-            self.sharedDataModel.currentTransaction.currentTransactionContactIndex = 0
+            self.viewStateManager.currentTransaction.currentTransactionContactIndex = 0
         }
 
         self.performSegueWithIdentifier("dismissSearchContactsView", sender: self)
@@ -172,7 +172,7 @@ extension ContactsSearchTableViewController{
         searchResultContactCell.emailLabel.text = cellCompany.email
         
         searchResultContactCell.phoneLabel.text = cellCompany.phone
-        searchResultContactCell.gocDescriptionLabel.text = cellCompany.gocDescription
+        searchResultContactCell.departmentLabel.text = cellCompany.department
         
         self.debugUtil.printLog("cellForRowAtIndexPath", msg: "END")
         return searchResultContactCell
@@ -199,9 +199,9 @@ extension ContactsSearchTableViewController: UISearchResultsUpdating, UISearchCo
         
         private func contactsForShowing() -> [ContactData] {
             if self.searchController.active {
-                return self.sharedDataModel.filteredContactsArray
+                return self.viewStateManager.filteredContactsArray
             } else {
-                return self.sharedDataModel.contactsArray
+                return self.viewStateManager.contactsArray
             }
         }
     // set the filtered array to the full list, then filter it based on the string matching
@@ -211,12 +211,12 @@ extension ContactsSearchTableViewController: UISearchResultsUpdating, UISearchCo
         
         if ( searchText.isEmpty ) {
             self.debugUtil.printLog("searchForText" , msg: "searchText isEmpty")
-            self.sharedDataModel.filteredContactsArray = self.sharedDataModel.contactsArray // reset to full list
+            self.viewStateManager.filteredContactsArray = self.viewStateManager.contactsArray // reset to full list
         } else {
             self.debugUtil.printLog("searchForText" , msg: "searchText = " + searchText)
             
             // Filter the array using the filter method
-            self.sharedDataModel.filteredContactsArray = self.sharedDataModel.contactsArray.filter({( contact: ContactData) -> Bool in
+            self.viewStateManager.filteredContactsArray = self.viewStateManager.contactsArray.filter({( contact: ContactData) -> Bool in
                 
                 switch scope {
                     

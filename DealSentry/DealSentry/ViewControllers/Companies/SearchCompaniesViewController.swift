@@ -14,7 +14,7 @@ enum CompanySearchScope: Int {
 class SearchCompaniesViewController: UITableViewController {
     
     var debugUtil = DebugUtility(thisClassName: "SearchCompaniesViewController", enabled:false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var detailViewController: DetailViewController!
     var addCompaniesViewController: AddCompaniesViewController! // presenting reference
     
@@ -37,7 +37,7 @@ class SearchCompaniesViewController: UITableViewController {
             
             var companyAlreadyPresent = "NO"
             
-            for transactionCompany in self.sharedDataModel.currentTransaction.transactionCompanies
+            for transactionCompany in self.viewStateManager.currentTransaction.transactionCompanies
             {
                 if transactionCompany.company.companyName.caseInsensitiveCompare(self.selectedCompany!.companyName) == NSComparisonResult.OrderedSame
                 {
@@ -58,7 +58,7 @@ class SearchCompaniesViewController: UITableViewController {
                         isGovtOwned: "", percentOwned: "",
                         //          hasFinancialSponsor: "", hasNonProfitOrganization: "",hasUSGovtAffiliatedMunicipality: "",
                         hasPRC: "", hasStandardAgreements: "", specialCircumstances: ""))
-                self.sharedDataModel.currentTransaction.addCompany(tComp)
+                self.viewStateManager.currentTransaction.addCompany(tComp)
                 
                 // UIView.animateWithDuration(0.3, delay: 0.0, options: nil, animations: {self.detailViewController.companiesContainerView.alpha = 1.0}, completion: nil)
                 
@@ -265,13 +265,13 @@ extension SearchCompaniesViewController: UISearchResultsUpdating, UISearchContro
     
     private func companiesForShowing() -> [CompanyData] {
         if self.searchController.active {
-            return self.sharedDataModel.filteredCompaniesArray
+            return self.viewStateManager.filteredCompaniesArray
         } else {
             
             if self.searchPreviousCompanies {
-                return self.sharedDataModel.previousCompaniesArray
+                return self.viewStateManager.previousCompaniesArray
             } else {
-                return self.sharedDataModel.companiesArray
+                return self.viewStateManager.companiesArray
             }
         }
     }
@@ -283,12 +283,12 @@ extension SearchCompaniesViewController: UISearchResultsUpdating, UISearchContro
         
         if ( searchText.isEmpty ) {
             self.debugUtil.printLog("searchForText" , msg: "searchText isEmpty")
-            self.sharedDataModel.filteredCompaniesArray = self.sharedDataModel.companiesArray // reset to full list
+            self.viewStateManager.filteredCompaniesArray = self.viewStateManager.companiesArray // reset to full list
         } else {
             self.debugUtil.printLog("searchForText" , msg: "searchText = " + searchText)
             
             // Filter the array using the filter method
-            self.sharedDataModel.filteredCompaniesArray = self.sharedDataModel.companiesArray.filter({( company: CompanyData) -> Bool in
+            self.viewStateManager.filteredCompaniesArray = self.viewStateManager.companiesArray.filter({( company: CompanyData) -> Bool in
                 
                 switch scope {
                     

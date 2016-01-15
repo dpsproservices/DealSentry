@@ -8,7 +8,7 @@ class AgreementsTableViewController: UITableViewController {
     var debugUtil = DebugUtility(thisClassName: "AgreementsTableViewController",enabled: false)
     let appAttributes = AppAttributes()
      let vcCon = VCConnection.sharedInstance
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
    
 
     var selectedContact: ContactData!
@@ -68,16 +68,16 @@ class AgreementsTableViewController: UITableViewController {
         alert.addAction(UIAlertAction(title: "Delete", style: .Default, handler: { action in
             switch action.style{
             case .Default:
-                self.sharedDataModel.checkForDeleteDraftClicked = "YES"
-                self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.removeAtIndex(selectedIndex)
+                self.viewStateManager.checkForDeleteDraftClicked = "YES"
+                self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.removeAtIndex(selectedIndex)
                 //update index of sharedModel
-                if self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count == 0 {
-                    self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = -1
+                if self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count == 0 {
+                    self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = -1
                     
                     //return back to companies if there are no more agreements
                     self.back()
                 } else {
-                    self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count  - 1
+                    self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count  - 1
                     
                     self.updateLocalVariables()
                     self.tableView.reloadData()
@@ -97,30 +97,30 @@ class AgreementsTableViewController: UITableViewController {
     
     func setSelectedRow(index: Int) {
         // update the currently selected transaction company index
-        let currentCompIndex = self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex
-        self.sharedDataModel.currentTransaction.transactionCompanies[currentCompIndex].currentTransactionCompanyAgreementIndex = index
+        let currentCompIndex = self.viewStateManager.currentTransaction.currentTransactionCompanyIndex
+        self.viewStateManager.currentTransaction.transactionCompanies[currentCompIndex].currentTransactionCompanyAgreementIndex = index
       
         self.selectedAgreement = self.agreementsArray[index]
      }
     
     func updateLocalVariables(){
-        self.currentCompanyIndex = self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex
+        self.currentCompanyIndex = self.viewStateManager.currentTransaction.currentTransactionCompanyIndex
         
-        self.debugUtil.printLog("updateLocalVar", msg: String(self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex))
-        self.currentTransactionCompany = self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex]
+        self.debugUtil.printLog("updateLocalVar", msg: String(self.viewStateManager.currentTransaction.currentTransactionCompanyIndex))
+        self.currentTransactionCompany = self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex]
         self.currentCompany = self.currentTransactionCompany.company
        // self.debugUtil.printLog("updateLocalVar", msg: currentCompany.companyName)
        // self.debugUtil.printLog("updateLocalVar", msg: currentCompany)
         
         self.agreementsArray = self.currentTransactionCompany.agreements
         if self.agreementsArray.count > 0 {
-            if self.sharedDataModel.checkForDeleteDraftClicked == "YES"
+            if self.viewStateManager.checkForDeleteDraftClicked == "YES"
             {
                 self.selectedAgreement = self.agreementsArray[0]
             }
             else
             {
-                self.selectedAgreement = self.agreementsArray[self.sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].currentTransactionCompanyAgreementIndex]
+                self.selectedAgreement = self.agreementsArray[self.viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].currentTransactionCompanyAgreementIndex]
             }
         }
     }
@@ -130,10 +130,10 @@ class AgreementsTableViewController: UITableViewController {
         
         //We will now have to either display the last selected row.  or "FORCE" create a new row
         if self.agreementsArray.count > 0 {
-            if self.sharedDataModel.checkForDeleteDraftClicked == "YES"
+            if self.viewStateManager.checkForDeleteDraftClicked == "YES"
             {
                 lastSelectedRowIndex = 0
-                self.sharedDataModel.checkForDeleteDraftClicked = "NO"
+                self.viewStateManager.checkForDeleteDraftClicked = "NO"
 
             }
             else
@@ -158,7 +158,7 @@ class AgreementsTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        if sharedDataModel.currentTransaction.transactionCompanies[self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex].agreements.count == 0{
+        if viewStateManager.currentTransaction.transactionCompanies[self.viewStateManager.currentTransaction.currentTransactionCompanyIndex].agreements.count == 0{
             //Add a new Agreement to the table.
             //then pretend its an EDIT mode
             let newAgmt = AgreementData(
@@ -169,8 +169,8 @@ class AgreementsTableViewController: UITableViewController {
                 legalReviewBy: "",
                 exclusivityApprovedBy: ""
             )
-            self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].addAgreement(newAgmt)
-            self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].currentTransactionCompanyAgreementIndex = 0
+            self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].addAgreement(newAgmt)
+            self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].currentTransactionCompanyAgreementIndex = 0
         }
         self.updateLocalVariables()
         self.reselectRow()
@@ -219,7 +219,7 @@ class AgreementsTableViewController: UITableViewController {
             [backBtn],
             animated: false
         )
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.navigationItem.rightBarButtonItem = nil
         }
@@ -246,8 +246,8 @@ class AgreementsTableViewController: UITableViewController {
             legalReviewBy: "",
             exclusivityApprovedBy: ""
         )
-        self.sharedDataModel.currentTransaction.transactionCompanies[currentCompanyIndex].addAgreement(newAgmt)
-        self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = self.sharedDataModel.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count - 1
+        self.viewStateManager.currentTransaction.transactionCompanies[currentCompanyIndex].addAgreement(newAgmt)
+        self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].currentTransactionCompanyAgreementIndex = self.viewStateManager.currentTransaction.transactionCompanies[self.currentCompanyIndex].agreements.count - 1
         self.updateLocalVariables()
         self.tableView.reloadData()
         self.reselectRow()
@@ -291,8 +291,8 @@ class AgreementsTableViewController: UITableViewController {
 //    }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        let orientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.Portrait, UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
-        return orientation
+        let currentOrientation: UIInterfaceOrientationMask = [UIInterfaceOrientationMask.Portrait, UIInterfaceOrientationMask.LandscapeLeft,UIInterfaceOrientationMask.LandscapeRight]
+        return currentOrientation
     }
     
     func handleEditButtonState(){
@@ -398,13 +398,13 @@ extension AgreementsTableViewController{
             
             let cellAgreement = self.agreementsArray[indexPath.row]
             
-            //self.sharedDataModel.selectedCompaniesArray[self.sharedDataModel.currentTransactionCompanyIndex].agreements[indexPath.row]
+            //self.viewStateManager.selectedCompaniesArray[self.viewStateManager.currentTransactionCompanyIndex].agreements[indexPath.row]
             //comment out temporarily
             cell.selectedBackgroundView = appAttributes.getcolorHighlightRowColor()
 
             cell.companyNameLabel.text = self.currentCompany.companyName
             
-                //self.sharedDataModel.selectedCompaniesArray[self.sharedDataModel.currentTransactionCompanyIndex].company.companyName
+                //self.viewStateManager.selectedCompaniesArray[self.viewStateManager.currentTransactionCompanyIndex].company.companyName
             cell.agreementTypeLabel.text = cellAgreement.agreementType
             
             cell.deleteButton.tag = indexPath.row
@@ -417,7 +417,7 @@ extension AgreementsTableViewController{
             }
             
             
-            if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+            if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
             {
                 cell.deleteButton.hidden = true
             }
@@ -442,9 +442,9 @@ extension AgreementsTableViewController{
         if (Int(selectedIndex) != nil){
             self.handleEditButtonState()
             self.handleDeleteButtonState()
-            let currTransIndex = self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex
-            self.sharedDataModel.currentTransaction.transactionCompanies[currTransIndex].currentTransactionCompanyAgreementIndex = selectedIndex
-//            self.sharedDataModel.currentTransactionCompanyAgreementIndex = selectedIndex
+            let currTransIndex = self.viewStateManager.currentTransaction.currentTransactionCompanyIndex
+            self.viewStateManager.currentTransaction.transactionCompanies[currTransIndex].currentTransactionCompanyAgreementIndex = selectedIndex
+//            self.viewStateManager.currentTransactionCompanyAgreementIndex = selectedIndex
             self.selectedAgreement = self.agreementsArray[selectedIndex]
             
         } else {

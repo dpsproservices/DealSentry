@@ -9,7 +9,7 @@ class CompaniesQuestionsViewController: UITableViewController {
     var debugUtil = DebugUtility(thisClassName: "CompaniesQuestionsViewController", enabled: false)
     var selectedCompany: TransactionCompanyData!
     let vcCon = VCConnection.sharedInstance
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     
 
     let appAttributes = AppAttributes()
@@ -38,22 +38,22 @@ class CompaniesQuestionsViewController: UITableViewController {
     func agreementFromIconAction(sender: UIBarButtonItem) {
         self.debugUtil.printLog("agreementaction", msg: String(sender.tag))
 
-        self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = sender.tag
+        self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = sender.tag
         
         let lastSelectedIndexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
         self.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
         //now that user has selected a row, we can re-enable swipe
       //  self.detailViewController.embeddedMaterialityViewController.materialityPage1ViewController.viewWillAppear(true)
         self.detailViewController.showQuestionaireTabByIndex(0)
-        self.sharedDataModel.checkForAgreementClicked = "YES"
+        self.viewStateManager.checkForAgreementClicked = "YES"
     }
     
     /// dismisses company view
     @IBAction func dismissDefineCompanyView(unwindSeque: UIStoryboardSegue ){
         self.debugUtil.printLog("dismissDefineCompanyView", msg: "BEGIN")
 
-        if !self.sharedDataModel.currentTransaction.transactionCompanies.isEmpty {
-            self.sharedDataModel.companynameArrayForManuallyDefined = [String]()
+        if !self.viewStateManager.currentTransaction.transactionCompanies.isEmpty {
+            self.viewStateManager.companynameArrayForManuallyDefined = [String]()
 
             self.tableView.reloadData()
             
@@ -65,8 +65,8 @@ class CompaniesQuestionsViewController: UITableViewController {
     func reselectLastSelectedRow() {
         self.debugUtil.printLog("reselect" , msg: "BEGIN")
         var lastSelectedRowIndex: Int = 0
-        if self.sharedDataModel.currentTransaction.transactionCompanies.count > 0 {
-            lastSelectedRowIndex = self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex
+        if self.viewStateManager.currentTransaction.transactionCompanies.count > 0 {
+            lastSelectedRowIndex = self.viewStateManager.currentTransaction.currentTransactionCompanyIndex
             let lastSelectedIndexPath = NSIndexPath(forRow: lastSelectedRowIndex, inSection: 0)
             self.selectedCompRowIndex = lastSelectedRowIndex
             self.tableView.selectRowAtIndexPath(lastSelectedIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
@@ -110,7 +110,7 @@ class CompaniesQuestionsViewController: UITableViewController {
         self.detailViewController.embeddedMaterialityViewController.materialityPage1ViewController.viewWillAppear(true)
         
         
-        let alert = UIAlertController(title: "Delete Company " +  self.sharedDataModel.currentTransaction.transactionCompanies[selectedCompRowIndex].company.companyName , message: "Deleting company " +  self.sharedDataModel.currentTransaction.transactionCompanies[selectedCompRowIndex].company.companyName + " will also remove its materiality and agreements. Continue?", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Delete Company " +  self.viewStateManager.currentTransaction.transactionCompanies[selectedCompRowIndex].company.companyName , message: "Deleting company " +  self.viewStateManager.currentTransaction.transactionCompanies[selectedCompRowIndex].company.companyName + " will also remove its materiality and agreements. Continue?", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
         
@@ -118,14 +118,14 @@ class CompaniesQuestionsViewController: UITableViewController {
             switch action.style{
             case .Default:
                 self.debugUtil.printLog( String(sender.tag))
-                self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = sender.tag
-                self.sharedDataModel.currentTransaction.removeCompanyAtIndex(sender.tag)
+                self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = sender.tag
+                self.viewStateManager.currentTransaction.removeCompanyAtIndex(sender.tag)
                 self.tableView.reloadData()
                 //after delete make sure items are not selected
-                self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = -1
+                self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = -1
                 
                 
-                if self.sharedDataModel.currentTransaction.transactionCompanies.count == 0{
+                if self.viewStateManager.currentTransaction.transactionCompanies.count == 0{
                     //self.detailViewController.changeToAddCompanyVC()
                     self.detailViewController.embeddedMaterialityViewController.goToPage(3, whichWay: 1)
                     self.showHideWarnings()
@@ -185,10 +185,10 @@ class CompaniesQuestionsViewController: UITableViewController {
     // @IBOutlet weak var tableView: UITableView!
     func setSelectedRow(index: Int) {
         // update the currently selected transaction company index
-        //self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = index
-        self.selectedCompany = self.sharedDataModel.currentTransaction.transactionCompanies[index]
+        //self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = index
+        self.selectedCompany = self.viewStateManager.currentTransaction.transactionCompanies[index]
         
-        self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = index
+        self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = index
         
         //allow user to swipe afterwards
         //   self.materialityViewController.materialityPageViewController.setViewControllers([self.materialityViewController.materialityPage1ViewController], direction: UIPageViewControllerNavigationDirection.Forward, animated: false, completion: nil)
@@ -206,7 +206,7 @@ class CompaniesQuestionsViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         debugUtil.printLog("viewWillappear", msg: "called")
-        self.sharedDataModel.companynameArrayForManuallyDefined = [String]()
+        self.viewStateManager.companynameArrayForManuallyDefined = [String]()
         tableView.reloadData()
 
         self.reselectLastSelectedRow()
@@ -220,7 +220,7 @@ class CompaniesQuestionsViewController: UITableViewController {
         //      self.materialityViewController.pageViewController.isMovingFromParentViewController()
         
         //    self.materialityViewController.pageViewController.dataSource = nil
-        if self.sharedDataModel.currentTransaction.transactionCompanies.count == 0 {
+        if self.viewStateManager.currentTransaction.transactionCompanies.count == 0 {
             self.detailViewController.embeddedMaterialityViewController.goToPage(3, whichWay: 1)
             self.detailViewController.embeddedMaterialityViewController.pageViewController.dataSource = nil
 
@@ -229,7 +229,7 @@ class CompaniesQuestionsViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-//        for var i=0; i<self.sharedDataModel.currentTransaction.transactionCompanies.count - 1; i++ {
+//        for var i=0; i<self.viewStateManager.currentTransaction.transactionCompanies.count - 1; i++ {
 //            var indexPath = NSIndexPath(forRow: i, inSection: 0)
 //
 //            var cell = self.tableView.cellForRowAtIndexPath(indexPath) as! CompaniesQuestionsTableViewCell
@@ -272,7 +272,7 @@ class CompaniesQuestionsViewController: UITableViewController {
             animated: false
         )
 
-       // var backTitle = self.sharedDataModel.selectedCategory + " (" + String(self.sharedDataModel.getTransactionCountByCategory(self.sharedDataModel.selectedCategory)) + ")"
+       // var backTitle = self.viewStateManager.selectedCategory + " (" + String(self.viewStateManager.getTransactionCountByCategory(self.viewStateManager.selectedCategory)) + ")"
         let backButton = UIBarButtonItem (
             //image: UIImage( named: "back.png" ),
             title: "< Deals",
@@ -291,7 +291,7 @@ class CompaniesQuestionsViewController: UITableViewController {
         //super.pageNumber = 1
         self.view.layer.backgroundColor = (appAttributes.colorBackgroundColor).CGColor
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.navigationItem.rightBarButtonItem = nil
             
@@ -307,12 +307,12 @@ class CompaniesQuestionsViewController: UITableViewController {
         self.debugUtil.printLog("didReceiveMemoryWarning", msg: "END")
     }
     func editFromIconAction(sender: UIBarButtonItem) {
-        self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = sender.tag
+        self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = sender.tag
         //  prepareForSegue("editCompany",sender)
         
     }
     func showHideWarnings() {
-        if self.sharedDataModel.currentTransaction.transactionCompanies.count == 0 {
+        if self.viewStateManager.currentTransaction.transactionCompanies.count == 0 {
             roleImgWarning.hidden = true
             roleTxtWarning.hidden = true
             
@@ -370,10 +370,10 @@ class CompaniesQuestionsViewController: UITableViewController {
                 self.debugUtil.printLog("prepareForSegue", msg: "Edit Defined company")
                 
                 
-                self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = sender!.tag
+                self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = sender!.tag
                 self.setSelectedRow(sender!.tag)
                 // this will be used later by Define Company view
-                self.sharedDataModel.definedCompany = self.selectedCompany
+                self.viewStateManager.definedCompany = self.selectedCompany
                 
                 let navigationController = segue.destinationViewController as! UINavigationController
                 
@@ -383,8 +383,8 @@ class CompaniesQuestionsViewController: UITableViewController {
                 self.defineCompanyViewController.definedCompany = self.selectedCompany
                 self.defineCompanyViewController.editMode = true
                 
-                //set the index from the sharedDataModel first.
-                //make sure this is the correct index corresponding to the sharedDataModel
+                //set the index from the viewStateManager first.
+                //make sure this is the correct index corresponding to the viewStateManager
                 //currently it works for both edit/delete
              //   let selectedIndexPath = self.tableView.indexPathForSelectedRow!
                 //var selectedIndex = selectedIndexPath.row
@@ -395,9 +395,9 @@ class CompaniesQuestionsViewController: UITableViewController {
             case "showAgreements":
             //    self.debugUtil.printLog("prepareForSegue", msg: "segueId = showAgreements template")
                 if sender != nil {
-                    self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = sender!.tag
+                    self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = sender!.tag
                 }
-                self.setSelectedRow(self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex)
+                self.setSelectedRow(self.viewStateManager.currentTransaction.currentTransactionCompanyIndex)
                 
                // self.performSegueWithIdentifier("showQuestionaire", sender: self)
                 self.agreementsViewController = segue.destinationViewController as! AgreementsTableViewController
@@ -434,7 +434,7 @@ extension CompaniesQuestionsViewController: UIPopoverPresentationControllerDeleg
     func addCompany(sender: UIBarButtonItem) {
         //  self.debugUtil.printLog("addCompany", msg: "BEGIN")
 
-       // if sharedDataModel.currentTransaction.transactionCompanies.count > 0 {
+       // if viewStateManager.currentTransaction.transactionCompanies.count > 0 {
             /*
             var popoverContent = detailViewController.embeddedAddCompaniesViewController
             popoverContent.preferredContentSize = CGSizeMake(600,700)
@@ -461,7 +461,7 @@ extension CompaniesQuestionsViewController: UIPopoverPresentationControllerDeleg
 extension CompaniesQuestionsViewController: PopTextPickerDelegate {
     func getPrimaryClientCount() -> Int{
         var count = 0
-        for c in self.sharedDataModel.currentTransaction.transactionCompanies {
+        for c in self.viewStateManager.currentTransaction.transactionCompanies {
             if c.role == "Primary Client" {
                 count++
             }
@@ -470,17 +470,17 @@ extension CompaniesQuestionsViewController: PopTextPickerDelegate {
     }
     func textDelegateCallBack(textField: UITextField) {
         if textField.text == "Primary Client" {
-            self.sharedDataModel.currentTransaction.transactionCompanies[textField.tag].role = textField.text!
-            self.sharedDataModel.currentTransaction.primaryClient = self.sharedDataModel.currentTransaction.transactionCompanies[textField.tag].company.companyName
+            self.viewStateManager.currentTransaction.transactionCompanies[textField.tag].role = textField.text!
+            self.viewStateManager.currentTransaction.primaryClient = self.viewStateManager.currentTransaction.transactionCompanies[textField.tag].company.companyName
             //also update the header
            // self.detailViewController.embeddedHeaderViewController.viewWillAppear(true)
         } else {
-            if self.sharedDataModel.currentTransaction.transactionCompanies[textField.tag].role == "Primary Client" {
-                self.sharedDataModel.currentTransaction.primaryClient = ""
+            if self.viewStateManager.currentTransaction.transactionCompanies[textField.tag].role == "Primary Client" {
+                self.viewStateManager.currentTransaction.primaryClient = ""
                 //also update the header
                // self.detailViewController.embeddedHeaderViewController.viewWillAppear(true)
             }
-            self.sharedDataModel.currentTransaction.transactionCompanies[textField.tag].role = textField.text!
+            self.viewStateManager.currentTransaction.transactionCompanies[textField.tag].role = textField.text!
         }
         primaryRoleCount = getPrimaryClientCount()
         self.showHideWarnings()
@@ -491,7 +491,7 @@ extension CompaniesQuestionsViewController: PopTextPickerDelegate {
 extension CompaniesQuestionsViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         
-        var companyRole = self.sharedDataModel.companyRolesArray.map { (CompanyRoleData) -> String in
+        var companyRole = self.viewStateManager.companyRolesArray.map { (CompanyRoleData) -> String in
             return CompanyRoleData.roleDescription
         }
         companyRole = companyRole.sort({ $0 < $1 })
@@ -522,7 +522,7 @@ extension CompaniesQuestionsViewController {
     
     func styleizeButtons(cell: CompaniesQuestionsTableViewCell) {
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             cell.roleTextField.backgroundColor = appAttributes.grayColorForClosedDeals
 
@@ -545,18 +545,18 @@ extension CompaniesQuestionsViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //  self.debugUtil.printLog("numberOfRowsInSection", msg: "BEGIN")
-        //  self.debugUtil.printLog("numberOfRowsInSection", msg: "company row count = "+ String(self.sharedDataModel.currentTransaction.transactionCompanies.count))
+        //  self.debugUtil.printLog("numberOfRowsInSection", msg: "company row count = "+ String(self.viewStateManager.currentTransaction.transactionCompanies.count))
         //  self.debugUtil.printLog("numberOfRowsInSection", msg: "END")
         
         //reloading table view - make sure no rows are selected
-        //self.sharedDataModel.currentTransactionCompanyIndex = -1
+        //self.viewStateManager.currentTransactionCompanyIndex = -1
         
-        if (self.sharedDataModel.currentTransaction.transactionCompanies.count == 0) {
+        if (self.viewStateManager.currentTransaction.transactionCompanies.count == 0) {
             return 1 // No Companies added yet.
             //return nil
         } else {
             primaryRoleCount = 0
-           return self.sharedDataModel.currentTransaction.transactionCompanies.count
+           return self.viewStateManager.currentTransaction.transactionCompanies.count
         }
     }
     
@@ -564,7 +564,7 @@ extension CompaniesQuestionsViewController {
         //  self.debugUtil.printLog("numberOfSectionsInTableView", msg: "BEGIN")
         //  self.debugUtil.printLog("numberOfSectionsInTableView", msg: "END" )
         var numberOfSections = 0
-        if !self.sharedDataModel.currentTransaction.transactionCompanies.isEmpty
+        if !self.viewStateManager.currentTransaction.transactionCompanies.isEmpty
         {
             numberOfSections = 1
             self.tableView.separatorStyle = UITableViewCellSeparatorStyle.SingleLine
@@ -584,15 +584,15 @@ extension CompaniesQuestionsViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             //  self.debugUtil.printLog("tableViewCommitEdit", msg: String(indexPath.row))
-            self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = indexPath.row
-            self.sharedDataModel.currentTransaction.removeCompanyAtIndex(indexPath.row)
+            self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = indexPath.row
+            self.viewStateManager.currentTransaction.removeCompanyAtIndex(indexPath.row)
             //self.hideButtonsFromDelete()
         
             //after delete make sure items are not selected
-            self.sharedDataModel.currentTransaction.currentTransactionCompanyIndex = -1
+            self.viewStateManager.currentTransaction.currentTransactionCompanyIndex = -1
             
             
-            if self.sharedDataModel.currentTransaction.transactionCompanies.count == 0{
+            if self.viewStateManager.currentTransaction.transactionCompanies.count == 0{
                 self.detailViewController.changeToAddCompanyVC()
                 
             } else {
@@ -627,7 +627,7 @@ extension CompaniesQuestionsViewController {
         self.debugUtil.printLog("cellForRowAtIndexPath", msg: "BEGIN")
        // var index = String(indexPath.row)
 
-        if self.sharedDataModel.currentTransaction.transactionCompanies.count == 0 {
+        if self.viewStateManager.currentTransaction.transactionCompanies.count == 0 {
             
             let cell: NoCompaniesTableViewCell = tableView.dequeueReusableCellWithIdentifier("NoCompaniesCell", forIndexPath: indexPath) as! NoCompaniesTableViewCell
             cell.hidden = false
@@ -642,14 +642,14 @@ extension CompaniesQuestionsViewController {
             
             let companyCell: CompaniesQuestionsTableViewCell = tableView.dequeueReusableCellWithIdentifier("QuestionaireCompanyCell", forIndexPath: indexPath) as! CompaniesQuestionsTableViewCell
             
-            let cellCompany = self.sharedDataModel.currentTransaction.transactionCompanies[indexPath.row]
+            let cellCompany = self.viewStateManager.currentTransaction.transactionCompanies[indexPath.row]
             companyCell.selectedBackgroundView = appAttributes.getcolorHighlightRowColor()
             companyCell.companyNameLabel.text = cellCompany.company.companyName
             companyCell.roleTextField.delegate = self
             companyCell.roleTextField.text = cellCompany.role
             companyCell.roleTextField.tag = indexPath.row
             
-            self.sharedDataModel.companynameArrayForManuallyDefined.append(cellCompany.company.companyName)
+            self.viewStateManager.companynameArrayForManuallyDefined.append(cellCompany.company.companyName)
           
             
             
@@ -713,14 +713,14 @@ extension CompaniesQuestionsViewController {
                 primaryRoleCount++
             }
             //    self.debugUtil.printLog("cellForRowAtIndexPath", msg: "END")
-//            if (indexPath.row == self.sharedDataModel.currentTransaction.transactionCompanies.count-1) {
+//            if (indexPath.row == self.viewStateManager.currentTransaction.transactionCompanies.count-1) {
             primaryRoleCount = getPrimaryClientCount()
 
                 self.showHideWarnings()
               //  self.debugUtil.printLog("tableView", msg: "Last row")
 //            }
             
-            if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+            if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
             {
                 companyCell.roleTextField.userInteractionEnabled = false
                 companyCell.deleteButton.hidden = true

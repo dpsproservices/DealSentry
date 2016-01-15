@@ -6,15 +6,15 @@ import Foundation
 @objc class VCConnection: NSObject{
     
     var window: UIWindow?
-    var debugUtil = DebugUtility(thisClassName: "AppDelegate", enabled: false)
+    var debugUtil = DebugUtility(thisClassName: "VCConnection", enabled: false)
     
-    let coreDataManager: AnyObject! = DataManager.getInstance()
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let dataManager: AnyObject! = DataManager.getInstance()
+    let viewStateManager = ViewStateManager.sharedInstance
 
     var splitViewController: UISplitViewController!
     var masterViewController: MasterViewController!
     var detailViewController: DetailViewController!
-    var newViewController: NewViewController!
+    var startViewController: StartViewController!
     
     var masterNavigationController: UINavigationController!
     var detailNavigationController: UINavigationController!
@@ -37,58 +37,59 @@ import Foundation
 
       /// this method connects the database data in objective C to the arrays present in swift
       /// all independent entities are mapped with their respective arrays of shared data model object
-      @objc  func forViewController() {
+      @objc func forViewController() {
     
         let appDelegate = UIApplication.sharedApplication().delegate! as! AppDelegate
         
     
-        let arrayForCompanyRoles = self.coreDataManager.arrayForCompanyRoles as NSArray as! [CompanyRoleData]
-        sharedDataModel.companyRolesArray = arrayForCompanyRoles
+        let arrayForCompanyRoles = self.dataManager.arrayForCompanyRoles as NSArray as! [CompanyRoleData]
+        viewStateManager.companyRolesArray = arrayForCompanyRoles
     
-        let arrayForContactRoles = self.coreDataManager.arrayForContactRoles as NSArray as! [ContactRoleData]
-        sharedDataModel.contactRolesArray = arrayForContactRoles
+        let arrayForContactRoles = self.dataManager.arrayForContactRoles as NSArray as! [ContactRoleData]
+        viewStateManager.contactRolesArray = arrayForContactRoles
     
-        let arrayForAgreementTypes = self.coreDataManager.arrayForAgreementTypes as NSArray as! [AgreementTypeData]
-        sharedDataModel.agreementTypesArray = arrayForAgreementTypes
+        let arrayForAgreementTypes = self.dataManager.arrayForAgreementTypes as NSArray as! [AgreementTypeData]
+        viewStateManager.agreementTypesArray = arrayForAgreementTypes
     
-        let arrayForDealStatuses = self.coreDataManager.arrayForDealStatuses as NSArray as! [DealStatusData]
-        sharedDataModel.dealStatusesArray = arrayForDealStatuses
+        let arrayForDealStatuses = self.dataManager.arrayForDealStatuses as NSArray as! [DealStatusData]
+        viewStateManager.dealStatusesArray = arrayForDealStatuses
     
-        let arrayForIndustries = self.coreDataManager.arrayForIndustries as NSArray as! [IndustryData]
-        sharedDataModel.industriesArray = arrayForIndustries
+        let arrayForIndustries = self.dataManager.arrayForIndustries as NSArray as! [IndustryData]
+        viewStateManager.industriesArray = arrayForIndustries
     
-        let arrayForLoanTypes = self.coreDataManager.arrayForLoanTypes as NSArray as! [LoanTypeData]
-        sharedDataModel.loanTypesArray = arrayForLoanTypes
+        let arrayForLoanTypes = self.dataManager.arrayForLoanTypes as NSArray as! [LoanTypeData]
+        viewStateManager.loanTypesArray = arrayForLoanTypes
     
-        let arrayForOfferingFormat = self.coreDataManager.arrayForOfferingFormat as NSArray as! [OfferingFormatData]
-        sharedDataModel.offeringFormatArray = arrayForOfferingFormat
+        let arrayForOfferingFormat = self.dataManager.arrayForOfferingFormat as NSArray as! [OfferingFormatData]
+        viewStateManager.offeringFormatArray = arrayForOfferingFormat
     
-        let arrayForSegments = self.coreDataManager.arrayForSegments as NSArray as! [SegmentsData]
-        sharedDataModel.segmentsArray = arrayForSegments
+        let arrayForSegments = self.dataManager.arrayForSegments as NSArray as! [SegmentsData]
+        viewStateManager.segmentsArray = arrayForSegments
     
-        let arrayForTransactionStatuses = self.coreDataManager.arrayForTransactionStatuses as NSArray as! [TransactionStatusData]
-        sharedDataModel.transactionStatusesArray = arrayForTransactionStatuses
+        let arrayForTransactionStatuses = self.dataManager.arrayForTransactionStatuses as NSArray as! [TransactionStatusData]
+        viewStateManager.transactionStatusesArray = arrayForTransactionStatuses
     
-        let arrayForUseOfProceeds = self.coreDataManager.arrayForUseOfProceeds as NSArray as! [UseOfProceedsData]
-        sharedDataModel.useOfProceedsArray = arrayForUseOfProceeds
+        let arrayForUseOfProceeds = self.dataManager.arrayForUseOfProceeds as NSArray as! [UseOfProceedsData]
+        viewStateManager.useOfProceedsArray = arrayForUseOfProceeds
     
-        let arrayForProduct = self.coreDataManager.arrayForProduct as NSArray as! [ProductData]
-        sharedDataModel.productArray = arrayForProduct
+        let arrayForProduct = self.dataManager.arrayForProduct as NSArray as! [ProductData]
+        viewStateManager.productArray = arrayForProduct
     
-        let arrayForProductSub = self.coreDataManager.arrayForProductSub as NSArray as! [ProductSubData]
-        sharedDataModel.productSubArray = arrayForProductSub
+        let arrayForProductSub = self.dataManager.arrayForProductSub as NSArray as! [ProductSubData]
+        viewStateManager.productSubArray = arrayForProductSub
     
-        let arrayForCountries = self.coreDataManager.arrayForCountries as NSArray as! [CountryData]
-        sharedDataModel.countriesArray = arrayForCountries
+        let arrayForCountries = self.dataManager.arrayForCountries as NSArray as! [CountryData]
+        viewStateManager.countriesArray = arrayForCountries
     
-        let arrayForProductMap = self.coreDataManager.arrayForProductmap as NSArray as! [ProductMapData]
-        sharedDataModel.productMapArray = arrayForProductMap
+        let arrayForProductMap = self.dataManager.arrayForProductmap as NSArray as! [ProductMapData]
+        viewStateManager.productMapArray = arrayForProductMap
     
-        let newViewController:NewViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NewViewController") as! NewViewController
-        self.window?.rootViewController?.presentViewController(newViewController, animated: false, completion: nil)
-        self.window?.rootViewController = newViewController
-        self.newViewController = newViewController
-        self.newViewController.appDelegate = appDelegate
+        let startViewController:StartViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("StartViewController") as! StartViewController
+        
+        self.window?.rootViewController?.presentViewController(startViewController, animated: false, completion: nil)
+        self.window?.rootViewController = startViewController
+        self.startViewController = startViewController
+        self.startViewController.appDelegate = appDelegate
         
         self.masterNavigationController = self.splitViewController.viewControllers[0] as! UINavigationController
         self.masterViewController = masterNavigationController.topViewController as! MasterViewController

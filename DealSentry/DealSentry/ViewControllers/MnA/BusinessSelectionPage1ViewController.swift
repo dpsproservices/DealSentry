@@ -7,7 +7,7 @@ import UIKit
 class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController {
     
     var debugUtil = DebugUtility(thisClassName: "BusinessSelectionPage1ViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     let appAttributes = AppAttributes()
     
     @IBOutlet weak var buySellDiffCurrenciesButton: UISegmentedControl!
@@ -36,9 +36,9 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
     /// this method will set the index for buySellDiffCurrenciesButton segmentControl and update the corresponding object of the transaction
     @IBAction func buySellDiffCurrenciesValueChangedAction(sender: AnyObject) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.isDifferentCurrencies = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.isDifferentCurrencies = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.isDifferentCurrencies = "No"
+            self.viewStateManager.currentTransaction.businessSelection.isDifferentCurrencies = "No"
         }
         buySellImgWarning.hidden = true
         buySellTxtWarning.hidden = true
@@ -47,9 +47,9 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
     /// this method will set the index for ukCompanyButton segmentControl and update the corresponding object of the transaction
     @IBAction func ukCompanyValueChangedAction(sender: AnyObject) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.isUKCompanyInvolved = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.isUKCompanyInvolved = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.isUKCompanyInvolved = "No"
+            self.viewStateManager.currentTransaction.businessSelection.isUKCompanyInvolved = "No"
         }
         ukPublicImgWarning.hidden = true
         ukPublicTxtWarning.hidden = true
@@ -58,9 +58,9 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
     /// this method will set the index for friendlyHostileButton segmentControl and update the corresponding object of the transaction
     @IBAction func friendlyHostileValueChangedAction(sender: AnyObject) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.isFriendlyOrHostile = "Hostile"
+            self.viewStateManager.currentTransaction.businessSelection.isFriendlyOrHostile = "Hostile"
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.isFriendlyOrHostile = "Friendly"
+            self.viewStateManager.currentTransaction.businessSelection.isFriendlyOrHostile = "Friendly"
         }
         friendlyImgWarning.hidden = true
         friendlyTxtWarning.hidden = true
@@ -69,9 +69,9 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
      /// this method will set the index for ratingChgButton segmentControl and update the corresponding object of the transaction
     @IBAction func ratingChgValueChangedAction(sender: AnyObject) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.isDownwardRatingsLikely = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.isDownwardRatingsLikely = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.isDownwardRatingsLikely = "No"
+            self.viewStateManager.currentTransaction.businessSelection.isDownwardRatingsLikely = "No"
         }
         ratingImgWarning.hidden = true
         ratingTxtWarning.hidden = true
@@ -80,9 +80,9 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
     /// this method will set the index for govtAgencyButton segmentControl and update the corresponding object of the transaction
     @IBAction func govtAgencyValueChangedAction(sender: AnyObject) {
         if sender.selectedSegmentIndex == 1 {
-            self.sharedDataModel.currentTransaction.businessSelection.isGovernmentAgency = "Yes"
+            self.viewStateManager.currentTransaction.businessSelection.isGovernmentAgency = "Yes"
         } else {
-            self.sharedDataModel.currentTransaction.businessSelection.isGovernmentAgency = "No"
+            self.viewStateManager.currentTransaction.businessSelection.isGovernmentAgency = "No"
         }
         govtImgWarning.hidden = true
         govtTxtWarning.hidden = true
@@ -98,11 +98,11 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
     ///this method provides data from the object to the view controller
     func resetViewsFromModel() {
         
-        if (self.sharedDataModel.currentTransaction.businessSelection.isDifferentCurrencies == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.isDifferentCurrencies == "Yes") {
             self.buySellDiffCurrenciesButton.selectedSegmentIndex = 1
             self.buySellImgWarning.hidden = true
             self.buySellTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.isDifferentCurrencies == "No"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.isDifferentCurrencies == "No"{
             self.buySellDiffCurrenciesButton.selectedSegmentIndex = 0
             self.buySellImgWarning.hidden = true
             self.buySellTxtWarning.hidden = true
@@ -111,11 +111,11 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
             self.buySellImgWarning.hidden = false
             self.buySellTxtWarning.hidden = false
         }
-        if (self.sharedDataModel.currentTransaction.businessSelection.isUKCompanyInvolved == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.isUKCompanyInvolved == "Yes") {
             self.ukCompanyButton.selectedSegmentIndex = 1
             self.ukPublicImgWarning.hidden = true
             self.ukPublicTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.isUKCompanyInvolved == "No"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.isUKCompanyInvolved == "No"{
             self.ukCompanyButton.selectedSegmentIndex = 0
             self.ukPublicImgWarning.hidden = true
             self.ukPublicTxtWarning.hidden = true
@@ -124,11 +124,11 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
             self.ukPublicImgWarning.hidden = false
             self.ukPublicTxtWarning.hidden = false
         }
-        if (self.sharedDataModel.currentTransaction.businessSelection.isFriendlyOrHostile == "Hostile") {
+        if (self.viewStateManager.currentTransaction.businessSelection.isFriendlyOrHostile == "Hostile") {
             self.friendlyHostileButton.selectedSegmentIndex = 1
             self.friendlyImgWarning.hidden = true
             self.friendlyTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.isFriendlyOrHostile == "Friendly"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.isFriendlyOrHostile == "Friendly"{
             self.friendlyHostileButton.selectedSegmentIndex = 0
             self.friendlyImgWarning.hidden = true
             self.friendlyTxtWarning.hidden = true
@@ -137,11 +137,11 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
             self.friendlyImgWarning.hidden = false
             self.friendlyTxtWarning.hidden = false
         }
-        if (self.sharedDataModel.currentTransaction.businessSelection.isDownwardRatingsLikely == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.isDownwardRatingsLikely == "Yes") {
             self.ratingChgButton.selectedSegmentIndex = 1
             self.ratingImgWarning.hidden = true
             self.ratingTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.isDownwardRatingsLikely == "No"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.isDownwardRatingsLikely == "No"{
             self.ratingChgButton.selectedSegmentIndex = 0
             self.ratingImgWarning.hidden = true
             self.ratingTxtWarning.hidden = true
@@ -150,11 +150,11 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
             self.ratingImgWarning.hidden = false
             self.ratingTxtWarning.hidden = false
         }
-        if (self.sharedDataModel.currentTransaction.businessSelection.isGovernmentAgency == "Yes") {
+        if (self.viewStateManager.currentTransaction.businessSelection.isGovernmentAgency == "Yes") {
             self.govtAgencyButton.selectedSegmentIndex = 1
             self.govtImgWarning.hidden = true
             self.govtTxtWarning.hidden = true
-        } else if self.sharedDataModel.currentTransaction.businessSelection.isGovernmentAgency == "No"{
+        } else if self.viewStateManager.currentTransaction.businessSelection.isGovernmentAgency == "No"{
             self.govtAgencyButton.selectedSegmentIndex = 0
             self.govtImgWarning.hidden = true
             self.govtTxtWarning.hidden = true
@@ -170,7 +170,7 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
     /// this method determines to show the next page or not by enabling/hiding the forward button based on current transaction business type
     func showHidePage2() {
         if (forwardButton != nil) {
-            if self.sharedDataModel.getBusinessType(self.sharedDataModel.currentTransaction) != "N/A"{
+            if self.viewStateManager.getBusinessType(self.viewStateManager.currentTransaction) != "N/A"{
                 self.forwardButton.enabled = true
                 self.forwardImage.hidden = false
             } else {
@@ -182,7 +182,7 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.sharedDataModel.checkForOrientationChange == "portrait"
+        if self.viewStateManager.currentOrientation == "portrait"
         {
             forwardImageCenterX.constant = 215.0
         }
@@ -207,7 +207,7 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         if UIDevice.currentDevice().orientation.isLandscape.boolValue
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 forwardImageCenterX.constant = 475.5
             }
@@ -219,7 +219,7 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
         }
         else
         {
-            if sharedDataModel.checkForCollapseButton == "YES"
+            if viewStateManager.checkForCollapseButton == "YES"
             {
                 forwardImageCenterX.constant = 365.0
             }
@@ -249,7 +249,7 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
         appAttributes.setColorAttributesSegmentControl(ratingChgButton)
         appAttributes.setColorAttributesSegmentControl(govtAgencyButton)
         
-        if sharedDataModel.currentTransaction.transactionStatus != "Draft" && sharedDataModel.currentTransaction.transactionStatus != "Pending Review" && sharedDataModel.currentTransaction.transactionStatus != "Cleared" && sharedDataModel.currentTransaction.transactionStatus != "Template"
+        if viewStateManager.currentTransaction.transactionStatus != "Draft" && viewStateManager.currentTransaction.transactionStatus != "Pending Review" && viewStateManager.currentTransaction.transactionStatus != "Cleared" && viewStateManager.currentTransaction.transactionStatus != "Template"
         {
             self.buySellDiffCurrenciesButton.userInteractionEnabled = false
             self.buySellDiffCurrenciesButton.backgroundColor = appAttributes.grayColorForClosedDeals
@@ -280,9 +280,9 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
     func notificationCheck()
     {
         //Take Action on Notification
-        if sharedDataModel.checkForCollapseButton == "YES"
+        if viewStateManager.checkForCollapseButton == "YES"
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 forwardImageCenterX.constant = 475.5
             }
@@ -294,7 +294,7 @@ class BusinessSelectionPage1ViewController: BusinessSelectionPageViewController 
         }
         else
         {
-            if self.sharedDataModel.checkForOrientationChange == "landscape"
+            if self.viewStateManager.currentOrientation == "landscape"
             {
                 forwardImageCenterX.constant = 325.5
             }

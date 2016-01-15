@@ -4,9 +4,7 @@
 
 import Foundation
 
-
-
-class LoanTypeData: NSObject {
+@objc class LoanTypeData: NSObject {
     
     var loanTypeId: String = ""
     var loanTypeDescription: String = ""

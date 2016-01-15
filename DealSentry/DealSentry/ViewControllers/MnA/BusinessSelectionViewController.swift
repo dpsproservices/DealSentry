@@ -7,7 +7,7 @@ import UIKit
 class BusinessSelectionViewController: UIViewController {
     
     var debugUtil = DebugUtility(thisClassName: "BusinessSelectionViewController", enabled: false)
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     let appAttributes = AppAttributes()
     var pageViewController: UIPageViewController!
     var detailViewController: DetailViewController!
@@ -97,7 +97,7 @@ class BusinessSelectionViewController: UIViewController {
  
         
         // buy side / sell side M&A
-        switch sharedDataModel.getBusinessType(self.sharedDataModel.currentTransaction) {
+        switch viewStateManager.getBusinessType(self.viewStateManager.currentTransaction) {
         case "Buy":
             // default show page 4 as last page rather than page 5
             //self.contentPageRestorationIds[3] = "BusinessSelectionPage4ViewController"

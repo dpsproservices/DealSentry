@@ -4,8 +4,7 @@
 
 import Foundation
 
-
-class ContactRoleData: NSObject {
+@objc class ContactRoleData: NSObject {
     
     var roleId: String = ""
     var roleDescription: String = ""

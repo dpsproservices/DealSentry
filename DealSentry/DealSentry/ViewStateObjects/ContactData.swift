@@ -8,8 +8,8 @@ import Foundation
     
     var firstName:String = ""
     var lastName:String = ""
-    var gocDescription:String = ""
-    var soeID:String = ""
+    var department:String = ""
+    var employeeId:String = ""
     var phone:String = ""
     var email:String = ""
     var crossSellDesignee:Bool = false
@@ -18,8 +18,8 @@ import Foundation
     
     init(firstName: String,
         lastName: String,
-        gocDescription: String,
-        soeID: String,
+        department: String,
+        employeeId: String,
         phone: String,
         email: String,
         crossSellDesignee: Bool
@@ -27,8 +27,8 @@ import Foundation
             
             self.firstName = firstName
             self.lastName = lastName
-            self.gocDescription = gocDescription
-            self.soeID = soeID
+            self.department = department
+            self.employeeId = employeeId
             self.phone = phone
             self.email = email
             self.crossSellDesignee = crossSellDesignee
@@ -52,8 +52,8 @@ import Foundation
     func toString() -> String {
         return self.firstName +
             self.lastName +
-            self.gocDescription +
-            self.soeID +
+            self.department +
+            self.employeeId +
             self.email +
             self.phone
     }

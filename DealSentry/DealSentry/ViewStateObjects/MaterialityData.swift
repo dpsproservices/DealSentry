@@ -4,7 +4,7 @@
 
 import Foundation
 
-class MaterialityData: NSObject {
+@objc class MaterialityData: NSObject {
     
     // one set of materiality questions per Company added to the Transaction
     

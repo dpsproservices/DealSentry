@@ -6,7 +6,7 @@
 import Foundation
 
 
-class CompanyData: NSObject {
+@objc class CompanyData: NSObject {
     var companyId: String = ""
     var companyName: String = ""
     var ticker: String = ""

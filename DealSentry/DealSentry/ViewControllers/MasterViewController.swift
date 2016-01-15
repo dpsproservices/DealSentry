@@ -19,7 +19,7 @@ class MasterViewController: UITableViewController {
     var debugUtil = DebugUtility(thisClassName: "MasterViewController", enabled: false)
     let appAttributes = AppAttributes()
     let vcCon = VCConnection.sharedInstance
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var emptyTableLabel:UILabel = UILabel()
     var detailViewController: DetailViewController!
     var appDelegate: AppDelegate!
@@ -36,11 +36,11 @@ class MasterViewController: UITableViewController {
     // set the view title based on current category
     //this needs to be made public so that the tran. filter can update count
     func setNavigationItemTitle() {
-        if self.sharedDataModel.selectedCategory == "Template" {
-            self.navigationItem.title = self.sharedDataModel.selectedCategory
+        if self.viewStateManager.selectedCategory == "Template" {
+            self.navigationItem.title = self.viewStateManager.selectedCategory
         } else {
-            let counter = self.sharedDataModel.getTransactionCountByCategory(self.sharedDataModel.selectedCategory)
-            self.navigationItem.title = self.sharedDataModel.selectedCategory + " (" + String(counter) + ")"
+            let counter = self.viewStateManager.getTransactionCountByCategory(self.viewStateManager.selectedCategory)
+            self.navigationItem.title = self.viewStateManager.selectedCategory + " (" + String(counter) + ")"
         }
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         self.navigationItem.titleView?.tintColor = UIColor.whiteColor()
@@ -74,9 +74,9 @@ class MasterViewController: UITableViewController {
     }
     */
     
-    func checkForOrientationChange()
+    func checkOrientation()
     {
-        if self.sharedDataModel.checkForOrientationChange == "landscape"
+        if self.viewStateManager.currentOrientation == "landscape"
         {
             vcCon.splitViewController!.preferredPrimaryColumnWidthFraction = 0.31
         }
@@ -137,7 +137,7 @@ class MasterViewController: UITableViewController {
          var lastSelectedRowIndex = 0
         if(self.transactionsForShowing().count > 1 )
         {
-          lastSelectedRowIndex  = self.sharedDataModel.getLastViewedTransactionIndexByCategory()
+          lastSelectedRowIndex  = self.viewStateManager.getLastViewedTransactionIndexByCategory()
         }
         else
         {
@@ -233,7 +233,7 @@ class MasterViewController: UITableViewController {
         self.tableView.dataSource = self
         self.refreshControl?.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
-        self.debugUtil.printLog("viewDidLoad", msg: "selectedCategory = " + self.sharedDataModel.selectedCategory)
+        self.debugUtil.printLog("viewDidLoad", msg: "selectedCategory = " + self.viewStateManager.selectedCategory)
         
         
         // add the right side buttons to nav bar
@@ -271,7 +271,7 @@ class MasterViewController: UITableViewController {
         self.debugUtil.printLog("viewWillAppear", msg: "BEGIN")
         
         super.viewWillAppear(true)
-        checkForOrientationChange()
+        self.checkOrientation()
         //self.searchController.searchBar.sizeToFit()
         //self.tableView.tableHeaderView = self.searchController.searchBar
         
@@ -287,7 +287,7 @@ class MasterViewController: UITableViewController {
         self.debugUtil.printLog("viewDidAppear", msg: "BEGIN")
         super.viewDidAppear(true)
          //self.tableView.reloadData()
-        //var lastViewedCellRow = self.sharedDataModel.getLastViewedTransactionIndexByCategory()
+        //var lastViewedCellRow = self.viewStateManager.getLastViewedTransactionIndexByCategory()
         //var selectedCellIndexPath = NSIndexPath(forRow: 0, inSection: 0)
         //self.tableView.selectRowAtIndexPath( selectedCellIndexPath, animated: true, scrollPosition: UITableViewScrollPosition.None )
         
@@ -306,7 +306,7 @@ class MasterViewController: UITableViewController {
         self.debugUtil.printLog("prepareForSegue", msg: "BEGIN")
         
         //var indexPath: NSIndexPath = self.tableView.indexPathForSelectedRow()!
-        self.debugUtil.printLog("prepareForSegue", msg: " selectedStatus = " + self.sharedDataModel.selectedCategory)
+        self.debugUtil.printLog("prepareForSegue", msg: " selectedStatus = " + self.viewStateManager.selectedCategory)
         
         if let segueId = segue.identifier {
             
@@ -321,9 +321,9 @@ class MasterViewController: UITableViewController {
                 
                 self.detailViewController = navController.topViewController as! DetailViewController
                                 
-                if ( self.sharedDataModel.selectedCategory == "Template" ) {
+                if ( self.viewStateManager.selectedCategory == "Template" ) {
                     self.debugUtil.printLog("prepareForSegue", msg: "segueId = showQuestionaire template")
-                    self.sharedDataModel.prepareTemplateModel()
+                    self.viewStateManager.prepareTemplateModel()
                 } else {
                     let indexPath = self.tableView.indexPathForSelectedRow!
                     let txnIndex = indexPath.row - 1 // first row is the sort and filter prototype cell
@@ -333,20 +333,20 @@ class MasterViewController: UITableViewController {
                         self.debugUtil.printLog("prepareForSegue", msg: "segueId = showQuestionaire search is active")
                         if (self.transactionsForShowing().count > 1)
                         {
-                            self.sharedDataModel.prepareQuestionaireModel(txnIndex, filtered: true)
+                            self.viewStateManager.prepareQuestionaireModel(txnIndex, filtered: true)
                         }
                         else
                         {
-                            self.sharedDataModel.prepareQuestionaireModel(0, filtered: true)
+                            self.viewStateManager.prepareQuestionaireModel(0, filtered: true)
                         }
                     } else if (self.transactionsForShowing().count > 1) {
                         self.debugUtil.printLog("prepareForSegue", msg: "segueId = showQuestionaire")
-                        self.sharedDataModel.prepareQuestionaireModel(txnIndex, filtered: false)
+                        self.viewStateManager.prepareQuestionaireModel(txnIndex, filtered: false)
                     }
                     else
                     {
                         self.debugUtil.printLog("prepareForSegue", msg: "segueId = showQuestionaire")
-                        self.sharedDataModel.prepareQuestionaireModel(0, filtered: false)
+                        self.viewStateManager.prepareQuestionaireModel(0, filtered: false)
                     }
                 }
             case "showCompanies" :
@@ -379,7 +379,7 @@ extension  MasterViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //self.debugUtil.printLog("numberOfRowsInSection", msg: "BEGIN")
         
-        if ( self.sharedDataModel.selectedCategory == "Template" || self.transactionsForShowing().count == 1 ) {
+        if ( self.viewStateManager.selectedCategory == "Template" || self.transactionsForShowing().count == 1 ) {
             // dont include the first sort and filter cell
             //self.debugUtil.printLog("numberOfRowsInSection", msg: "END")
             return 1
@@ -423,13 +423,13 @@ extension  MasterViewController {
     var txnIndex = indexPath.row - 1
     
     // always select the template
-    if ( self.sharedDataModel.selectedCategory == "Template" ) {
+    if ( self.viewStateManager.selectedCategory == "Template" ) {
     
     cell.setSelected(true, animated: true)
     
     } else if ( intIndex > 0 ) {
     
-    if ( txnIndex == self.sharedDataModel.getLastViewedTransactionIndexByCategory() ) {
+    if ( txnIndex == self.viewStateManager.getLastViewedTransactionIndexByCategory() ) {
     cell.setSelected(true, animated: true)
     }
     }
@@ -442,7 +442,7 @@ extension  MasterViewController {
         
         var rowHeight = 155 // default
         
-        if ( self.sharedDataModel.selectedCategory == "Template"  || self.transactionsForShowing().count == 1) {
+        if ( self.viewStateManager.selectedCategory == "Template"  || self.transactionsForShowing().count == 1) {
             //self.debugUtil.printLog("heightForRowAtIndexPath 125", msg: "END")
             rowHeight = 155 // no sort filter cell
             
@@ -472,13 +472,13 @@ extension  MasterViewController {
         var conditionLabel: String = "Conditions: "
         //self.debugUtil.printLog("cellForRowAtIndexPath", msg: "BEGIN indexPath.row = " + index)
         
-        if ( self.sharedDataModel.selectedCategory == "Template" ) {
+        if ( self.viewStateManager.selectedCategory == "Template" ) {
             
             // dont show sort filter cell
             let templateCell: TransactionTableViewCell = tableView.dequeueReusableCellWithIdentifier("TransactionCell", forIndexPath: indexPath) as! TransactionTableViewCell
             
             // actual cell model object
-            let templateTransaction = self.sharedDataModel.templateTransaction
+            let templateTransaction = self.viewStateManager.templateTransaction
             
            // var txnIndex = indexPath.row // always only one template cell
             
@@ -556,7 +556,7 @@ extension  MasterViewController {
                 customTransactionCell.selectedBackgroundView = appAttributes.getcolorHighlightRowColor()
 
                 // set the labels text in the cell based on transaction values
-                if(self.sharedDataModel.selectedCategory == "All") {
+                if(self.viewStateManager.selectedCategory == "All") {
                     customTransactionCell.IdTransactionStatusLbl.text = cellTransaction.transactionId
                         + " (" + cellTransaction.transactionStatus + ")"
                 } else {
@@ -583,7 +583,7 @@ extension  MasterViewController {
                     customTransactionCell.ProductSubDealStatusLbl.text = cellTransaction.transactionDetail.productSub
                         + " (" + cellTransaction.transactionDetail.dealStatus + ")"
                     }
-                    customTransactionCell.savedOnDateLbl.text = self.sharedDataModel.separateStringFromTime(cellTransaction.savedOnDate)
+                    customTransactionCell.savedOnDateLbl.text = self.viewStateManager.separateStringFromTime(cellTransaction.savedOnDate)
                 }
                 
                 customTransactionCell.primaryClientLbl.text = cellTransaction.primaryClient
@@ -602,7 +602,7 @@ extension  MasterViewController {
                     customTransactionCell.conditionLabel.text = conditionLabel
                 }
                 
-                if ( txnIndex == self.sharedDataModel.getLastViewedTransactionIndexByCategory() ) {
+                if ( txnIndex == self.viewStateManager.getLastViewedTransactionIndexByCategory() ) {
                     //customTransactionCell.setSelected(true, animated: true)
                 }
                 
@@ -641,7 +641,7 @@ extension  MasterViewController {
     // tableview itself provide a delete option for each row. if needed we can simply swipe the row left and delete it.
 /*
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        if sharedDataModel.currentTransaction.transactionStatus == "Draft"
+        if viewStateManager.currentTransaction.transactionStatus == "Draft"
         {
             return true
         }
@@ -653,7 +653,7 @@ extension  MasterViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if sharedDataModel.currentTransaction.transactionStatus == "Draft"
+        if viewStateManager.currentTransaction.transactionStatus == "Draft"
         {
             if editingStyle == UITableViewCellEditingStyle.Delete
             {
@@ -668,57 +668,57 @@ extension  MasterViewController {
                     switch action.style{
                     case .Default:
                         
-                        if self.sharedDataModel.currentTransaction.transactionId == "New"
+                        if self.viewStateManager.currentTransaction.transactionId == "New"
                         {
-                            self.sharedDataModel.checkForNewDraft = "NO"
-                            self.sharedDataModel.transactionsArray.removeAtIndex(0)
+                            self.viewStateManager.checkForNewDraft = "NO"
+                            self.viewStateManager.transactionsArray.removeAtIndex(0)
                             
                             
-                            if(self.sharedDataModel.selectedCategory == "Draft" && self.sharedDataModel.filteredTransactionArray.count > 1)
+                            if(self.viewStateManager.selectedCategory == "Draft" && self.viewStateManager.filteredTransactionArray.count > 1)
                             {
-                                self.sharedDataModel.prepareQuestionaireModel(0, filtered: false)
+                                self.viewStateManager.prepareQuestionaireModel(0, filtered: false)
                             }
                             
-                            self.sharedDataModel.filteredTransactionArray = self.sharedDataModel.transactionsArray
-                            self.sharedDataModel.selectedTransactionArray = self.sharedDataModel.transactionsArray
+                            self.viewStateManager.filteredTransactionArray = self.viewStateManager.transactionsArray
+                            self.viewStateManager.selectedTransactionArray = self.viewStateManager.transactionsArray
                             
-                            self.sharedDataModel.selectedCategory = "All"
+                            self.viewStateManager.selectedCategory = "All"
                             
                             self.vcCon.masterViewController.setNavigationItemTitle()
                             self.vcCon.masterViewController.tableView.reloadData()
                         }
                         else
                         {
-                            let coreDataManager: AnyObject! = DataManager.getInstance()
-                            coreDataManager.checkForDeletePressed("YES")
-                            //saveTransactionArray.append(self.sharedDataModel.currentTransaction)
-                            coreDataManager.deleteTransaction(self.sharedDataModel.currentTransaction.transactionId)
+                            let dataManager: AnyObject! = DataManager.getInstance()
+                            dataManager.checkForDeletePressed("YES")
+                            //saveTransactionArray.append(self.viewStateManager.currentTransaction)
+                            dataManager.deleteTransaction(self.viewStateManager.currentTransaction.transactionId)
                             
-                            let arrayFortransaction = coreDataManager.transactionArray() as NSArray as! [TransactionData]
-                            self.sharedDataModel.transactionsArray = arrayFortransaction
+                            let arrayFortransaction = dataManager.transactionArray() as NSArray as! [TransactionData]
+                            self.viewStateManager.transactionsArray = arrayFortransaction
                             
                             
-                            if(self.sharedDataModel.selectedCategory == "Draft" && self.sharedDataModel.filteredTransactionArray.count > 1)
+                            if(self.viewStateManager.selectedCategory == "Draft" && self.viewStateManager.filteredTransactionArray.count > 1)
                             {
-                                self.sharedDataModel.prepareQuestionaireModel(0, filtered: false)
+                                self.viewStateManager.prepareQuestionaireModel(0, filtered: false)
                             }
                             
-                            if self.sharedDataModel.checkForNewDraft == "YES"
+                            if self.viewStateManager.checkForNewDraft == "YES"
                             {
-                                self.sharedDataModel.transactionsArray =  self.sharedDataModel.preserveDrafttransaction + self.sharedDataModel.transactionsArray
+                                self.viewStateManager.transactionsArray =  self.viewStateManager.preserveDrafttransaction + self.viewStateManager.transactionsArray
                             }
                             
-                            self.sharedDataModel.filteredTransactionArray = self.sharedDataModel.transactionsArray
-                            self.sharedDataModel.selectedTransactionArray = self.sharedDataModel.transactionsArray
+                            self.viewStateManager.filteredTransactionArray = self.viewStateManager.transactionsArray
+                            self.viewStateManager.selectedTransactionArray = self.viewStateManager.transactionsArray
                             
                             
                             
-                            self.sharedDataModel.selectedCategory = "All"
+                            self.viewStateManager.selectedCategory = "All"
                             
                             self.vcCon.masterViewController.setNavigationItemTitle()
                             self.vcCon.masterViewController.tableView.reloadData()
                         }
-                        self.sharedDataModel.lastViewedTransactionsIndexes[self.sharedDataModel.selectedCategory] = 0
+                        self.viewStateManager.lastViewedTransactionsIndexes[self.viewStateManager.selectedCategory] = 0
                         self.vcCon.masterViewController.reselectLastSelectedRow()
                         self.vcCon.masterViewController.initDefault()
                         
@@ -760,15 +760,15 @@ extension MasterViewController: UISearchControllerDelegate, UISearchResultsUpdat
     
     func sortDateAscending(this:TransactionData,that:TransactionData) -> Bool
     {
-        let date1 = self.sharedDataModel.convertStringToDate(this.savedOnDate)
-        let date2 = self.sharedDataModel.convertStringToDate(that.savedOnDate)
+        let date1 = self.viewStateManager.convertStringToDate(this.savedOnDate)
+        let date2 = self.viewStateManager.convertStringToDate(that.savedOnDate)
         return  date1.compare(date2) == .OrderedAscending
     }
     
     func sortDateDescending(this:TransactionData,that:TransactionData) -> Bool
     {
-        let date1 = self.sharedDataModel.convertStringToDate(this.savedOnDate)
-        let date2 = self.sharedDataModel.convertStringToDate(that.savedOnDate)
+        let date1 = self.viewStateManager.convertStringToDate(this.savedOnDate)
+        let date2 = self.viewStateManager.convertStringToDate(that.savedOnDate)
         return  date1.compare(date2) == .OrderedDescending
     }
     
@@ -887,21 +887,21 @@ extension MasterViewController: UISearchControllerDelegate, UISearchResultsUpdat
                 
                 switch attributeName {
                 case "Id":
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace({ $0.transactionId < $1.transactionId })
+                    self.viewStateManager.filteredTransactionArray.sortInPlace({ $0.transactionId < $1.transactionId })
                 case "Date":
                     
                    
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace(sortDateAscending)
+                    self.viewStateManager.filteredTransactionArray.sortInPlace(sortDateAscending)
                 case "TRue Status":
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace({ $0.transactionStatus < $1.transactionStatus })
+                    self.viewStateManager.filteredTransactionArray.sortInPlace({ $0.transactionStatus < $1.transactionStatus })
                 case "Deal Status":
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace({ $0.transactionDetail.dealStatus < $1.transactionDetail.dealStatus })
+                    self.viewStateManager.filteredTransactionArray.sortInPlace({ $0.transactionDetail.dealStatus < $1.transactionDetail.dealStatus })
                 case "Product":
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace({ $0.transactionDetail.product < $1.transactionDetail.product })
+                    self.viewStateManager.filteredTransactionArray.sortInPlace({ $0.transactionDetail.product < $1.transactionDetail.product })
                 case "Sub Product":
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace({ $0.transactionDetail.productSub < $1.transactionDetail.productSub })
+                    self.viewStateManager.filteredTransactionArray.sortInPlace({ $0.transactionDetail.productSub < $1.transactionDetail.productSub })
                 default:
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace(sortDateAscending)
+                    self.viewStateManager.filteredTransactionArray.sortInPlace(sortDateAscending)
                     
                     
                     break
@@ -909,19 +909,19 @@ extension MasterViewController: UISearchControllerDelegate, UISearchResultsUpdat
             } else { // sort filtered array descending
                 switch attributeName {
                 case "Id":
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace({ $0.transactionId > $1.transactionId })
+                    self.viewStateManager.filteredTransactionArray.sortInPlace({ $0.transactionId > $1.transactionId })
                 case "Date":
-                   self.sharedDataModel.filteredTransactionArray.sortInPlace(sortDateDescending)
+                   self.viewStateManager.filteredTransactionArray.sortInPlace(sortDateDescending)
                 case "TRue Status":
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace({ $0.transactionStatus > $1.transactionStatus })
+                    self.viewStateManager.filteredTransactionArray.sortInPlace({ $0.transactionStatus > $1.transactionStatus })
                 case "Deal Status":
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace({ $0.transactionDetail.dealStatus > $1.transactionDetail.dealStatus })
+                    self.viewStateManager.filteredTransactionArray.sortInPlace({ $0.transactionDetail.dealStatus > $1.transactionDetail.dealStatus })
                 case "Product":
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace({ $0.transactionDetail.product > $1.transactionDetail.product })
+                    self.viewStateManager.filteredTransactionArray.sortInPlace({ $0.transactionDetail.product > $1.transactionDetail.product })
                 case "Sub Product":
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace({ $0.transactionDetail.productSub > $1.transactionDetail.productSub })
+                    self.viewStateManager.filteredTransactionArray.sortInPlace({ $0.transactionDetail.productSub > $1.transactionDetail.productSub })
                 default:
-                    self.sharedDataModel.filteredTransactionArray.sortInPlace(sortDateDescending)
+                    self.viewStateManager.filteredTransactionArray.sortInPlace(sortDateDescending)
                     break
                 }
             }
@@ -933,38 +933,38 @@ extension MasterViewController: UISearchControllerDelegate, UISearchResultsUpdat
                 
                 switch attributeName {
                 case "Id":
-                    self.sharedDataModel.selectedTransactionArray.sortInPlace({ $0.transactionId < $1.transactionId })
+                    self.viewStateManager.selectedTransactionArray.sortInPlace({ $0.transactionId < $1.transactionId })
                 case "Date":
-                   self.sharedDataModel.selectedTransactionArray.sortInPlace(sortDateAscending)
+                   self.viewStateManager.selectedTransactionArray.sortInPlace(sortDateAscending)
                 case "TRue Status":
-                    self.sharedDataModel.selectedTransactionArray.sortInPlace({ $0.transactionStatus < $1.transactionStatus })
+                    self.viewStateManager.selectedTransactionArray.sortInPlace({ $0.transactionStatus < $1.transactionStatus })
                 case "Deal Status":
-                    self.sharedDataModel.selectedTransactionArray.sortInPlace({ $0.transactionDetail.dealStatus < $1.transactionDetail.dealStatus })
+                    self.viewStateManager.selectedTransactionArray.sortInPlace({ $0.transactionDetail.dealStatus < $1.transactionDetail.dealStatus })
                 case "Product":
-                    self.sharedDataModel.selectedTransactionArray.sortInPlace({ $0.transactionDetail.product < $1.transactionDetail.product })
+                    self.viewStateManager.selectedTransactionArray.sortInPlace({ $0.transactionDetail.product < $1.transactionDetail.product })
                 case "Sub Product":
-                    self.sharedDataModel.selectedTransactionArray.sortInPlace({ $0.transactionDetail.productSub < $1.transactionDetail.productSub })
+                    self.viewStateManager.selectedTransactionArray.sortInPlace({ $0.transactionDetail.productSub < $1.transactionDetail.productSub })
                 default:
-                   self.sharedDataModel.selectedTransactionArray.sortInPlace(sortDateAscending)
+                   self.viewStateManager.selectedTransactionArray.sortInPlace(sortDateAscending)
                     break
                 }
             } else { // sort descending
                 
                 switch attributeName {
                 case "Id":
-                    self.sharedDataModel.selectedTransactionArray.sortInPlace({ $0.transactionId > $1.transactionId })
+                    self.viewStateManager.selectedTransactionArray.sortInPlace({ $0.transactionId > $1.transactionId })
                 case "Date":
-                    self.sharedDataModel.selectedTransactionArray.sortInPlace(sortDateDescending)
+                    self.viewStateManager.selectedTransactionArray.sortInPlace(sortDateDescending)
                 case "TRue Status":
-                    self.sharedDataModel.selectedTransactionArray.sortInPlace({ $0.transactionStatus > $1.transactionStatus })
+                    self.viewStateManager.selectedTransactionArray.sortInPlace({ $0.transactionStatus > $1.transactionStatus })
                 case "Deal Status":
-                    self.sharedDataModel.selectedTransactionArray.sortInPlace({ $0.transactionDetail.dealStatus > $1.transactionDetail.dealStatus })
+                    self.viewStateManager.selectedTransactionArray.sortInPlace({ $0.transactionDetail.dealStatus > $1.transactionDetail.dealStatus })
                 case "Product":
-                    self.sharedDataModel.selectedTransactionArray.sortInPlace({ $0.transactionDetail.product > $1.transactionDetail.product })
+                    self.viewStateManager.selectedTransactionArray.sortInPlace({ $0.transactionDetail.product > $1.transactionDetail.product })
                 case "Sub Product":
-                    self.sharedDataModel.selectedTransactionArray.sortInPlace({ $0.transactionDetail.productSub > $1.transactionDetail.productSub })
+                    self.viewStateManager.selectedTransactionArray.sortInPlace({ $0.transactionDetail.productSub > $1.transactionDetail.productSub })
                 default:
-                   self.sharedDataModel.selectedTransactionArray.sortInPlace(sortDateDescending)
+                   self.viewStateManager.selectedTransactionArray.sortInPlace(sortDateDescending)
                     break
                 }
             }
@@ -972,7 +972,7 @@ extension MasterViewController: UISearchControllerDelegate, UISearchResultsUpdat
         
 
         self.tableView.reloadData()
-        if(self.sharedDataModel.filteredTransactionArray.count > 0 || self.sharedDataModel.selectedTransactionArray.count > 0)
+        if(self.viewStateManager.filteredTransactionArray.count > 0 || self.viewStateManager.selectedTransactionArray.count > 0)
         {
             self.reselectLastSelectedRow()
             self.initDefault()
@@ -988,13 +988,13 @@ extension MasterViewController: UISearchControllerDelegate, UISearchResultsUpdat
         
         if ( searchText.isEmpty ) {
             self.debugUtil.printLog("searchForText" , msg: "searchText isEmpty")
-            self.sharedDataModel.filteredTransactionArray = self.sharedDataModel.selectedTransactionArray
+            self.viewStateManager.filteredTransactionArray = self.viewStateManager.selectedTransactionArray
         } else {
             self.debugUtil.printLog("searchForText" , msg: "searchText = " + searchText)
-            //self.sharedDataModel.filteredTransactionArray.removeAll(keepCapacity: false)
+            //self.viewStateManager.filteredTransactionArray.removeAll(keepCapacity: false)
             
             // Filter the array using the filter method
-            self.sharedDataModel.filteredTransactionArray = self.sharedDataModel.selectedTransactionArray.filter({( transaction: TransactionData) -> Bool in
+            self.viewStateManager.filteredTransactionArray = self.viewStateManager.selectedTransactionArray.filter({( transaction: TransactionData) -> Bool in
                 
                 switch scope {
                     
@@ -1029,9 +1029,9 @@ extension MasterViewController: UISearchControllerDelegate, UISearchResultsUpdat
     
     private func transactionsForShowing() -> [TransactionData] {
         if searchController.active {
-            return self.sharedDataModel.filteredTransactionArray
+            return self.viewStateManager.filteredTransactionArray
         } else {
-            return self.sharedDataModel.selectedTransactionArray
+            return self.viewStateManager.selectedTransactionArray
         }
     }
     
@@ -1045,7 +1045,7 @@ extension MasterViewController: UISearchControllerDelegate, UISearchResultsUpdat
         let scopeIndex = TransactionSortingSearchScope(rawValue: self.searchController.searchBar.selectedScopeButtonIndex)!
         searchForText(searchString!, scope: scopeIndex)
             tableView.reloadData()
-        if(self.sharedDataModel.filteredTransactionArray.count > 0)
+        if(self.viewStateManager.filteredTransactionArray.count > 0)
         {
             self.reselectLastSelectedRow()
             self.initDefault()

@@ -7,7 +7,7 @@ import UIKit
 class TransactionSummaryViewController: UIViewController {
     var debugUtil = DebugUtility(thisClassName: "TransactionSummaryViewController", enabled: false)
     let vcCon = VCConnection.sharedInstance
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
 
     var detailViewController: DetailViewController!
     let appAttributes = AppAttributes()
@@ -210,7 +210,7 @@ class TransactionSummaryViewController: UIViewController {
     var errRowIndex = 0
     func initData() {
         errRowIndex = 0
-        let ct = sharedDataModel.currentTransaction
+        let ct = viewStateManager.currentTransaction
 
         self.sections.removeAll(keepCapacity: false)
         var sect:TableData
@@ -324,7 +324,7 @@ class TransactionSummaryViewController: UIViewController {
         
         //show Companies
         sect = TableData()
-        if sharedDataModel.currentTransaction.transactionCompanies.count==0 {
+        if viewStateManager.currentTransaction.transactionCompanies.count==0 {
             sect.transData.append((TransactionSummary)(label: "", value: "", error: true, errorText: "*Company cannot be empty", specialRow: 1, errorType: 4, errorRowIndex: errRowIndex++))
             errorSect.transData.append((TransactionSummary)(label: "", value: "", error: true, errorText: "*Company cannot be empty", specialRow: 1, errorType: 4, errorRowIndex: errRowIndex++))
             sect.transData.append((TransactionSummary)(label: "", value: "", error: false, errorText: "", specialRow: 1))
@@ -493,7 +493,7 @@ class TransactionSummaryViewController: UIViewController {
             }
             
             
-            if self.sharedDataModel.getBusinessType(ct) == "Buy" || self.sharedDataModel.getBusinessType(ct) == "Sell" || self.sharedDataModel.getBusinessType(ct) == "Either" {
+            if self.viewStateManager.getBusinessType(ct) == "Buy" || self.viewStateManager.getBusinessType(ct) == "Sell" || self.viewStateManager.getBusinessType(ct) == "Either" {
                 
                 if ct.businessSelection.isConsolidatedBankingOpportunity == "" {
                     sect.transData.append((TransactionSummary)(label: "*Benefit consolidated opportunities", value: "", error: true, errorText: "Must select a Benefit consolidated opportunity", specialRow: 1, errorType: 16, errorRowIndex: errRowIndex++))
@@ -563,7 +563,7 @@ class TransactionSummaryViewController: UIViewController {
                 }
                 
                 //buy or sell side
-//                if self.sharedDataModel.getBusinessType(ct) == "Buy" {
+//                if self.viewStateManager.getBusinessType(ct) == "Buy" {
 //                    if ct.businessSelection.hasDerivativesExposure == ""{
 //                        sect.transData.append((TransactionSummary)(label: "Material Derivatives exposure", value: "", error: true, errorText: "Must select Material Derivatives exposure", specialRow: 1, errorType: 18, errorRowIndex: errRowIndex++))
 //                        errorSect.transData.append((TransactionSummary)(label: "Material Derivatives exposure", value: "", error: true, errorText: "Must select Material Derivatives exposure", specialRow: 1, errorType: 18, errorRowIndex: errRowIndex++))
@@ -578,7 +578,7 @@ class TransactionSummaryViewController: UIViewController {
 //                    }
 //                
 //                }else 
-                if self.sharedDataModel.getBusinessType(ct) == "Sell" ||  self.sharedDataModel.currentTransaction.businessSelection.businessSelectionTypeForEither == "Sell" {
+                if self.viewStateManager.getBusinessType(ct) == "Sell" ||  self.viewStateManager.currentTransaction.businessSelection.businessSelectionTypeForEither == "Sell" {
 //                    if ct.businessSelection.hasWealthManagementOpportunity == "" {
 //                        sect.transData.append((TransactionSummary)(label: "Wealth Management Opportunities", value: "", error: true, errorText: "Must select Wealth Management Opportunity", specialRow: 1, errorType: 19, errorRowIndex: errRowIndex++))
 //                        errorSect.transData.append((TransactionSummary)(label: "Wealth Management Opportunities", value: "", error: true, errorText: "Must select Wealth Management Opportunity", specialRow: 1, errorType: 19, errorRowIndex: errRowIndex++))
@@ -611,7 +611,7 @@ class TransactionSummaryViewController: UIViewController {
             sect.transData.append((TransactionSummary)(label: "Name", value: trans.contact.firstName + " " + trans.contact.lastName, error: false, errorText: "", specialRow: 3))
             sect.transData.append((TransactionSummary)(label: "Role", value: trans.role, error: false, errorText: "", specialRow: 3))
             sect.transData.append((TransactionSummary)(label: "Phone", value: trans.contact.phone, error: false, errorText: "", specialRow: 3))
-            sect.transData.append((TransactionSummary)(label: "GOC", value: trans.contact.gocDescription, error: false, errorText: "", specialRow: 3))
+            sect.transData.append((TransactionSummary)(label: "DPT", value: trans.contact.department, error: false, errorText: "", specialRow: 3))
             sect.transData.append((TransactionSummary)(label: "Email", value: trans.contact.email, error: false, errorText: "", specialRow: 3))
             sect.transData.append((TransactionSummary)(label: "", value: "", error: false, errorText: "", specialRow: 1))
             if (trans.role=="Sponsoring MD") {
@@ -636,7 +636,7 @@ class TransactionSummaryViewController: UIViewController {
         }
        
         
-        if (crossSellCount == 0 && sharedDataModel.currentTransaction.transactionDetail.product == "M&A") {
+        if (crossSellCount == 0 && viewStateManager.currentTransaction.transactionDetail.product == "M&A") {
 //            sect.transData.append((TransactionSummary)(label: "", value: "", error: true, errorText: "At least one Cross Sell Designee is required", specialRow: 1, errorType: 12, errorRowIndex: errRowIndex++))
             errorSect.transData.append((TransactionSummary)(label: "", value: "", error: true, errorText: "At least one Cross Sell Designee is required", specialRow: 1, errorType: 12, errorRowIndex: errRowIndex++))
         }
@@ -689,7 +689,7 @@ class TransactionSummaryViewController: UIViewController {
 }
 extension TransactionSummaryViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // self.debugUtil.printLog("numberRowsSection", msg: String(self.sharedDataModel.currentTransaction.transactionCompanies.count))
+        // self.debugUtil.printLog("numberRowsSection", msg: String(self.viewStateManager.currentTransaction.transactionCompanies.count))
         //self.debugUtil.printLog("numberRowsSection", msg: String(sections[section].transData.count))
         if sections.count == 0 {
             return 0

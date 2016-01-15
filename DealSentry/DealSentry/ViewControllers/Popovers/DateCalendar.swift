@@ -11,7 +11,7 @@ import WebKit
 class DateCalendar: UIViewController , WKScriptMessageHandler
 {
     @IBOutlet weak var containerView:UIView!
-    let sharedDataModel = SharedDataModel.sharedInstance
+    let viewStateManager = ViewStateManager.sharedInstance
     var transDetail3VC: TransactionDetailPage3ViewController!
     var enterAgreementVC: EnterAgreementViewController!
     var webView: WKWebView?
@@ -33,23 +33,23 @@ class DateCalendar: UIViewController , WKScriptMessageHandler
         
         // getting the value from date textfield and passing it to the html for showing the exact date in calendar 
         
-        if(self.sharedDataModel.selectedButtonTextForDate == "PitchDate")
+        if(self.viewStateManager.selectedButtonTextForDate == "PitchDate")
         {
           names =   self.transDetail3VC.estimatedPitchDateTextField.text!
         }
-        else if(self.sharedDataModel.selectedButtonTextForDate == "AnnouncementDate")
+        else if(self.viewStateManager.selectedButtonTextForDate == "AnnouncementDate")
         {
             names =   self.transDetail3VC.announcementDateTextField.text!
         }
-        else if(self.sharedDataModel.selectedButtonTextForDate == "ClosingDate")
+        else if(self.viewStateManager.selectedButtonTextForDate == "ClosingDate")
         {
             names =   self.transDetail3VC.closingDateTextField.text!
         }
-        else if(self.sharedDataModel.selectedButtonTextForDate == "EffectiveDate")
+        else if(self.viewStateManager.selectedButtonTextForDate == "EffectiveDate")
         {
             names =   self.enterAgreementVC.effectiveDateTextField.text!
         }
-        else if(self.sharedDataModel.selectedButtonTextForDate == "ExpirationDate")
+        else if(self.viewStateManager.selectedButtonTextForDate == "ExpirationDate")
         {
             names =   self.enterAgreementVC.expirationDateTextField.text!
         }
@@ -113,33 +113,33 @@ class DateCalendar: UIViewController , WKScriptMessageHandler
         {
             // Getting the selected value from webview and passing it to the respective view controllers textfields
             let msg = String(message.body as! NSString)
-            if(self.sharedDataModel.selectedButtonTextForDate == "PitchDate")
+            if(self.viewStateManager.selectedButtonTextForDate == "PitchDate")
             {
                 self.transDetail3VC.estimatedPitchDateTextField.text = msg
-                self.sharedDataModel.currentTransaction.transactionDetail.estimatedPitchDate = msg
+                self.viewStateManager.currentTransaction.transactionDetail.estimatedPitchDate = msg
                 self.transDetail3VC.pitchDateImgWarning.hidden = true
                 self.transDetail3VC.pitchDateTxtWarning.hidden = true
             }
-            else if(self.sharedDataModel.selectedButtonTextForDate == "AnnouncementDate")
+            else if(self.viewStateManager.selectedButtonTextForDate == "AnnouncementDate")
             {
                 self.transDetail3VC.announcementDateTextField.text = msg
-                self.sharedDataModel.currentTransaction.transactionDetail.expectedAnnouncementDate = msg
+                self.viewStateManager.currentTransaction.transactionDetail.expectedAnnouncementDate = msg
                 self.transDetail3VC.announcementDateImgWarning.hidden = true
                 self.transDetail3VC.announcementDateTxtWarning.hidden = true
             }
-            else if(self.sharedDataModel.selectedButtonTextForDate == "ClosingDate")
+            else if(self.viewStateManager.selectedButtonTextForDate == "ClosingDate")
             {
                 self.transDetail3VC.closingDateTextField.text = msg
-                self.sharedDataModel.currentTransaction.transactionDetail.expectedClosingDate = msg
+                self.viewStateManager.currentTransaction.transactionDetail.expectedClosingDate = msg
             }
-            else if(self.sharedDataModel.selectedButtonTextForDate == "EffectiveDate")
+            else if(self.viewStateManager.selectedButtonTextForDate == "EffectiveDate")
             {
                 self.enterAgreementVC.effectiveDateTextField.text = msg
                 self.enterAgreementVC.enteredAgreement.effectiveDate = msg
                 self.enterAgreementVC.effectiveDateTxtWarning.hidden = true
                 self.enterAgreementVC.effectiveDateImgWarning.hidden = true
             }
-            else if(self.sharedDataModel.selectedButtonTextForDate == "ExpirationDate")
+            else if(self.viewStateManager.selectedButtonTextForDate == "ExpirationDate")
             {
                 self.enterAgreementVC.expirationDateTextField.text = msg
                 self.enterAgreementVC.enteredAgreement.expirationDate = msg

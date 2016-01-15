@@ -15,7 +15,7 @@ class ContactsSearchTableViewCell: UITableViewCell {
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var phoneLabel: UILabel!
     
-    @IBOutlet weak var gocDescriptionLabel: UILabel!
+    @IBOutlet weak var departmentLabel: UILabel!
     
     
     
