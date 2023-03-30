@@ -16,7 +16,7 @@
 @property (nonatomic, retain) NSString * exchange;
 @property (nonatomic, retain) NSString * gfcid;
 @property (nonatomic, retain) NSString * industryId;
-@property (nonatomic, retain) NSString * isManuallyDefinedByUser;
+@property (nonatomic) Boolean * isUserDefined;
 @property (nonatomic, retain) NSString * parentCompany;
 @property (nonatomic, retain) NSString * segmentId;
 @property (nonatomic, retain) NSString * ticker;

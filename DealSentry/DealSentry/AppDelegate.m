@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "DealSentry-Swift.h"
+//#import "DealSentry-Swift.h"
 
 #import "DataManager.h"
 

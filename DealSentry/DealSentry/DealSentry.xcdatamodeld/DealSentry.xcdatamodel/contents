@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F27" minimumToolsVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G217" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="AgreementEntity" representedClassName="Agreement" syncable="YES">
         <attribute name="agreementId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="agreementTerms" optional="YES" attributeType="String" syncable="YES"/>
@@ -130,6 +130,7 @@
     </entity>
     <entity name="TransactionCompanyEntity" representedClassName="TransactionCompany" syncable="YES">
         <attribute name="companyId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isUserDefined" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="roleId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="transactionId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="agreement" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="AgreementEntity" inverseName="transactionCompany" inverseEntity="AgreementEntity" syncable="YES"/>
@@ -139,7 +140,7 @@
     </entity>
     <entity name="TransactionContactEntity" representedClassName="TransactionContact" syncable="YES">
         <attribute name="contactId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="crossSellDesignee" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="crossSellDesignee" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="roleId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="transactionId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="transaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransactionEntity" inverseName="transactionContact" inverseEntity="TransactionEntity" syncable="YES"/>
@@ -185,9 +186,9 @@
         <attribute name="productSub" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="queueEvent" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="requestorContactId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="savedOnDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="savedOnDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="sponsoringMDContactId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="submittedDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="submittedDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="transactionId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="transactionStatusId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedDate" optional="YES" attributeType="String" syncable="YES"/>
@@ -204,29 +205,4 @@
         <attribute name="useOfProceedsDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="useOfProceedsId" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <elements>
-        <element name="AgreementEntity" positionX="-155" positionY="291" width="128" height="195"/>
-        <element name="AgreementTypeEntity" positionX="16" positionY="288" width="128" height="75"/>
-        <element name="BusinessSelectionEntity" positionX="-810" positionY="408" width="243" height="375"/>
-        <element name="CompanyEntity" positionX="-153" positionY="549" width="162" height="225"/>
-        <element name="CompanyRoleEntity" positionX="-155" positionY="792" width="128" height="75"/>
-        <element name="ContactEntity" positionX="-603" positionY="855" width="128" height="148"/>
-        <element name="ContactRoleEntity" positionX="-603" positionY="1023" width="128" height="75"/>
-        <element name="CountryEntity" positionX="70" positionY="774" width="128" height="90"/>
-        <element name="DealStatusEntity" positionX="-578" positionY="1176" width="128" height="75"/>
-        <element name="IndustryEntity" positionX="61" positionY="540" width="128" height="90"/>
-        <element name="LoanTypeEntity" positionX="-576" positionY="1536" width="128" height="75"/>
-        <element name="MaterialityEntity" positionX="-153" positionY="909" width="180" height="255"/>
-        <element name="OfferingFormatEntity" positionX="-576" positionY="1635" width="144" height="75"/>
-        <element name="ProductEntity" positionX="-576" positionY="1266" width="128" height="75"/>
-        <element name="ProductMapEntity" positionX="-389" positionY="1296" width="128" height="105"/>
-        <element name="SegmentEntity" positionX="63" positionY="666" width="128" height="90"/>
-        <element name="SubProductEntity" positionX="-578" positionY="1356" width="128" height="75"/>
-        <element name="TransactionCompanyEntity" positionX="-432" positionY="666" width="171" height="150"/>
-        <element name="TransactionContactEntity" positionX="-819" positionY="855" width="173" height="120"/>
-        <element name="TransactionDetailEntity" positionX="-873" positionY="1224" width="207" height="390"/>
-        <element name="TransactionEntity" positionX="-1206" positionY="441" width="171" height="420"/>
-        <element name="TransactionStatusEntity" positionX="-1010" positionY="441" width="128" height="75"/>
-        <element name="UseOfProceedsEntity" positionX="-576" positionY="1446" width="153" height="75"/>
-    </elements>
 </model>
